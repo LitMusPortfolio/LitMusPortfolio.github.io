@@ -16,7 +16,9 @@ const MainSection = styled.div`
   display: flex;
   align-items: center;
   position: relative;
-  background: linear-gradient(135deg, #0a1628 0%, #1a2c4e 30%, #2a4a7c 60%, #3a5f95 100%);
+  background: 
+    linear-gradient(135deg, rgba(10, 22, 40, 0.8) 0%, rgba(26, 44, 78, 0.7) 30%, rgba(42, 74, 124, 0.6) 60%, rgba(58, 95, 149, 0.5) 100%),
+    url('/LitBG.webp') center/cover no-repeat;
   overflow: hidden;
   
   &::before {
