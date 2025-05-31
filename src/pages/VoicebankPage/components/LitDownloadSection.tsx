@@ -1,228 +1,458 @@
 import { useState } from "react";
 import styled from "styled-components";
+import {
+  Card,
+  CardDescription,
+  CardGrid,
+  CardHeader,
+  CardInfo,
+  CardTag,
+  CardTitle,
+  Modal,
+  ModalCloseButton,
+  ModalContent,
+} from "../../../components/CardGrid";
 import { theme } from "../../../styles/theme";
 
-// ダウンロードセクション
-const DownloadsSection = styled.div`
-  margin-top: 6rem;
-  padding: 4rem 0;
-  background: ${theme.colors.background.dark};
+// カスタムスタイル
+const DownloadSection = styled.section`
   min-height: 100vh;
+  padding: 8rem 2rem;
+  background: url("/LitBG.webp") no-repeat center center;
+  position: relative;
+  overflow: hidden;
+
+  /* 背景の幾何学模様 */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      linear-gradient(45deg, rgba(139, 92, 246, 0.1) 25%, transparent 25%),
+      linear-gradient(-45deg, rgba(139, 92, 246, 0.1) 25%, transparent 25%),
+      linear-gradient(45deg, transparent 75%, rgba(139, 92, 246, 0.1) 75%),
+      linear-gradient(-45deg, transparent 75%, rgba(139, 92, 246, 0.1) 75%);
+    background-size: 30px 30px;
+    background-position: 0 0, 0 15px, 15px -15px, -15px 0px;
+    z-index: 0;
+  }
 `;
 
 const Container = styled.div`
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0 2rem;
+  position: relative;
+  z-index: 1;
 `;
 
 const SectionTitle = styled.h2`
-  font-size: clamp(2rem, 5vw, 4rem);
+  font-size: clamp(3rem, 8vw, 6rem);
   font-weight: 900;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.05em;
   margin-bottom: 4rem;
   text-align: center;
   background: ${theme.colors.primary.gradient};
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  text-shadow: ${theme.shadows.text};
+  text-shadow: 0 0 30px rgba(139, 92, 246, 0.5);
 `;
 
-const DownloadGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  margin-bottom: 4rem;
-`;
-
-const DownloadCard = styled.div`
-  background: ${theme.effects.glassmorphism.background};
-  border: 2px solid ${theme.colors.primary.main};
-  border-radius: ${theme.effects.glassmorphism.borderRadius};
-  padding: 2rem;
-  text-align: center;
-  transition: all 0.3s ease;
-  cursor: pointer;
-  backdrop-filter: ${theme.effects.glassmorphism.backdropFilter};
+const SideDecoration = styled.div`
+  position: absolute;
+  left: -100px;
+  top: 50%;
+  transform: translateY(-50%);
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
   
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: ${theme.shadows.glow.medium};
-    background: ${theme.colors.purple[500]}33;
+  img {
+    height: 200px;
+    opacity: 0.3;
   }
   
-  h4 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-    color: ${theme.colors.primary.main};
-  }
-  
-  p {
-    margin-bottom: 1.5rem;
-    opacity: 0.9;
-    color: ${theme.colors.text.secondary};
-  }
-  
-  .price {
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: ${theme.colors.primary.light};
+  @media (max-width: 768px) {
+    display: none;
   }
 `;
 
-// モーダル
-const Modal = styled.div<{ $isOpen: boolean }>`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.8);
+// カスタムカードコンポーネント
+const DownloadCard = styled(Card)`
+  background: rgba(0, 0, 0, 0.6);
+  border: 2px solid transparent;
   backdrop-filter: blur(10px);
-  z-index: 1000;
-  display: ${(props) => (props.$isOpen ? "flex" : "none")};
+
+  &:hover {
+    border-color: ${theme.colors.primary.main};
+    box-shadow: 
+      0 10px 30px rgba(139, 92, 246, 0.3),
+      inset 0 0 20px rgba(139, 92, 246, 0.1);
+  }
+`;
+
+const CardSubtitle = styled.p`
+  font-size: 0.9rem;
+  color: ${theme.colors.text.secondary};
+  margin-bottom: 1rem;
+  opacity: 0.8;
+`;
+
+const CardFooter = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+`;
+
+const CardStatus = styled.span<{ $free?: boolean }>`
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: ${(props) => (props.$free ? "#4CAF50" : theme.colors.primary.light)};
+`;
+
+// モーダル内部のスタイル
+const ModalImage = styled.div`
+  flex: 0 0 300px;
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(92, 246, 246, 0.2));
+  display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
+  
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  @media (max-width: 768px) {
+    flex: 0 0 200px;
+  }
 `;
 
-const ModalContent = styled.div`
-  background: ${theme.colors.background.dark};
-  border: 2px solid ${theme.colors.primary.main};
-  border-radius: 20px;
+const ModalInfo = styled.div`
+  flex: 1;
   padding: 3rem;
-  max-width: 600px;
-  width: 100%;
-  max-height: 80vh;
   overflow-y: auto;
-  position: relative;
+`;
+
+const ModalTitle = styled.h3`
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: ${theme.colors.primary.main};
+`;
+
+const ModalDescription = styled.div`
+  margin-bottom: 2rem;
+  line-height: 1.8;
+  color: ${theme.colors.text.secondary};
   
-  h3 {
-    font-size: 2rem;
-    margin-bottom: 1.5rem;
-    color: ${theme.colors.primary.main};
-    text-shadow: ${theme.shadows.text};
-  }
-  
-  .description {
-    margin-bottom: 2rem;
-    line-height: 1.8;
-    color: ${theme.colors.text.secondary};
-  }
-  
-  .download-link {
-    display: inline-block;
-    padding: 1rem 3rem;
-    background: ${theme.colors.primary.main};
-    color: ${theme.colors.text.primary};
-    border-radius: 30px;
-    font-weight: bold;
-    transition: all 0.3s ease;
-    box-shadow: ${theme.shadows.button};
-    
-    &:hover {
-      background: ${theme.colors.primary.dark};
-      transform: translateY(-2px);
-      box-shadow: ${theme.shadows.buttonHover};
-    }
+  p {
+    margin-bottom: 1rem;
   }
 `;
 
-const ModalCloseButton = styled.button`
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: none;
-  border: none;
+const ModalButtons = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+`;
+
+const ModalButton = styled.a<{ $primary?: boolean }>`
+  display: inline-block;
+  padding: 1rem 2rem;
+  background: ${(props) => (props.$primary ? theme.colors.primary.main : "rgba(255, 255, 255, 0.1)")};
   color: ${theme.colors.text.primary};
-  font-size: 2rem;
-  cursor: pointer;
-  opacity: 0.7;
-  transition: opacity 0.3s ease;
+  border: 2px solid ${(props) => (props.$primary ? "transparent" : "rgba(255, 255, 255, 0.2)")};
+  border-radius: 30px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.3s ease;
   
   &:hover {
-    opacity: 1;
-    color: ${theme.colors.primary.light};
+    transform: translateY(-2px);
+    background: ${(props) => (props.$primary ? theme.colors.primary.dark : "rgba(255, 255, 255, 0.2)")};
+    box-shadow: 0 5px 20px rgba(139, 92, 246, 0.3);
   }
 `;
 
-// データ定義
-const downloadItems = [
+// データ型定義
+interface DownloadItem {
+  id: number;
+  type: "voicevox" | "utau" | "music";
+  name: string;
+  subtitle?: string;
+  description: string;
+  status: "free" | "paid";
+  price?: string;
+  image?: string;
+  links: {
+    primary?: { text: string; url: string };
+    secondary?: { text: string; url: string };
+    tertiary?: { text: string; url: string };
+  };
+  modalContent?: {
+    detailedDescription: string[];
+    notes?: string[];
+  };
+}
+
+// ダウンロードデータ
+const downloadItems: DownloadItem[] = [
   {
     id: 1,
-    name: "離途-HABIT-",
-    description: "プロ仕様の高品質音声ライブラリ。豊富な音素と表現力。",
-    price: "¥3,000",
-    type: "paid",
-    link: "https://booth.pm/",
+    type: "voicevox",
+    name: "VOICEVOX 離途",
+    subtitle: "オーディナリ",
+    description: "無料で使える中品質音声テキスト読み上げソフトウェア",
+    status: "free",
+    links: {
+      primary: { text: "ダウンロード", url: "#" },
+      secondary: {
+        text: "VOICEVOXを先にダウンロード",
+        url: "https://voicevox.hiroshiba.jp/",
+      },
+    },
+    modalContent: {
+      detailedDescription: [
+        "VOICEVOXは無料で使える中品質音声合成ソフトウェアです。",
+        "商用・非商用問わず無料で、イントネーションの調整も可能。",
+        "プラグイン機能でキャラクターも追加でき、音声ファイルの作成も簡単です。",
+      ],
+    },
   },
   {
     id: 2,
-    name: "離途V2",
-    description: "スタンダードな音声ライブラリ。基本的な歌唱に対応。",
-    price: "FREE",
-    type: "free",
-    link: "#",
+    type: "utau",
+    name: "UTAU 離途 -FLOW-",
+    subtitle: "ソングライブラリ",
+    description: "柔らかな歌唱適性で聴いた人に大容量のFLOW提供",
+    status: "free",
+    links: {
+      primary: { text: "無料ダウンロード", url: "#" },
+    },
   },
   {
     id: 3,
-    name: "離途-FLOW-",
-    description: "流れるような歌声を実現する特別版。限定配布中。",
-    price: "FREE",
-    type: "free",
-    link: "#",
+    type: "utau",
+    name: "UTAU 離途 -HABIT-",
+    subtitle: "ソングライブラリ",
+    description: "強めなる歌声をメンタルとした音声サウンド音源",
+    status: "paid",
+    price: "¥3,000",
+    links: {
+      primary: { text: "BOOTHで購入", url: "https://booth.pm/" },
+      secondary: {
+        text: "VOICEVOXを先にダウンロード",
+        url: "https://voicevox.hiroshiba.jp/",
+      },
+      tertiary: { text: "無料ダウンロード", url: "#" },
+    },
+    modalContent: {
+      detailedDescription: [
+        "合成音源ライブラリ。限定。",
+        "UTAU用音源カラクシダウンロライブラリです。",
+        "耳いと腹のちを民夏を詳細して仕様した高品。",
+        "製品で表現いては感激こもくしており音声ライブラリ...の記録管理されてます。",
+      ],
+      notes: [
+        "※音素データのみの配布となります。",
+        "パッケージのDLカード等の物理商品の販売ではありません。",
+      ],
+    },
+  },
+  {
+    id: 4,
+    type: "music",
+    name: "消えたいと願うだけで",
+    subtitle: "LitPlus",
+    description: "自主制作、歌曲、イラスト、残録素材",
+    status: "free",
+    links: {
+      primary: { text: "ダウンロード", url: "#" },
+    },
+  },
+  // 残りのLitPlus楽曲
+  {
+    id: 5,
+    type: "music",
+    name: "消えたいと願うだけで",
+    subtitle: "LitPlus",
+    description: "自主制作、歌曲、イラスト、残録素材",
+    status: "free",
+    links: {
+      primary: { text: "ダウンロード", url: "#" },
+    },
+  },
+  {
+    id: 6,
+    type: "music",
+    name: "消えたいと願うだけで",
+    subtitle: "LitPlus",
+    description: "自主制作、歌曲、イラスト、残録素材",
+    status: "free",
+    links: {
+      primary: { text: "ダウンロード", url: "#" },
+    },
+  },
+  {
+    id: 7,
+    type: "music",
+    name: "消えたいと願うだけで",
+    subtitle: "LitPlus",
+    description: "自主制作、歌曲、イラスト、残録素材",
+    status: "free",
+    links: {
+      primary: { text: "ダウンロード", url: "#" },
+    },
+  },
+  {
+    id: 8,
+    type: "music",
+    name: "消えたいと願うだけで",
+    subtitle: "LitPlus",
+    description: "自主制作、歌曲、イラスト、残録素材",
+    status: "free",
+    links: {
+      primary: { text: "ダウンロード", url: "#" },
+    },
   },
 ];
 
 export default function LitDownloadSection() {
-  const [selectedDownload, setSelectedDownload] = useState<
-    (typeof downloadItems)[0] | null
-  >(null);
+  const [selectedItem, setSelectedItem] = useState<DownloadItem | null>(null);
+
+  const getTypeLabel = (type: string) => {
+    switch (type) {
+      case "voicevox":
+        return "VOICEVOX";
+      case "utau":
+        return "UTAU";
+      case "music":
+        return "MUSIC";
+      default:
+        return type.toUpperCase();
+    }
+  };
 
   return (
     <>
-      <Container>
-        <DownloadsSection id="downloads">
-          <SectionTitle>Downloads</SectionTitle>
+      <DownloadSection id="downloads">
+        <SideDecoration>
+          <img src="/010_PageSideTitleSvg/DOWNLOAD.svg" alt="DOWNLOAD" />
+        </SideDecoration>
 
-          <DownloadGrid>
+        <Container>
+          <SectionTitle>DOWNLOAD</SectionTitle>
+
+          <CardGrid>
             {downloadItems.map((item) => (
-              <DownloadCard
-                key={item.id}
-                onClick={() => setSelectedDownload(item)}
-              >
-                <h4>{item.name}</h4>
-                <p>{item.description}</p>
-                <div className="price">{item.price}</div>
+              <DownloadCard key={item.id} onClick={() => setSelectedItem(item)}>
+                <CardHeader>
+                  <CardTag>{getTypeLabel(item.type)}</CardTag>
+                </CardHeader>
+                <CardInfo>
+                  <CardTitle>{item.name}</CardTitle>
+                  {item.subtitle && (
+                    <CardSubtitle>{item.subtitle}</CardSubtitle>
+                  )}
+                  <CardDescription>{item.description}</CardDescription>
+                  <CardFooter>
+                    <CardStatus $free={item.status === "free"}>
+                      {item.status === "free" ? "FREE" : item.price}
+                    </CardStatus>
+                  </CardFooter>
+                </CardInfo>
               </DownloadCard>
             ))}
-          </DownloadGrid>
-        </DownloadsSection>
-      </Container>
+          </CardGrid>
+        </Container>
+      </DownloadSection>
 
-      {/* ダウンロードモーダル */}
-      <Modal $isOpen={!!selectedDownload}>
-        {selectedDownload && (
+      {/* モーダル */}
+      <Modal $isOpen={!!selectedItem}>
+        {selectedItem && (
           <ModalContent>
-            <ModalCloseButton onClick={() => setSelectedDownload(null)}>
+            <ModalCloseButton onClick={() => setSelectedItem(null)}>
               ×
             </ModalCloseButton>
-            <h3>{selectedDownload.name}</h3>
-            <div className="description">
-              <p>{selectedDownload.description}</p>
-              <p>価格: {selectedDownload.price}</p>
-            </div>
-            <a
-              href={selectedDownload.link}
-              className="download-link"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {selectedDownload.type === "paid"
-                ? "BOOTHで購入"
-                : "ダウンロード"}
-            </a>
+
+            {selectedItem.image && (
+              <ModalImage>
+                <img src={selectedItem.image} alt={selectedItem.name} />
+              </ModalImage>
+            )}
+
+            <ModalInfo>
+              <ModalTitle>{selectedItem.name}</ModalTitle>
+
+              <ModalDescription>
+                {selectedItem.modalContent?.detailedDescription ? (
+                  selectedItem.modalContent.detailedDescription.map(
+                    (text, idx) => (
+                      <p key={`desc-${selectedItem.id}-${idx}`}>{text}</p>
+                    ),
+                  )
+                ) : (
+                  <>
+                    <p>{selectedItem.description}</p>
+                    {selectedItem.status === "paid" && (
+                      <p>価格: {selectedItem.price}</p>
+                    )}
+                  </>
+                )}
+
+                {selectedItem.modalContent?.notes && (
+                  <div
+                    style={{
+                      marginTop: "2rem",
+                      fontSize: "0.9rem",
+                      opacity: 0.8,
+                    }}
+                  >
+                    {selectedItem.modalContent.notes.map((note, idx) => (
+                      <p key={`note-${selectedItem.id}-${idx}`}>{note}</p>
+                    ))}
+                  </div>
+                )}
+              </ModalDescription>
+
+              <ModalButtons>
+                {selectedItem.links.primary && (
+                  <ModalButton
+                    href={selectedItem.links.primary.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    $primary
+                  >
+                    {selectedItem.links.primary.text}
+                  </ModalButton>
+                )}
+
+                {selectedItem.links.secondary && (
+                  <ModalButton
+                    href={selectedItem.links.secondary.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {selectedItem.links.secondary.text}
+                  </ModalButton>
+                )}
+
+                {selectedItem.links.tertiary && (
+                  <ModalButton
+                    href={selectedItem.links.tertiary.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {selectedItem.links.tertiary.text}
+                  </ModalButton>
+                )}
+              </ModalButtons>
+            </ModalInfo>
           </ModalContent>
         )}
       </Modal>
