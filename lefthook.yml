@@ -1,0 +1,10 @@
+pre-commit:
+  parallel: true
+  jobs:
+    - run: npm run lint {staged_files}
+      glob: "*.{js,ts,jsx,tsx}"
+
+pre-push:
+  jobs:
+    - run: npm run build
+    - glob: "*.{js,ts,jsx,tsx}"
