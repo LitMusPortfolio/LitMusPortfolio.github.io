@@ -78,6 +78,46 @@ const NameLine = styled.div`
   opacity: 0.5;
 `;
 
+// プロフィールコンテナ
+const ProfileContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  margin-top: 2rem;
+  width: 100%;
+`;
+
+// プロフィール項目
+const ProfileItem = styled.div`
+  display: flex;
+  align-items: center;
+  font-size: 1.5rem;
+  color: ${theme.colors.text.primary};
+  width: 100%;
+`;
+
+// プロフィールラベル
+const ProfileLabel = styled.span`
+  min-width: 8rem;
+  font-weight: bold;
+  opacity: 0.8;
+  padding-right: 1rem;
+`;
+
+// プロフィール罫線
+const ProfileLine = styled.div`
+  flex: 1;
+  height: 1px;
+  background: ${theme.colors.text.primary};
+  opacity: 0.3;
+  margin: 0 1rem;
+`;
+
+// プロフィール値
+const ProfileValue = styled.span`
+  white-space: nowrap;
+`;
+
 // 左側のエリア（キャラクター画像用）
 const LeftSection = styled.div`
   position: relative;
@@ -117,6 +157,33 @@ export default function LitCharacterSection() {
             <CharacterName>離途</CharacterName>
             <NameLine />
           </CharacterNameContainer>
+          <ProfileContainer>
+            <ProfileItem>
+              <ProfileLabel>誕生日</ProfileLabel>
+              <ProfileLine />
+              <ProfileValue>10月10日</ProfileValue>
+            </ProfileItem>
+            <ProfileItem>
+              <ProfileLabel>年齢</ProfileLabel>
+              <ProfileLine />
+              <ProfileValue>不明</ProfileValue>
+            </ProfileItem>
+            <ProfileItem>
+              <ProfileLabel>身長</ProfileLabel>
+              <ProfileLine />
+              <ProfileValue>180cm</ProfileValue>
+            </ProfileItem>
+            <ProfileItem>
+              <ProfileLabel>体重</ProfileLabel>
+              <ProfileLine />
+              <ProfileValue>200kg</ProfileValue>
+            </ProfileItem>
+            <ProfileItem>
+              <ProfileLabel>一人称</ProfileLabel>
+              <ProfileLine />
+              <ProfileValue>ボク</ProfileValue>
+            </ProfileItem>
+          </ProfileContainer>
         </ContentContainer>
       </CharacterDetailSection>
     </>
