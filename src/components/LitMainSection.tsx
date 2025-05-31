@@ -16,8 +16,9 @@ const MainSection = styled.div`
   min-height: 100vh;
   display: flex;
   align-items: center;
+  justify-content: flex-start;
   position: relative;
-  background: ${theme.colors.background.gradient.blue};
+  background: transparent;
   overflow: hidden;
   
   &::before {
@@ -55,29 +56,42 @@ const MainSection = styled.div`
   }
 `;
 
-const MainContainer = styled.div`
-  width: 100%;
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 2rem;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-  align-items: center;
+const Container = styled.div`
+  width: fit-content;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   position: relative;
   z-index: 2;
   
   @media (max-width: 968px) {
-    grid-template-columns: 1fr;
-    text-align: center;
+    width: 100%;
+    margin-left: 0;
+    align-items: center;
   }
 `;
 
-const MainContent = styled.div`
-  text-align: left;
+const LogoImg = styled.img`
+  height: 25vw;
+  width: auto;
+  margin-bottom: 2rem;
+  filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.9))
+          drop-shadow(${theme.shadows.glow.large});
+  
+  @media (max-width: 768px) {
+    height: 220px;
+  }
+`;
+
+const TextContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 7rem;
   
   @media (max-width: 968px) {
-    text-align: center;
+    align-items: center;
   }
 `;
 
@@ -115,36 +129,33 @@ const MainCharacterVisual = styled.div`
   }
 `;
 
-const Logo = styled.img`
-  height: 280px;
-  width: auto;
-  margin-bottom: 2rem;
-  filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.9))
-          drop-shadow(${theme.shadows.glow.large});
-  
-  @media (max-width: 768px) {
-    height: 180px;
-  }
-`;
-
-const Tagline = styled.p`
+const Text = styled.p`
   font-size: 1.8rem;
   color: #fff;
   margin-bottom: 3rem;
-  line-height: 1.8;
+  line-height: 1.0;
   font-weight: 400;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.02em;
   text-shadow: ${theme.shadows.text};
-  background: linear-gradient(135deg, rgba(139, 92, 246, 0.3) 0%, rgba(162, 53, 237, 0.2) 100%);
-  padding: 1.5rem 2.5rem;
-  border-radius: 15px;
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(139, 92, 246, 0.2);
-  display: inline-block;
+  width: fit-content;
   
   @media (max-width: 768px) {
     font-size: 1.4rem;
-    padding: 1rem 1.5rem;
+  }
+`;
+
+const TaglineSpan = styled.span`
+  background: ${theme.colors.primary.main};
+  border-radius: 2px;
+  font-size: 3rem;
+  font-weight: bold;
+  display: inline;
+  line-height: 1.3;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  
+  br {
+    line-height: 0.8;
   }
 `;
 
@@ -207,12 +218,18 @@ export default function LitMainSection() {
         <source src="/101_Lit/LitTopMovie.webm" type="video/webm" />
         <source src="/101_Lit/LitTopMovie.mp4" type="video/mp4" />
       </BackgroundVideo>
-      <MainContainer>
-        <MainContent>
-          <Logo src="/101_Lit/Litlogo.webp" alt="離途" />
-          <Tagline>優しさと吐息が香る穏やかな男声ソフトウェア。</Tagline>
-        </MainContent>
-      </MainContainer>
+      <Container>
+        <LogoImg src="/101_Lit/Litlogo.webp" alt="離途" />
+        <TextContainer>
+          <Text>
+            <TaglineSpan>
+              優しさと吐息が香る
+              <br />
+              穏やかな男声ソフトウェア。
+            </TaglineSpan>
+          </Text>
+        </TextContainer>
+      </Container>
       <MainCharacterVisual>
         <img
           src="/101_Lit/LitA_差し替え前提.webp"
