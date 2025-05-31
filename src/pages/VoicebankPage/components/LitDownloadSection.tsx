@@ -11,6 +11,8 @@ import {
   Modal,
   ModalCloseButton,
   ModalContent,
+  Tab,
+  TabContainer,
 } from "../../../components/CardGrid";
 import SectionTitle from "../../../components/SectionTitle";
 import { theme } from "../../../styles/theme";
@@ -60,13 +62,6 @@ const DownloadCard = styled(Card)`
       0 10px 30px rgba(139, 92, 246, 0.3),
       inset 0 0 20px rgba(139, 92, 246, 0.1);
   }
-`;
-
-const CardSubtitle = styled.p`
-  font-size: 0.9rem;
-  color: ${theme.colors.text.secondary};
-  margin-bottom: 1rem;
-  opacity: 0.8;
 `;
 
 const CardFooter = styled.div`
@@ -151,9 +146,9 @@ const ModalButton = styled.a<{ $primary?: boolean }>`
 // データ型定義
 interface DownloadItem {
   id: number;
-  type: "voicevox" | "utau" | "music";
+  type: "talk" | "sing" | "other";
+  category: string;
   name: string;
-  subtitle?: string;
   description: string;
   status: "free" | "paid";
   price?: string;
@@ -173,32 +168,21 @@ interface DownloadItem {
 const downloadItems: DownloadItem[] = [
   {
     id: 1,
-    type: "voicevox",
+    type: "talk",
+    category: "トークソフト",
     name: "VOICEVOX 離途",
-    subtitle: "オーディナリ",
-    description: "無料で使える中品質音声テキスト読み上げソフトウェア",
+    description: "無料で使える中品質なテキスト読み上げソフトウェア",
     status: "free",
     links: {
       primary: { text: "ダウンロード", url: "#" },
-      secondary: {
-        text: "VOICEVOXを先にダウンロード",
-        url: "https://voicevox.hiroshiba.jp/",
-      },
-    },
-    modalContent: {
-      detailedDescription: [
-        "VOICEVOXは無料で使える中品質音声合成ソフトウェアです。",
-        "商用・非商用問わず無料で、イントネーションの調整も可能。",
-        "プラグイン機能でキャラクターも追加でき、音声ファイルの作成も簡単です。",
-      ],
     },
   },
   {
     id: 2,
-    type: "utau",
-    name: "UTAU 離途 -FLOW-",
-    subtitle: "ソングライブラリ",
-    description: "柔らかな歌唱適性で聴いた人に大容量のFLOW提供",
+    type: "sing",
+    category: "UTAUソングライブラリ",
+    name: "離途 -FLOW-",
+    description: "豊かな声色で感情的な歌唱が可能な大容量のライブラリ",
     status: "free",
     links: {
       primary: { text: "無料ダウンロード", url: "#" },
@@ -206,51 +190,33 @@ const downloadItems: DownloadItem[] = [
   },
   {
     id: 3,
-    type: "utau",
-    name: "UTAU 離途 -HABIT-",
-    subtitle: "ソングライブラリ",
-    description: "強めなる歌声をメンタルとした音声サウンド音源",
+    type: "sing",
+    category: "UTAUソングライブラリ",
+    name: "離途 -HABIT-",
+    description: "癖と勢いのある発音をコンセプトとした有料アペンドライブラリ",
     status: "paid",
     price: "¥3,000",
     links: {
       primary: { text: "BOOTHで購入", url: "https://booth.pm/" },
-      secondary: {
-        text: "VOICEVOXを先にダウンロード",
-        url: "https://voicevox.hiroshiba.jp/",
-      },
-      tertiary: { text: "無料ダウンロード", url: "#" },
-    },
-    modalContent: {
-      detailedDescription: [
-        "合成音源ライブラリ。限定。",
-        "UTAU用音源カラクシダウンロライブラリです。",
-        "耳いと腹のちを民夏を詳細して仕様した高品。",
-        "製品で表現いては感激こもくしており音声ライブラリ...の記録管理されてます。",
-      ],
-      notes: [
-        "※音素データのみの配布となります。",
-        "パッケージのDLカード等の物理商品の販売ではありません。",
-      ],
     },
   },
   {
     id: 4,
-    type: "music",
-    name: "消えたいと願うだけで",
-    subtitle: "LitPlus",
-    description: "自主制作、歌曲、イラスト、残録素材",
+    type: "sing",
+    category: "UTAUソングライブラリ",
+    name: "離途 -ORIGINAL V2-",
+    description: "LitMusが収録した無加工の音声のみを収録したレガシーライブラリ",
     status: "free",
     links: {
-      primary: { text: "ダウンロード", url: "#" },
+      primary: { text: "無料ダウンロード", url: "#" },
     },
   },
-  // 残りのLitPlus楽曲
   {
     id: 5,
-    type: "music",
-    name: "消えたいと願うだけで",
-    subtitle: "LitPlus",
-    description: "自主制作、歌曲、イラスト、残録素材",
+    type: "talk",
+    category: "トークソフト",
+    name: "MYCOEIROINK 離途",
+    description: "寂しさと吐息感を意識して収録したトーク用レガシーライブラリ",
     status: "free",
     links: {
       primary: { text: "ダウンロード", url: "#" },
@@ -258,10 +224,10 @@ const downloadItems: DownloadItem[] = [
   },
   {
     id: 6,
-    type: "music",
-    name: "消えたいと願うだけで",
-    subtitle: "LitPlus",
-    description: "自主制作、歌曲、イラスト、残録素材",
+    type: "other",
+    category: "画像素材",
+    name: "離途立ち絵イラスト",
+    description: "これまでの離途の立ち絵イラストを一括でダウンロード",
     status: "free",
     links: {
       primary: { text: "ダウンロード", url: "#" },
@@ -269,10 +235,10 @@ const downloadItems: DownloadItem[] = [
   },
   {
     id: 7,
-    type: "music",
-    name: "消えたいと願うだけで",
-    subtitle: "LitPlus",
-    description: "自主制作、歌曲、イラスト、残録素材",
+    type: "other",
+    category: "画像素材",
+    name: "離途ちびキャライラストPSD",
+    description: "PSDTool対応の差分ありのちびキャライラスト",
     status: "free",
     links: {
       primary: { text: "ダウンロード", url: "#" },
@@ -280,10 +246,21 @@ const downloadItems: DownloadItem[] = [
   },
   {
     id: 8,
-    type: "music",
-    name: "消えたいと願うだけで",
-    subtitle: "LitPlus",
-    description: "自主制作、歌曲、イラスト、残録素材",
+    type: "other",
+    category: "音声素材",
+    name: "離途エクストラボイス素材",
+    description: "CVを担当するLitMus本人が、離途をイメージして収録したボイス集",
+    status: "free",
+    links: {
+      primary: { text: "ダウンロード", url: "#" },
+    },
+  },
+  {
+    id: 9,
+    type: "other",
+    category: "3Dモデル",
+    name: "ちびりとすりーでぃー",
+    description: "ローポリゴンのかわいらしい３Dモデル",
     status: "free",
     links: {
       primary: { text: "ダウンロード", url: "#" },
@@ -293,19 +270,12 @@ const downloadItems: DownloadItem[] = [
 
 export default function LitDownloadSection() {
   const [selectedItem, setSelectedItem] = useState<DownloadItem | null>(null);
+  const [activeTab, setActiveTab] = useState("all");
 
-  const getTypeLabel = (type: string) => {
-    switch (type) {
-      case "voicevox":
-        return "VOICEVOX";
-      case "utau":
-        return "UTAU";
-      case "music":
-        return "MUSIC";
-      default:
-        return type.toUpperCase();
-    }
-  };
+  const filteredItems =
+    activeTab === "all"
+      ? downloadItems
+      : downloadItems.filter((item) => item.type === activeTab);
 
   return (
     <>
@@ -317,17 +287,41 @@ export default function LitDownloadSection() {
         <Container>
           <SectionTitle>DOWNLOAD</SectionTitle>
 
+          <TabContainer>
+            <Tab
+              $active={activeTab === "all"}
+              onClick={() => setActiveTab("all")}
+            >
+              ALL
+            </Tab>
+            <Tab
+              $active={activeTab === "talk"}
+              onClick={() => setActiveTab("talk")}
+            >
+              TALK
+            </Tab>
+            <Tab
+              $active={activeTab === "sing"}
+              onClick={() => setActiveTab("sing")}
+            >
+              SING
+            </Tab>
+            <Tab
+              $active={activeTab === "other"}
+              onClick={() => setActiveTab("other")}
+            >
+              OTHER
+            </Tab>
+          </TabContainer>
+
           <CardGrid>
-            {downloadItems.map((item) => (
+            {filteredItems.map((item) => (
               <DownloadCard key={item.id} onClick={() => setSelectedItem(item)}>
                 <CardHeader>
-                  <CardTag>{getTypeLabel(item.type)}</CardTag>
+                  <CardTag>{item.category}</CardTag>
                 </CardHeader>
                 <CardInfo>
                   <CardTitle>{item.name}</CardTitle>
-                  {item.subtitle && (
-                    <CardSubtitle>{item.subtitle}</CardSubtitle>
-                  )}
                   <CardDescription>{item.description}</CardDescription>
                   <CardFooter>
                     <CardStatus $free={item.status === "free"}>
