@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import styled from "styled-components";
-import TextWithBackground from "./TextWithBackground";
+import TextWithBackground from "../../../components/TextWithBackground";
 
 const HomeSection = styled.section`
   position: fixed;

@@ -1,5 +1,5 @@
 import styled, { keyframes } from "styled-components";
-import { theme } from "../styles/theme";
+import { theme } from "../../../styles/theme";
 
 // アニメーション定義
 const floatAnimation = keyframes`

@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { theme } from "../styles/theme";
-import ProfileSection from "./ProfileSection";
-import TextWithBackground from "./TextWithBackground";
+import ProfileSection from "../../../components/ProfileSection";
+import TextWithBackground from "../../../components/TextWithBackground";
+import { theme } from "../../../styles/theme";
 
 // 型定義
 interface ProfileData {
