@@ -36,6 +36,7 @@ const ContentContainer = styled.div`
   position: relative;
   z-index: 2;
   margin-left: 2rem;
+  padding-right: 4rem;
   
   @media (max-width: 968px) {
     padding: 0 2rem;
@@ -49,6 +50,32 @@ const SectionTitleWrapper = styled.h1`
   flex-direction: column;
   align-items: flex-start;
   font-size: 8rem;
+`;
+
+// キャラクター名と罫線のコンテナ
+const CharacterNameContainer = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin: 2rem 0;
+`;
+
+// キャラクター名
+const CharacterName = styled.h2`
+  font-size: 4rem;
+  font-weight: bold;
+  color: ${theme.colors.text.primary};
+  margin: 0;
+  padding-right: 1rem;
+  white-space: nowrap;
+`;
+
+// 罫線
+const NameLine = styled.div`
+  flex: 1;
+  height: 2px;
+  background: ${theme.colors.text.primary};
+  opacity: 0.5;
 `;
 
 // 左側のエリア（キャラクター画像用）
@@ -86,6 +113,10 @@ export default function LitCharacterSection() {
           <SectionTitleWrapper>
             <TextWithBackground>CHARACTER</TextWithBackground>
           </SectionTitleWrapper>
+          <CharacterNameContainer>
+            <CharacterName>離途</CharacterName>
+            <NameLine />
+          </CharacterNameContainer>
         </ContentContainer>
       </CharacterDetailSection>
     </>
