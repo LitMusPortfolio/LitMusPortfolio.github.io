@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import ProfileSection from "../../../components/ProfileSection";
-import TextWithBackground from "../../../components/TextWithBackground";
+import SectionTitle from "../../../components/SectionTitle";
 import { theme } from "../../../styles/theme";
 
 // 型定義
@@ -74,21 +74,13 @@ const ContentContainer = styled.div`
   z-index: 2;
   margin-left: 2rem;
   padding-top: 8rem;
+  padding-bottom: 2rem;
   padding-right: 4rem;
   
   @media (max-width: 968px) {
     padding: 0 2rem;
     align-items: center;
   }
-`;
-
-// セクションタイトルのラッパー
-const SectionTitleWrapper = styled.h1`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  font-size: 8rem;
-  margin-bottom: 1rem;
 `;
 
 // 共通タイトルコンテナ
@@ -217,9 +209,7 @@ export default function LitCharacterSection() {
           />
         </LeftSection>
         <ContentContainer>
-          <SectionTitleWrapper>
-            <TextWithBackground>CHARACTER</TextWithBackground>
-          </SectionTitleWrapper>
+          <SectionTitle>CHARACTER</SectionTitle>
           <CharacterNameContainer>
             <CharacterName>離途</CharacterName>
             <NameLine />

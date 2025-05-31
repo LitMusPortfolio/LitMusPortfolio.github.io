@@ -12,6 +12,7 @@ import {
   ModalCloseButton,
   ModalContent,
 } from "../../../components/CardGrid";
+import SectionTitle from "../../../components/SectionTitle";
 import { theme } from "../../../styles/theme";
 
 // カスタムスタイル
@@ -46,19 +47,7 @@ const Container = styled.div`
   margin: 0 auto;
   position: relative;
   z-index: 1;
-`;
-
-const SectionTitle = styled.h2`
-  font-size: clamp(3rem, 8vw, 6rem);
-  font-weight: 900;
-  letter-spacing: 0.05em;
-  margin-bottom: 4rem;
-  text-align: center;
-  background: ${theme.colors.primary.gradient};
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  text-shadow: 0 0 30px rgba(139, 92, 246, 0.5);
+  padding: 0 2rem;
 `;
 
 const SideDecoration = styled.div`
