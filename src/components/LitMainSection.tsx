@@ -2,13 +2,20 @@ import styled, { keyframes } from "styled-components";
 import { theme } from "../styles/theme";
 
 // アニメーション定義
-const float = keyframes`
+const floatAnimation = keyframes`
   0%, 100% {
     transform: scale(0.8);
   }
   50% {
     transform: scale(0.9);
   }
+`;
+
+const gradientMoveAnimation = keyframes`
+  0%, 100% { transform: rotate(0deg) scale(1); }
+  25% { transform: rotate(90deg) scale(1.1); }
+  50% { transform: rotate(180deg) scale(1); }
+  75% { transform: rotate(270deg) scale(1.1); }
 `;
 
 // メインセクション（離途紹介）
@@ -32,7 +39,7 @@ const MainSection = styled.div`
       radial-gradient(circle at 20% 50%, rgba(139, 92, 246, 0.3) 0%, transparent 40%),
       radial-gradient(circle at 80% 20%, rgba(92, 246, 246, 0.2) 0%, transparent 30%),
       radial-gradient(circle at 60% 80%, rgba(246, 92, 246, 0.2) 0%, transparent 40%);
-    animation: gradientMove 20s ease-in-out infinite;
+    animation: ${gradientMoveAnimation} 20s ease-in-out infinite;
     z-index: 0;
   }
   
@@ -47,16 +54,10 @@ const MainSection = styled.div`
       url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><filter id="noiseFilter"><feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="2" result="turbulence"/><feColorMatrix in="turbulence" type="saturate" values="0"/></filter></defs><rect width="100%" height="100%" filter="url(%23noiseFilter)" opacity="0.05"/></svg>');
     z-index: 0;
   }
-  
-  @keyframes gradientMove {
-    0%, 100% { transform: rotate(0deg) scale(1); }
-    25% { transform: rotate(90deg) scale(1.1); }
-    50% { transform: rotate(180deg) scale(1); }
-    75% { transform: rotate(270deg) scale(1.1); }
-  }
 `;
 
-const Container = styled.div`
+// コンテナ
+const ContentContainer = styled.div`
   width: fit-content;
   padding: 0;
   display: flex;
@@ -72,7 +73,8 @@ const Container = styled.div`
   }
 `;
 
-const LogoImg = styled.img`
+// ロゴ画像
+const Logo = styled.img`
   height: 25vw;
   width: auto;
   margin-bottom: 2rem;
@@ -84,7 +86,8 @@ const LogoImg = styled.img`
   }
 `;
 
-const TextContainer = styled.div`
+// テキストコンテナ
+const TextWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -95,7 +98,8 @@ const TextContainer = styled.div`
   }
 `;
 
-const MainCharacterVisual = styled.div`
+// キャラクター画像
+const CharacterImage = styled.div`
   position: absolute;
   bottom: 0;
   right: -5%;
@@ -129,7 +133,8 @@ const MainCharacterVisual = styled.div`
   }
 `;
 
-const Text = styled.p`
+// テキスト
+const TaglineText = styled.p`
   font-size: 1.8rem;
   color: #fff;
   margin-bottom: 3rem;
@@ -144,7 +149,8 @@ const Text = styled.p`
   }
 `;
 
-const TaglineSpan = styled.span`
+// 背景付きテキスト
+const HighlightedText = styled.span`
   background: ${theme.colors.primary.main};
   border-radius: 2px;
   font-size: 3rem;
@@ -159,7 +165,8 @@ const TaglineSpan = styled.span`
   }
 `;
 
-const FreeDownloadButton = styled.button`
+// ダウンロードボタン
+const DownloadButton = styled.button`
   position: absolute;
   bottom: 4rem;
   right: 4rem;
@@ -171,7 +178,7 @@ const FreeDownloadButton = styled.button`
   font-size: 1.4rem;
   font-weight: bold;
   cursor: pointer;
-  animation: ${float} 3s ease-in-out infinite;
+  animation: ${floatAnimation} 3s ease-in-out infinite;
   transition: all 0.3s ease;
   box-shadow: 
     ${theme.shadows.button},
@@ -218,31 +225,31 @@ export default function LitMainSection() {
         <source src="/101_Lit/LitTopMovie.webm" type="video/webm" />
         <source src="/101_Lit/LitTopMovie.mp4" type="video/mp4" />
       </BackgroundVideo>
-      <Container>
-        <LogoImg src="/101_Lit/Litlogo.webp" alt="離途" />
-        <TextContainer>
-          <Text>
-            <TaglineSpan>
+      <ContentContainer>
+        <Logo src="/101_Lit/Litlogo.webp" alt="離途" />
+        <TextWrapper>
+          <TaglineText>
+            <HighlightedText>
               優しさと吐息が香る
               <br />
               穏やかな男声ソフトウェア。
-            </TaglineSpan>
-          </Text>
-        </TextContainer>
-      </Container>
-      <MainCharacterVisual>
+            </HighlightedText>
+          </TaglineText>
+        </TextWrapper>
+      </ContentContainer>
+      <CharacterImage>
         <img
           src="/101_Lit/LitA_差し替え前提.webp"
           alt="離途 メインビジュアル"
         />
-      </MainCharacterVisual>
-      <FreeDownloadButton
+      </CharacterImage>
+      <DownloadButton
         onClick={() => {
           window.location.href = "#downloads";
         }}
       >
         FREE DL
-      </FreeDownloadButton>
+      </DownloadButton>
     </MainSection>
   );
 }
