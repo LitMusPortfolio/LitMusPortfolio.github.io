@@ -23,86 +23,68 @@ const VideoBackground = styled.video`
 `;
 
 const HomeContent = styled.div`
-  position: relative;
+  position: absolute;
+  left: 3rem;
+  bottom: 10rem;
   z-index: 1;
-  text-align: center;
+  text-align: left;
   color: #fff;
+  
+  @media (max-width: 768px) {
+    left: 2rem;
+    bottom: 8rem;
+  }
 `;
 
 const MainTitle = styled.h1`
   font-family: 'Montserrat', sans-serif;
-  font-size: clamp(3rem, 10vw, 10rem);
+  font-size: clamp(3rem, 8vw, 8rem);
   font-weight: 900;
   letter-spacing: 0.15em;
   margin: 0;
-  text-shadow: 0 0 30px rgba(0, 191, 255, 0.5);
-  animation: glow 2s ease-in-out infinite alternate;
   line-height: 1;
-  
-  @keyframes glow {
-    from {
-      text-shadow: 0 0 30px rgba(0, 191, 255, 0.5);
-    }
-    to {
-      text-shadow: 0 0 50px rgba(0, 191, 255, 0.8), 0 0 70px rgba(0, 191, 255, 0.6);
-    }
-  }
 `;
 
 const SubTitle = styled.p`
   font-family: 'Montserrat', sans-serif;
-  font-size: clamp(0.8rem, 2vw, 1.2rem);
-  font-weight: 900;
-  letter-spacing: 0.3em;
-  margin-top: 1rem;
-  opacity: 0.8;
+  font-size: clamp(0.7rem, 1.5vw, 1rem);
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  margin-top: 0.5rem;
+  opacity: 0.9;
 `;
 
 const TagLine = styled.div`
   display: flex;
-  justify-content: center;
-  gap: 2rem;
-  margin-top: 2rem;
+  justify-content: flex-start;
+  gap: 1rem;
+  margin-top: 1rem;
   flex-wrap: wrap;
   
   span {
-    font-family: 'Montserrat Black', sans-serif;
-    font-size: 0.9rem;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    opacity: 0.7;
-  }
-`;
-
-const CharacterImage = styled.img`
-  position: absolute;
-  right: 5%;
-  bottom: 0;
-  height: 70vh;
-  object-fit: contain;
-  animation: float 6s ease-in-out infinite;
-  
-  @keyframes float {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-20px); }
-    100% { transform: translateY(0px); }
-  }
-  
-  @media (max-width: 768px) {
-    display: none;
+    opacity: 0.8;
   }
 `;
 
 const SocialLinks = styled.div`
   position: absolute;
+  right: 3rem;
   bottom: 2rem;
-  left: 50%;
-  transform: translateX(-50%);
   display: flex;
-  gap: 2rem;
+  gap: 1.5rem;
+  
+  @media (max-width: 768px) {
+    right: 2rem;
+    bottom: 2rem;
+  }
   
   a {
-    opacity: 0.7;
+    opacity: 0.8;
     transition: opacity 0.3s ease;
     
     &:hover {
@@ -111,8 +93,75 @@ const SocialLinks = styled.div`
   }
   
   img {
-    width: 30px;
-    height: 30px;
+    width: 24px;
+    height: 24px;
+  }
+`;
+
+const VoicevoxLogo = styled.div`
+  position: absolute;
+  right: 3rem;
+  top: 6rem;
+  
+  @media (max-width: 768px) {
+    right: 2rem;
+    top: 5rem;
+  }
+  
+  img {
+    width: 120px;
+    opacity: 0.9;
+  }
+  
+  p {
+    font-size: 0.7rem;
+    opacity: 0.7;
+    margin-top: 0.5rem;
+    text-align: right;
+  }
+`;
+
+const NewsBar = styled.div`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  padding: 1rem 3rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  overflow: hidden;
+  
+  @media (max-width: 768px) {
+    padding: 1rem 2rem;
+    gap: 1rem;
+  }
+`;
+
+const NewsLabel = styled.span`
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  color: #00bfff;
+  white-space: nowrap;
+`;
+
+const NewsText = styled.span`
+  font-size: 0.9rem;
+  opacity: 0.9;
+  white-space: nowrap;
+  animation: scroll 20s linear infinite;
+  
+  @keyframes scroll {
+    0% {
+      transform: translateX(100%);
+    }
+    100% {
+      transform: translateX(-100%);
+    }
   }
 `;
 
@@ -144,10 +193,10 @@ export default function Home() {
         </TagLine>
       </HomeContent>
 
-      <CharacterImage
-        src="/101_Lit/LitA_差し替え前提.webp"
-        alt="Lit Character"
-      />
+      <VoicevoxLogo>
+        <img src="/001_top/voicevox_banner.svg" alt="VOICEVOX" />
+        <p>無料エデュケーションライセンス</p>
+      </VoicevoxLogo>
 
       <SocialLinks>
         <a
@@ -172,6 +221,14 @@ export default function Home() {
           <img src="/001_top/icon_niconico.svg" alt="niconico" />
         </a>
       </SocialLinks>
+
+      <NewsBar>
+        <NewsLabel>News</NewsLabel>
+        <NewsText>
+          2025.06.09 新曲「VOICEVOX楽曲 001」を公開しました | 2025.05.30
+          Webサイトをリニューアルしました
+        </NewsText>
+      </NewsBar>
     </HomeSection>
   );
 }

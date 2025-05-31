@@ -8,7 +8,7 @@ const HeaderContainer = styled.header`
   left: 0;
   right: 0;
   z-index: 1000;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(10px);
   padding: 1rem 2rem;
 `;
