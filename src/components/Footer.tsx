@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const FooterContainer = styled.footer`
@@ -110,19 +111,19 @@ export default function Footer() {
             <h3>Navigation</h3>
             <ul>
               <li>
-                <a href="#about">About</a>
+                <Link to="/about">About</Link>
               </li>
               <li>
-                <a href="#works">Works</a>
+                <Link to="/works">Works</Link>
               </li>
               <li>
-                <a href="#voicebank">Voicebank</a>
+                <Link to="/voicebank">Voicebank</Link>
               </li>
               <li>
-                <a href="#shop">Shop</a>
+                <Link to="/shop">Shop</Link>
               </li>
               <li>
-                <a href="#contact">Contact</a>
+                <Link to="/contact">Contact</Link>
               </li>
             </ul>
           </FooterSection>

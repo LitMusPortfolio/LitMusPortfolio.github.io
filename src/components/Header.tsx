@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const HeaderContainer = styled.header`
@@ -20,9 +21,13 @@ const Nav = styled.nav`
   align-items: center;
 `;
 
-const Logo = styled.img`
-  height: 40px;
-  cursor: pointer;
+const Logo = styled(Link)`
+  display: inline-block;
+  
+  img {
+    height: 40px;
+    cursor: pointer;
+  }
 `;
 
 const MenuList = styled.ul<{ $isOpen: boolean }>`
@@ -93,22 +98,16 @@ export default function Header() {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const handleNavClick = (href: string) => {
-    const target = document.querySelector(href);
-    if (target) {
-      target.scrollIntoView({ behavior: "smooth" });
-    }
+  const handleNavClick = () => {
     setIsMenuOpen(false);
   };
 
   return (
     <HeaderContainer>
       <Nav>
-        <Logo
-          src="/001_top/LitMus9_logo.webp"
-          alt="LitMus9"
-          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-        />
+        <Logo to="/">
+          <img src="/001_top/LitMus9_logo.webp" alt="LitMus9" />
+        </Logo>
         <HamburgerButton onClick={toggleMenu}>
           <span />
           <span />
@@ -116,34 +115,29 @@ export default function Header() {
         </HamburgerButton>
         <MenuList $isOpen={isMenuOpen}>
           <MenuItem>
-            {/* biome-ignore lint/a11y/useValidAnchor: ページ内リンクのため正当な使用 */}
-            <a href="#about" onClick={() => handleNavClick("#about")}>
+            <Link to="/about" onClick={handleNavClick}>
               About
-            </a>
+            </Link>
           </MenuItem>
           <MenuItem>
-            {/* biome-ignore lint/a11y/useValidAnchor: ページ内リンクのため正当な使用 */}
-            <a href="#works" onClick={() => handleNavClick("#works")}>
+            <Link to="/works" onClick={handleNavClick}>
               Works
-            </a>
+            </Link>
           </MenuItem>
           <MenuItem>
-            {/* biome-ignore lint/a11y/useValidAnchor: ページ内リンクのため正当な使用 */}
-            <a href="#voicebank" onClick={() => handleNavClick("#voicebank")}>
+            <Link to="/voicebank" onClick={handleNavClick}>
               Voicebank
-            </a>
+            </Link>
           </MenuItem>
           <MenuItem>
-            {/* biome-ignore lint/a11y/useValidAnchor: ページ内リンクのため正当な使用 */}
-            <a href="#shop" onClick={() => handleNavClick("#shop")}>
+            <Link to="/shop" onClick={handleNavClick}>
               Shop
-            </a>
+            </Link>
           </MenuItem>
           <MenuItem>
-            {/* biome-ignore lint/a11y/useValidAnchor: ページ内リンクのため正当な使用 */}
-            <a href="#contact" onClick={() => handleNavClick("#contact")}>
+            <Link to="/contact" onClick={handleNavClick}>
               Contact
-            </a>
+            </Link>
           </MenuItem>
         </MenuList>
       </Nav>

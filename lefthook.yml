@@ -7,4 +7,5 @@ pre-commit:
 pre-push:
   jobs:
     - run: npm run build
-    - glob: "*.{js,ts,jsx,tsx}"
+      glob: "*.{js,ts,jsx,tsx}"
+    

@@ -17,6 +17,17 @@ export const GlobalStyles = createGlobalStyle`
     color: #fff;
     overflow-x: hidden;
   }
+  
+  #root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  main {
+    flex: 1;
+    margin-top: 60px; /* ヘッダー分の余白 */
+  }
 
   h1, h2, h3, h4, h5, h6 {
     margin: 0;
