@@ -16,8 +16,23 @@ const MainSection = styled.div`
   display: flex;
   align-items: center;
   position: relative;
-  background: linear-gradient(135deg, #1a0a3e 0%, #2d1b69 50%, #3e2980 100%);
+  background: linear-gradient(135deg, #0a1628 0%, #1a2c4e 30%, #2a4a7c 60%, #3a5f95 100%);
   overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: 
+      radial-gradient(circle at 20% 50%, rgba(139, 92, 246, 0.3) 0%, transparent 40%),
+      radial-gradient(circle at 80% 20%, rgba(92, 246, 246, 0.2) 0%, transparent 30%),
+      radial-gradient(circle at 60% 80%, rgba(246, 92, 246, 0.2) 0%, transparent 40%);
+    animation: gradientMove 20s ease-in-out infinite;
+    z-index: 0;
+  }
   
   &::after {
     content: '';
@@ -27,9 +42,15 @@ const MainSection = styled.div`
     right: 0;
     bottom: 0;
     background: 
-      radial-gradient(circle at 70% 50%, rgba(139, 92, 246, 0.4) 0%, transparent 50%),
-      radial-gradient(circle at 30% 80%, rgba(139, 92, 246, 0.3) 0%, transparent 50%);
+      url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><filter id="noiseFilter"><feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="2" result="turbulence"/><feColorMatrix in="turbulence" type="saturate" values="0"/></filter></defs><rect width="100%" height="100%" filter="url(%23noiseFilter)" opacity="0.05"/></svg>');
     z-index: 0;
+  }
+  
+  @keyframes gradientMove {
+    0%, 100% { transform: rotate(0deg) scale(1); }
+    25% { transform: rotate(90deg) scale(1.1); }
+    50% { transform: rotate(180deg) scale(1); }
+    75% { transform: rotate(270deg) scale(1.1); }
   }
 `;
 
@@ -84,17 +105,15 @@ const MainCharacterVisual = styled.div`
   }
 `;
 
-const Logo = styled.div`
-  font-size: 6rem;
-  font-weight: 900;
+const Logo = styled.img`
+  height: 120px;
+  width: auto;
   margin-bottom: 1rem;
-  color: #8b5cf6;
-  text-shadow: 0 4px 20px rgba(139, 92, 246, 0.8);
-  font-family: "Noto Serif JP", serif;
-  letter-spacing: 0.2em;
+  filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.8))
+          drop-shadow(0 0 40px rgba(139, 92, 246, 0.6));
   
   @media (max-width: 768px) {
-    font-size: 4rem;
+    height: 80px;
   }
 `;
 
@@ -111,18 +130,22 @@ const Tagline = styled.p`
 // 下部のディスクリプションは削除（完成イメージにないため）
 
 const InfoBox = styled.div`
-  background: rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(139, 92, 246, 0.3);
-  border-radius: 10px;
-  padding: 2rem;
+  background: rgba(0, 20, 40, 0.4);
+  border: 1px solid rgba(92, 246, 246, 0.3);
+  border-radius: 15px;
+  padding: 2.5rem;
   margin: 2rem 0;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(20px);
+  box-shadow: 
+    0 8px 32px rgba(31, 38, 135, 0.37),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
   
   p {
-    font-size: 1rem;
+    font-size: 1.1rem;
     line-height: 1.8;
-    color: rgba(255, 255, 255, 0.9);
-    margin-bottom: 1rem;
+    color: rgba(255, 255, 255, 0.95);
+    margin-bottom: 1.2rem;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
     
     &:last-child {
       margin-bottom: 0;
@@ -132,26 +155,31 @@ const InfoBox = styled.div`
 
 const FreeDownloadButton = styled.button`
   position: absolute;
-  bottom: 2rem;
-  right: 2rem;
-  padding: 1.2rem 3rem;
-  background: #8035F6;
+  bottom: 3rem;
+  right: 3rem;
+  padding: 1.5rem 4rem;
+  background: linear-gradient(135deg, #8035F6 0%, #9d5ff6 100%);
   color: #fff;
   border: none;
-  border-radius: 50px;
-  font-size: 1.2rem;
+  border-radius: 60px;
+  font-size: 1.4rem;
   font-weight: bold;
   cursor: pointer;
   animation: ${float} 3s ease-in-out infinite;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 20px rgba(128, 53, 246, 0.4);
+  box-shadow: 
+    0 10px 30px rgba(128, 53, 246, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
   
   &:hover {
     animation: none;
-    transform: scale(1);
-    background: #8035F6;
-    color: #FF91E9;
-    box-shadow: 0 10px 30px rgba(128, 53, 246, 0.6);
+    transform: scale(1.05) translateY(-2px);
+    background: linear-gradient(135deg, #9d5ff6 0%, #8035F6 100%);
+    box-shadow: 
+      0 15px 40px rgba(128, 53, 246, 0.7),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
   }
   
   @media (max-width: 968px) {
@@ -165,7 +193,7 @@ export default function LitMainSection() {
     <MainSection>
       <MainContainer>
         <MainContent>
-          <Logo>離途</Logo>
+          <Logo src="/101_Lit/Litlogo.webp" alt="離途" />
           <Tagline>優しさと吐息が香る穏やかな男声ソフトウェア。</Tagline>
 
           <InfoBox>
