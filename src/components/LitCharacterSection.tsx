@@ -3,78 +3,142 @@ import styled from "styled-components";
 
 // キャラクター詳細セクション
 const CharacterDetailSection = styled.div`
-  margin-top: 8rem;
+  min-height: 100vh;
   padding: 4rem 0;
-  background: rgba(0, 0, 0, 0.5);
-  border-radius: 20px;
+  background: linear-gradient(135deg, #2d1b69 0%, #1a0a3e 50%, #3e2980 100%);
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(circle at 20% 50%, rgba(139, 92, 246, 0.3) 0%, transparent 40%),
+      radial-gradient(circle at 80% 80%, rgba(139, 92, 246, 0.2) 0%, transparent 40%);
+    z-index: 0;
+  }
+  
+  &::after {
+    content: 'CHARACTER';
+    position: absolute;
+    top: 50%;
+    right: -100px;
+    transform: translateY(-50%) rotate(90deg);
+    font-size: 8rem;
+    font-weight: 900;
+    color: rgba(139, 92, 246, 0.1);
+    letter-spacing: 0.2em;
+    z-index: 0;
+  }
 `;
 
 const Container = styled.div`
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 2rem;
+  position: relative;
+  z-index: 1;
 `;
 
-const SectionTitle = styled.h2`
-  font-size: clamp(2rem, 5vw, 4rem);
-  font-weight: 900;
-  letter-spacing: 0.1em;
+const SectionTitle = styled.div`
   margin-bottom: 4rem;
   text-align: center;
-  background: linear-gradient(45deg, #9400d3, #4b0082);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  
+  img {
+    height: 80px;
+    width: auto;
+    filter: drop-shadow(0 4px 20px rgba(139, 92, 246, 0.8));
+  }
+  
+  @media (max-width: 768px) {
+    img {
+      height: 60px;
+    }
+  }
 `;
 
 const CharacterProfile = styled.div`
   display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 4rem;
-  align-items: start;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 6rem;
+  align-items: stretch;
   margin-bottom: 4rem;
+  min-height: 80vh;
   
-  @media (max-width: 768px) {
+  @media (max-width: 968px) {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 3rem;
+    min-height: auto;
   }
 `;
 
 const CharacterVisual = styled.div`
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 100%;
   
   img {
     width: 100%;
-    max-width: 400px;
-    margin: 0 auto;
+    max-width: 600px;
+    height: auto;
     display: block;
-    border-radius: 10px;
+    filter: drop-shadow(0 0 30px rgba(139, 92, 246, 0.5));
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  @media (max-width: 968px) {
+    img {
+      max-width: 400px;
+    }
   }
 `;
 
 const ProfileInfo = styled.div`
+  background: rgba(0, 0, 0, 0.3);
+  border: 2px solid rgba(139, 92, 246, 0.5);
+  border-radius: 20px;
+  padding: 3rem;
+  backdrop-filter: blur(10px);
+  
   h3 {
-    font-size: 2.5rem;
+    font-size: 3rem;
     margin-bottom: 2rem;
-    color: #9400d3;
+    color: #8b5cf6;
+    text-shadow: 0 2px 10px rgba(139, 92, 246, 0.8);
+    font-weight: 900;
+    letter-spacing: 0.1em;
   }
 `;
 
 const ProfileTable = styled.table`
   width: 100%;
   border-collapse: separate;
-  border-spacing: 0 1rem;
+  border-spacing: 0 1.5rem;
   
   tr {
-    background: rgba(148, 0, 211, 0.1);
-    
     td {
-      padding: 1rem;
+      padding: 1rem 0;
+      font-size: 1.1rem;
+      color: #fff;
       
       &:first-child {
         font-weight: bold;
-        color: #9400d3;
-        width: 150px;
+        color: #a78bfa;
+        width: 120px;
+        padding-right: 2rem;
+      }
+      
+      &:last-child {
+        font-size: 1.2rem;
       }
     }
   }
@@ -82,17 +146,21 @@ const ProfileTable = styled.table`
 
 const TruthButton = styled.button`
   margin-top: 3rem;
-  padding: 1rem 3rem;
-  background: transparent;
-  border: 2px solid #9400d3;
-  color: #9400d3;
-  font-size: 1.1rem;
+  padding: 1.2rem 3rem;
+  background: rgba(139, 92, 246, 0.2);
+  border: 2px solid #8b5cf6;
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: bold;
   cursor: pointer;
   transition: all 0.3s ease;
+  border-radius: 50px;
+  box-shadow: 0 4px 20px rgba(139, 92, 246, 0.3);
   
   &:hover {
-    background: #9400d3;
-    color: #fff;
+    background: #8b5cf6;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 30px rgba(139, 92, 246, 0.5);
   }
 `;
 
@@ -192,14 +260,68 @@ const researchLogs = [
   },
 ];
 
+// デモソングの追加
+const DemoSongs = styled.div`
+  margin-top: 4rem;
+  text-align: center;
+`;
+
+const DemoSongTitle = styled.h3`
+  font-size: 2rem;
+  color: #8b5cf6;
+  margin-bottom: 2rem;
+  text-shadow: 0 2px 10px rgba(139, 92, 246, 0.5);
+`;
+
+const DemoSongGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin-top: 2rem;
+  
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+const DemoSongCard = styled.a`
+  display: block;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  border-radius: 10px;
+  padding: 1.5rem;
+  text-decoration: none;
+  color: #fff;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background: rgba(139, 92, 246, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(139, 92, 246, 0.3);
+  }
+  
+  h4 {
+    font-size: 1.3rem;
+    color: #a78bfa;
+    margin-bottom: 0.5rem;
+  }
+  
+  p {
+    font-size: 0.9rem;
+    opacity: 0.8;
+  }
+`;
+
 export default function LitCharacterSection() {
   const [showBugModal, setShowBugModal] = useState(false);
 
   return (
     <>
-      <Container>
-        <CharacterDetailSection>
-          <SectionTitle>離途 - Character Profile</SectionTitle>
+      <CharacterDetailSection>
+        <Container>
+          <SectionTitle>
+            <img src="/010_PageSideTitleSvg/Character.svg" alt="CHARACTER" />
+          </SectionTitle>
 
           <CharacterProfile>
             <CharacterVisual>
@@ -218,6 +340,10 @@ export default function LitCharacterSection() {
                     <td>10月10日</td>
                   </tr>
                   <tr>
+                    <td>年齢</td>
+                    <td>不明</td>
+                  </tr>
+                  <tr>
                     <td>身長</td>
                     <td>180cm</td>
                   </tr>
@@ -226,19 +352,61 @@ export default function LitCharacterSection() {
                     <td>200kg</td>
                   </tr>
                   <tr>
+                    <td>一人称</td>
+                    <td>ボク</td>
+                  </tr>
+                  <tr>
+                    <td>趣味</td>
+                    <td>旅行、歌、瞑想</td>
+                  </tr>
+                  <tr>
+                    <td>好き</td>
+                    <td>日光浴、さつまいも</td>
+                  </tr>
+                  <tr>
+                    <td>嫌い</td>
+                    <td>わからない</td>
+                  </tr>
+                  <tr>
                     <td>特筆事項</td>
-                    <td>記憶喪失 / アンドロイド</td>
+                    <td>記憶喪失</td>
+                  </tr>
+                  <tr>
+                    <td>目的</td>
+                    <td>自分が何者か知る</td>
                   </tr>
                 </tbody>
               </ProfileTable>
 
+              <DemoSongs>
+                <DemoSongTitle>デモソング</DemoSongTitle>
+                <DemoSongGrid>
+                  <DemoSongCard
+                    href="https://www.youtube.com/watch?v=Am0LJHT7ipv0"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <h4>はじめまして僕「リト」で忘れよう / RuLu</h4>
+                    <p>オリジナル楽曲</p>
+                  </DemoSongCard>
+                  <DemoSongCard
+                    href="https://www.youtube.com/watch?v=Am0LJHT7ipv0"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <h4>はじめまして僕「リト」で思い出そう♪ / Rと</h4>
+                    <p>カバー楽曲</p>
+                  </DemoSongCard>
+                </DemoSongGrid>
+              </DemoSongs>
+
               <TruthButton onClick={() => setShowBugModal(true)}>
-                Do you want to know the truth?
+                DO YOU WANT TO KNOW THE TRUTH?
               </TruthButton>
             </ProfileInfo>
           </CharacterProfile>
-        </CharacterDetailSection>
-      </Container>
+        </Container>
+      </CharacterDetailSection>
 
       {/* バグモーダル */}
       <BugModal $isOpen={showBugModal}>
