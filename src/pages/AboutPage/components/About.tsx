@@ -1,22 +1,17 @@
 import styled from "styled-components";
+import { Container, Section, SideDecoration } from "@/components/Layout/";
+import { PageTitle } from "@/components/PageTitle";
+import { glassmorphism } from "@/styles/utils";
 
-const AboutSection = styled.section`
-  min-height: 100vh;
-  padding: 8rem 2rem;
-  background: #0a0a0a;
-  position: relative;
-  overflow: hidden;
-`;
+// AboutSection は Section コンポーネントで置き換え
 
-const Container = styled.div`
-  max-width: 1200px;
-  margin: 0 auto;
+const GridContainer = styled(Container)`
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 4rem;
   align-items: center;
   
-  @media (max-width: 768px) {
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
     grid-template-columns: 1fr;
     gap: 2rem;
   }
@@ -26,16 +21,7 @@ const ContentWrapper = styled.div`
   position: relative;
 `;
 
-const SectionTitle = styled.h2`
-  font-size: clamp(2rem, 5vw, 4rem);
-  font-weight: 900;
-  letter-spacing: 0.1em;
-  margin-bottom: 2rem;
-  background: linear-gradient(45deg, #00bfff, #0080ff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-`;
+// SectionTitleはPageTitleコンポーネントで置き換え
 
 const Description = styled.p`
   font-size: 1.1rem;
@@ -92,8 +78,7 @@ const SkillsList = styled.div`
 
 const SkillTag = styled.span`
   padding: 0.5rem 1rem;
-  background: rgba(0, 191, 255, 0.1);
-  border: 1px solid rgba(0, 191, 255, 0.3);
+  ${glassmorphism}
   border-radius: 20px;
   font-size: 0.9rem;
   transition: all 0.3s ease;
@@ -105,34 +90,20 @@ const SkillTag = styled.span`
   }
 `;
 
-const SideDecoration = styled.div`
-  position: absolute;
-  left: -100px;
-  top: 50%;
-  transform: translateY(-50%);
-  writing-mode: vertical-rl;
-  text-orientation: mixed;
-  
-  img {
-    height: 200px;
-    opacity: 0.3;
-  }
-  
-  @media (max-width: 768px) {
-    display: none;
-  }
-`;
+// SideDecorationは共通コンポーネントを使用
 
 export default function About() {
   return (
-    <AboutSection id="about">
-      <SideDecoration>
+    <Section id="about">
+      <SideDecoration position="left">
         <img src="/010_PageSideTitleSvg/ABOUT.svg" alt="ABOUT" />
       </SideDecoration>
 
-      <Container>
+      <GridContainer>
         <ContentWrapper>
-          <SectionTitle>ABOUT</SectionTitle>
+          <PageTitle gradientColors={{ color1: "#00bfff", color2: "#0080ff" }}>
+            ABOUT
+          </PageTitle>
           <Description>
             LitMus9は音楽制作を中心に、イラストレーション、デザイン、
             3DCG、映像制作など幅広いクリエイティブ活動を展開しています。
@@ -170,7 +141,7 @@ export default function About() {
         <ImageWrapper>
           <ProfileImage src="/002_about/LitMusIcon.webp" alt="LitMus9" />
         </ImageWrapper>
-      </Container>
-    </AboutSection>
+      </GridContainer>
+    </Section>
   );
 }
