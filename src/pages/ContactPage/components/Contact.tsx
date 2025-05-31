@@ -1,38 +1,25 @@
 import styled from "styled-components";
+import { Container, Section, SideDecoration } from "@/components/Layout/";
+import { PageTitle } from "@/components/PageTitle";
+import { SocialLinks as CommonSocialLinks } from "@/components/SocialLinks";
+import { glassmorphism } from "@/styles/utils";
+import type { SocialLink } from "@/types";
 
-const ContactSection = styled.section`
-  min-height: 100vh;
-  padding: 8rem 2rem;
-  background: #0a0a0a;
-  position: relative;
+const ContactSectionWrapper = styled(Section)`
   display: flex;
   align-items: center;
 `;
 
-const Container = styled.div`
+const ContactContainer = styled(Container)`
   max-width: 800px;
-  margin: 0 auto;
-  width: 100%;
 `;
 
-const SectionTitle = styled.h2`
-  font-size: clamp(2rem, 5vw, 4rem);
-  font-weight: 900;
-  letter-spacing: 0.1em;
-  margin-bottom: 4rem;
-  text-align: center;
-  background: linear-gradient(45deg, #00ff00, #00ffff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-`;
+// SectionTitleはPageTitleコンポーネントで置き換え
 
 const ContactForm = styled.form`
-  background: rgba(255, 255, 255, 0.03);
+  ${glassmorphism}
   padding: 3rem;
   border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
 `;
 
 const FormGroup = styled.div`
@@ -124,54 +111,13 @@ const InfoItem = styled.div`
   }
 `;
 
-const SocialLinks = styled.div`
+const SocialLinksWrapper = styled.div`
   display: flex;
   justify-content: center;
-  gap: 2rem;
   margin-top: 3rem;
-  
-  a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 50px;
-    height: 50px;
-    background: rgba(0, 255, 0, 0.1);
-    border: 1px solid rgba(0, 255, 0, 0.3);
-    border-radius: 50%;
-    transition: all 0.3s ease;
-    
-    &:hover {
-      background: rgba(0, 255, 0, 0.2);
-      border-color: #00ff00;
-      transform: translateY(-3px);
-    }
-    
-    img {
-      width: 24px;
-      height: 24px;
-      filter: brightness(0) invert(1);
-    }
-  }
 `;
 
-const SideDecoration = styled.div`
-  position: absolute;
-  right: -100px;
-  top: 50%;
-  transform: translateY(-50%);
-  writing-mode: vertical-rl;
-  text-orientation: mixed;
-  
-  img {
-    height: 200px;
-    opacity: 0.3;
-  }
-  
-  @media (max-width: 768px) {
-    display: none;
-  }
-`;
+// SideDecorationは共通コンポーネントを使用
 
 export default function Contact() {
   const handleSubmit = (e: React.FormEvent) => {
@@ -180,14 +126,34 @@ export default function Contact() {
     console.log("フォームが送信されました");
   };
 
+  const socialLinks: SocialLink[] = [
+    {
+      platform: "X (Twitter)",
+      url: "https://twitter.com/litmus9",
+      icon: "/001_top/icon_X.svg",
+    },
+    {
+      platform: "YouTube",
+      url: "https://www.youtube.com/@litmus9",
+      icon: "/001_top/icon_youtube.svg",
+    },
+    {
+      platform: "niconico",
+      url: "https://www.nicovideo.jp/user/12345678",
+      icon: "/001_top/icon_niconico.svg",
+    },
+  ];
+
   return (
-    <ContactSection id="contact">
-      <SideDecoration>
+    <ContactSectionWrapper id="contact">
+      <SideDecoration position="right">
         <img src="/010_PageSideTitleSvg/CONTACT.svg" alt="CONTACT" />
       </SideDecoration>
 
-      <Container>
-        <SectionTitle>CONTACT</SectionTitle>
+      <ContactContainer>
+        <PageTitle gradientColors={{ color1: "#00ff00", color2: "#00ffff" }}>
+          CONTACT
+        </PageTitle>
 
         <ContactForm onSubmit={handleSubmit}>
           <FormGroup>
@@ -219,31 +185,11 @@ export default function Contact() {
             <a href="mailto:contact@litmus9.com">contact@litmus9.com</a>
           </InfoItem>
 
-          <SocialLinks>
-            <a
-              href="https://twitter.com/litmus9"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img src="/001_top/icon_X.svg" alt="X (Twitter)" />
-            </a>
-            <a
-              href="https://www.youtube.com/@litmus9"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img src="/001_top/icon_youtube.svg" alt="YouTube" />
-            </a>
-            <a
-              href="https://www.nicovideo.jp/user/12345678"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <img src="/001_top/icon_niconico.svg" alt="niconico" />
-            </a>
-          </SocialLinks>
+          <SocialLinksWrapper>
+            <CommonSocialLinks links={socialLinks} size="large" />
+          </SocialLinksWrapper>
         </ContactInfo>
-      </Container>
-    </ContactSection>
+      </ContactContainer>
+    </ContactSectionWrapper>
   );
 }
