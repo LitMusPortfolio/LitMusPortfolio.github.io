@@ -2,85 +2,92 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## 重要
-
-- ファイルを編集したら必ず当該部分をplaywrightで確認し、意図した表示になっていることを確認して。
-
-## 開発環境
-
-- 開発サーバーは既に起動しています: http://localhost:5173/
-- 新たに開発サーバーを起動しようとすると他の作業ができなくなるため、必ず既存の開発サーバーが立ち上がっていることを確認してください
-
-## 共通コマンド
+## 開発コマンド
 
 ```bash
-# 開発サーバー起動
+# 依存関係のインストール
+npm install
+
+# 開発サーバー起動 (http://localhost:5173)
 npm run dev
 
 # ビルド
 npm run build
 
-# リント
+# リント実行
 npm run lint
 
-# プレビュー
+# プレビューサーバーの起動
 npm run preview
 ```
 
-## プロジェクト構成
+## アーキテクチャ
 
 ### 技術スタック
-- Vite + React + TypeScript
-- styled-components（CSS-in-JS）
-- React Router DOM（ルーティング）
-- Biome（リンター・フォーマッター）
+- **Vite**: 高速なビルドツール
+- **React 19**: UIライブラリ
+- **TypeScript**: 型安全性
+- **styled-components**: CSS-in-JSライブラリ
+- **Biome**: リンター/フォーマッター
 
-### アーキテクチャ
-- **Pages**: 各ルートに対応するページコンポーネント（`src/pages/`）
-- **Components**: 再利用可能なUIコンポーネント（`src/components/`）
-- **Layouts**: ページ共通のレイアウト（`src/layouts/MainLayout.tsx`）
-- **Styles**: テーマとグローバルスタイル（`src/styles/`）
-
-### ルーティング構成
+### ディレクトリ構造
 ```
-/ (HomePage)
-/about (AboutPage)  
-/works (WorksPage)
-/voicebank (VoicebankPage)
-/shop (ShopPage)
-/contact (ContactPage)
+src/
+├── components/        # 再利用可能なコンポーネント
+│   ├── Header.tsx
+│   ├── Footer.tsx
+│   ├── ProfileSection.tsx
+│   └── TextWithBackground.tsx
+├── pages/            # 各ページとそのコンポーネント
+│   ├── HomePage/
+│   │   ├── index.tsx
+│   │   └── components/
+│   ├── AboutPage/
+│   ├── ContactPage/
+│   ├── WorksPage/
+│   ├── ShopPage/
+│   └── VoicebankPage/
+│       └── components/
+│           ├── LitCharacter.tsx
+│           ├── LitMainSection.tsx
+│           ├── LitCharacterSection.tsx
+│           └── LitDownloadSection.tsx
+├── layouts/          # レイアウトコンポーネント
+│   └── MainLayout.tsx
+└── styles/           # スタイル関連
+    ├── theme.ts      # テーマ定義
+    └── GlobalStyles.ts
 ```
 
-### スタイリング規約
-- テーマシステム（`src/styles/theme.ts`）を使用
-- 紫をベースとしたカラーパレット
-- グラスモーフィズムデザインパターン
-- レスポンシブデザイン対応
+### 重要な設定
+- **GitHub Pages対応**: `vite.config.ts`でbase pathが設定済み
+- **Git hooks**: lefthookでpre-commit/pre-pushフックが設定済み
+- **フォーマット**: スペース2文字インデント、ダブルクォート使用
+
+## ルーティング構成
+
+アプリケーションは`MainLayout`でラップされ、以下のルートが定義されています：
+
+- `/` - HomePage
+- `/about` - AboutPage  
+- `/works` - WorksPage
+- `/voicebank` - VoicebankPage（離途キャラクターページ）
+- `/shop` - ShopPage
+- `/contact` - ContactPage
+
+## スタイリングシステム
+
+`theme.ts`に定義された統一テーマを使用：
+- カラーパレット: 紫系統を基調としたダークテーマ
+- グラスモーフィズム効果
+- レスポンシブ対応（ブレークポイント: 768px, 968px）
 
 ## デプロイ
 
-- GitHub Actions による自動デプロイ
-- mainブランチへのpush時に自動実行
-- GitHub Pagesにデプロイ
+GitHub Actionsによる自動デプロイが設定済み。`main`ブランチへのプッシュで自動的にGitHub Pagesにデプロイされます。
 
-## Git Hooks
+## 開発時の注意事項
 
-- **pre-commit**: Biomeによるlintチェック
-- **pre-push**: ビルドテスト実行
-
-## プロジェクトドキュメント
-
-### .claude/docs/
-プロジェクトの設計資料とアセットが配置されています：
-
-- **pages/**: 各ページのデザイン仕様書（PDF形式）
-  - TopPage_and_header.pdf
-  - About.pdf, Contact.pdf, Works.pdf
-  - Lit_UTAU.pdf（UTAUキャラクター関連ページ）
-  - extracted/: デザインから抽出された画像素材
-
-- **hp-assets/**: Webサイト用の画像・動画アセット
-  - 001_top/: トップページ用素材（ロゴ、動画、アイコン等）
-  - 002_about/: Aboutページ用素材
-  - 010_PageSideTitleSvg/: ページタイトル用SVG
-  - 101_Lit/: Litキャラクター関連素材
+1. コミット前に自動的にリントが実行されます
+2. プッシュ前にビルドが実行されます
+3. Biomeによるコードフォーマットが適用されます
