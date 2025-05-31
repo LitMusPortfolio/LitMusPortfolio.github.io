@@ -101,56 +101,9 @@ export const CardOverlay = styled.div`
   }
 `;
 
-// モーダルコンポーネント
-export const Modal = styled.div<{ $isOpen: boolean }>`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.9);
-  backdrop-filter: blur(20px);
-  z-index: 1000;
-  display: ${(props) => (props.$isOpen ? "flex" : "none")};
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-`;
-
-export const ModalContent = styled.div`
-  background: ${theme.colors.background.dark};
-  border: 2px solid ${theme.colors.primary.main};
-  border-radius: 20px;
-  max-width: 900px;
-  width: 100%;
-  max-height: 90vh;
-  overflow: hidden;
-  position: relative;
-  display: flex;
-  
-  @media (max-width: 768px) {
-    flex-direction: column;
-  }
-`;
-
-export const ModalCloseButton = styled.button`
-  position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
-  background: none;
-  border: none;
-  color: ${theme.colors.text.primary};
-  font-size: 2rem;
-  cursor: pointer;
-  opacity: 0.7;
-  transition: all 0.3s ease;
-  z-index: 10;
-  
-  &:hover {
-    opacity: 1;
-    transform: rotate(90deg);
-  }
-`;
+export { default as DownloadModal } from "./DownloadModal";
+// 共通Modalコンポーネントを使用
+export { default as Modal, ModalContent, ModalTitle } from "./Modal";
 
 // タブコンポーネント
 export const TabContainer = styled.div`
