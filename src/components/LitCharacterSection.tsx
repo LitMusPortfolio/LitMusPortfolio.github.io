@@ -8,13 +8,22 @@ interface ProfileData {
   value: string;
 }
 
-// プロフィールデータ
-const PROFILE_DATA: ProfileData[] = [
+// プロフィールデータ（左側）
+const PROFILE_DATA_LEFT: ProfileData[] = [
   { label: "誕生日", value: "10月10日" },
   { label: "年齢", value: "不明" },
   { label: "身長", value: "180cm" },
   { label: "体重", value: "200kg" },
   { label: "一人称", value: "ボク" },
+];
+
+// プロフィールデータ（右側）
+const PROFILE_DATA_RIGHT: ProfileData[] = [
+  { label: "趣味", value: "旅行、歌、瞑想" },
+  { label: "好き", value: "日光浴、さつまいも" },
+  { label: "嫌い", value: "わからない" },
+  { label: "特筆事項", value: "記憶喪失" },
+  { label: "目的", value: "自分が何者か知る" },
 ];
 
 // キャラクター詳細セクション
@@ -65,6 +74,7 @@ const SectionTitleWrapper = styled.h1`
   flex-direction: column;
   align-items: flex-start;
   font-size: 8rem;
+  margin-bottom: 2rem;
 `;
 
 // キャラクター名と罫線のコンテナ
@@ -97,36 +107,46 @@ const NameLine = styled(LineBase)`
   opacity: 0.5;
 `;
 
-// プロフィールコンテナ
+// プロフィールコンテナ（全体）
+const ProfileWrapper = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  margin-top: 2rem;
+  width: 100%;
+  
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+// プロフィールコンテナ（個別）
 const ProfileContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
-  margin-top: 2rem;
-  width: 100%;
 `;
 
 // プロフィール項目
 const ProfileItem = styled.div`
   display: flex;
   align-items: center;
-  font-size: 1.5rem;
+  font-size: 2rem;
   color: ${theme.colors.text.primary};
   width: 100%;
 `;
 
 // プロフィールラベル
 const ProfileLabel = styled.span`
-  min-width: 8rem;
+  
   font-weight: bold;
-  opacity: 0.8;
-  padding-right: 1rem;
+  font-size: 2rem;
 `;
 
 // プロフィール用の罫線
 const ProfileLine = styled(LineBase)`
   height: 1px;
-  opacity: 0.3;
+  opacity: 0.8;
   margin: 0 1rem;
 `;
 
@@ -174,15 +194,26 @@ export default function LitCharacterSection() {
             <CharacterName>離途</CharacterName>
             <NameLine />
           </CharacterNameContainer>
-          <ProfileContainer>
-            {PROFILE_DATA.map((item) => (
-              <ProfileItem key={item.label}>
-                <ProfileLabel>{item.label}</ProfileLabel>
-                <ProfileLine />
-                <ProfileValue>{item.value}</ProfileValue>
-              </ProfileItem>
-            ))}
-          </ProfileContainer>
+          <ProfileWrapper>
+            <ProfileContainer>
+              {PROFILE_DATA_LEFT.map((item) => (
+                <ProfileItem key={item.label}>
+                  <ProfileLabel>{item.label}</ProfileLabel>
+                  <ProfileLine />
+                  <ProfileValue>{item.value}</ProfileValue>
+                </ProfileItem>
+              ))}
+            </ProfileContainer>
+            <ProfileContainer>
+              {PROFILE_DATA_RIGHT.map((item) => (
+                <ProfileItem key={item.label}>
+                  <ProfileLabel>{item.label}</ProfileLabel>
+                  <ProfileLine />
+                  <ProfileValue>{item.value}</ProfileValue>
+                </ProfileItem>
+              ))}
+            </ProfileContainer>
+          </ProfileWrapper>
         </ContentContainer>
       </CharacterDetailSection>
     </>
