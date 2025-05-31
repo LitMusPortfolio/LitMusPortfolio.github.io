@@ -1,13 +1,13 @@
 import { useState } from "react";
 import styled from "styled-components";
+import { Tab, TabContainer } from "../../../components/CardGrid";
+import { Container, Section } from "../../../components/Layout";
 
-const WorksSection = styled.section`
-  min-height: 100vh;
+const WorksSection = styled(Section)`
   background-image: url('/LitMusBG.webp');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  position: relative;
   
   &::before {
     content: '';
@@ -18,15 +18,13 @@ const WorksSection = styled.section`
   }
 `;
 
-const ContentWrapper = styled.div`
+const ContentWrapper = styled(Container)`
   position: relative;
   z-index: 1;
-  padding: 120px 3rem 3rem;
-  max-width: 1400px;
-  margin: 0 auto;
+  padding-top: 120px;
   
-  @media (max-width: 768px) {
-    padding: 100px 1.5rem 1.5rem;
+  @media (max-width: ${(props) => props.theme.breakpoints?.mobile || "768px"}) {
+    padding-top: 100px;
   }
 `;
 
@@ -40,36 +38,7 @@ const PageTitle = styled.h1`
   letter-spacing: 0.1em;
 `;
 
-const TabContainer = styled.div`
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  margin-bottom: 3rem;
-  flex-wrap: wrap;
-`;
-
-const Tab = styled.button<{ $active: boolean }>`
-  padding: 0.8rem 2rem;
-  background: ${(props) =>
-    props.$active ? "rgba(147, 51, 234, 0.5)" : "rgba(255, 255, 255, 0.1)"};
-  backdrop-filter: blur(10px);
-  border: 1px solid ${(props) =>
-    props.$active ? "rgba(147, 51, 234, 0.8)" : "rgba(255, 255, 255, 0.2)"};
-  color: ${(props) => (props.$active ? "#fff" : "rgba(255, 255, 255, 0.8)")};
-  border-radius: 30px;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 600;
-  font-size: 0.9rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  
-  &:hover {
-    background: ${(props) =>
-      props.$active ? "rgba(147, 51, 234, 0.6)" : "rgba(255, 255, 255, 0.15)"};
-    color: #fff;
-    transform: translateY(-2px);
-  }
-`;
+// TabはCardGridからimportしたものを使用
 
 const WorksGrid = styled.div`
   display: grid;

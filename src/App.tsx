@@ -1,4 +1,5 @@
 import { Route, Routes } from "react-router-dom";
+import { ThemeProvider } from "styled-components";
 import MainLayout from "./layouts/MainLayout";
 import AboutPage from "./pages/AboutPage";
 import ContactPage from "./pages/ContactPage";
@@ -7,10 +8,11 @@ import ShopPage from "./pages/ShopPage";
 import VoicebankPage from "./pages/VoicebankPage";
 import WorksPage from "./pages/WorksPage";
 import { GlobalStyles } from "./styles/GlobalStyles";
+import { theme } from "./styles/theme";
 
 function App() {
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <GlobalStyles />
       <Routes>
         <Route path="/" element={<MainLayout />}>
@@ -22,7 +24,7 @@ function App() {
           <Route path="contact" element={<ContactPage />} />
         </Route>
       </Routes>
-    </>
+    </ThemeProvider>
   );
 }
 
