@@ -2,6 +2,21 @@ import styled from "styled-components";
 import { theme } from "../styles/theme";
 import TextWithBackground from "./TextWithBackground";
 
+// 型定義
+interface ProfileData {
+  label: string;
+  value: string;
+}
+
+// プロフィールデータ
+const PROFILE_DATA: ProfileData[] = [
+  { label: "誕生日", value: "10月10日" },
+  { label: "年齢", value: "不明" },
+  { label: "身長", value: "180cm" },
+  { label: "体重", value: "200kg" },
+  { label: "一人称", value: "ボク" },
+];
+
 // キャラクター詳細セクション
 const CharacterDetailSection = styled.div`
   min-height: 100vh;
@@ -70,11 +85,15 @@ const CharacterName = styled.h2`
   white-space: nowrap;
 `;
 
-// 罫線
-const NameLine = styled.div`
+// 共通罫線スタイル
+const LineBase = styled.div`
   flex: 1;
-  height: 2px;
   background: ${theme.colors.text.primary};
+`;
+
+// 名前用の罫線
+const NameLine = styled(LineBase)`
+  height: 2px;
   opacity: 0.5;
 `;
 
@@ -104,11 +123,9 @@ const ProfileLabel = styled.span`
   padding-right: 1rem;
 `;
 
-// プロフィール罫線
-const ProfileLine = styled.div`
-  flex: 1;
+// プロフィール用の罫線
+const ProfileLine = styled(LineBase)`
   height: 1px;
-  background: ${theme.colors.text.primary};
   opacity: 0.3;
   margin: 0 1rem;
 `;
@@ -158,31 +175,13 @@ export default function LitCharacterSection() {
             <NameLine />
           </CharacterNameContainer>
           <ProfileContainer>
-            <ProfileItem>
-              <ProfileLabel>誕生日</ProfileLabel>
-              <ProfileLine />
-              <ProfileValue>10月10日</ProfileValue>
-            </ProfileItem>
-            <ProfileItem>
-              <ProfileLabel>年齢</ProfileLabel>
-              <ProfileLine />
-              <ProfileValue>不明</ProfileValue>
-            </ProfileItem>
-            <ProfileItem>
-              <ProfileLabel>身長</ProfileLabel>
-              <ProfileLine />
-              <ProfileValue>180cm</ProfileValue>
-            </ProfileItem>
-            <ProfileItem>
-              <ProfileLabel>体重</ProfileLabel>
-              <ProfileLine />
-              <ProfileValue>200kg</ProfileValue>
-            </ProfileItem>
-            <ProfileItem>
-              <ProfileLabel>一人称</ProfileLabel>
-              <ProfileLine />
-              <ProfileValue>ボク</ProfileValue>
-            </ProfileItem>
+            {PROFILE_DATA.map((item) => (
+              <ProfileItem key={item.label}>
+                <ProfileLabel>{item.label}</ProfileLabel>
+                <ProfileLine />
+                <ProfileValue>{item.value}</ProfileValue>
+              </ProfileItem>
+            ))}
           </ProfileContainer>
         </ContentContainer>
       </CharacterDetailSection>
