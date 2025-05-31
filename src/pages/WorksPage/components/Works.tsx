@@ -1,7 +1,11 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { Tab, TabContainer } from "../../../components/CardGrid";
-import { Container, Section } from "../../../components/Layout";
+import { Tab, TabContainer } from "@/components/CardGrid";
+import { Container, Section } from "@/components/Layout";
+import { PageTitle as CommonPageTitle } from "@/components/PageTitle";
+import { cardHoverEffect, glassmorphism } from "@/styles/utils";
+import type { Work } from "@/types";
+import { categoryColors } from "@/types";
 
 const WorksSection = styled(Section)`
   background-image: url('/LitMusBG.webp');
@@ -28,14 +32,9 @@ const ContentWrapper = styled(Container)`
   }
 `;
 
-const PageTitle = styled.h1`
-  font-family: 'Montserrat', sans-serif;
+const PageTitle = styled(CommonPageTitle)`
   font-size: clamp(3rem, 8vw, 6rem);
-  font-weight: 900;
-  color: #fff;
-  text-align: center;
   margin-bottom: 3rem;
-  letter-spacing: 0.1em;
 `;
 
 // TabはCardGridからimportしたものを使用
@@ -52,18 +51,12 @@ const WorksGrid = styled.div`
 `;
 
 const WorkCard = styled.article`
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  ${glassmorphism}
   border-radius: 12px;
   overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
+  ${cardHoverEffect}
   
   &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    
     .play-button {
       transform: translate(-50%, -50%) scale(1.1);
     }
@@ -117,10 +110,16 @@ const WorkInfo = styled.div`
   background: rgba(0, 0, 0, 0.5);
 `;
 
-const WorkCategory = styled.span`
+const WorkCategory = styled.span<{ $category: string }>`
   display: inline-block;
   padding: 0.3rem 0.8rem;
-  background: rgba(147, 51, 234, 0.3);
+  background: ${({ $category }) => {
+    const colors = categoryColors[$category] || {
+      primary: "#8a61ff",
+      secondary: "#a78bff",
+    };
+    return `linear-gradient(135deg, ${colors.primary}40, ${colors.secondary}40)`;
+  }};
   border-radius: 15px;
   font-size: 0.75rem;
   color: rgba(255, 255, 255, 0.9);
@@ -146,24 +145,13 @@ const WorkStats = styled.div`
   color: rgba(255, 255, 255, 0.7);
 `;
 
-interface Work {
-  id: number;
-  title: string;
-  category: string;
-  type: string;
-  description: string;
-  image: string;
-  link?: string;
-  videoId?: string;
-  views?: string;
-  date?: string;
-}
+// Work型は@/typesからインポート
 
 const worksData: Work[] = [
   {
     id: 1,
     title: "消えたいと思うだけで",
-    category: "MUSIC",
+    category: "オリジナル曲",
     type: "music",
     description: "VOICEVOX「四国めたん」を使用したオリジナル楽曲",
     image: "/001_top/離途バナー_差し替え予定.webp",
@@ -174,7 +162,7 @@ const worksData: Work[] = [
   {
     id: 2,
     title: "夜明けの向こう側",
-    category: "MUSIC",
+    category: "オリジナル曲",
     type: "music",
     description: "VOICEVOX楽曲第2弾",
     image: "/001_top/Moviedummy.png",
@@ -185,7 +173,7 @@ const worksData: Work[] = [
   {
     id: 3,
     title: "Lit キャラクターイラスト",
-    category: "ILLUST",
+    category: "イラスト",
     type: "illustration",
     description: "UTAUボイスライブラリ「Lit」のキャラクターデザイン",
     image: "/101_Lit/Litlogo.webp",
@@ -195,7 +183,7 @@ const worksData: Work[] = [
   {
     id: 4,
     title: "Digital Dreams MV",
-    category: "MOVIE",
+    category: "3DMV",
     type: "movie",
     description: "オリジナル楽曲のミュージックビデオ制作",
     image: "/001_top/Moviedummy.png",
@@ -206,7 +194,7 @@ const worksData: Work[] = [
   {
     id: 5,
     title: "3Dキャラクターモデル",
-    category: "3D",
+    category: "3DMV",
     type: "3d",
     description: "Blenderを使用したキャラクターモデリング",
     image: "/101_Lit/LitDummy.png",
@@ -216,7 +204,7 @@ const worksData: Work[] = [
   {
     id: 6,
     title: "シンセティックボイス実験",
-    category: "OTHER",
+    category: "その他",
     type: "other",
     description: "AIボイスを使用した実験的作品",
     image: "/001_top/Moviedummy.png",
@@ -226,7 +214,7 @@ const worksData: Work[] = [
   {
     id: 7,
     title: "季節の移ろい",
-    category: "MUSIC",
+    category: "カバー",
     type: "music",
     description: "四季をテーマにした楽曲",
     image: "/001_top/離途バナー_差し替え予定.webp",
@@ -237,7 +225,7 @@ const worksData: Work[] = [
   {
     id: 8,
     title: "ファンタジーイラスト集",
-    category: "ILLUST",
+    category: "イラスト",
     type: "illustration",
     description: "幻想的な世界観のイラスト作品",
     image: "/101_Lit/Litlogo.webp",
@@ -247,7 +235,7 @@ const worksData: Work[] = [
   {
     id: 9,
     title: "サイバーパンクMV",
-    category: "MOVIE",
+    category: "3DMV",
     type: "movie",
     description: "近未来的な映像表現",
     image: "/001_top/Moviedummy.png",
@@ -258,7 +246,7 @@ const worksData: Work[] = [
   {
     id: 10,
     title: "ローポリキャラクター",
-    category: "3D",
+    category: "3DMV",
     type: "3d",
     description: "スタイライズされた3Dモデル",
     image: "/101_Lit/LitDummy.png",
@@ -268,7 +256,7 @@ const worksData: Work[] = [
   {
     id: 11,
     title: "実験的サウンドスケープ",
-    category: "OTHER",
+    category: "その他",
     type: "other",
     description: "環境音を取り入れた音響作品",
     image: "/001_top/Moviedummy.png",
@@ -278,7 +266,7 @@ const worksData: Work[] = [
   {
     id: 12,
     title: "夏の終わりに",
-    category: "MUSIC",
+    category: "オリジナル曲",
     type: "music",
     description: "夏の思い出を歌った楽曲",
     image: "/001_top/離途バナー_差し替え予定.webp",
@@ -299,7 +287,9 @@ export default function Works() {
   return (
     <WorksSection>
       <ContentWrapper>
-        <PageTitle>WORKS</PageTitle>
+        <PageTitle gradientColors={{ color1: "#8a61ff", color2: "#ff61a6" }}>
+          WORKS
+        </PageTitle>
 
         <TabContainer>
           <Tab
@@ -351,7 +341,9 @@ export default function Works() {
                 )}
               </VideoWrapper>
               <WorkInfo>
-                <WorkCategory>{work.category}</WorkCategory>
+                <WorkCategory $category={work.category}>
+                  {work.category}
+                </WorkCategory>
                 <WorkTitle>{work.title}</WorkTitle>
                 <WorkStats>
                   <span>{work.views}</span>
