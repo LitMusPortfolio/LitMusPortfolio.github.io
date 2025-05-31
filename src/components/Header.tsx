@@ -7,7 +7,7 @@ const HeaderContainer = styled.header`
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1000;
+  z-index: 9999;
   background: rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(10px);
   padding: 1rem 2rem;

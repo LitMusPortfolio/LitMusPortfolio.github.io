@@ -26,7 +26,7 @@ export const GlobalStyles = createGlobalStyle`
   
   main {
     flex: 1;
-    margin-top: 60px; /* ヘッダー分の余白 */
+    margin-top: 0;
   }
 
   h1, h2, h3, h4, h5, h6 {

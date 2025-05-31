@@ -2,13 +2,12 @@ import { useEffect, useRef } from "react";
 import styled from "styled-components";
 
 const HomeSection = styled.section`
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100vh;
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 `;
 
 const VideoBackground = styled.video`
@@ -74,13 +73,14 @@ const TagLine = styled.div`
 const SocialLinks = styled.div`
   position: absolute;
   right: 3rem;
-  bottom: 2rem;
+  bottom: 10rem;
   display: flex;
   gap: 1.5rem;
+  z-index: 10;
   
   @media (max-width: 768px) {
     right: 2rem;
-    bottom: 2rem;
+    bottom: 10rem;
   }
   
   a {
@@ -138,15 +138,6 @@ const NewsBar = styled.div`
     padding: 1rem 2rem;
     gap: 1rem;
   }
-`;
-
-const NewsLabel = styled.span`
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 700;
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  color: #00bfff;
-  white-space: nowrap;
 `;
 
 const NewsText = styled.span`
@@ -223,7 +214,6 @@ export default function Home() {
       </SocialLinks>
 
       <NewsBar>
-        <NewsLabel>News</NewsLabel>
         <NewsText>
           2025.06.09 新曲「VOICEVOX楽曲 001」を公開しました | 2025.05.30
           Webサイトをリニューアルしました
