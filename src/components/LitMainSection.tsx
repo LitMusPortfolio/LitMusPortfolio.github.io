@@ -81,39 +81,46 @@ const MainContent = styled.div`
 `;
 
 const MainCharacterVisual = styled.div`
-  position: relative;
+  position: absolute;
+  bottom: 0;
+  right: 0;
   height: 100vh;
+  width: 50%;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-end;
+  justify-content: flex-end;
   
   img {
-    width: 100%;
-    max-width: 800px;
-    height: 90vh;
+    width: auto;
+    height: 95vh;
+    max-height: 95vh;
     object-fit: contain;
+    object-position: bottom right;
     filter: drop-shadow(0 0 50px rgba(139, 92, 246, 0.5));
   }
   
   @media (max-width: 968px) {
-    height: 60vh;
+    position: relative;
+    width: 100%;
+    height: 70vh;
+    justify-content: center;
     
     img {
-      height: 60vh;
-      max-width: 500px;
+      height: 100%;
+      max-width: 100%;
     }
   }
 `;
 
 const Logo = styled.img`
-  height: 120px;
+  height: 180px;
   width: auto;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.8))
           drop-shadow(0 0 40px rgba(139, 92, 246, 0.6));
   
   @media (max-width: 768px) {
-    height: 80px;
+    height: 120px;
   }
 `;
 
@@ -155,8 +162,8 @@ const InfoBox = styled.div`
 
 const FreeDownloadButton = styled.button`
   position: absolute;
-  bottom: 3rem;
-  right: 3rem;
+  bottom: 4rem;
+  right: 4rem;
   padding: 1.5rem 4rem;
   background: linear-gradient(135deg, #8035F6 0%, #9d5ff6 100%);
   color: #fff;
@@ -172,6 +179,7 @@ const FreeDownloadButton = styled.button`
     inset 0 1px 0 rgba(255, 255, 255, 0.2);
   text-transform: uppercase;
   letter-spacing: 0.1em;
+  z-index: 10;
   
   &:hover {
     animation: none;
@@ -183,8 +191,10 @@ const FreeDownloadButton = styled.button`
   }
   
   @media (max-width: 968px) {
-    position: static;
-    margin-top: 2rem;
+    position: absolute;
+    bottom: 2rem;
+    right: 50%;
+    transform: translateX(50%);
   }
 `;
 
@@ -232,21 +242,20 @@ export default function LitMainSection() {
             </p>
           </InfoBox>
         </MainContent>
-
-        <MainCharacterVisual>
-          <img
-            src="/101_Lit/LitA_差し替え前提.webp"
-            alt="離途 メインビジュアル"
-          />
-          <FreeDownloadButton
-            onClick={() => {
-              window.location.href = "#downloads";
-            }}
-          >
-            FREE DL
-          </FreeDownloadButton>
-        </MainCharacterVisual>
       </MainContainer>
+      <MainCharacterVisual>
+        <img
+          src="/101_Lit/LitA_差し替え前提.webp"
+          alt="離途 メインビジュアル"
+        />
+      </MainCharacterVisual>
+      <FreeDownloadButton
+        onClick={() => {
+          window.location.href = "#downloads";
+        }}
+      >
+        FREE DL
+      </FreeDownloadButton>
     </MainSection>
   );
 }
