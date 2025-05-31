@@ -1,11 +1,12 @@
 import { useState } from "react";
 import styled from "styled-components";
+import { theme } from "../styles/theme";
 
 // キャラクター詳細セクション
 const CharacterDetailSection = styled.div`
   min-height: 100vh;
   padding: 4rem 0;
-  background: linear-gradient(135deg, #2d1b69 0%, #1a0a3e 50%, #3e2980 100%);
+  background: ${theme.colors.background.gradient.main};
   position: relative;
   overflow: hidden;
   
@@ -30,7 +31,7 @@ const CharacterDetailSection = styled.div`
     transform: translateY(-50%) rotate(90deg);
     font-size: 8rem;
     font-weight: 900;
-    color: rgba(139, 92, 246, 0.1);
+    color: ${theme.colors.purple[500]}1a;
     letter-spacing: 0.2em;
     z-index: 0;
   }
@@ -88,7 +89,7 @@ const CharacterVisual = styled.div`
     max-width: 600px;
     height: auto;
     display: block;
-    filter: drop-shadow(0 0 30px rgba(139, 92, 246, 0.5));
+    filter: drop-shadow(${theme.shadows.glow.medium});
     position: absolute;
     bottom: 0;
     left: 50%;
@@ -103,8 +104,8 @@ const CharacterVisual = styled.div`
 `;
 
 const ProfileInfo = styled.div`
-  background: rgba(0, 0, 0, 0.3);
-  border: 2px solid rgba(139, 92, 246, 0.5);
+  background: ${theme.effects.glassmorphism.background};
+  border: 2px solid ${theme.colors.purple[500]}80;
   border-radius: 20px;
   padding: 3rem;
   backdrop-filter: blur(10px);
@@ -112,7 +113,7 @@ const ProfileInfo = styled.div`
   h3 {
     font-size: 3rem;
     margin-bottom: 2rem;
-    color: #8b5cf6;
+    color: ${theme.colors.primary.main};
     text-shadow: 0 2px 10px rgba(139, 92, 246, 0.8);
     font-weight: 900;
     letter-spacing: 0.1em;
@@ -132,7 +133,7 @@ const ProfileTable = styled.table`
       
       &:first-child {
         font-weight: bold;
-        color: #a78bfa;
+        color: ${theme.colors.primary.light};
         width: 120px;
         padding-right: 2rem;
       }
@@ -147,8 +148,8 @@ const ProfileTable = styled.table`
 const TruthButton = styled.button`
   margin-top: 3rem;
   padding: 1.2rem 3rem;
-  background: rgba(139, 92, 246, 0.2);
-  border: 2px solid #8b5cf6;
+  background: ${theme.colors.purple[500]}33;
+  border: 2px solid ${theme.colors.primary.main};
   color: #fff;
   font-size: 1.2rem;
   font-weight: bold;
@@ -158,7 +159,7 @@ const TruthButton = styled.button`
   box-shadow: 0 4px 20px rgba(139, 92, 246, 0.3);
   
   &:hover {
-    background: #8b5cf6;
+    background: ${theme.colors.primary.main};
     transform: translateY(-2px);
     box-shadow: 0 6px 30px rgba(139, 92, 246, 0.5);
   }

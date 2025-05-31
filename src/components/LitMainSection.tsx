@@ -1,4 +1,5 @@
 import styled, { keyframes } from "styled-components";
+import { theme } from "../styles/theme";
 
 // アニメーション定義
 const float = keyframes`
@@ -16,7 +17,7 @@ const MainSection = styled.div`
   display: flex;
   align-items: center;
   position: relative;
-  background: linear-gradient(135deg, rgba(10, 22, 40, 0.8) 0%, rgba(26, 44, 78, 0.7) 30%, rgba(42, 74, 124, 0.6) 60%, rgba(58, 95, 149, 0.5) 100%);
+  background: ${theme.colors.background.gradient.blue};
   overflow: hidden;
   
   &::before {
@@ -96,7 +97,7 @@ const MainCharacterVisual = styled.div`
     height: 90vh;
     max-height: none;
     object-fit: unset;
-    filter: drop-shadow(0 0 50px rgba(139, 92, 246, 0.5));
+    filter: drop-shadow(${theme.shadows.glow.small});
   }
   
   @media (max-width: 968px) {
@@ -119,7 +120,7 @@ const Logo = styled.img`
   width: auto;
   margin-bottom: 2rem;
   filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.9))
-          drop-shadow(0 0 60px rgba(139, 92, 246, 0.7));
+          drop-shadow(${theme.shadows.glow.large});
   
   @media (max-width: 768px) {
     height: 180px;
@@ -133,7 +134,7 @@ const Tagline = styled.p`
   line-height: 1.8;
   font-weight: 400;
   letter-spacing: 0.08em;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  text-shadow: ${theme.shadows.text};
   background: linear-gradient(135deg, rgba(139, 92, 246, 0.3) 0%, rgba(162, 53, 237, 0.2) 100%);
   padding: 1.5rem 2.5rem;
   border-radius: 15px;
@@ -152,7 +153,7 @@ const FreeDownloadButton = styled.button`
   bottom: 4rem;
   right: 4rem;
   padding: 1.5rem 4rem;
-  background: linear-gradient(135deg, #8035F6 0%, #9d5ff6 100%);
+  background: ${theme.colors.primary.gradient};
   color: #fff;
   border: none;
   border-radius: 60px;
@@ -162,7 +163,7 @@ const FreeDownloadButton = styled.button`
   animation: ${float} 3s ease-in-out infinite;
   transition: all 0.3s ease;
   box-shadow: 
-    0 10px 30px rgba(128, 53, 246, 0.5),
+    ${theme.shadows.button},
     inset 0 1px 0 rgba(255, 255, 255, 0.2);
   text-transform: uppercase;
   letter-spacing: 0.1em;
@@ -173,7 +174,7 @@ const FreeDownloadButton = styled.button`
     transform: scale(1.05) translateY(-2px);
     background: linear-gradient(135deg, #9d5ff6 0%, #8035F6 100%);
     box-shadow: 
-      0 15px 40px rgba(128, 53, 246, 0.7),
+      ${theme.shadows.buttonHover},
       inset 0 1px 0 rgba(255, 255, 255, 0.3);
   }
   

@@ -1,10 +1,13 @@
 import { useState } from "react";
 import styled from "styled-components";
+import { theme } from "../styles/theme";
 
 // ダウンロードセクション
 const DownloadsSection = styled.div`
   margin-top: 6rem;
   padding: 4rem 0;
+  background: ${theme.colors.background.dark};
+  min-height: 100vh;
 `;
 
 const Container = styled.div`
@@ -19,10 +22,11 @@ const SectionTitle = styled.h2`
   letter-spacing: 0.1em;
   margin-bottom: 4rem;
   text-align: center;
-  background: linear-gradient(45deg, #9400d3, #4b0082);
+  background: ${theme.colors.primary.gradient};
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  text-shadow: ${theme.shadows.text};
 `;
 
 const DownloadGrid = styled.div`
@@ -33,35 +37,37 @@ const DownloadGrid = styled.div`
 `;
 
 const DownloadCard = styled.div`
-  background: rgba(162, 53, 237, 0.1);
-  border: 2px solid #A235ED;
-  border-radius: 15px;
+  background: ${theme.effects.glassmorphism.background};
+  border: 2px solid ${theme.colors.primary.main};
+  border-radius: ${theme.effects.glassmorphism.borderRadius};
   padding: 2rem;
   text-align: center;
   transition: all 0.3s ease;
   cursor: pointer;
+  backdrop-filter: ${theme.effects.glassmorphism.backdropFilter};
   
   &:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 30px rgba(162, 53, 237, 0.3);
-    background: rgba(162, 53, 237, 0.2);
+    box-shadow: ${theme.shadows.glow.medium};
+    background: ${theme.colors.purple[500]}33;
   }
   
   h4 {
     font-size: 1.5rem;
     margin-bottom: 1rem;
-    color: #A235ED;
+    color: ${theme.colors.primary.main};
   }
   
   p {
     margin-bottom: 1.5rem;
     opacity: 0.9;
+    color: ${theme.colors.text.secondary};
   }
   
   .price {
     font-size: 1.2rem;
     font-weight: bold;
-    color: #FF91E9;
+    color: ${theme.colors.primary.light};
   }
 `;
 
@@ -82,8 +88,8 @@ const Modal = styled.div<{ $isOpen: boolean }>`
 `;
 
 const ModalContent = styled.div`
-  background: #1a0a2a;
-  border: 2px solid #A235ED;
+  background: ${theme.colors.background.dark};
+  border: 2px solid ${theme.colors.primary.main};
   border-radius: 20px;
   padding: 3rem;
   max-width: 600px;
@@ -95,26 +101,30 @@ const ModalContent = styled.div`
   h3 {
     font-size: 2rem;
     margin-bottom: 1.5rem;
-    color: #A235ED;
+    color: ${theme.colors.primary.main};
+    text-shadow: ${theme.shadows.text};
   }
   
   .description {
     margin-bottom: 2rem;
     line-height: 1.8;
+    color: ${theme.colors.text.secondary};
   }
   
   .download-link {
     display: inline-block;
     padding: 1rem 3rem;
-    background: #A235ED;
-    color: #fff;
+    background: ${theme.colors.primary.main};
+    color: ${theme.colors.text.primary};
     border-radius: 30px;
     font-weight: bold;
     transition: all 0.3s ease;
+    box-shadow: ${theme.shadows.button};
     
     &:hover {
-      background: #8035F6;
+      background: ${theme.colors.primary.dark};
       transform: translateY(-2px);
+      box-shadow: ${theme.shadows.buttonHover};
     }
   }
 `;
@@ -125,7 +135,7 @@ const ModalCloseButton = styled.button`
   right: 1rem;
   background: none;
   border: none;
-  color: #fff;
+  color: ${theme.colors.text.primary};
   font-size: 2rem;
   cursor: pointer;
   opacity: 0.7;
@@ -133,6 +143,7 @@ const ModalCloseButton = styled.button`
   
   &:hover {
     opacity: 1;
+    color: ${theme.colors.primary.light};
   }
 `;
 
