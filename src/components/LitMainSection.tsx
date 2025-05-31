@@ -75,7 +75,7 @@ const ContentContainer = styled.div`
 
 // ロゴ画像
 const Logo = styled.img`
-  max-height: 25vw;
+  max-height: 20vw;
   width: auto;
   margin-bottom: 2rem;
   filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.9))
@@ -221,7 +221,7 @@ export default function LitMainSection() {
         <source src="/101_Lit/LitTopMovie.mp4" type="video/mp4" />
       </BackgroundVideo>
       <ContentContainer>
-        <Logo src="/101_Lit/Litlogo.webp" alt="離途" />
+        <Logo src="/101_Lit/LitLogo.webp" alt="離途" />
         <TextWrapper>
           <MainTagline>
             <HighlightedText>
