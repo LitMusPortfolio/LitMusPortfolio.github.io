@@ -19,27 +19,7 @@ import { theme } from "../../../styles/theme";
 const DownloadSection = styled.section`
   min-height: 100vh;
   padding: 8rem 2rem;
-  background: url("/LitBG.webp") no-repeat center center;
   position: relative;
-  overflow: hidden;
-
-  /* 背景の幾何学模様 */
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: 
-      linear-gradient(45deg, rgba(139, 92, 246, 0.1) 25%, transparent 25%),
-      linear-gradient(-45deg, rgba(139, 92, 246, 0.1) 25%, transparent 25%),
-      linear-gradient(45deg, transparent 75%, rgba(139, 92, 246, 0.1) 75%),
-      linear-gradient(-45deg, transparent 75%, rgba(139, 92, 246, 0.1) 75%);
-    background-size: 30px 30px;
-    background-position: 0 0, 0 15px, 15px -15px, -15px 0px;
-    z-index: 0;
-  }
 `;
 
 const Container = styled.div`

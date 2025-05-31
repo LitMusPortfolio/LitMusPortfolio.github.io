@@ -46,18 +46,6 @@ const CharacterDetailSection = styled.div`
   grid-template-columns: 45% 55%;
   align-items: center;
   position: relative;
-  background: url("/LitBG.webp") no-repeat center center;
-  overflow: hidden;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 0;
-  }
   
   @media (max-width: 968px) {
     grid-template-columns: 1fr;
