@@ -113,14 +113,14 @@ const MainCharacterVisual = styled.div`
 `;
 
 const Logo = styled.img`
-  height: 180px;
+  height: 280px;
   width: auto;
-  margin-bottom: 1.5rem;
-  filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.8))
-          drop-shadow(0 0 40px rgba(139, 92, 246, 0.6));
+  margin-bottom: 2rem;
+  filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.9))
+          drop-shadow(0 0 60px rgba(139, 92, 246, 0.7));
   
   @media (max-width: 768px) {
-    height: 120px;
+    height: 180px;
   }
 `;
 
