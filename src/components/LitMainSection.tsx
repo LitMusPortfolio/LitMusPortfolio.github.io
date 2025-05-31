@@ -64,7 +64,7 @@ const MainContainer = styled.div`
   gap: 4rem;
   align-items: center;
   position: relative;
-  z-index: 1;
+  z-index: 2;
   
   @media (max-width: 968px) {
     grid-template-columns: 1fr;
@@ -83,24 +83,25 @@ const MainContent = styled.div`
 const MainCharacterVisual = styled.div`
   position: absolute;
   bottom: 0;
-  right: 0;
+  right: -5%;
   height: 100vh;
-  width: 50%;
+  width: auto;
   display: flex;
   align-items: flex-end;
   justify-content: flex-end;
+  z-index: 1;
   
   img {
     width: auto;
-    height: 95vh;
-    max-height: 95vh;
-    object-fit: contain;
-    object-position: bottom right;
+    height: 90vh;
+    max-height: none;
+    object-fit: unset;
     filter: drop-shadow(0 0 50px rgba(139, 92, 246, 0.5));
   }
   
   @media (max-width: 968px) {
     position: relative;
+    right: 0;
     width: 100%;
     height: 70vh;
     justify-content: center;
@@ -108,6 +109,7 @@ const MainCharacterVisual = styled.div`
     img {
       height: 100%;
       max-width: 100%;
+      transform: none;
     }
   }
 `;
@@ -142,32 +144,6 @@ const Tagline = styled.p`
   @media (max-width: 768px) {
     font-size: 1.4rem;
     padding: 1rem 1.5rem;
-  }
-`;
-
-// 下部のディスクリプションは削除（完成イメージにないため）
-
-const InfoBox = styled.div`
-  background: rgba(0, 20, 40, 0.4);
-  border: 1px solid rgba(92, 246, 246, 0.3);
-  border-radius: 15px;
-  padding: 2.5rem;
-  margin: 2rem 0;
-  backdrop-filter: blur(20px);
-  box-shadow: 
-    0 8px 32px rgba(31, 38, 135, 0.37),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  
-  p {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    color: rgba(255, 255, 255, 0.95);
-    margin-bottom: 1.2rem;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-    
-    &:last-child {
-      margin-bottom: 0;
-    }
   }
 `;
 
@@ -234,24 +210,6 @@ export default function LitMainSection() {
         <MainContent>
           <Logo src="/101_Lit/Litlogo.webp" alt="離途" />
           <Tagline>優しさと吐息が香る穏やかな男声ソフトウェア。</Tagline>
-
-          <InfoBox>
-            <p>「離途」は、LitMusによるオリジナルキャラクター。</p>
-            <p>
-              読み上げ合成音声「VOICEVOX」
-              <br />
-              歌唱合成音声「UTAU」にて
-              <br />
-              無料で使用することができます。
-            </p>
-            <p>
-              また、合成音声の権利にとらわれず
-              <br />
-              パーソナルシンガーとして
-              <br />
-              シャンルレスな活動を行っています。
-            </p>
-          </InfoBox>
         </MainContent>
       </MainContainer>
       <MainCharacterVisual>
