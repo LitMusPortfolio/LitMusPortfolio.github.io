@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import styled from "styled-components";
 
-const HeroSection = styled.section`
+const HomeSection = styled.section`
   position: relative;
   width: 100%;
   height: 100vh;
@@ -22,7 +22,7 @@ const VideoBackground = styled.video`
   opacity: 0.5;
 `;
 
-const HeroContent = styled.div`
+const HomeContent = styled.div`
   position: relative;
   z-index: 1;
   text-align: center;
@@ -116,7 +116,7 @@ const SocialLinks = styled.div`
   }
 `;
 
-export default function Hero() {
+export default function Home() {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -126,13 +126,13 @@ export default function Hero() {
   }, []);
 
   return (
-    <HeroSection>
+    <HomeSection>
       <VideoBackground ref={videoRef} autoPlay loop muted playsInline>
         <source src="/001_top/LitMusHPTopMovie.webm" type="video/webm" />
         <source src="/001_top/LitMusHPTopMovie.mp4" type="video/mp4" />
       </VideoBackground>
 
-      <HeroContent>
+      <HomeContent>
         <MainTitle>LITMUS</MainTitle>
         <SubTitle>#MUSIC #EVOCALOID #PRODUCE</SubTitle>
         <TagLine>
@@ -142,7 +142,7 @@ export default function Hero() {
           <span>#MOVIE</span>
           <span>#SYNTHETIC VOICE</span>
         </TagLine>
-      </HeroContent>
+      </HomeContent>
 
       <CharacterImage
         src="/101_Lit/LitA_差し替え前提.webp"
@@ -172,6 +172,6 @@ export default function Hero() {
           <img src="/001_top/icon_niconico.svg" alt="niconico" />
         </a>
       </SocialLinks>
-    </HeroSection>
+    </HomeSection>
   );
 }
