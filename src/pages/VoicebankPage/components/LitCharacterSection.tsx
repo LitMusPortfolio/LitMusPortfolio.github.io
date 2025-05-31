@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { ContentContainer, GridContainer } from "../../../components/Layout";
 import ProfileSection from "../../../components/ProfileSection";
 import SectionTitle from "../../../components/SectionTitle";
 import { theme } from "../../../styles/theme";
@@ -40,34 +41,21 @@ const DEMO_SONGS: DemoSong[] = [
 ];
 
 // キャラクター詳細セクション
-const CharacterDetailSection = styled.div`
+const CharacterDetailSection = styled(GridContainer)`
   min-height: 100vh;
-  display: grid;
-  grid-template-columns: 45% 55%;
   align-items: center;
-  position: relative;
-  
-  @media (max-width: 968px) {
-    grid-template-columns: 1fr;
-  }
 `;
 
-// 統合コンテナ（右側のコンテンツエリア）
-const ContentContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  position: relative;
-  z-index: 2;
+// コンテンツコンテナのカスタマイズ
+const StyledContentContainer = styled(ContentContainer)`
   margin-left: 2rem;
   padding-top: 8rem;
   padding-bottom: 2rem;
   padding-right: 4rem;
   
-  @media (max-width: 968px) {
+  @media (max-width: ${(props) => props.theme.breakpoints?.tablet || "968px"}) {
     padding: 0 2rem;
-    align-items: center;
+    margin-left: 0;
   }
 `;
 
@@ -189,14 +177,14 @@ const CharacterImage = styled.img`
 export default function LitCharacterSection() {
   return (
     <>
-      <CharacterDetailSection>
+      <CharacterDetailSection $columns="45% 55%" $mobileColumns="1fr">
         <LeftSection>
           <CharacterImage
             src="/101_Lit/LitB_差し替え前提.webp"
             alt="離途 キャラクター"
           />
         </LeftSection>
-        <ContentContainer>
+        <StyledContentContainer>
           <SectionTitle>CHARACTER</SectionTitle>
           <CharacterNameContainer>
             <CharacterName>離途</CharacterName>
@@ -224,7 +212,7 @@ export default function LitCharacterSection() {
               ))}
             </DemoSongContainer>
           </DemoSongSection>
-        </ContentContainer>
+        </StyledContentContainer>
       </CharacterDetailSection>
     </>
   );

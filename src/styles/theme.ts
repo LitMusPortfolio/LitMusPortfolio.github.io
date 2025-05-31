@@ -49,4 +49,14 @@ export const theme = {
       backdropFilter: "blur(10px)",
     },
   },
+  breakpoints: {
+    mobile: "768px",
+    tablet: "968px",
+    desktop: "1200px",
+  },
+  spacing: {
+    sectionPadding: "8rem 2rem",
+    titleMargin: "4rem",
+    containerMaxWidth: "1400px",
+  },
 } as const;

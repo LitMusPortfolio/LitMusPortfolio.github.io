@@ -1,13 +1,13 @@
 import { useEffect } from "react";
 import styled from "styled-components";
+import { Section, SideDecoration } from "../../../components/Layout";
 import LitCharacterSection from "./LitCharacterSection";
 import LitDownloadSection from "./LitDownloadSection";
 import LitMainSection from "./LitMainSection";
 
-const CharacterSection = styled.section`
-  min-height: 100vh;
-  position: relative;
+const CharacterSection = styled(Section)`
   overflow: hidden;
+  padding: 0;
 `;
 
 // CharacterSectionとDownloadSectionを統合するコンテナ
@@ -33,24 +33,6 @@ const IntegratedSection = styled.div`
     background-size: 30px 30px;
     background-position: 0 0, 0 15px, 15px -15px, -15px 0px;
     z-index: 0;
-  }
-`;
-
-const SideDecoration = styled.div`
-  position: absolute;
-  left: -100px;
-  top: 50%;
-  transform: translateY(-50%);
-  writing-mode: vertical-rl;
-  text-orientation: mixed;
-  
-  img {
-    height: 200px;
-    opacity: 0.3;
-  }
-  
-  @media (max-width: 768px) {
-    display: none;
   }
 `;
 
