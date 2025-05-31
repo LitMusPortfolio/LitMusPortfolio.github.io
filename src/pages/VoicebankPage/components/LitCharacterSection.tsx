@@ -36,7 +36,7 @@ const PROFILE_DATA_RIGHT: ProfileData[] = [
 // デモソングデータ
 const DEMO_SONGS: DemoSong[] = [
   { id: "1", title: "デモソング1", embedId: "dQw4w9WgXcQ" },
-  { id: "2", title: "デモソング2", embedId: "dQw4w9WgXcQ" },
+  { id: "2", title: "牢 - 離途", embedId: "Am0LJH7ipv0" },
 ];
 
 // キャラクター詳細セクション
