@@ -146,7 +146,7 @@ export default function Contact() {
 
   return (
     <ContactSectionWrapper id="contact">
-      <SideDecoration position="right">
+      <SideDecoration $side="right">
         <img src="/010_PageSideTitleSvg/CONTACT.svg" alt="CONTACT" />
       </SideDecoration>
 

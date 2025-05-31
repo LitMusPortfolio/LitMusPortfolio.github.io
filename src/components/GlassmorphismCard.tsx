@@ -14,7 +14,7 @@ const StyledCard = styled.div<{ $clickable?: boolean }>`
   padding: 2rem;
   ${({ $clickable }) => $clickable && cardHoverEffect}
   
-  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+  @media (max-width: ${({ theme }) => theme.breakpoints?.mobile || "768px"}) {
     padding: 1.5rem;
   }
 `;

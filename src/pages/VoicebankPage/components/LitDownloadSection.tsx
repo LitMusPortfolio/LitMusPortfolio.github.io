@@ -255,7 +255,7 @@ const ModalContent = ({ item }: ModalContentProps) => {
     <>
       <ModalDescription>
         {hasDetailedDescription ? (
-          item.modalContent!.detailedDescription.map((text, idx) => (
+          item.modalContent?.detailedDescription.map((text, idx) => (
             <p key={`desc-${item.id}-${idx}`}>{text}</p>
           ))
         ) : (
@@ -268,7 +268,7 @@ const ModalContent = ({ item }: ModalContentProps) => {
 
       {hasNotes && (
         <ModalNotes>
-          {item.modalContent!.notes!.map((note, idx) => (
+          {item.modalContent?.notes?.map((note, idx) => (
             <p key={`note-${item.id}-${idx}`}>{note}</p>
           ))}
         </ModalNotes>

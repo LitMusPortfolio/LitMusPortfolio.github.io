@@ -11,7 +11,7 @@ const GridContainer = styled(Container)`
   gap: 4rem;
   align-items: center;
   
-  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+  @media (max-width: ${({ theme }) => theme.breakpoints?.mobile || "768px"}) {
     grid-template-columns: 1fr;
     gap: 2rem;
   }
@@ -95,7 +95,7 @@ const SkillTag = styled.span`
 export default function About() {
   return (
     <Section id="about">
-      <SideDecoration position="left">
+      <SideDecoration $side="left">
         <img src="/010_PageSideTitleSvg/ABOUT.svg" alt="ABOUT" />
       </SideDecoration>
 

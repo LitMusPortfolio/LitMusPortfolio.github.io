@@ -44,12 +44,12 @@ export const cardHoverEffect = css`
 // レスポンシブヘルパー
 export const responsive = {
   mobile: (content: string) => css`
-    @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    @media (max-width: ${({ theme }) => theme.breakpoints?.mobile || "768px"}) {
       ${content}
     }
   `,
   tablet: (content: string) => css`
-    @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
+    @media (max-width: ${({ theme }) => theme.breakpoints?.tablet || "968px"}) {
       ${content}
     }
   `,
