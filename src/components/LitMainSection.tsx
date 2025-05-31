@@ -56,45 +56,46 @@ const MainSection = styled.div`
   }
 `;
 
-// コンテナ
+// 統合コンテナ
 const ContentContainer = styled.div`
-  width: fit-content;
-  padding: 0;
+  width: 100%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  justify-content: center;
   position: relative;
   z-index: 2;
   
   @media (max-width: 968px) {
-    width: 100%;
-    margin-left: 0;
+    padding: 0 2rem;
     align-items: center;
   }
 `;
 
 // ロゴ画像
 const Logo = styled.img`
-  height: 25vw;
+  max-height: 25vw;
   width: auto;
   margin-bottom: 2rem;
   filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.9))
           drop-shadow(${theme.shadows.glow.large});
   
   @media (max-width: 768px) {
-    height: 220px;
+    max-height: 20vw;
   }
 `;
 
 // テキストコンテナ
 const TextWrapper = styled.div`
   display: flex;
+  margin-left: 7rem;
   flex-direction: column;
   align-items: flex-start;
-  margin-left: 7rem;
   
   @media (max-width: 968px) {
     align-items: center;
+    max-width: 90%;
   }
 `;
 
@@ -102,50 +103,43 @@ const TextWrapper = styled.div`
 const CharacterImage = styled.div`
   position: absolute;
   bottom: 0;
-  right: -5%;
-  height: 100vh;
-  width: auto;
+  right: 0;
+  max-height: 10vh;
   display: flex;
   align-items: flex-end;
   justify-content: flex-end;
   z-index: 1;
+  pointer-events: none;
   
   img {
-    width: auto;
-    height: 90vh;
-    max-height: none;
     object-fit: unset;
     filter: drop-shadow(${theme.shadows.glow.small});
   }
-  
-  @media (max-width: 968px) {
-    position: relative;
-    right: 0;
-    width: 100%;
-    height: 70vh;
-    justify-content: center;
-    
-    img {
-      height: 100%;
-      max-width: 100%;
-      transform: none;
-    }
-  }
 `;
 
-// テキスト
-const TaglineText = styled.p`
-  font-size: 1.8rem;
-  color: #fff;
-  margin-bottom: 3rem;
-  line-height: 1.0;
-  font-weight: 400;
-  letter-spacing: 0.02em;
-  text-shadow: ${theme.shadows.text};
-  width: fit-content;
+// メインテキスト
+const MainTagline = styled.div`
+  margin-bottom: 1.5rem;
+`;
+
+// 説明テキスト
+const DescriptionText = styled.div`
+  font-size: 1.5rem;
+  color: rgba(255, 255, 255, 0.95);
+  line-height: 1.7;
+  font-weight: 600;
+  
+  p {
+    margin: 0 0 0.6rem 0;
+    line-height: 1.2;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
   
   @media (max-width: 768px) {
-    font-size: 1.4rem;
+    font-size: 1rem;
   }
 `;
 
@@ -159,6 +153,7 @@ const HighlightedText = styled.span`
   line-height: 1.3;
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
+  white-space: nowrap;
   
   br {
     line-height: 0.8;
@@ -228,13 +223,30 @@ export default function LitMainSection() {
       <ContentContainer>
         <Logo src="/101_Lit/Litlogo.webp" alt="離途" />
         <TextWrapper>
-          <TaglineText>
+          <MainTagline>
             <HighlightedText>
               優しさと吐息が香る
               <br />
               穏やかな男声ソフトウェア。
             </HighlightedText>
-          </TaglineText>
+          </MainTagline>
+          <DescriptionText>
+            <p>「離途」は、LitMusによるオリジナルキャラクター。</p>
+            <p>
+              読み上げ合成音声「VOICEVOX」
+              <br />
+              歌唱合成音声「UTAU」にて
+              <br />
+              無料で使用することができます。
+            </p>
+            <p>
+              また、合成音声の枠組みにとらわれず
+              <br />
+              バーチャルシンガーとして
+              <br />
+              ジャンルレスな活動を行っています。
+            </p>
+          </DescriptionText>
         </TextWrapper>
       </ContentContainer>
       <CharacterImage>
