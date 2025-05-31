@@ -2,6 +2,10 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## 重要
+
+- ファイルを編集したら必ず当該部分をplaywrightで確認し、意図した表示になっていることを確認して。
+
 ## 開発環境
 
 - 開発サーバーは既に起動しています: http://localhost:5173/
