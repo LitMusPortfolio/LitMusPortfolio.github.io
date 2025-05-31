@@ -125,13 +125,24 @@ const Logo = styled.img`
 `;
 
 const Tagline = styled.p`
-  font-size: 1.3rem;
+  font-size: 1.8rem;
   color: #fff;
   margin-bottom: 3rem;
-  line-height: 1.6;
-  font-weight: 300;
-  letter-spacing: 0.05em;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  line-height: 1.8;
+  font-weight: 400;
+  letter-spacing: 0.08em;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.3) 0%, rgba(162, 53, 237, 0.2) 100%);
+  padding: 1.5rem 2.5rem;
+  border-radius: 15px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  display: inline-block;
+  
+  @media (max-width: 768px) {
+    font-size: 1.4rem;
+    padding: 1rem 1.5rem;
+  }
 `;
 
 // 下部のディスクリプションは削除（完成イメージにないため）
