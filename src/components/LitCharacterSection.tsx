@@ -1,11 +1,18 @@
 import styled from "styled-components";
 import { theme } from "../styles/theme";
+import ProfileSection from "./ProfileSection";
 import TextWithBackground from "./TextWithBackground";
 
 // 型定義
 interface ProfileData {
   label: string;
   value: string;
+}
+
+interface DemoSong {
+  id: string;
+  title: string;
+  embedId: string;
 }
 
 // プロフィールデータ（左側）
@@ -24,6 +31,12 @@ const PROFILE_DATA_RIGHT: ProfileData[] = [
   { label: "嫌い", value: "わからない" },
   { label: "特筆事項", value: "記憶喪失" },
   { label: "目的", value: "自分が何者か知る" },
+];
+
+// デモソングデータ
+const DEMO_SONGS: DemoSong[] = [
+  { id: "1", title: "デモソング1", embedId: "dQw4w9WgXcQ" },
+  { id: "2", title: "デモソング2", embedId: "dQw4w9WgXcQ" },
 ];
 
 // キャラクター詳細セクション
@@ -78,11 +91,15 @@ const SectionTitleWrapper = styled.h1`
   margin-bottom: 1rem;
 `;
 
-// キャラクター名と罫線のコンテナ
-const CharacterNameContainer = styled.div`
+// 共通タイトルコンテナ
+const TitleWithLineContainer = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
+`;
+
+// キャラクター名コンテナ
+const CharacterNameContainer = styled(TitleWithLineContainer)`
   margin-top: 2rem;
 `;
 
@@ -121,40 +138,6 @@ const ProfileWrapper = styled.div`
   }
 `;
 
-// プロフィールコンテナ（個別）
-const ProfileContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
-`;
-
-// プロフィール項目
-const ProfileItem = styled.div`
-  display: flex;
-  align-items: center;
-  font-size: 1.5rem;
-  color: ${theme.colors.text.primary};
-  width: 100%;
-`;
-
-// プロフィールラベル
-const ProfileLabel = styled.span`
-  font-weight: bold;
-  font-size: 1.5rem;
-`;
-
-// プロフィール用の罫線
-const ProfileLine = styled(LineBase)`
-  height: 1px;
-  opacity: 0.8;
-  margin: 0 1rem;
-`;
-
-// プロフィール値
-const ProfileValue = styled.span`
-  white-space: nowrap;
-`;
-
 // デモソングセクション
 const DemoSongSection = styled.div`
   margin-top: 2rem;
@@ -162,10 +145,7 @@ const DemoSongSection = styled.div`
 `;
 
 // デモソングタイトルコンテナ
-const DemoSongTitleContainer = styled.div`
-  display: flex;
-  align-items: center;
-  width: 100%;
+const DemoSongTitleContainer = styled(TitleWithLineContainer)`
   margin-bottom: 2rem;
 `;
 
@@ -245,24 +225,8 @@ export default function LitCharacterSection() {
             <NameLine />
           </CharacterNameContainer>
           <ProfileWrapper>
-            <ProfileContainer>
-              {PROFILE_DATA_LEFT.map((item) => (
-                <ProfileItem key={item.label}>
-                  <ProfileLabel>{item.label}</ProfileLabel>
-                  <ProfileLine />
-                  <ProfileValue>{item.value}</ProfileValue>
-                </ProfileItem>
-              ))}
-            </ProfileContainer>
-            <ProfileContainer>
-              {PROFILE_DATA_RIGHT.map((item) => (
-                <ProfileItem key={item.label}>
-                  <ProfileLabel>{item.label}</ProfileLabel>
-                  <ProfileLine />
-                  <ProfileValue>{item.value}</ProfileValue>
-                </ProfileItem>
-              ))}
-            </ProfileContainer>
+            <ProfileSection data={PROFILE_DATA_LEFT} />
+            <ProfileSection data={PROFILE_DATA_RIGHT} />
           </ProfileWrapper>
           <DemoSongSection>
             <DemoSongTitleContainer>
@@ -270,22 +234,16 @@ export default function LitCharacterSection() {
               <NameLine />
             </DemoSongTitleContainer>
             <DemoSongContainer>
-              <DemoSongItem>
-                <iframe
-                  src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-                  title="デモソング1"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
-              </DemoSongItem>
-              <DemoSongItem>
-                <iframe
-                  src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-                  title="デモソング2"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
-              </DemoSongItem>
+              {DEMO_SONGS.map((song) => (
+                <DemoSongItem key={song.id}>
+                  <iframe
+                    src={`https://www.youtube.com/embed/${song.embedId}`}
+                    title={song.title}
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                  />
+                </DemoSongItem>
+              ))}
             </DemoSongContainer>
           </DemoSongSection>
         </ContentContainer>
