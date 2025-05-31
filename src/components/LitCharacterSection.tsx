@@ -60,6 +60,7 @@ const ContentContainer = styled.div`
   position: relative;
   z-index: 2;
   margin-left: 2rem;
+  padding-top: 8rem;
   padding-right: 4rem;
   
   @media (max-width: 968px) {
@@ -74,7 +75,7 @@ const SectionTitleWrapper = styled.h1`
   flex-direction: column;
   align-items: flex-start;
   font-size: 8rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 `;
 
 // キャラクター名と罫線のコンテナ
@@ -82,7 +83,7 @@ const CharacterNameContainer = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-  margin: 2rem 0;
+  margin-top: 2rem;
 `;
 
 // キャラクター名
@@ -110,9 +111,9 @@ const NameLine = styled(LineBase)`
 // プロフィールコンテナ（全体）
 const ProfileWrapper = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 4fr 6fr;
   gap: 3rem;
-  margin-top: 2rem;
+  margin-top: 1rem;
   width: 100%;
   
   @media (max-width: 768px) {
@@ -131,16 +132,15 @@ const ProfileContainer = styled.div`
 const ProfileItem = styled.div`
   display: flex;
   align-items: center;
-  font-size: 2rem;
+  font-size: 1.5rem;
   color: ${theme.colors.text.primary};
   width: 100%;
 `;
 
 // プロフィールラベル
 const ProfileLabel = styled.span`
-  
   font-weight: bold;
-  font-size: 2rem;
+  font-size: 1.5rem;
 `;
 
 // プロフィール用の罫線
@@ -153,6 +153,56 @@ const ProfileLine = styled(LineBase)`
 // プロフィール値
 const ProfileValue = styled.span`
   white-space: nowrap;
+`;
+
+// デモソングセクション
+const DemoSongSection = styled.div`
+  margin-top: 2rem;
+  width: 100%;
+`;
+
+// デモソングタイトルコンテナ
+const DemoSongTitleContainer = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 2rem;
+`;
+
+// デモソングタイトル
+const DemoSongTitle = styled.h3`
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: ${theme.colors.text.primary};
+  margin: 0;
+  padding-right: 1rem;
+  white-space: nowrap;
+`;
+
+// デモソングコンテナ
+const DemoSongContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  
+  @media (max-width: 968px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+// デモソングアイテム
+const DemoSongItem = styled.div`
+  aspect-ratio: 16 / 9;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+  
+  iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
 `;
 
 // 左側のエリア（キャラクター画像用）
@@ -214,6 +264,30 @@ export default function LitCharacterSection() {
               ))}
             </ProfileContainer>
           </ProfileWrapper>
+          <DemoSongSection>
+            <DemoSongTitleContainer>
+              <DemoSongTitle>デモソング</DemoSongTitle>
+              <NameLine />
+            </DemoSongTitleContainer>
+            <DemoSongContainer>
+              <DemoSongItem>
+                <iframe
+                  src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                  title="デモソング1"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </DemoSongItem>
+              <DemoSongItem>
+                <iframe
+                  src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                  title="デモソング2"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </DemoSongItem>
+            </DemoSongContainer>
+          </DemoSongSection>
         </ContentContainer>
       </CharacterDetailSection>
     </>
