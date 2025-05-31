@@ -8,12 +8,10 @@ import {
   CardInfo,
   CardTag,
   CardTitle,
-  Modal,
-  ModalCloseButton,
-  ModalContent,
   Tab,
   TabContainer,
 } from "../../../components/CardGrid";
+import DownloadModal from "../../../components/DownloadModal";
 import SectionTitle from "../../../components/SectionTitle";
 import { theme } from "../../../styles/theme";
 
@@ -64,6 +62,27 @@ const DownloadCard = styled(Card)`
   }
 `;
 
+// カテゴリー別のタグカラー
+const CategoryTag = styled(CardTag)<{ $category: string }>`
+  background: ${(props) => {
+    switch (props.$category) {
+      case "トークソフト":
+        return "linear-gradient(135deg, #00BCD4, #0097A7)";
+      case "UTAUソングライブラリ":
+        return "linear-gradient(135deg, #9C27B0, #7B1FA2)";
+      case "画像素材":
+        return "linear-gradient(135deg, #FF6B6B, #EE5A6F)";
+      case "音声素材":
+        return "linear-gradient(135deg, #4CAF50, #388E3C)";
+      case "3Dモデル":
+        return "linear-gradient(135deg, #FF9800, #F57C00)";
+      default:
+        return theme.colors.primary.main;
+    }
+  }};
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+`;
+
 const CardFooter = styled.div`
   display: flex;
   justify-content: space-between;
@@ -78,36 +97,6 @@ const CardStatus = styled.span<{ $free?: boolean }>`
 `;
 
 // モーダル内部のスタイル
-const ModalImage = styled.div`
-  flex: 0 0 300px;
-  background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(92, 246, 246, 0.2));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  
-  @media (max-width: 768px) {
-    flex: 0 0 200px;
-  }
-`;
-
-const ModalInfo = styled.div`
-  flex: 1;
-  padding: 3rem;
-  overflow-y: auto;
-`;
-
-const ModalTitle = styled.h3`
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-  color: ${theme.colors.primary.main};
-`;
-
 const ModalDescription = styled.div`
   margin-bottom: 2rem;
   line-height: 1.8;
@@ -318,7 +307,9 @@ export default function LitDownloadSection() {
             {filteredItems.map((item) => (
               <DownloadCard key={item.id} onClick={() => setSelectedItem(item)}>
                 <CardHeader>
-                  <CardTag>{item.category}</CardTag>
+                  <CategoryTag $category={item.category}>
+                    {item.category}
+                  </CategoryTag>
                 </CardHeader>
                 <CardInfo>
                   <CardTitle>{item.name}</CardTitle>
@@ -336,89 +327,80 @@ export default function LitDownloadSection() {
       </DownloadSection>
 
       {/* モーダル */}
-      <Modal $isOpen={!!selectedItem}>
+      <DownloadModal
+        isOpen={!!selectedItem}
+        onClose={() => setSelectedItem(null)}
+        image={selectedItem?.image}
+        title={selectedItem?.name || ""}
+      >
         {selectedItem && (
-          <ModalContent>
-            <ModalCloseButton onClick={() => setSelectedItem(null)}>
-              ×
-            </ModalCloseButton>
+          <>
+            <ModalDescription>
+              {selectedItem.modalContent?.detailedDescription ? (
+                selectedItem.modalContent.detailedDescription.map(
+                  (text, idx) => (
+                    <p key={`desc-${selectedItem.id}-${idx}`}>{text}</p>
+                  ),
+                )
+              ) : (
+                <>
+                  <p>{selectedItem.description}</p>
+                  {selectedItem.status === "paid" && (
+                    <p>価格: {selectedItem.price}</p>
+                  )}
+                </>
+              )}
 
-            {selectedItem.image && (
-              <ModalImage>
-                <img src={selectedItem.image} alt={selectedItem.name} />
-              </ModalImage>
-            )}
+              {selectedItem.modalContent?.notes && (
+                <div
+                  style={{
+                    marginTop: "2rem",
+                    fontSize: "0.9rem",
+                    opacity: 0.8,
+                  }}
+                >
+                  {selectedItem.modalContent.notes.map((note, idx) => (
+                    <p key={`note-${selectedItem.id}-${idx}`}>{note}</p>
+                  ))}
+                </div>
+              )}
+            </ModalDescription>
 
-            <ModalInfo>
-              <ModalTitle>{selectedItem.name}</ModalTitle>
+            <ModalButtons>
+              {selectedItem.links.primary && (
+                <ModalButton
+                  href={selectedItem.links.primary.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  $primary
+                >
+                  {selectedItem.links.primary.text}
+                </ModalButton>
+              )}
 
-              <ModalDescription>
-                {selectedItem.modalContent?.detailedDescription ? (
-                  selectedItem.modalContent.detailedDescription.map(
-                    (text, idx) => (
-                      <p key={`desc-${selectedItem.id}-${idx}`}>{text}</p>
-                    ),
-                  )
-                ) : (
-                  <>
-                    <p>{selectedItem.description}</p>
-                    {selectedItem.status === "paid" && (
-                      <p>価格: {selectedItem.price}</p>
-                    )}
-                  </>
-                )}
+              {selectedItem.links.secondary && (
+                <ModalButton
+                  href={selectedItem.links.secondary.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {selectedItem.links.secondary.text}
+                </ModalButton>
+              )}
 
-                {selectedItem.modalContent?.notes && (
-                  <div
-                    style={{
-                      marginTop: "2rem",
-                      fontSize: "0.9rem",
-                      opacity: 0.8,
-                    }}
-                  >
-                    {selectedItem.modalContent.notes.map((note, idx) => (
-                      <p key={`note-${selectedItem.id}-${idx}`}>{note}</p>
-                    ))}
-                  </div>
-                )}
-              </ModalDescription>
-
-              <ModalButtons>
-                {selectedItem.links.primary && (
-                  <ModalButton
-                    href={selectedItem.links.primary.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    $primary
-                  >
-                    {selectedItem.links.primary.text}
-                  </ModalButton>
-                )}
-
-                {selectedItem.links.secondary && (
-                  <ModalButton
-                    href={selectedItem.links.secondary.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {selectedItem.links.secondary.text}
-                  </ModalButton>
-                )}
-
-                {selectedItem.links.tertiary && (
-                  <ModalButton
-                    href={selectedItem.links.tertiary.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {selectedItem.links.tertiary.text}
-                  </ModalButton>
-                )}
-              </ModalButtons>
-            </ModalInfo>
-          </ModalContent>
+              {selectedItem.links.tertiary && (
+                <ModalButton
+                  href={selectedItem.links.tertiary.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {selectedItem.links.tertiary.text}
+                </ModalButton>
+              )}
+            </ModalButtons>
+          </>
         )}
-      </Modal>
+      </DownloadModal>
     </>
   );
 }
