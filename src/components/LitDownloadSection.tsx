@@ -1,0 +1,220 @@
+import { useState } from "react";
+import styled from "styled-components";
+
+// ダウンロードセクション
+const DownloadsSection = styled.div`
+  margin-top: 6rem;
+  padding: 4rem 0;
+`;
+
+const Container = styled.div`
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 2rem;
+`;
+
+const SectionTitle = styled.h2`
+  font-size: clamp(2rem, 5vw, 4rem);
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  margin-bottom: 4rem;
+  text-align: center;
+  background: linear-gradient(45deg, #9400d3, #4b0082);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+`;
+
+const DownloadGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-bottom: 4rem;
+`;
+
+const DownloadCard = styled.div`
+  background: rgba(162, 53, 237, 0.1);
+  border: 2px solid #A235ED;
+  border-radius: 15px;
+  padding: 2rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(162, 53, 237, 0.3);
+    background: rgba(162, 53, 237, 0.2);
+  }
+  
+  h4 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #A235ED;
+  }
+  
+  p {
+    margin-bottom: 1.5rem;
+    opacity: 0.9;
+  }
+  
+  .price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #FF91E9;
+  }
+`;
+
+// モーダル
+const Modal = styled.div<{ $isOpen: boolean }>`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  display: ${(props) => (props.$isOpen ? "flex" : "none")};
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+`;
+
+const ModalContent = styled.div`
+  background: #1a0a2a;
+  border: 2px solid #A235ED;
+  border-radius: 20px;
+  padding: 3rem;
+  max-width: 600px;
+  width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+  
+  h3 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: #A235ED;
+  }
+  
+  .description {
+    margin-bottom: 2rem;
+    line-height: 1.8;
+  }
+  
+  .download-link {
+    display: inline-block;
+    padding: 1rem 3rem;
+    background: #A235ED;
+    color: #fff;
+    border-radius: 30px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    
+    &:hover {
+      background: #8035F6;
+      transform: translateY(-2px);
+    }
+  }
+`;
+
+const ModalCloseButton = styled.button`
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 2rem;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+  
+  &:hover {
+    opacity: 1;
+  }
+`;
+
+// データ定義
+const downloadItems = [
+  {
+    id: 1,
+    name: "離途-HABIT-",
+    description: "プロ仕様の高品質音声ライブラリ。豊富な音素と表現力。",
+    price: "¥3,000",
+    type: "paid",
+    link: "https://booth.pm/",
+  },
+  {
+    id: 2,
+    name: "離途V2",
+    description: "スタンダードな音声ライブラリ。基本的な歌唱に対応。",
+    price: "FREE",
+    type: "free",
+    link: "#",
+  },
+  {
+    id: 3,
+    name: "離途-FLOW-",
+    description: "流れるような歌声を実現する特別版。限定配布中。",
+    price: "FREE",
+    type: "free",
+    link: "#",
+  },
+];
+
+export default function LitDownloadSection() {
+  const [selectedDownload, setSelectedDownload] = useState<
+    (typeof downloadItems)[0] | null
+  >(null);
+
+  return (
+    <>
+      <Container>
+        <DownloadsSection id="downloads">
+          <SectionTitle>Downloads</SectionTitle>
+
+          <DownloadGrid>
+            {downloadItems.map((item) => (
+              <DownloadCard
+                key={item.id}
+                onClick={() => setSelectedDownload(item)}
+              >
+                <h4>{item.name}</h4>
+                <p>{item.description}</p>
+                <div className="price">{item.price}</div>
+              </DownloadCard>
+            ))}
+          </DownloadGrid>
+        </DownloadsSection>
+      </Container>
+
+      {/* ダウンロードモーダル */}
+      <Modal $isOpen={!!selectedDownload}>
+        {selectedDownload && (
+          <ModalContent>
+            <ModalCloseButton onClick={() => setSelectedDownload(null)}>
+              ×
+            </ModalCloseButton>
+            <h3>{selectedDownload.name}</h3>
+            <div className="description">
+              <p>{selectedDownload.description}</p>
+              <p>価格: {selectedDownload.price}</p>
+            </div>
+            <a
+              href={selectedDownload.link}
+              className="download-link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {selectedDownload.type === "paid"
+                ? "BOOTHで購入"
+                : "ダウンロード"}
+            </a>
+          </ModalContent>
+        )}
+      </Modal>
+    </>
+  );
+}
