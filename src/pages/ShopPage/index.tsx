@@ -1,30 +1,19 @@
 import styled from "styled-components";
+import { Container, Section } from "@/components/Layout";
+import { PageTitle } from "@/components/PageTitle";
 
-const ShopSection = styled.section`
-  min-height: 100vh;
-  padding: 8rem 2rem;
-  background: #050505;
+const ShopSection = styled(Section)`
   display: flex;
   align-items: center;
   justify-content: center;
 `;
 
-const Container = styled.div`
+const ShopContainer = styled(Container)`
   max-width: 800px;
-  margin: 0 auto;
   text-align: center;
 `;
 
-const Title = styled.h1`
-  font-size: clamp(2rem, 5vw, 4rem);
-  font-weight: 900;
-  letter-spacing: 0.1em;
-  margin-bottom: 2rem;
-  background: linear-gradient(45deg, #00ffff, #ff00ff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-`;
+// TitleはPageTitleコンポーネントで置き換え
 
 const Message = styled.p`
   font-size: 1.2rem;
@@ -35,14 +24,16 @@ const Message = styled.p`
 export default function ShopPage() {
   return (
     <ShopSection>
-      <Container>
-        <Title>SHOP</Title>
+      <ShopContainer>
+        <PageTitle gradientColors={{ color1: "#00ffff", color2: "#ff00ff" }}>
+          SHOP
+        </PageTitle>
         <Message>
           オンラインショップは現在準備中です。
           <br />
           今しばらくお待ちください。
         </Message>
-      </Container>
+      </ShopContainer>
     </ShopSection>
   );
 }
