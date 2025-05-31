@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import styled from "styled-components";
+import TextWithBackground from "./TextWithBackground";
 
 const HomeSection = styled.section`
   position: fixed;
@@ -42,32 +43,22 @@ const MainTitle = styled.h1`
   letter-spacing: 0.15em;
   margin: 0;
   line-height: 1;
+  color: #fff;
 `;
 
-const SubTitle = styled.p`
-  font-family: 'Montserrat', sans-serif;
-  font-size: clamp(0.7rem, 1.5vw, 1rem);
-  font-weight: 700;
-  letter-spacing: 0.2em;
-  margin-top: 0.5rem;
-  opacity: 0.9;
+const TagsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 2.5rem;
 `;
 
 const TagLine = styled.div`
   display: flex;
   justify-content: flex-start;
   gap: 1rem;
-  margin-top: 1rem;
   flex-wrap: wrap;
-  
-  span {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    opacity: 0.8;
-  }
+  font-family: 'Montserrat', sans-serif;
 `;
 
 const SocialLinks = styled.div`
@@ -173,15 +164,25 @@ export default function Home() {
       </VideoBackground>
 
       <HomeContent>
-        <MainTitle>LITMUS</MainTitle>
-        <SubTitle>#MUSIC #EVOCALOID #PRODUCE</SubTitle>
-        <TagLine>
-          <span>#ILLUSTRATION</span>
-          <span>#DESIGN</span>
-          <span>#3D</span>
-          <span>#MOVIE</span>
-          <span>#SYNTHETIC VOICE</span>
-        </TagLine>
+        <MainTitle>
+          <TextWithBackground>LITMUS</TextWithBackground>
+        </MainTitle>
+        <TagsWrapper>
+          <TagLine>
+            <TextWithBackground>#MUSIC</TextWithBackground>
+            <TextWithBackground>#VOCALOID</TextWithBackground>
+            <TextWithBackground>#PRODUCE</TextWithBackground>
+          </TagLine>
+          <TagLine>
+            <TextWithBackground>#ILLUSTRATION</TextWithBackground>
+            <TextWithBackground>#DESIGN</TextWithBackground>
+          </TagLine>
+          <TagLine>
+            <TextWithBackground>#3D</TextWithBackground>
+            <TextWithBackground>#MOVIE</TextWithBackground>
+            <TextWithBackground>#SYNTHETIC VOICE</TextWithBackground>
+          </TagLine>
+        </TagsWrapper>
       </HomeContent>
 
       <VoicevoxLogo>
