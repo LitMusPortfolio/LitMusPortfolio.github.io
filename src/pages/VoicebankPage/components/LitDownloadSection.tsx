@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import styled from "styled-components";
 import {
   Card,
@@ -15,7 +15,7 @@ import DownloadModal from "../../../components/DownloadModal";
 import SectionTitle from "../../../components/SectionTitle";
 import { theme } from "../../../styles/theme";
 
-// カスタムスタイル
+// スタイルコンポーネント
 const DownloadSection = styled.section`
   min-height: 100vh;
   padding: 8rem 2rem;
@@ -48,7 +48,6 @@ const SideDecoration = styled.div`
   }
 `;
 
-// カスタムカードコンポーネント
 const DownloadCard = styled(Card)`
   background: rgba(0, 0, 0, 0.6);
   border: 2px solid transparent;
@@ -60,27 +59,6 @@ const DownloadCard = styled(Card)`
       0 10px 30px rgba(139, 92, 246, 0.3),
       inset 0 0 20px rgba(139, 92, 246, 0.1);
   }
-`;
-
-// カテゴリー別のタグカラー
-const CategoryTag = styled(CardTag)<{ $category: string }>`
-  background: ${(props) => {
-    switch (props.$category) {
-      case "トークソフト":
-        return "linear-gradient(135deg, #00BCD4, #0097A7)";
-      case "UTAUソングライブラリ":
-        return "linear-gradient(135deg, #9C27B0, #7B1FA2)";
-      case "画像素材":
-        return "linear-gradient(135deg, #FF6B6B, #EE5A6F)";
-      case "音声素材":
-        return "linear-gradient(135deg, #4CAF50, #388E3C)";
-      case "3Dモデル":
-        return "linear-gradient(135deg, #FF9800, #F57C00)";
-      default:
-        return theme.colors.primary.main;
-    }
-  }};
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 `;
 
 const CardFooter = styled.div`
@@ -96,56 +74,28 @@ const CardStatus = styled.span<{ $free?: boolean }>`
   color: ${(props) => (props.$free ? "#4CAF50" : theme.colors.primary.light)};
 `;
 
-// モーダル内部のスタイル
-const ModalDescription = styled.div`
-  margin-bottom: 2rem;
-  line-height: 1.8;
-  color: ${theme.colors.text.secondary};
-  
-  p {
-    margin-bottom: 1rem;
-  }
-`;
+// 型定義
+type ItemType = "talk" | "sing" | "other";
+type ItemStatus = "free" | "paid";
 
-const ModalButtons = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-`;
+interface DownloadLink {
+  text: string;
+  url: string;
+}
 
-const ModalButton = styled.a<{ $primary?: boolean }>`
-  display: inline-block;
-  padding: 1rem 2rem;
-  background: ${(props) => (props.$primary ? theme.colors.primary.main : "rgba(255, 255, 255, 0.1)")};
-  color: ${theme.colors.text.primary};
-  border: 2px solid ${(props) => (props.$primary ? "transparent" : "rgba(255, 255, 255, 0.2)")};
-  border-radius: 30px;
-  font-weight: bold;
-  text-align: center;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  
-  &:hover {
-    transform: translateY(-2px);
-    background: ${(props) => (props.$primary ? theme.colors.primary.dark : "rgba(255, 255, 255, 0.2)")};
-    box-shadow: 0 5px 20px rgba(139, 92, 246, 0.3);
-  }
-`;
-
-// データ型定義
 interface DownloadItem {
   id: number;
-  type: "talk" | "sing" | "other";
+  type: ItemType;
   category: string;
   name: string;
   description: string;
-  status: "free" | "paid";
+  status: ItemStatus;
   price?: string;
   image?: string;
   links: {
-    primary?: { text: string; url: string };
-    secondary?: { text: string; url: string };
-    tertiary?: { text: string; url: string };
+    primary?: DownloadLink;
+    secondary?: DownloadLink;
+    tertiary?: DownloadLink;
   };
   modalContent?: {
     detailedDescription: string[];
@@ -153,8 +103,24 @@ interface DownloadItem {
   };
 }
 
+// カテゴリー別の色設定
+const CATEGORY_COLORS: Record<string, string> = {
+  トークソフト: "linear-gradient(135deg, #00BCD4, #0097A7)",
+  UTAUソングライブラリ: "linear-gradient(135deg, #9C27B0, #7B1FA2)",
+  画像素材: "linear-gradient(135deg, #FF6B6B, #EE5A6F)",
+  音声素材: "linear-gradient(135deg, #4CAF50, #388E3C)",
+  "3Dモデル": "linear-gradient(135deg, #FF9800, #F57C00)",
+};
+
+// カテゴリータグコンポーネント
+const CategoryTag = styled(CardTag)<{ $category: string }>`
+  background: ${(props) =>
+    CATEGORY_COLORS[props.$category] || theme.colors.primary.main};
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+`;
+
 // ダウンロードデータ
-const downloadItems: DownloadItem[] = [
+const DOWNLOAD_ITEMS: DownloadItem[] = [
   {
     id: 1,
     type: "talk",
@@ -257,14 +223,161 @@ const downloadItems: DownloadItem[] = [
   },
 ];
 
+// タブの定義
+const TABS = [
+  { id: "all", label: "ALL" },
+  { id: "talk", label: "TALK" },
+  { id: "sing", label: "SING" },
+  { id: "other", label: "OTHER" },
+] as const;
+
+type TabId = (typeof TABS)[number]["id"];
+
+// ダウンロードアイテムカードコンポーネント
+interface DownloadItemCardProps {
+  item: DownloadItem;
+  onClick: () => void;
+}
+
+function DownloadItemCard({ item, onClick }: DownloadItemCardProps) {
+  return (
+    <DownloadCard onClick={onClick}>
+      <CardHeader>
+        <CategoryTag $category={item.category}>{item.category}</CategoryTag>
+      </CardHeader>
+      <CardInfo>
+        <CardTitle>{item.name}</CardTitle>
+        <CardDescription>{item.description}</CardDescription>
+        <CardFooter>
+          <CardStatus $free={item.status === "free"}>
+            {item.status === "free" ? "FREE" : item.price}
+          </CardStatus>
+        </CardFooter>
+      </CardInfo>
+    </DownloadCard>
+  );
+}
+
+// モーダル内容コンポーネント
+interface ModalContentProps {
+  item: DownloadItem;
+}
+
+function ModalContent({ item }: ModalContentProps) {
+  return (
+    <>
+      <ModalDescription>
+        {item.modalContent?.detailedDescription ? (
+          item.modalContent.detailedDescription.map((text, idx) => (
+            <p key={`desc-${item.id}-${idx}`}>{text}</p>
+          ))
+        ) : (
+          <>
+            <p>{item.description}</p>
+            {item.status === "paid" && <p>価格: {item.price}</p>}
+          </>
+        )}
+
+        {item.modalContent?.notes && (
+          <ModalNotes>
+            {item.modalContent.notes.map((note, idx) => (
+              <p key={`note-${item.id}-${idx}`}>{note}</p>
+            ))}
+          </ModalNotes>
+        )}
+      </ModalDescription>
+
+      <ModalButtons>
+        {item.links.primary && (
+          <ModalButton
+            href={item.links.primary.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            $primary
+          >
+            {item.links.primary.text}
+          </ModalButton>
+        )}
+        {item.links.secondary && (
+          <ModalButton
+            href={item.links.secondary.url}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {item.links.secondary.text}
+          </ModalButton>
+        )}
+        {item.links.tertiary && (
+          <ModalButton
+            href={item.links.tertiary.url}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {item.links.tertiary.text}
+          </ModalButton>
+        )}
+      </ModalButtons>
+    </>
+  );
+}
+
+// モーダル用スタイル
+const ModalDescription = styled.div`
+  margin-bottom: 2rem;
+  line-height: 1.8;
+  color: ${theme.colors.text.secondary};
+  
+  p {
+    margin-bottom: 1rem;
+  }
+`;
+
+const ModalNotes = styled.div`
+  margin-top: 2rem;
+  font-size: 0.9rem;
+  opacity: 0.8;
+`;
+
+const ModalButtons = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+`;
+
+const ModalButton = styled.a<{ $primary?: boolean }>`
+  display: inline-block;
+  padding: 1rem 2rem;
+  background: ${(props) =>
+    props.$primary ? theme.colors.primary.main : "rgba(255, 255, 255, 0.1)"};
+  color: ${theme.colors.text.primary};
+  border: 2px solid ${(props) =>
+    props.$primary ? "transparent" : "rgba(255, 255, 255, 0.2)"};
+  border-radius: 30px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-2px);
+    background: ${(props) =>
+      props.$primary ? theme.colors.primary.dark : "rgba(255, 255, 255, 0.2)"};
+    box-shadow: 0 5px 20px rgba(139, 92, 246, 0.3);
+  }
+`;
+
+// メインコンポーネント
 export default function LitDownloadSection() {
   const [selectedItem, setSelectedItem] = useState<DownloadItem | null>(null);
-  const [activeTab, setActiveTab] = useState("all");
+  const [activeTab, setActiveTab] = useState<TabId>("all");
 
-  const filteredItems =
-    activeTab === "all"
-      ? downloadItems
-      : downloadItems.filter((item) => item.type === activeTab);
+  // フィルタリングされたアイテムをメモ化
+  const filteredItems = useMemo(() => {
+    if (activeTab === "all") {
+      return DOWNLOAD_ITEMS;
+    }
+    return DOWNLOAD_ITEMS.filter((item) => item.type === activeTab);
+  }, [activeTab]);
 
   return (
     <>
@@ -277,129 +390,36 @@ export default function LitDownloadSection() {
           <SectionTitle>DOWNLOAD</SectionTitle>
 
           <TabContainer>
-            <Tab
-              $active={activeTab === "all"}
-              onClick={() => setActiveTab("all")}
-            >
-              ALL
-            </Tab>
-            <Tab
-              $active={activeTab === "talk"}
-              onClick={() => setActiveTab("talk")}
-            >
-              TALK
-            </Tab>
-            <Tab
-              $active={activeTab === "sing"}
-              onClick={() => setActiveTab("sing")}
-            >
-              SING
-            </Tab>
-            <Tab
-              $active={activeTab === "other"}
-              onClick={() => setActiveTab("other")}
-            >
-              OTHER
-            </Tab>
+            {TABS.map((tab) => (
+              <Tab
+                key={tab.id}
+                $active={activeTab === tab.id}
+                onClick={() => setActiveTab(tab.id)}
+              >
+                {tab.label}
+              </Tab>
+            ))}
           </TabContainer>
 
           <CardGrid>
             {filteredItems.map((item) => (
-              <DownloadCard key={item.id} onClick={() => setSelectedItem(item)}>
-                <CardHeader>
-                  <CategoryTag $category={item.category}>
-                    {item.category}
-                  </CategoryTag>
-                </CardHeader>
-                <CardInfo>
-                  <CardTitle>{item.name}</CardTitle>
-                  <CardDescription>{item.description}</CardDescription>
-                  <CardFooter>
-                    <CardStatus $free={item.status === "free"}>
-                      {item.status === "free" ? "FREE" : item.price}
-                    </CardStatus>
-                  </CardFooter>
-                </CardInfo>
-              </DownloadCard>
+              <DownloadItemCard
+                key={item.id}
+                item={item}
+                onClick={() => setSelectedItem(item)}
+              />
             ))}
           </CardGrid>
         </Container>
       </DownloadSection>
 
-      {/* モーダル */}
       <DownloadModal
         isOpen={!!selectedItem}
         onClose={() => setSelectedItem(null)}
         image={selectedItem?.image}
         title={selectedItem?.name || ""}
       >
-        {selectedItem && (
-          <>
-            <ModalDescription>
-              {selectedItem.modalContent?.detailedDescription ? (
-                selectedItem.modalContent.detailedDescription.map(
-                  (text, idx) => (
-                    <p key={`desc-${selectedItem.id}-${idx}`}>{text}</p>
-                  ),
-                )
-              ) : (
-                <>
-                  <p>{selectedItem.description}</p>
-                  {selectedItem.status === "paid" && (
-                    <p>価格: {selectedItem.price}</p>
-                  )}
-                </>
-              )}
-
-              {selectedItem.modalContent?.notes && (
-                <div
-                  style={{
-                    marginTop: "2rem",
-                    fontSize: "0.9rem",
-                    opacity: 0.8,
-                  }}
-                >
-                  {selectedItem.modalContent.notes.map((note, idx) => (
-                    <p key={`note-${selectedItem.id}-${idx}`}>{note}</p>
-                  ))}
-                </div>
-              )}
-            </ModalDescription>
-
-            <ModalButtons>
-              {selectedItem.links.primary && (
-                <ModalButton
-                  href={selectedItem.links.primary.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  $primary
-                >
-                  {selectedItem.links.primary.text}
-                </ModalButton>
-              )}
-
-              {selectedItem.links.secondary && (
-                <ModalButton
-                  href={selectedItem.links.secondary.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {selectedItem.links.secondary.text}
-                </ModalButton>
-              )}
-
-              {selectedItem.links.tertiary && (
-                <ModalButton
-                  href={selectedItem.links.tertiary.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {selectedItem.links.tertiary.text}
-                </ModalButton>
-              )}
-            </ModalButtons>
-          </>
-        )}
+        {selectedItem && <ModalContent item={selectedItem} />}
       </DownloadModal>
     </>
   );

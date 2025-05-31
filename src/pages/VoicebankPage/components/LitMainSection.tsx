@@ -221,7 +221,7 @@ export default function LitMainSection() {
         <source src="/101_Lit/LitTopMovie.mp4" type="video/mp4" />
       </BackgroundVideo>
       <ContentContainer>
-        <Logo src="/101_Lit/LitLogo.webp" alt="離途" />
+        <Logo src="/101_Lit/Litlogo.webp" alt="離途" />
         <TextWrapper>
           <MainTagline>
             <HighlightedText>
