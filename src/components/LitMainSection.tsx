@@ -16,18 +16,20 @@ const MainSection = styled.div`
   display: flex;
   align-items: center;
   position: relative;
-  background: linear-gradient(135deg, #4a1a8a 0%, #2a0a5a 100%);
+  background: linear-gradient(135deg, #1a0a3e 0%, #2d1b69 50%, #3e2980 100%);
   overflow: hidden;
   
-  &::before {
+  &::after {
     content: '';
     position: absolute;
     top: 0;
-    right: -20%;
-    width: 80%;
-    height: 100%;
-    background: radial-gradient(circle at center, rgba(139, 92, 246, 0.2) 0%, transparent 70%);
-    filter: blur(100px);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(circle at 70% 50%, rgba(139, 92, 246, 0.4) 0%, transparent 50%),
+      radial-gradient(circle at 30% 80%, rgba(139, 92, 246, 0.3) 0%, transparent 50%);
+    z-index: 0;
   }
 `;
 
@@ -66,24 +68,33 @@ const MainCharacterVisual = styled.div`
   
   img {
     width: 100%;
-    max-width: 600px;
-    height: auto;
+    max-width: 800px;
+    height: 90vh;
     object-fit: contain;
     filter: drop-shadow(0 0 50px rgba(139, 92, 246, 0.5));
   }
   
   @media (max-width: 968px) {
-    height: 50vh;
+    height: 60vh;
+    
+    img {
+      height: 60vh;
+      max-width: 500px;
+    }
   }
 `;
 
-const Logo = styled.img`
-  width: 400px;
-  margin-bottom: 2rem;
-  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.3));
+const Logo = styled.div`
+  font-size: 6rem;
+  font-weight: 900;
+  margin-bottom: 1rem;
+  color: #8b5cf6;
+  text-shadow: 0 4px 20px rgba(139, 92, 246, 0.8);
+  font-family: "Noto Serif JP", serif;
+  letter-spacing: 0.2em;
   
   @media (max-width: 768px) {
-    width: 300px;
+    font-size: 4rem;
   }
 `;
 
@@ -97,58 +108,24 @@ const Tagline = styled.p`
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 `;
 
-const Description = styled.div`
-  margin-bottom: 3rem;
+// 下部のディスクリプションは削除（完成イメージにないため）
+
+const InfoBox = styled.div`
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  border-radius: 10px;
+  padding: 2rem;
+  margin: 2rem 0;
+  backdrop-filter: blur(10px);
   
   p {
     font-size: 1rem;
     line-height: 1.8;
-    margin-bottom: 1rem;
     color: rgba(255, 255, 255, 0.9);
-    font-weight: 300;
-  }
-`;
-
-const InfoSection = styled.div`
-  background: rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
-  padding: 2rem;
-  margin: 3rem 0;
-  backdrop-filter: blur(10px);
-  
-  h3 {
-    font-size: 1.2rem;
     margin-bottom: 1rem;
-    color: #fff;
-  }
-  
-  p {
-    font-size: 0.9rem;
-    line-height: 1.8;
-    color: rgba(255, 255, 255, 0.8);
-    margin-bottom: 1rem;
-  }
-  
-  .divider {
-    width: 50%;
-    height: 1px;
-    background: rgba(255, 255, 255, 0.2);
-    margin: 2rem 0;
-  }
-  
-  .small-text {
-    font-size: 0.8rem;
-    line-height: 1.6;
-    color: rgba(255, 255, 255, 0.6);
-  }
-  
-  a {
-    color: #8b5cf6;
-    text-decoration: underline;
     
-    &:hover {
-      color: #a78bfa;
+    &:last-child {
+      margin-bottom: 0;
     }
   }
 `;
@@ -188,10 +165,10 @@ export default function LitMainSection() {
     <MainSection>
       <MainContainer>
         <MainContent>
-          <Logo src="/101_Lit/Litlogo.webp" alt="離途" />
+          <Logo>離途</Logo>
           <Tagline>優しさと吐息が香る穏やかな男声ソフトウェア。</Tagline>
 
-          <InfoSection>
+          <InfoBox>
             <p>「離途」は、LitMusによるオリジナルキャラクター。</p>
             <p>
               読み上げ合成音声「VOICEVOX」
@@ -207,45 +184,7 @@ export default function LitMainSection() {
               <br />
               シャンルレスな活動を行っています。
             </p>
-
-            <div className="divider" />
-
-            <div className="small-text">
-              <p>
-                FREE DLの円をふわふわさせてほしいです
-                <br />
-                パラメイトのオマケページの
-                <br />
-                トラウマまでの円の拡大縮小もよろしょうだけるーく主張弱い感じて
-                <br />
-                光に80%を90%でらふわさせてほしい
-                <br />
-                マウスオーバーしたら100%になってほしい
-                <br />
-                背景色に丸文字から、マウスオーバーしたら色変更
-                <br />円 #8035F6 文字 #FF91E9
-                <br />
-                このボタンはキャラクターページも加調の形を変えて再利用お願いします
-              </p>
-              <p>
-                <a
-                  href="https://paradoxlive.jp/character/bae/allen.php?c=1"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  https://paradoxlive.jp/character/bae/allen.php?c=1
-                </a>
-              </p>
-            </div>
-          </InfoSection>
-
-          <Description>
-            <p>
-              優しさと吐息が香る
-              <br />
-              穏やかな男声ソフトウェア。
-            </p>
-          </Description>
+          </InfoBox>
         </MainContent>
 
         <MainCharacterVisual>
