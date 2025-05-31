@@ -16,9 +16,7 @@ const MainSection = styled.div`
   display: flex;
   align-items: center;
   position: relative;
-  background: 
-    linear-gradient(135deg, rgba(10, 22, 40, 0.8) 0%, rgba(26, 44, 78, 0.7) 30%, rgba(42, 74, 124, 0.6) 60%, rgba(58, 95, 149, 0.5) 100%),
-    url('/LitBG.webp') center/cover no-repeat;
+  background: linear-gradient(135deg, rgba(10, 22, 40, 0.8) 0%, rgba(26, 44, 78, 0.7) 30%, rgba(42, 74, 124, 0.6) 60%, rgba(58, 95, 149, 0.5) 100%);
   overflow: hidden;
   
   &::before {
@@ -190,9 +188,27 @@ const FreeDownloadButton = styled.button`
   }
 `;
 
+// 背景動画コンポーネント
+const BackgroundVideo = styled.video`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+  object-fit: cover;
+`;
+
 export default function LitMainSection() {
   return (
     <MainSection>
+      <BackgroundVideo autoPlay muted loop playsInline>
+        <source src="/101_Lit/LitTopMovie.webm" type="video/webm" />
+        <source src="/101_Lit/LitTopMovie.mp4" type="video/mp4" />
+      </BackgroundVideo>
       <MainContainer>
         <MainContent>
           <Logo src="/101_Lit/Litlogo.webp" alt="離途" />
