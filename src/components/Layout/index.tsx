@@ -3,7 +3,7 @@ import styled from "styled-components";
 // 基本セクションコンポーネント
 export const Section = styled.section`
   min-height: 100vh;
-  padding: ${(props) => props.theme.spacing?.sectionPadding || "8rem 2rem"};
+  padding: ${(props) => props.theme.spacing?.sectionPadding || "2rem 2rem"};
   position: relative;
 `;
 

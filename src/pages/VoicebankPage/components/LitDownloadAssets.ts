@@ -1,3 +1,32 @@
+// 型定義
+type ItemType = "talk" | "sing" | "other";
+type ItemStatus = "free" | "paid";
+
+interface DownloadLink {
+  text: string;
+  url: string;
+}
+
+interface DownloadItem {
+  id: number;
+  type: ItemType;
+  category: string;
+  name: string;
+  description: string;
+  status: ItemStatus;
+  price?: string;
+  image?: string;
+  links: {
+    primary?: DownloadLink;
+    secondary?: DownloadLink;
+    tertiary?: DownloadLink;
+  };
+  modalContent?: {
+    detailedDescription: string[];
+    notes?: string[];
+  };
+}
+
 // ダウンロードデータ
 export const DOWNLOAD_ITEMS: DownloadItem[] = [
   {
