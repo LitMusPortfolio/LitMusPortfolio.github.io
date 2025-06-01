@@ -3,7 +3,6 @@ import styled from "styled-components";
 import {
   Card,
   CardDescription,
-  CardGrid,
   CardHeader,
   CardInfo,
   CardTag,
@@ -31,6 +30,30 @@ const TABS = [
 ];
 
 // スタイルコンポーネント
+// レスポンシブグリッドコンテナ（最大4カラム）
+const ResponsiveCardGrid = styled.div`
+  display: grid;
+  gap: 2rem;
+  
+  /* デフォルト: 1カラム */
+  grid-template-columns: 1fr;
+  
+  /* スマホ横向き以上: 2カラム */
+  @media (min-width: ${theme.breakpoints.small}) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  /* タブレット以上: 3カラム */
+  @media (min-width: ${theme.breakpoints.tablet}) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  /* デスクトップ以上: 4カラム（最大） */
+  @media (min-width: ${theme.breakpoints.desktop}) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+`;
+
 const DownloadCard = styled(Card)`
   background: rgba(0, 0, 0, 0.6);
   border: 2px solid transparent;
@@ -140,7 +163,7 @@ export default function LitDownloadSection() {
             ))}
           </TabContainer>
 
-          <CardGrid>
+          <ResponsiveCardGrid>
             {filteredItems.map((item) => (
               <DownloadItemCard
                 key={item.id}
@@ -148,7 +171,7 @@ export default function LitDownloadSection() {
                 onClick={() => handleItemClick(item)}
               />
             ))}
-          </CardGrid>
+          </ResponsiveCardGrid>
         </Container>
       </Section>
 

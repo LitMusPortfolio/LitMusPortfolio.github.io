@@ -4,8 +4,8 @@ import { Tab, TabContainer } from "@/components/CardGrid";
 import { Container, Section } from "@/components/Layout";
 import { PageTitle as CommonPageTitle } from "@/components/PageTitle";
 import { cardHoverEffect, glassmorphism } from "@/styles/utils";
-import type { Work } from "@/types";
 import { categoryColors } from "@/types";
+import { worksData } from "./WorksAssets";
 
 const WorksSection = styled(Section)`
   background-image: url('/LitMusBG.webp');
@@ -144,137 +144,6 @@ const WorkStats = styled.div`
   font-size: 0.85rem;
   color: rgba(255, 255, 255, 0.7);
 `;
-
-// Work型は@/typesからインポート
-
-const worksData: Work[] = [
-  {
-    id: 1,
-    title: "消えたいと思うだけで",
-    category: "オリジナル曲",
-    type: "music",
-    description: "VOICEVOX「四国めたん」を使用したオリジナル楽曲",
-    image: "/001_top/離途バナー_差し替え予定.webp",
-    videoId: "dQw4w9WgXcQ", // 実際のYouTube IDに置き換えてください
-    views: "1.2万回視聴",
-    date: "2024.03.15",
-  },
-  {
-    id: 2,
-    title: "夜明けの向こう側",
-    category: "オリジナル曲",
-    type: "music",
-    description: "VOICEVOX楽曲第2弾",
-    image: "/001_top/Moviedummy.png",
-    videoId: "dQw4w9WgXcQ",
-    views: "8,542回視聴",
-    date: "2024.02.28",
-  },
-  {
-    id: 3,
-    title: "Lit キャラクターイラスト",
-    category: "イラスト",
-    type: "illustration",
-    description: "UTAUボイスライブラリ「Lit」のキャラクターデザイン",
-    image: "/101_Lit/Litlogo.webp",
-    views: "5,234回視聴",
-    date: "2024.01.20",
-  },
-  {
-    id: 4,
-    title: "Digital Dreams MV",
-    category: "3DMV",
-    type: "movie",
-    description: "オリジナル楽曲のミュージックビデオ制作",
-    image: "/001_top/Moviedummy.png",
-    videoId: "dQw4w9WgXcQ",
-    views: "15,678回視聴",
-    date: "2024.01.10",
-  },
-  {
-    id: 5,
-    title: "3Dキャラクターモデル",
-    category: "3DMV",
-    type: "3d",
-    description: "Blenderを使用したキャラクターモデリング",
-    image: "/101_Lit/LitDummy.png",
-    views: "3,456回視聴",
-    date: "2023.12.25",
-  },
-  {
-    id: 6,
-    title: "シンセティックボイス実験",
-    category: "その他",
-    type: "other",
-    description: "AIボイスを使用した実験的作品",
-    image: "/001_top/Moviedummy.png",
-    views: "2,890回視聴",
-    date: "2023.12.15",
-  },
-  {
-    id: 7,
-    title: "季節の移ろい",
-    category: "カバー",
-    type: "music",
-    description: "四季をテーマにした楽曲",
-    image: "/001_top/離途バナー_差し替え予定.webp",
-    videoId: "dQw4w9WgXcQ",
-    views: "9,876回視聴",
-    date: "2023.11.30",
-  },
-  {
-    id: 8,
-    title: "ファンタジーイラスト集",
-    category: "イラスト",
-    type: "illustration",
-    description: "幻想的な世界観のイラスト作品",
-    image: "/101_Lit/Litlogo.webp",
-    views: "4,321回視聴",
-    date: "2023.11.15",
-  },
-  {
-    id: 9,
-    title: "サイバーパンクMV",
-    category: "3DMV",
-    type: "movie",
-    description: "近未来的な映像表現",
-    image: "/001_top/Moviedummy.png",
-    videoId: "dQw4w9WgXcQ",
-    views: "7,890回視聴",
-    date: "2023.10.30",
-  },
-  {
-    id: 10,
-    title: "ローポリキャラクター",
-    category: "3DMV",
-    type: "3d",
-    description: "スタイライズされた3Dモデル",
-    image: "/101_Lit/LitDummy.png",
-    views: "2,345回視聴",
-    date: "2023.10.15",
-  },
-  {
-    id: 11,
-    title: "実験的サウンドスケープ",
-    category: "その他",
-    type: "other",
-    description: "環境音を取り入れた音響作品",
-    image: "/001_top/Moviedummy.png",
-    views: "1,567回視聴",
-    date: "2023.09.30",
-  },
-  {
-    id: 12,
-    title: "夏の終わりに",
-    category: "オリジナル曲",
-    type: "music",
-    description: "夏の思い出を歌った楽曲",
-    image: "/001_top/離途バナー_差し替え予定.webp",
-    videoId: "dQw4w9WgXcQ",
-    views: "11,234回視聴",
-    date: "2023.09.15",
-  },
-];
 
 export default function Works() {
   const [activeTab, setActiveTab] = useState("all");

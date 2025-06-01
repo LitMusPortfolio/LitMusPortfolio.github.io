@@ -50,6 +50,7 @@ export const theme = {
     },
   },
   breakpoints: {
+    small: "600px", // スマホ横向き
     mobile: "768px",
     tablet: "968px",
     desktop: "1200px",
