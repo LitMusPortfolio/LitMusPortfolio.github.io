@@ -1,19 +1,18 @@
 import styled from "styled-components";
 import { Container, Section, SideDecoration } from "@/components/Layout/";
-import { PageTitle } from "@/components/PageTitle";
+import SectionTitle from "@/components/SectionTitle";
+import { theme } from "@/styles/theme";
 import { glassmorphism } from "@/styles/utils";
-
-// AboutSection は Section コンポーネントで置き換え
 
 const GridContainer = styled(Container)`
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 4rem;
-  align-items: center;
+  align-items: start;
   
-  @media (max-width: ${({ theme }) => theme.breakpoints?.mobile || "768px"}) {
+  @media (max-width: ${theme.breakpoints.tablet}) {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 3rem;
   }
 `;
 
@@ -21,76 +20,151 @@ const ContentWrapper = styled.div`
   position: relative;
 `;
 
-// SectionTitleはPageTitleコンポーネントで置き換え
-
 const Description = styled.p`
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   line-height: 1.8;
   margin-bottom: 1.5rem;
-  opacity: 0.9;
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 300;
 `;
 
 const ProfileInfo = styled.div`
   margin-top: 3rem;
+  ${glassmorphism}
+  padding: 2rem;
+  border-radius: 20px;
+  background: rgba(0, 0, 0, 0.3);
 `;
 
 const ProfileItem = styled.div`
   display: flex;
   align-items: center;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  
+  &:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+  }
   
   strong {
-    min-width: 120px;
-    color: #00bfff;
+    min-width: 140px;
+    color: ${theme.colors.primary.light};
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  
+  span {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.1rem;
   }
 `;
 
 const ImageWrapper = styled.div`
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   
   &::before {
     content: '';
     position: absolute;
-    top: -20px;
-    left: -20px;
-    right: 20px;
-    bottom: 20px;
-    background: linear-gradient(45deg, #00bfff, #0080ff);
+    top: -40px;
+    left: -40px;
+    right: -40px;
+    bottom: -40px;
+    background: radial-gradient(circle at center, ${theme.colors.primary.main}, transparent);
     opacity: 0.3;
-    filter: blur(40px);
+    filter: blur(60px);
     z-index: -1;
   }
 `;
 
 const ProfileImage = styled.img`
   width: 100%;
-  max-width: 400px;
-  border-radius: 20px;
-  box-shadow: 0 20px 60px rgba(0, 191, 255, 0.2);
+  max-width: 500px;
+  border-radius: 30px;
+  box-shadow: 
+    0 20px 60px rgba(139, 92, 246, 0.3),
+    0 0 0 2px rgba(139, 92, 246, 0.2);
+  transition: transform 0.3s ease;
+  
+  &:hover {
+    transform: scale(1.02);
+  }
+`;
+
+const SkillsSection = styled.div`
+  margin-top: 3rem;
+`;
+
+const SkillsTitle = styled.h3`
+  font-size: 1.3rem;
+  margin-bottom: 1.5rem;
+  color: ${theme.colors.primary.light};
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
 `;
 
 const SkillsList = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
-  margin-top: 2rem;
 `;
 
 const SkillTag = styled.span`
-  padding: 0.5rem 1rem;
-  ${glassmorphism}
-  border-radius: 20px;
-  font-size: 0.9rem;
+  padding: 0.7rem 1.5rem;
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(139, 92, 246, 0.1));
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  border-radius: 25px;
+  font-size: 0.95rem;
+  font-weight: 500;
   transition: all 0.3s ease;
+  cursor: default;
   
   &:hover {
-    background: rgba(0, 191, 255, 0.2);
-    border-color: rgba(0, 191, 255, 0.5);
-    transform: translateY(-2px);
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.3), rgba(139, 92, 246, 0.2));
+    border-color: ${theme.colors.primary.main};
+    transform: translateY(-3px);
+    box-shadow: 0 5px 20px rgba(139, 92, 246, 0.3);
   }
 `;
 
-// SideDecorationは共通コンポーネントを使用
+const StatsContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 3rem;
+  
+  @media (max-width: ${theme.breakpoints.mobile}) {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+`;
+
+const StatCard = styled.div`
+  ${glassmorphism}
+  padding: 1.5rem;
+  border-radius: 15px;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.3);
+  
+  h4 {
+    font-size: 2rem;
+    color: ${theme.colors.primary.main};
+    margin-bottom: 0.5rem;
+  }
+  
+  p {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+`;
 
 export default function About() {
   return (
@@ -101,15 +175,13 @@ export default function About() {
 
       <GridContainer>
         <ContentWrapper>
-          <PageTitle gradientColors={{ color1: "#00bfff", color2: "#0080ff" }}>
-            ABOUT
-          </PageTitle>
+          <SectionTitle>ABOUT</SectionTitle>
           <Description>
             LitMus9は音楽制作を中心に、イラストレーション、デザイン、
             3DCG、映像制作など幅広いクリエイティブ活動を展開しています。
           </Description>
           <Description>
-            EVOCALOIDプロデューサーとして、感情に訴える楽曲制作を心がけ、
+            VOCALOIDプロデューサーとして、感情に訴える楽曲制作を心がけ、
             聴く人の心に残る作品づくりを目指しています。
           </Description>
 
@@ -128,14 +200,32 @@ export default function About() {
             </ProfileItem>
           </ProfileInfo>
 
-          <SkillsList>
-            <SkillTag>音楽制作</SkillTag>
-            <SkillTag>作詞・作曲</SkillTag>
-            <SkillTag>イラスト</SkillTag>
-            <SkillTag>3DCG</SkillTag>
-            <SkillTag>映像編集</SkillTag>
-            <SkillTag>デザイン</SkillTag>
-          </SkillsList>
+          <SkillsSection>
+            <SkillsTitle>Skills & Expertise</SkillsTitle>
+            <SkillsList>
+              <SkillTag>音楽制作</SkillTag>
+              <SkillTag>作詞・作曲</SkillTag>
+              <SkillTag>イラスト</SkillTag>
+              <SkillTag>3DCG</SkillTag>
+              <SkillTag>映像編集</SkillTag>
+              <SkillTag>デザイン</SkillTag>
+            </SkillsList>
+          </SkillsSection>
+
+          <StatsContainer>
+            <StatCard>
+              <h4>50+</h4>
+              <p>楽曲制作</p>
+            </StatCard>
+            <StatCard>
+              <h4>100+</h4>
+              <p>イラスト作品</p>
+            </StatCard>
+            <StatCard>
+              <h4>5年</h4>
+              <p>活動年数</p>
+            </StatCard>
+          </StatsContainer>
         </ContentWrapper>
 
         <ImageWrapper>

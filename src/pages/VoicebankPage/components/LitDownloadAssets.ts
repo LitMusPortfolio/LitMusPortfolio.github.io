@@ -36,6 +36,7 @@ export const DOWNLOAD_ITEMS: DownloadItem[] = [
     name: "VOICEVOX 離途",
     description: "無料で使える中品質なテキスト読み上げソフトウェア",
     status: "free",
+    image: "/101_Lit/Litlogo.webp",
     links: {
       primary: { text: "ダウンロード", url: "#" },
     },
@@ -47,6 +48,7 @@ export const DOWNLOAD_ITEMS: DownloadItem[] = [
     name: "離途 -FLOW-",
     description: "豊かな声色で感情的な歌唱が可能な大容量のライブラリ",
     status: "free",
+    image: "/101_Lit/LitA_差し替え前提.webp",
     links: {
       primary: { text: "無料ダウンロード", url: "#" },
     },
@@ -59,6 +61,7 @@ export const DOWNLOAD_ITEMS: DownloadItem[] = [
     description: "癖と勢いのある発音をコンセプトとした有料アペンドライブラリ",
     status: "paid",
     price: "¥3,000",
+    image: "/101_Lit/LitB_差し替え前提.webp",
     links: {
       primary: { text: "BOOTHで購入", url: "https://booth.pm/" },
     },
