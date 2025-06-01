@@ -14,7 +14,7 @@
     "launch-playwright-sse": "npx -y @playwright/mcp@latest --port 8931 --headless",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "screenshot": "storycap",
+    "screenshot": "storycap http://localhost:6006 -o .reg/actual -V 320x568 -V 375x667 -V 414x896 -V 768x1024 -V 1024x768 -V 1280x720 -V 1440x900 -V 1920x1080",
     "screenshot:server": "storycap --serverCmd \"npm run storybook\" --serverTimeout 60000",
     "screenshot:ci": "storycap --serverCmd \"npm run storybook -- --ci\" --serverTimeout 60000",
     "visual-test": "reg-suit run",
