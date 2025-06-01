@@ -1,0 +1,41 @@
+{
+  "recommendations": [
+    // 必須: Biome (このプロジェクトのフォーマッター/リンター)
+    "biomejs.biome",
+    
+    // TypeScript/JavaScript開発
+    "ms-vscode.vscode-typescript-next",
+    "christian-kohler.path-intellisense",
+    "christian-kohler.npm-intellisense",
+    
+    // React開発
+    "dsznajder.es7-react-js-snippets",
+    "formulahendry.auto-rename-tag",
+    "formulahendry.auto-close-tag",
+    
+    // styled-components (このプロジェクトで使用)
+    "styled-components.vscode-styled-components",
+    
+    // Git
+    "eamodio.gitlens",
+    
+    // 開発効率化
+    "visualstudioexptteam.vscodeintellicode",
+    "usernamehw.errorlens",
+    
+    // Storybook
+    "bbenoist.storybook",
+    
+    // その他便利ツール
+    "gruntfuggly.todo-tree",
+    "yzhang.markdown-all-in-one",
+    
+    // アイコンテーマ (お好みで)
+    "pkief.material-icon-theme"
+  ],
+  "unwantedRecommendations": [
+    // Biomeを使用しているため不要
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint"
+  ]
+}
