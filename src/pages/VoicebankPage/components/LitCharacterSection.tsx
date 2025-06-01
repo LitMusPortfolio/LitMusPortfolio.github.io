@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { ContentContainer, GridContainer } from "../../../components/Layout";
-import ProfileSection from "../../../components/ProfileSection";
 import SectionTitle from "../../../components/SectionTitle";
 import { theme } from "../../../styles/theme";
+import ProfileSection from "./ProfileSection";
 
 // 型定義
 interface ProfileData {
@@ -64,34 +64,50 @@ const TitleWithLineContainer = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
+  margin-bottom: 2rem;
 `;
 
-// キャラクター名コンテナ
-const CharacterNameContainer = styled(TitleWithLineContainer)`
-  margin-top: 2rem;
-`;
-
-// キャラクター名
-const CharacterName = styled.h2`
-  font-size: 4rem;
+// 共通タイトルテキスト
+const TitleText = styled.h2<{ $size?: "large" | "medium" }>`
+  font-size: ${(props) => (props.$size === "large" ? "4rem" : "2.5rem")};
   font-weight: bold;
   color: ${theme.colors.text.primary};
   margin: 0;
   padding-right: 1rem;
   white-space: nowrap;
+  
+  @media (max-width: 768px) {
+    font-size: ${(props) => (props.$size === "large" ? "3rem" : "2rem")};
+  }
 `;
 
-// 共通罫線スタイル
-const LineBase = styled.div`
+// 共通罫線
+const TitleLine = styled.div`
   flex: 1;
-  background: ${theme.colors.text.primary};
-`;
-
-// 名前用の罫線
-const NameLine = styled(LineBase)`
   height: 2px;
+  background: ${theme.colors.text.primary};
   opacity: 0.5;
 `;
+
+// 共通タイトル付き罫線コンポーネント
+interface TitleWithLineProps {
+  title: string;
+  size?: "large" | "medium";
+  className?: string;
+}
+
+const TitleWithLine: React.FC<TitleWithLineProps> = ({
+  title,
+  size = "medium",
+  className,
+}) => (
+  <TitleWithLineContainer className={className}>
+    <TitleText as={size === "large" ? "h2" : "h3"} $size={size}>
+      {title}
+    </TitleText>
+    <TitleLine />
+  </TitleWithLineContainer>
+);
 
 // プロフィールコンテナ（全体）
 const ProfileWrapper = styled.div`
@@ -110,21 +126,6 @@ const ProfileWrapper = styled.div`
 const DemoSongSection = styled.div`
   margin-top: 2rem;
   width: 100%;
-`;
-
-// デモソングタイトルコンテナ
-const DemoSongTitleContainer = styled(TitleWithLineContainer)`
-  margin-bottom: 2rem;
-`;
-
-// デモソングタイトル
-const DemoSongTitle = styled.h3`
-  font-size: 2.5rem;
-  font-weight: bold;
-  color: ${theme.colors.text.primary};
-  margin: 0;
-  padding-right: 1rem;
-  white-space: nowrap;
 `;
 
 // デモソングコンテナ
@@ -186,19 +187,13 @@ export default function LitCharacterSection() {
         </LeftSection>
         <StyledContentContainer>
           <SectionTitle>CHARACTER</SectionTitle>
-          <CharacterNameContainer>
-            <CharacterName>離途</CharacterName>
-            <NameLine />
-          </CharacterNameContainer>
+          <TitleWithLine title="離途" size="large" />
           <ProfileWrapper>
             <ProfileSection data={PROFILE_DATA_LEFT} />
             <ProfileSection data={PROFILE_DATA_RIGHT} />
           </ProfileWrapper>
           <DemoSongSection>
-            <DemoSongTitleContainer>
-              <DemoSongTitle>デモソング</DemoSongTitle>
-              <NameLine />
-            </DemoSongTitleContainer>
+            <TitleWithLine title="デモソング" size="medium" />
             <DemoSongContainer>
               {DEMO_SONGS.map((song) => (
                 <DemoSongItem key={song.id}>
