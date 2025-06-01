@@ -2,36 +2,28 @@ import styled from "styled-components";
 import Modal from "@/components/Modal";
 import { theme } from "@/styles/theme";
 
-// モーダルのプロップス型定義
-interface BaseDownloadModalProps {
+// 型定義
+interface DownloadLink {
+  text: string;
+  url: string;
+  primary?: boolean;
+}
+
+interface DownloadContent {
+  description: string[];
+  notes?: string[];
+  links: DownloadLink[];
+}
+
+interface DownloadModalProps {
   isOpen: boolean;
   onClose: () => void;
-  image?: string;
   title: string;
+  image?: string;
   defaultImage?: string;
+  content?: DownloadContent;
+  children?: React.ReactNode;
 }
-
-interface SimpleDownloadModalProps extends BaseDownloadModalProps {
-  variant?: "simple";
-  children: React.ReactNode;
-}
-
-interface StructuredDownloadModalProps extends BaseDownloadModalProps {
-  variant: "structured";
-  content: {
-    description: string[];
-    notes?: string[];
-    links: Array<{
-      text: string;
-      url: string;
-      primary?: boolean;
-    }>;
-  };
-}
-
-type DownloadModalProps =
-  | SimpleDownloadModalProps
-  | StructuredDownloadModalProps;
 
 // スタイルコンポーネント
 const ModalDescription = styled.div`
@@ -63,11 +55,11 @@ const ModalButtons = styled.div`
 const ModalButton = styled.a<{ $primary?: boolean }>`
   display: inline-block;
   padding: 1rem 2rem;
-  background: ${(props) =>
-    props.$primary ? theme.colors.primary.main : "rgba(255, 255, 255, 0.1)"};
+  background: ${({ $primary }) =>
+    $primary ? theme.colors.primary.main : "rgba(255, 255, 255, 0.1)"};
   color: ${theme.colors.text.primary};
-  border: 2px solid ${(props) =>
-    props.$primary ? "transparent" : "rgba(255, 255, 255, 0.2)"};
+  border: 2px solid ${({ $primary }) =>
+    $primary ? "transparent" : "rgba(255, 255, 255, 0.2)"};
   border-radius: 30px;
   font-weight: bold;
   text-align: center;
@@ -76,74 +68,65 @@ const ModalButton = styled.a<{ $primary?: boolean }>`
   
   &:hover {
     transform: translateY(-2px);
-    background: ${(props) =>
-      props.$primary ? theme.colors.primary.dark : "rgba(255, 255, 255, 0.2)"};
+    background: ${({ $primary }) =>
+      $primary ? theme.colors.primary.dark : "rgba(255, 255, 255, 0.2)"};
     box-shadow: 0 5px 20px rgba(139, 92, 246, 0.3);
   }
 `;
 
 // 構造化コンテンツコンポーネント
-const StructuredContent = ({
+const StructuredContent = ({ content }: { content: DownloadContent }) => (
+  <>
+    <ModalDescription>
+      {content.description.map((text) => (
+        <p key={text}>{text}</p>
+      ))}
+    </ModalDescription>
+
+    {content.notes?.length > 0 && (
+      <ModalNotes>
+        {content.notes.map((note) => (
+          <p key={note}>{note}</p>
+        ))}
+      </ModalNotes>
+    )}
+
+    <ModalButtons>
+      {content.links.map((link) => (
+        <ModalButton
+          key={link.url}
+          href={link.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          $primary={link.primary}
+        >
+          {link.text}
+        </ModalButton>
+      ))}
+    </ModalButtons>
+  </>
+);
+
+export default function DownloadModal({
+  isOpen,
+  onClose,
+  title,
+  image,
+  defaultImage = "/001_top/Moviedummy.png",
   content,
-}: {
-  content: StructuredDownloadModalProps["content"];
-}) => {
-  return (
-    <>
-      <ModalDescription>
-        {content.description.map((text) => (
-          <p key={text}>{text}</p>
-        ))}
-      </ModalDescription>
-
-      {content.notes && content.notes.length > 0 && (
-        <ModalNotes>
-          {content.notes.map((note) => (
-            <p key={note}>{note}</p>
-          ))}
-        </ModalNotes>
-      )}
-
-      <ModalButtons>
-        {content.links.map((link) => (
-          <ModalButton
-            key={link.url}
-            href={link.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            $primary={link.primary}
-          >
-            {link.text}
-          </ModalButton>
-        ))}
-      </ModalButtons>
-    </>
-  );
-};
-
-export default function DownloadModal(props: DownloadModalProps) {
-  const { isOpen, onClose, title, image } = props;
-  const defaultImage = props.defaultImage || "/001_top/Moviedummy.png";
-  const displayImage = image || defaultImage;
-
-  const renderContent = () => {
-    if (props.variant === "structured") {
-      return <StructuredContent content={props.content} />;
-    }
-    return props.children;
-  };
-
+  children,
+}: DownloadModalProps) {
   return (
     <Modal
       isOpen={isOpen}
       onClose={onClose}
       title={title}
-      imageUrl={displayImage}
+      imageUrl={image || defaultImage}
       variant="download"
       maxWidth="900px"
       ariaLabel={`Download modal for ${title}`}
     >
-      {renderContent()}
+      {content ? <StructuredContent content={content} /> : children}
     </Modal>
   );
 }

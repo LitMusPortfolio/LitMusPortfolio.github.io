@@ -9,10 +9,17 @@ const meta = {
   },
   tags: ["autodocs"],
   argTypes: {
-    variant: {
-      control: { type: "select" },
-      options: ["simple", "structured"],
-      description: "Modal content variant",
+    isOpen: {
+      control: "boolean",
+      description: "Whether the modal is open",
+    },
+    title: {
+      control: "text",
+      description: "Modal title",
+    },
+    image: {
+      control: "text",
+      description: "Image URL for the modal",
     },
   },
 } satisfies Meta<typeof DownloadModal>;
@@ -26,7 +33,6 @@ export const Simple: Story = {
     isOpen: true,
     onClose: () => {},
     title: "Download Modal",
-    variant: "simple",
     children: (
       <div style={{ padding: "2rem", color: "white" }}>
         <p>This is a simple download modal with custom content.</p>
@@ -46,7 +52,6 @@ export const Structured: Story = {
     isOpen: true,
     onClose: () => {},
     title: "VOICEVOX 離途",
-    variant: "structured",
     image: "/101_Lit/LitA_差し替え前提.webp",
     content: {
       description: [
@@ -79,7 +84,6 @@ export const WithCustomImage: Story = {
     onClose: () => {},
     title: "Custom Image Modal",
     image: "/001_top/nameBG.webp",
-    variant: "simple",
     children: (
       <div style={{ padding: "2rem", color: "white" }}>
         <p>This modal has a custom image.</p>
@@ -93,7 +97,6 @@ export const WithDefaultImage: Story = {
     isOpen: true,
     onClose: () => {},
     title: "Default Image Modal",
-    variant: "simple",
     children: (
       <div style={{ padding: "2rem", color: "white" }}>
         <p>This modal uses the default placeholder image.</p>

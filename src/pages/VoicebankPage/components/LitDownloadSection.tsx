@@ -237,28 +237,29 @@ export default function LitDownloadSection() {
         onClose={handleModalClose}
         image={selectedItem?.image}
         title={selectedItem?.name || ""}
-        variant="structured"
-        content={{
-          description: selectedItem?.modalContent?.detailedDescription || [
-            selectedItem?.description || "",
-          ],
-          notes: selectedItem?.modalContent?.notes,
-          links: selectedItem
-            ? Object.entries(selectedItem.links)
-                .filter(([_, link]) => link)
-                .map(([key, link]) => {
-                  if (!link) return null;
-                  return {
-                    text: link.text,
-                    url: link.url,
-                    primary: key === "primary",
-                  };
-                })
-                .filter(
-                  (item): item is NonNullable<typeof item> => item !== null,
-                )
-            : [],
-        }}
+        content={
+          selectedItem
+            ? {
+                description: selectedItem.modalContent?.detailedDescription || [
+                  selectedItem.description || "",
+                ],
+                notes: selectedItem.modalContent?.notes,
+                links: Object.entries(selectedItem.links)
+                  .filter(([_, link]) => link)
+                  .map(([key, link]) => {
+                    if (!link) return null;
+                    return {
+                      text: link.text,
+                      url: link.url,
+                      primary: key === "primary",
+                    };
+                  })
+                  .filter(
+                    (item): item is NonNullable<typeof item> => item !== null,
+                  ),
+              }
+            : undefined
+        }
       />
     </>
   );
