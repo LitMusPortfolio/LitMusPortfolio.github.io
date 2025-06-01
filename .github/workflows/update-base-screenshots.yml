@@ -1,0 +1,40 @@
+name: Update Base Screenshots
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  update-screenshots:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+      
+      - name: Install dependencies
+        run: npm ci
+      
+      - name: Build Storybook
+        run: npm run build-storybook
+      
+      - name: Serve Storybook and capture screenshots
+        run: |
+          npx http-server storybook-static -p 6006 &
+          sleep 5
+          npx storycap http://localhost:6006 -o .reg/actual -V 320x568 -V 375x667 -V 414x896 -V 768x1024 -V 1024x768 -V 1280x720 -V 1440x900 -V 1920x1080
+      
+      - name: Upload base screenshots
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots-base
+          path: .reg/actual
+          retention-days: 90
