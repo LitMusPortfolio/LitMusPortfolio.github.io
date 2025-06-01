@@ -5,9 +5,9 @@ import { fileURLToPath } from "node:url";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// コンポーネントファイルのうち、対応するstoriesファイルが無いものを検出
+// TSXファイルのうち、対応するstoriesファイルが無いものを検出
 function checkMissingStories(): { missing: string[]; total: number } {
-  const componentsDir = path.join(__dirname, "../src/components");
+  const srcDir = path.join(__dirname, "../src");
   const missingStories: string[] = [];
   let totalComponents = 0;
 
@@ -23,7 +23,9 @@ function checkMissingStories(): { missing: string[]; total: number } {
         entry.name.endsWith(".tsx") &&
         !entry.name.includes(".stories.") &&
         !entry.name.includes(".test.") &&
-        !entry.name.includes(".d.")
+        !entry.name.includes(".d.") &&
+        entry.name !== "main.tsx" && // Exclude main entry point
+        entry.name !== "App.tsx" // Exclude App root
       ) {
         totalComponents++;
         const storyPath = fullPath.replace(".tsx", ".stories.tsx");
@@ -39,7 +41,7 @@ function checkMissingStories(): { missing: string[]; total: number } {
     }
   }
 
-  processDirectory(componentsDir);
+  processDirectory(srcDir);
   return { missing: missingStories, total: totalComponents };
 }
 

@@ -19,9 +19,33 @@ const generateStoryTemplate = (info: ComponentInfo): string => {
     ? `import ${info.name} from "./${path.basename(info.path, ".tsx")}";`
     : `import { ${info.name} } from "./${path.basename(info.path, ".tsx")}";`;
 
+  // Determine the story category based on file path
+  const relativePath = path.relative(path.join(__dirname, "../src"), info.path);
+  let storyCategory = "Components";
+
+  if (relativePath.includes("pages/")) {
+    const pageName = relativePath.split("/")[1].replace("Page", "");
+    if (relativePath.includes("/components/")) {
+      storyCategory = `Pages/${pageName}/Components`;
+    } else if (relativePath.endsWith("/index.tsx")) {
+      storyCategory = `Pages/${pageName}`;
+    } else {
+      storyCategory = `Pages/${pageName}`;
+    }
+  } else if (relativePath.includes("layouts/")) {
+    storyCategory = "Layouts";
+  } else if (!relativePath.includes("components/")) {
+    storyCategory = "Other";
+  }
+
+  // Determine layout based on component type
+  const isPage =
+    relativePath.includes("pages/") && relativePath.endsWith("/index.tsx");
+  const isLayout = relativePath.includes("layouts/");
+
   const layout = info.isModal
     ? "centered"
-    : info.hasChildren
+    : isPage || isLayout || info.hasChildren
       ? "fullscreen"
       : "centered";
 
@@ -37,7 +61,7 @@ const generateStoryTemplate = (info: ComponentInfo): string => {
 ${importStatement}
 
 const meta = {
-  title: "Components/${info.name}",
+  title: "${storyCategory}/${info.name}",
   component: ${info.name},
   parameters: {
     layout: "${layout}",
@@ -111,7 +135,7 @@ function analyzeComponent(filePath: string): ComponentInfo | null {
 
 // メイン処理
 async function generateStories() {
-  const componentsDir = path.join(__dirname, "../src/components");
+  const srcDir = path.join(__dirname, "../src");
   let generatedCount = 0;
   let skippedCount = 0;
 
@@ -128,7 +152,10 @@ async function generateStories() {
       } else if (
         entry.name.endsWith(".tsx") &&
         !entry.name.includes(".stories.") &&
-        !entry.name.includes(".test.")
+        !entry.name.includes(".test.") &&
+        !entry.name.includes(".d.") &&
+        entry.name !== "main.tsx" && // Exclude main entry point
+        entry.name !== "App.tsx" // Exclude App root
       ) {
         const storyPath = fullPath.replace(".tsx", ".stories.tsx");
 
@@ -149,7 +176,7 @@ async function generateStories() {
     }
   }
 
-  processDirectory(componentsDir);
+  processDirectory(srcDir);
 
   console.log(
     `\n✨ Done! Generated ${generatedCount} stories, skipped ${skippedCount} existing ones.`,
