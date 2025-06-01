@@ -100,7 +100,7 @@ const VoicevoxLogo = styled.div`
   }
   
   img {
-    width: 120px;
+    width: 200px;
     opacity: 0.9;
   }
   
@@ -186,8 +186,7 @@ export default function Home() {
       </HomeContent>
 
       <VoicevoxLogo>
-        <img src="/001_top/voicevox_banner.svg" alt="VOICEVOX" />
-        <p>無料エデュケーションライセンス</p>
+        <img src="/001_top/離途バナー_差し替え予定.webp" alt="VOICEVOX" />
       </VoicevoxLogo>
 
       <SocialLinks>

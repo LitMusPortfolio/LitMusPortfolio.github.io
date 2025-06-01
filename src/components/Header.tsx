@@ -10,15 +10,20 @@ const HeaderContainer = styled.header`
   z-index: 9999;
   background: rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(10px);
-  padding: 1rem 2rem;
+  padding: 1rem 0;
 `;
 
 const Nav = styled.nav`
-  max-width: 1200px;
+  max-width: 95%;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0 2rem;
+  
+  @media (max-width: 768px) {
+    padding: 0 1rem;
+  }
 `;
 
 const Logo = styled(Link)`
@@ -70,33 +75,8 @@ const MenuItem = styled.li`
   }
 `;
 
-const HamburgerButton = styled.button`
-  display: none;
-  background: none;
-  border: none;
-  cursor: pointer;
-  z-index: 1001;
-  
-  @media (max-width: 768px) {
-    display: block;
-  }
-  
-  span {
-    display: block;
-    width: 25px;
-    height: 3px;
-    background: #fff;
-    margin: 5px 0;
-    transition: all 0.3s ease;
-  }
-`;
-
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
 
   const handleNavClick = () => {
     setIsMenuOpen(false);
@@ -108,11 +88,6 @@ export default function Header() {
         <Logo to="/">
           <img src="/001_top/LitMus9_logo.webp" alt="LitMus9" />
         </Logo>
-        <HamburgerButton onClick={toggleMenu}>
-          <span />
-          <span />
-          <span />
-        </HamburgerButton>
         <MenuList $isOpen={isMenuOpen}>
           <MenuItem>
             <Link to="/about" onClick={handleNavClick}>
