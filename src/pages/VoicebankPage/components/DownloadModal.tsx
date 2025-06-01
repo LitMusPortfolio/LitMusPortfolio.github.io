@@ -12,7 +12,6 @@ interface DownloadLink {
 
 interface DownloadContent {
   description: string[];
-  notes?: string[];
   links: DownloadLink[];
 }
 
@@ -47,34 +46,19 @@ const shimmer = keyframes`
   }
 `;
 
-// スタイルコンポーネント
-const ModalDescription = styled.div`
-  margin-bottom: 2rem;
-  line-height: 1.8;
-  color: ${theme.colors.text.secondary};
-  animation: ${slideInUp} 0.6s ease-out;
-  
-  p {
-    margin-bottom: 1rem;
-    position: relative;
-    padding-left: 1.5rem;
-    
-    &::before {
-      content: "▸";
-      position: absolute;
-      left: 0;
-      color: ${theme.colors.primary.main};
-      font-weight: bold;
-    }
-  }
+const ContentWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 `;
 
 const ModalButtons = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
-  margin-top: 2.5rem;
+  margin-top: auto;
+  align-self: flex-end;
   animation: ${slideInUp} 0.8s ease-out;
+  margin-bottom: 3rem;
 `;
 
 const ModalButton = styled.a<{ $primary?: boolean }>`
@@ -93,7 +77,6 @@ const ModalButton = styled.a<{ $primary?: boolean }>`
     $primary ? "transparent" : "rgba(255, 255, 255, 0.15)"};
   border-radius: 50px;
   font-weight: 600;
-  font-size: 1.1rem;
   text-align: center;
   text-decoration: none;
   transition: all 0.3s ease;
@@ -163,7 +146,7 @@ const IconWrapper = styled.span`
   }
 `;
 
-const DownloadIcon = () => (
+const DownloadIcon = (): JSX.Element => (
   <svg
     viewBox="0 0 24 24"
     fill="none"
@@ -178,28 +161,45 @@ const DownloadIcon = () => (
   </svg>
 );
 
+// スタイルコンポーネント
+const DescriptionSection = styled.div``;
+
+const DescriptionParagraph = styled.p`
+  color: ${theme.colors.text.secondary};
+  margin-bottom: 1.2rem;
+`;
+
 // 構造化コンテンツコンポーネント
-const StructuredContent = ({ content }: { content: DownloadContent }) => {
+const StructuredContent = ({
+  content,
+}: {
+  content: DownloadContent;
+}): JSX.Element => {
   if (!content) {
     return <div>コンテンツが見つかりません</div>;
   }
 
   return (
-    <>
-      <ModalDescription>
-        {content.description?.map((text) => (
-          <p key={`desc-${text}`}>{text}</p>
-        )) || <p>説明がありません</p>}
-      </ModalDescription>
+    <ContentWrapper>
+      {content.description && content.description.length > 0 && (
+        <DescriptionSection>
+          {content.description.map((paragraph) => (
+            <DescriptionParagraph key={`paragraph-${paragraph}`}>
+              {paragraph}
+            </DescriptionParagraph>
+          ))}
+        </DescriptionSection>
+      )}
+
       <ModalButtons>
         {content.links && content.links.length > 0 ? (
-          content.links.map((link) => (
+          content.links.map((link, index) => (
             <ModalButton
-              key={`link-${link.text}`}
+              key={`link-${link.url}-${index}`}
               href={link.url}
               target="_blank"
               rel="noopener noreferrer"
-              $primary={link.primary}
+              $primary={link.primary || index === 0}
             >
               <IconWrapper>
                 <DownloadIcon />
@@ -211,7 +211,7 @@ const StructuredContent = ({ content }: { content: DownloadContent }) => {
           <div>ダウンロードリンクがありません</div>
         )}
       </ModalButtons>
-    </>
+    </ContentWrapper>
   );
 };
 
@@ -223,7 +223,7 @@ export default function DownloadModal({
   defaultImage = "/001_top/Moviedummy.png",
   content,
   children,
-}: DownloadModalProps) {
+}: DownloadModalProps): JSX.Element {
   return (
     <Modal
       isOpen={isOpen}

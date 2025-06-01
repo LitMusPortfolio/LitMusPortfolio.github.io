@@ -97,21 +97,6 @@ const CategoryTag = styled.span<{ $category: string }>`
   letter-spacing: 0.05em;
 `;
 
-const StatusBadge = styled.span<{ $status: "free" | "paid" }>`
-  display: inline-block;
-  padding: 0.3rem 0.8rem;
-  background: ${({ $status }) => 
-    $status === "free" 
-      ? "linear-gradient(135deg, #4CAF5040, #66BB6A40)" 
-      : "linear-gradient(135deg, #FF980040, #FFA72640)"
-  };
-  border-radius: 15px;
-  font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.9);
-  font-weight: 600;
-  letter-spacing: 0.05em;
-`;
-
 // コンポーネントのProps
 interface DownloadItemCardProps {
   item: DownloadItem;
@@ -135,11 +120,6 @@ export default function DownloadItemCard({
       <CardInfo>
         <TagContainer>
           <CategoryTag $category={item.category}>{item.category}</CategoryTag>
-          {item.status && (
-            <StatusBadge $status={item.status}>
-              {item.status === "free" ? "FREE" : item.price || "PAID"}
-            </StatusBadge>
-          )}
         </TagContainer>
         <CardTitle>{item.name}</CardTitle>
         <CardDescription>{item.description}</CardDescription>

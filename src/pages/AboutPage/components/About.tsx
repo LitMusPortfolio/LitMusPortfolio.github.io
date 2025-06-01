@@ -10,6 +10,7 @@ const AboutSection = styled(Section)`
   background-attachment: fixed;
   position: relative;
   min-height: 100vh;
+  padding-top: 6rem;
   
   &::before {
     content: '';

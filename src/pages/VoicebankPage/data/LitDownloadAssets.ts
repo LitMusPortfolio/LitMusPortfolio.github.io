@@ -8,13 +8,12 @@ export const DOWNLOAD_ITEMS: DownloadItem[] = [
     category: "トークソフト",
     name: "VOICEVOX 離途",
     description: "無料で使える中品質なテキスト読み上げソフトウェア",
-    status: "free",
     image: "/101_Lit/Litlogo.webp",
     modalContent: {
       description: [
+        ["商用・非商用問わず無料で使用可能。すぐに使えるソフトウェアです。"],
+        ["優しさと吐息が香る、穏やかな男声で読み上げます。"],
         [
-          "商用・非商用問わず無料で使用可能。すぐに使えるソフトウェアです。",
-          "優しさと吐息が香る、穏やかな男声で読み上げます。",
           "使用する際には「VOICEVOX 離途」のクレジット表記を必ず行ってください。",
         ],
       ],
@@ -29,7 +28,6 @@ export const DOWNLOAD_ITEMS: DownloadItem[] = [
     category: "UTAUソングライブラリ",
     name: "離途 -FLOW-",
     description: "豊かな声色で感情的な歌唱が可能な大容量のライブラリ",
-    status: "free",
     image: "/101_Lit/LitA_差し替え前提.webp",
     links: {
       primary: { text: "無料ダウンロード", url: "#" },
@@ -62,8 +60,6 @@ export const DOWNLOAD_ITEMS: DownloadItem[] = [
     category: "UTAUソングライブラリ",
     name: "離途 -HABIT-",
     description: "癖と勢いのある発音をコンセプトとした有料アペンドライブラリ",
-    status: "paid",
-    price: "¥3,000",
     image: "/101_Lit/LitB_差し替え前提.webp",
     modalContent: {
       description: [
@@ -92,7 +88,6 @@ export const DOWNLOAD_ITEMS: DownloadItem[] = [
     category: "UTAUソングライブラリ",
     name: "離途 -ORIGINAL V2-",
     description: "LitMusが収録した無加工の音声のみを収録したレガシーライブラリ",
-    status: "free",
     image: "/101_Lit/LitC_差し替え前提.webp",
     modalContent: {
       description: [
@@ -100,10 +95,7 @@ export const DOWNLOAD_ITEMS: DownloadItem[] = [
           "LitMusが収録した無加工の音声のみを収録したレガシーライブラリ。",
           "現在は「離途FLOW」の使用を推奨しています。",
         ],
-        [
-          "連続音+VC音素切り出し済み。",
-          "A#2、F3、A#3、F4の4音階を収録。",
-        ],
+        ["連続音+VC音素切り出し済み。", "A#2、F3、A#3、F4の4音階を収録。"],
       ],
       links: [
         { text: "無料ダウンロード", url: "#" }, // TODO: 変える
@@ -139,7 +131,6 @@ export const DOWNLOAD_ITEMS: DownloadItem[] = [
     category: "画像素材",
     name: "離途立ち絵イラスト",
     description: "これまでの離途の立ち絵イラストを一括でダウンロード",
-    status: "free",
     image: "/101_Lit/LitE_差し替え前提.webp",
     modalContent: {
       description: [
@@ -163,7 +154,6 @@ export const DOWNLOAD_ITEMS: DownloadItem[] = [
     category: "画像素材",
     name: "離途ちびキャライラストPSD",
     description: "PSDTool対応の差分ありのちびキャライラスト",
-    status: "free",
     image: "/101_Lit/LitF_差し替え前提.webp",
     modalContent: {
       description: [
@@ -172,9 +162,7 @@ export const DOWNLOAD_ITEMS: DownloadItem[] = [
           "PSDTool対応の差分ありのちびキャライラストです。",
           "レイヤー分けされた差分で、様々な表情やポーズをカスタマイズ。",
         ],
-        [
-          "使用する際には利用規約に則ってご使用ください。",
-        ],
+        ["使用する際には利用規約に則ってご使用ください。"],
       ],
     },
     links: [{ text: "無料ダウンロード", url: "#" }], // TODO: 変える
@@ -185,7 +173,6 @@ export const DOWNLOAD_ITEMS: DownloadItem[] = [
     category: "音声素材",
     name: "離途エクストラボイス素材",
     description: "CVを担当するLitMus本人が、離途をイメージして収録したボイス集",
-    status: "free",
     image: "/101_Lit/LitG_差し替え前提.webp",
     modalContent: {
       description: [
@@ -194,9 +181,7 @@ export const DOWNLOAD_ITEMS: DownloadItem[] = [
           "挨拶や掛け声、感情表現のほか、",
           "さつまいもの品種を42種類読み上げた音声などを収録。",
         ],
-        [
-          "使用する際には利用規約に則ってご使用ください。",
-        ],
+        ["使用する際には利用規約に則ってご使用ください。"],
       ],
       links: [
         { text: "無料ダウンロード", url: "#" }, // TODO: 変える
@@ -208,8 +193,7 @@ export const DOWNLOAD_ITEMS: DownloadItem[] = [
     type: "other",
     category: "3Dモデル",
     name: "ちびりとすりーでぃー",
-    description: "ローポリゴンのかわいらしい３Dモデル",
-    status: "free",
+    description: "ローポリゴンのかわいらしい3Dモデル",
     image: "/101_Lit/LitH_差し替え前提.webp",
     modalContent: {
       description: [
@@ -221,9 +205,7 @@ export const DOWNLOAD_ITEMS: DownloadItem[] = [
           "fbx形式と、MMDでの使用を想定したpmx形式を収録。",
           "モデリング：林津子（@Ri2g_）",
         ],
-        [
-          "使用する際には利用規約に則ってご使用ください。",
-        ],
+        ["使用する際には利用規約に則ってご使用ください。"],
       ],
       links: [
         { text: "無料ダウンロード", url: "#" }, // TODO: 変える
