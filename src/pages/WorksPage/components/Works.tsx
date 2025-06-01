@@ -24,13 +24,10 @@ const WorksSection = styled(Section)`
   }
 `;
 
-const ContentWrapper = styled(Container).attrs({
-  className: "works-content-wrapper",
-})`
+const ContentWrapper = styled(Container)`
   position: relative;
   z-index: 1;
 `;
-ContentWrapper.displayName = "WorksContentWrapper";
 
 const StickyHeader = styled.div.attrs({ className: "works-sticky-header" })`
   position: sticky;

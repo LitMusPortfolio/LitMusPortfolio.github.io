@@ -1,19 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { BrowserRouter } from "react-router-dom";
-import { ThemeProvider } from "styled-components";
+import { HashRouter } from "react-router-dom";
 import App from "../App";
-import { GlobalStyles } from "../styles/GlobalStyles";
-import { theme } from "../styles/theme";
 
 // 完全なアプリケーション環境を再現
 const FullApp = () => {
   return (
-    <BrowserRouter basename="/LitMusPortfolio.github.io">
-      <ThemeProvider theme={theme}>
-        <GlobalStyles />
-        <App />
-      </ThemeProvider>
-    </BrowserRouter>
+    <HashRouter>
+      <App />
+    </HashRouter>
   );
 };
 
