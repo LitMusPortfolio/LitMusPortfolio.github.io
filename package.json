@@ -9,7 +9,9 @@
     "lint": "biome check",
     "preview": "vite preview",
     "prepare": "lefthook install",
-    "launch-playwright-sse": "npx -y @playwright/mcp@latest --port 8931 --headless"
+    "launch-playwright-sse": "npx -y @playwright/mcp@latest --port 8931 --headless",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@types/styled-components": "^5.1.34",
