@@ -2,8 +2,8 @@ import { useState } from "react";
 import styled from "styled-components";
 import { Tab, TabContainer } from "@/components/CardGrid";
 import { Container, Section } from "@/components/Layout";
-import { PageTitle as CommonPageTitle } from "@/components/PageTitle";
-import { cardHoverEffect, glassmorphism } from "@/styles/utils";
+import SectionTitle from "@/components/SectionTitle";
+import { glassmorphism } from "@/styles/utils";
 import { categoryColors } from "@/types";
 import { worksData } from "./WorksAssets";
 
@@ -17,7 +17,7 @@ const WorksSection = styled(Section)`
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(20, 0, 50, 0.8) 0%, rgba(40, 20, 80, 0.9) 100%);
+    background: url('/001_top/LitMusBG.webp');
     z-index: 0;
   }
 `;
@@ -25,19 +25,11 @@ const WorksSection = styled(Section)`
 const ContentWrapper = styled(Container)`
   position: relative;
   z-index: 1;
-  padding-top: 120px;
   
   @media (max-width: ${(props) => props.theme.breakpoints?.mobile || "768px"}) {
     padding-top: 100px;
   }
 `;
-
-const PageTitle = styled(CommonPageTitle)`
-  font-size: clamp(3rem, 8vw, 6rem);
-  margin-bottom: 3rem;
-`;
-
-// TabはCardGridからimportしたものを使用
 
 const WorksGrid = styled.div`
   display: grid;
@@ -54,13 +46,8 @@ const WorkCard = styled.article`
   ${glassmorphism}
   border-radius: 12px;
   overflow: hidden;
-  ${cardHoverEffect}
-  
-  &:hover {
-    .play-button {
-      transform: translate(-50%, -50%) scale(1.1);
-    }
-  }
+  cursor: default;
+  pointer-events: none;
 `;
 
 const VideoWrapper = styled.div`
@@ -78,31 +65,6 @@ const VideoThumbnail = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
-`;
-
-const PlayButton = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 60px;
-  height: 60px;
-  background: rgba(255, 0, 0, 0.8);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-  
-  &::before {
-    content: '';
-    width: 0;
-    height: 0;
-    border-left: 20px solid white;
-    border-top: 12px solid transparent;
-    border-bottom: 12px solid transparent;
-    margin-left: 5px;
-  }
 `;
 
 const WorkInfo = styled.div`
@@ -154,75 +116,65 @@ export default function Works() {
       : worksData.filter((work) => work.type === activeTab);
 
   return (
-    <WorksSection>
-      <ContentWrapper>
-        <PageTitle gradientColors={{ color1: "#8a61ff", color2: "#ff61a6" }}>
-          WORKS
-        </PageTitle>
+    <>
+      <WorksSection>
+        <ContentWrapper>
+          <SectionTitle>WORKS</SectionTitle>
 
-        <TabContainer>
-          <Tab
-            $active={activeTab === "all"}
-            onClick={() => setActiveTab("all")}
-          >
-            ALL
-          </Tab>
-          <Tab
-            $active={activeTab === "music"}
-            onClick={() => setActiveTab("music")}
-          >
-            MUSIC
-          </Tab>
-          <Tab
-            $active={activeTab === "illustration"}
-            onClick={() => setActiveTab("illustration")}
-          >
-            ILLUST
-          </Tab>
-          <Tab
-            $active={activeTab === "movie"}
-            onClick={() => setActiveTab("movie")}
-          >
-            MOVIE
-          </Tab>
-          <Tab
-            $active={activeTab === "other"}
-            onClick={() => setActiveTab("other")}
-          >
-            OTHER
-          </Tab>
-        </TabContainer>
+          <TabContainer>
+            <Tab
+              $active={activeTab === "all"}
+              onClick={() => setActiveTab("all")}
+            >
+              ALL
+            </Tab>
+            <Tab
+              $active={activeTab === "music"}
+              onClick={() => setActiveTab("music")}
+            >
+              MUSIC
+            </Tab>
+            <Tab
+              $active={activeTab === "illustration"}
+              onClick={() => setActiveTab("illustration")}
+            >
+              ILLUST
+            </Tab>
+            <Tab
+              $active={activeTab === "movie"}
+              onClick={() => setActiveTab("movie")}
+            >
+              MOVIE
+            </Tab>
+            <Tab
+              $active={activeTab === "other"}
+              onClick={() => setActiveTab("other")}
+            >
+              OTHER
+            </Tab>
+          </TabContainer>
 
-        <WorksGrid>
-          {filteredWorks.map((work) => (
-            <WorkCard key={work.id}>
-              <VideoWrapper>
-                <VideoThumbnail src={work.image} alt={work.title} />
-                {work.videoId && (
-                  <a
-                    href={`https://www.youtube.com/watch?v=${work.videoId}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    style={{ position: "absolute", inset: 0 }}
-                  >
-                    <PlayButton className="play-button" />
-                  </a>
-                )}
-              </VideoWrapper>
-              <WorkInfo>
-                <WorkCategory $category={work.category}>
-                  {work.category}
-                </WorkCategory>
-                <WorkTitle>{work.title}</WorkTitle>
-                <WorkStats>
-                  <span>{work.views}</span>
-                  <span>{work.date}</span>
-                </WorkStats>
-              </WorkInfo>
-            </WorkCard>
-          ))}
-        </WorksGrid>
-      </ContentWrapper>
-    </WorksSection>
+          <WorksGrid>
+            {filteredWorks.map((work) => (
+              <WorkCard key={work.id}>
+                <VideoWrapper>
+                  <VideoThumbnail src={work.image} alt={work.title} />
+                </VideoWrapper>
+                <WorkInfo>
+                  <WorkCategory $category={work.category}>
+                    {work.category}
+                  </WorkCategory>
+                  <WorkTitle>{work.title}</WorkTitle>
+                  <WorkStats>
+                    <span>{work.views}</span>
+                    <span>{work.date}</span>
+                  </WorkStats>
+                </WorkInfo>
+              </WorkCard>
+            ))}
+          </WorksGrid>
+        </ContentWrapper>
+      </WorksSection>
+    </>
   );
 }
