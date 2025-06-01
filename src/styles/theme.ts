@@ -57,7 +57,7 @@ export const theme = {
   },
   spacing: {
     sectionPadding: "2rem 2rem",
-    titleMargin: "4rem",
+    titleMargin: "2rem",
     containerMaxWidth: "90%",
   },
   typography: {

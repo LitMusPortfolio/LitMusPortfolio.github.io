@@ -7,7 +7,7 @@ export const TabContainer = styled.div`
   justify-content: flex-start;
   align-items: center;
   gap: 2rem;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
   position: relative;
   
   /* 右端まで伸びる罫線 */
@@ -41,5 +41,14 @@ export const Tab = styled.button<{ $active: boolean }>`
   &:hover {
     background: rgba(139, 92, 246, 0.1);
     border-color: ${theme.colors.primary.main};
+  }
+  
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.4);
+  }
+  
+  &:focus:not(:focus-visible) {
+    box-shadow: none;
   }
 `;

@@ -12,17 +12,6 @@ const HomeSection = styled.section`
   overflow: hidden;
 `;
 
-const VideoBackground = styled.video`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: -1;
-  opacity: 0.5;
-`;
-
 const HomeContent = styled.div`
   position: absolute;
   left: 3rem;
@@ -90,7 +79,7 @@ const SocialLinks = styled.div`
   }
 `;
 
-const VoicevoxLogo = styled.div`
+const VoicevoxBanner = styled.div`
   position: absolute;
   right: 3rem;
   top: 6rem;
@@ -101,7 +90,7 @@ const VoicevoxLogo = styled.div`
   }
   
   img {
-    width: 200px;
+    width: 100%;
     opacity: 0.9;
   }
   
@@ -148,6 +137,16 @@ const NewsText = styled.span`
   }
 `;
 
+const VideoBackground = styled.video`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+`;
+
 export default function Home() {
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -160,8 +159,8 @@ export default function Home() {
   return (
     <HomeSection>
       <VideoBackground ref={videoRef} autoPlay loop muted playsInline>
-        <source src="/001_top/LitMusHPTopMovie.webm" type="video/webm" />
         <source src="/001_top/LitMusHPTopMovie.mp4" type="video/mp4" />
+        <source src="/001_top/LitMusHPTopMovie.webm" type="video/webm" />
       </VideoBackground>
 
       <HomeContent>
@@ -186,9 +185,9 @@ export default function Home() {
         </TagsWrapper>
       </HomeContent>
 
-      <VoicevoxLogo>
+      <VoicevoxBanner>
         <img src="/001_top/離途バナー_差し替え予定.webp" alt="VOICEVOX" />
-      </VoicevoxLogo>
+      </VoicevoxBanner>
 
       <SocialLinks>
         <a

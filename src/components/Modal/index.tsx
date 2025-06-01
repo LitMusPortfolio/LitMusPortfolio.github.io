@@ -13,6 +13,7 @@ interface ModalProps {
   title?: string;
   imageUrl?: string;
   variant?: "default" | "download" | "glass";
+  ariaLabel?: string;
 }
 
 // モーダルオーバーレイ（背景）
@@ -184,18 +185,63 @@ export default function Modal({
   title,
   imageUrl,
   variant = "default",
+  ariaLabel,
 }: ModalProps) {
   const modalRef = useRef<HTMLDivElement>(null);
+  const previousActiveElement = useRef<HTMLElement | null>(null);
 
+  // フォーカス管理とESCキー処理
   useEffect(() => {
-    const handleEsc = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && isOpen) {
+    if (!isOpen) return;
+
+    // 現在のフォーカス要素を保存
+    previousActiveElement.current = document.activeElement as HTMLElement;
+
+    // モーダル内の最初のフォーカス可能要素にフォーカス
+    setTimeout(() => {
+      const focusableElements = modalRef.current?.querySelectorAll(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+      );
+      if (focusableElements && focusableElements.length > 0) {
+        (focusableElements[0] as HTMLElement).focus();
+      }
+    }, 100);
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
         onClose();
+      }
+
+      // Tab キーでのフォーカストラップ
+      if (e.key === "Tab" && modalRef.current) {
+        const focusableElements = modalRef.current.querySelectorAll(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])',
+        );
+
+        if (focusableElements.length > 0) {
+          const firstElement = focusableElements[0] as HTMLElement;
+          const lastElement = focusableElements[
+            focusableElements.length - 1
+          ] as HTMLElement;
+
+          if (e.shiftKey && document.activeElement === firstElement) {
+            e.preventDefault();
+            lastElement.focus();
+          } else if (!e.shiftKey && document.activeElement === lastElement) {
+            e.preventDefault();
+            firstElement.focus();
+          }
+        }
       }
     };
 
-    window.addEventListener("keydown", handleEsc);
-    return () => window.removeEventListener("keydown", handleEsc);
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      // 元のフォーカス要素に戻す
+      previousActiveElement.current?.focus();
+    };
   }, [isOpen, onClose]);
 
   const handleOverlayClick = (e: React.MouseEvent) => {
@@ -217,14 +263,23 @@ export default function Modal({
   }, [isOpen]);
 
   return (
-    <ModalOverlay $isOpen={isOpen} onClick={handleOverlayClick} ref={modalRef}>
+    <ModalOverlay $isOpen={isOpen} onClick={handleOverlayClick}>
       <ModalContainer
+        ref={modalRef}
         onClick={(e) => e.stopPropagation()}
         $maxWidth={maxWidth}
         $hasImage={hasImage || !!imageUrl}
         $variant={variant}
+        role="dialog"
+        aria-modal="true"
+        aria-label={ariaLabel || title || "Modal dialog"}
       >
-        <CloseButton onClick={onClose} $variant={variant}>
+        <CloseButton
+          onClick={onClose}
+          $variant={variant}
+          aria-label="Close modal"
+          type="button"
+        >
           ×
         </CloseButton>
         {(hasImage || imageUrl) && (

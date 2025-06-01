@@ -136,6 +136,7 @@ export default function Footer() {
                   href="https://twitter.com/litmus9"
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label="Visit LitMus9 on X (Twitter)"
                 >
                   X (Twitter)
                 </a>
@@ -145,6 +146,7 @@ export default function Footer() {
                   href="https://www.youtube.com/@litmus9"
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label="Visit LitMus9 on YouTube"
                 >
                   YouTube
                 </a>
@@ -154,6 +156,7 @@ export default function Footer() {
                   href="https://www.nicovideo.jp/user/12345678"
                   target="_blank"
                   rel="noopener noreferrer"
+                  aria-label="Visit LitMus9 on niconico"
                 >
                   niconico
                 </a>
@@ -182,8 +185,8 @@ export default function Footer() {
         </Copyright>
       </FooterContainer>
 
-      <BackToTop onClick={scrollToTop}>
-        <img src="/001_top/FotterPageTop.svg" alt="Back to top" />
+      <BackToTop onClick={scrollToTop} aria-label="Back to top">
+        <img src="/001_top/FotterPageTop.svg" alt="" aria-hidden="true" />
       </BackToTop>
     </>
   );

@@ -141,6 +141,7 @@ export default function DownloadModal(props: DownloadModalProps) {
       imageUrl={displayImage}
       variant="download"
       maxWidth="900px"
+      ariaLabel={`Download modal for ${title}`}
     >
       {renderContent()}
     </Modal>

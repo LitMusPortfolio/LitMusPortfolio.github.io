@@ -199,8 +199,8 @@ const DownloadButton = styled.button`
   }
 `;
 
-// 背景動画コンポーネント
-const BackgroundVideo = styled.video`
+// 背景動画のスタイル
+const VideoBackground = styled.video`
   position: absolute;
   top: 50%;
   left: 50%;
@@ -216,10 +216,10 @@ const BackgroundVideo = styled.video`
 export default function LitMainSection() {
   return (
     <MainSection>
-      <BackgroundVideo autoPlay muted loop playsInline>
-        <source src="/101_Lit/LitTopMovie.webm" type="video/webm" />
+      <VideoBackground autoPlay loop muted playsInline>
         <source src="/101_Lit/LitTopMovie.mp4" type="video/mp4" />
-      </BackgroundVideo>
+        <source src="/101_Lit/LitTopMovie.webm" type="video/webm" />
+      </VideoBackground>
       <ContentContainer>
         <Logo src="/101_Lit/Litlogo.webp" alt="離途" />
         <TextWrapper>

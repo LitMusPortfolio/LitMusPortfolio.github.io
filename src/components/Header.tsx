@@ -87,8 +87,12 @@ export default function Header() {
 
   return (
     <HeaderContainer>
-      <Nav>
-        <Logo to="/" onClick={() => window.scrollTo(0, 0)}>
+      <Nav aria-label="Main navigation">
+        <Logo
+          to="/"
+          onClick={() => window.scrollTo(0, 0)}
+          aria-label="LitMus9 home"
+        >
           <img src="/001_top/LitMus9_logo.webp" alt="LitMus9" />
         </Logo>
         <MenuList $isOpen={isMenuOpen}>

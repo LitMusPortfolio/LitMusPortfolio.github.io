@@ -1,15 +1,19 @@
+import { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
+import LoadingSpinner from "./components/LoadingSpinner";
 import ScrollToTop from "./components/ScrollToTop";
 import MainLayout from "./layouts/MainLayout";
-import AboutPage from "./pages/AboutPage";
-import ContactPage from "./pages/ContactPage";
-import HomePage from "./pages/HomePage";
-import ShopPage from "./pages/ShopPage";
-import VoicebankPage from "./pages/VoicebankPage";
-import WorksPage from "./pages/WorksPage";
 import { GlobalStyles } from "./styles/GlobalStyles";
 import { theme } from "./styles/theme";
+
+// Lazy load page components
+const HomePage = lazy(() => import("./pages/HomePage"));
+const AboutPage = lazy(() => import("./pages/AboutPage"));
+const WorksPage = lazy(() => import("./pages/WorksPage"));
+const VoicebankPage = lazy(() => import("./pages/VoicebankPage"));
+const ShopPage = lazy(() => import("./pages/ShopPage"));
+const ContactPage = lazy(() => import("./pages/ContactPage"));
 
 function App() {
   return (
@@ -18,12 +22,54 @@ function App() {
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<MainLayout />}>
-          <Route index element={<HomePage />} />
-          <Route path="about" element={<AboutPage />} />
-          <Route path="works" element={<WorksPage />} />
-          <Route path="voicebank" element={<VoicebankPage />} />
-          <Route path="shop" element={<ShopPage />} />
-          <Route path="contact" element={<ContactPage />} />
+          <Route
+            index
+            element={
+              <Suspense fallback={<LoadingSpinner />}>
+                <HomePage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="about"
+            element={
+              <Suspense fallback={<LoadingSpinner />}>
+                <AboutPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="works"
+            element={
+              <Suspense fallback={<LoadingSpinner />}>
+                <WorksPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="voicebank"
+            element={
+              <Suspense fallback={<LoadingSpinner />}>
+                <VoicebankPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="shop"
+            element={
+              <Suspense fallback={<LoadingSpinner />}>
+                <ShopPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="contact"
+            element={
+              <Suspense fallback={<LoadingSpinner />}>
+                <ContactPage />
+              </Suspense>
+            }
+          />
         </Route>
       </Routes>
     </ThemeProvider>

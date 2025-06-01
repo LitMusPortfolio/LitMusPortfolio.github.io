@@ -15,4 +15,12 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  args: {
+    src: "/001_top/LitMusHPTopMovie.mp4",
+    poster: "/001_top/Moviedummy.png",
+    autoPlay: true,
+    loop: true,
+    muted: true,
+  },
+};

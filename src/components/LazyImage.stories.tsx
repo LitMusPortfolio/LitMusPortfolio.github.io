@@ -15,4 +15,9 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  args: {
+    src: "/101_Lit/LitA_差し替え前提.webp",
+    alt: "Sample image",
+  },
+};
