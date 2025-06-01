@@ -123,7 +123,6 @@ export default function Contact() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // フォーム送信処理
-    console.log("フォームが送信されました");
   };
 
   const socialLinks: SocialLink[] = [

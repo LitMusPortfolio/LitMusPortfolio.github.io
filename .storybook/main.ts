@@ -1,5 +1,4 @@
 import type { StorybookConfig } from "@storybook/react-vite";
-import { storybookViewportsPlugin } from "../src/vite-plugin-storybook-viewports";
 
 const config: StorybookConfig = {
   stories: ["../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
@@ -14,10 +13,6 @@ const config: StorybookConfig = {
   framework: {
     name: "@storybook/react-vite",
     options: {},
-  },
-  async viteFinal(config) {
-    config.plugins?.push(storybookViewportsPlugin());
-    return config;
   },
 };
 
