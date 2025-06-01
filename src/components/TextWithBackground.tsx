@@ -7,27 +7,39 @@ interface TextWithBackgroundProps {
 
 const Container = styled.span`
   position: relative;
-  display: inline-block;
-  line-height: 0.7;
-  vertical-align: bottom;
-  /* Montserratフォントの余白を削除 */
-  margin-top: -0.15em;
-  margin-bottom: -0.15em;
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+  /* フォントのメトリクスに基づく調整 */
+  &::before {
+    content: '';
+    display: inline-block;
+    width: 0;
+    height: 1em;
+  }
 `;
 
 const Background = styled.div<{ $backgroundImage: string }>`
   position: absolute;
-  inset: 0;
+  /* テキストの実際の高さに合わせる */
+  top: 0.1em;
+  bottom: 0.1em;
+  left: -0.05em;
+  right: -0.05em;
   background-image: url(${(props) => props.$backgroundImage});
-  background-size: contain;
+  background-size: 100% 100%;
   background-position: center;
-  background-repeat: repeat-x;
+  background-repeat: no-repeat;
   z-index: -1;
 `;
 
 const Content = styled.span`
   position: relative;
   z-index: 1;
+  display: block;
+  /* 上下の余白を削除 */
+  line-height: 0.8;
+  padding: 0.1em 0;
 `;
 
 export default function TextWithBackground({
