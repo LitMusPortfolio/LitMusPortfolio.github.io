@@ -59,4 +59,19 @@ export const theme = {
     titleMargin: "4rem",
     containerMaxWidth: "1400px",
   },
+  typography: {
+    heading: {
+      fontFamilyJa: "'Source Han Sans JP', 'Noto Sans JP', sans-serif",
+      fontFamilyEn: "'Montserrat', sans-serif",
+      fontWeight: 900,
+      letterSpacingJa: "0.07em", // 字間0.7
+      letterSpacingEn: "0.1em", // 字間1.0
+    },
+    body: {
+      fontFamily: "'Zen Kaku Gothic New', 'Noto Sans JP', sans-serif",
+      fontWeight: 900,
+      letterSpacing: "0.06em", // 字間0.6
+      lineHeight: 1.8,
+    },
+  },
 } as const;

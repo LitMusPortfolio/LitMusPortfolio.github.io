@@ -34,7 +34,8 @@
       "src/**/*.stories.tsx",
       "src/stories/**",
       ".storybook/**",
-      "src/**/*.d.ts"
+      "src/**/*.d.ts",
+      "src/utils/**"
     ],
     "ignoreDependencies": [
       "@types/styled-components",

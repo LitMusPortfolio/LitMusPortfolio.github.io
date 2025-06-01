@@ -38,78 +38,60 @@ type Story = StoryObj<typeof meta>;
 
 // 各ルートのストーリー
 export const Home: Story = {
-  args: {
-    initialPath: "/",
-  },
   decorators: [
-    (Story, { args }) => (
-      <MemoryRouter initialEntries={[args.initialPath]}>
-        <Story {...args} />
+    (Story) => (
+      <MemoryRouter initialEntries={["/"]}>
+        <Story />
       </MemoryRouter>
     ),
   ],
 };
 
 export const About: Story = {
-  args: {
-    initialPath: "/about",
-  },
   decorators: [
-    (Story, { args }) => (
-      <MemoryRouter initialEntries={[args.initialPath]}>
-        <Story {...args} />
+    (Story) => (
+      <MemoryRouter initialEntries={["/about"]}>
+        <Story />
       </MemoryRouter>
     ),
   ],
 };
 
 export const Works: Story = {
-  args: {
-    initialPath: "/works",
-  },
   decorators: [
-    (Story, { args }) => (
-      <MemoryRouter initialEntries={[args.initialPath]}>
-        <Story {...args} />
+    (Story) => (
+      <MemoryRouter initialEntries={["/works"]}>
+        <Story />
       </MemoryRouter>
     ),
   ],
 };
 
 export const Voicebank: Story = {
-  args: {
-    initialPath: "/voicebank",
-  },
   decorators: [
-    (Story, { args }) => (
-      <MemoryRouter initialEntries={[args.initialPath]}>
-        <Story {...args} />
+    (Story) => (
+      <MemoryRouter initialEntries={["/voicebank"]}>
+        <Story />
       </MemoryRouter>
     ),
   ],
 };
 
 export const Shop: Story = {
-  args: {
-    initialPath: "/shop",
-  },
   decorators: [
-    (Story, { args }) => (
-      <MemoryRouter initialEntries={[args.initialPath]}>
-        <Story {...args} />
+    (Story) => (
+      <MemoryRouter initialEntries={["/shop"]}>
+        <Story />
       </MemoryRouter>
     ),
   ],
 };
 
 export const Contact: Story = {
-  args: {
-    initialPath: "/contact",
-  },
   decorators: [
-    (Story, { args }) => (
-      <MemoryRouter initialEntries={[args.initialPath]}>
-        <Story {...args} />
+    (Story) => (
+      <MemoryRouter initialEntries={["/contact"]}>
+        <Story />
       </MemoryRouter>
     ),
   ],
