@@ -8,6 +8,9 @@ pre-commit:
     - run: npm run knip
       glob: "*.{js,ts,jsx,tsx}"
       fail_text: "未使用のコード、依存関係、またはファイルが検出されました。'npx knip --fix'で修正するか、手動で削除してください。"
+    - run: npm run check-stories
+      glob: "src/components/**/*.tsx"
+      fail_text: "Storybookストーリーが見つからないコンポーネントがあります。'npm run generate-stories'を実行してください。"
 
 pre-push:
   jobs:

@@ -8,6 +8,9 @@ const config: StorybookConfig = {
     "@storybook/addon-interactions",
     "@storybook/addon-viewport",
   ],
+  features: {
+    autodocs: true,
+  },
   framework: {
     name: "@storybook/react-vite",
     options: {},
