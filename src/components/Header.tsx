@@ -80,12 +80,14 @@ export default function Header() {
 
   const handleNavClick = () => {
     setIsMenuOpen(false);
+    // Force scroll to top
+    window.scrollTo(0, 0);
   };
 
   return (
     <HeaderContainer>
       <Nav>
-        <Logo to="/">
+        <Logo to="/" onClick={() => window.scrollTo(0, 0)}>
           <img src="/001_top/LitMus9_logo.webp" alt="LitMus9" />
         </Logo>
         <MenuList $isOpen={isMenuOpen}>

@@ -4,6 +4,7 @@ import { Section, SideDecoration } from "../../../components/Layout";
 import LitCharacterSection from "./LitCharacterSection";
 import LitDownloadSection from "./LitDownloadSection";
 import LitMainSection from "./LitMainSection";
+import LitRulesSection from "./LitRulesSection";
 
 const CharacterSection = styled(Section)`
   overflow: hidden;
@@ -65,6 +66,9 @@ export default function LitCharacter() {
 
         {/* ダウンロードセクション */}
         <LitDownloadSection />
+
+        {/* 利用規約セクション */}
+        <LitRulesSection />
       </IntegratedSection>
     </CharacterSection>
   );
