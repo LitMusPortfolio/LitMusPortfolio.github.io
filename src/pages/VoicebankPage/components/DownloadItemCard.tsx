@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { theme } from "@/styles/theme";
 import { cardHoverEffect, glassmorphism } from "@/styles/utils";
 import type { DownloadItem } from "../types";
 import { CATEGORY_COLORS } from "../utils/LitDownloadUtils";
@@ -11,6 +10,7 @@ const DownloadCard = styled.article`
   overflow: hidden;
   ${cardHoverEffect}
   cursor: pointer;
+  min-width: 80%;
 `;
 
 const ThumbnailWrapper = styled.div`
@@ -73,20 +73,6 @@ const CardDescription = styled.p`
   margin: 0.5rem 0;
 `;
 
-const CardStats = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 0.8rem;
-  font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.7);
-`;
-
-const CardStatus = styled.span<{ $free?: boolean }>`
-  font-weight: bold;
-  color: ${(props) => (props.$free ? "#4CAF50" : theme.colors.primary.light)};
-`;
-
 const CategoryTag = styled.span<{ $category: string }>`
   display: inline-block;
   padding: 0.3rem 0.8rem;
@@ -129,12 +115,6 @@ export default function DownloadItemCard({
         <CategoryTag $category={item.category}>{item.category}</CategoryTag>
         <CardTitle>{item.name}</CardTitle>
         <CardDescription>{item.description}</CardDescription>
-        <CardStats>
-          <CardStatus $free={item.status === "free"}>
-            {item.status === "free" ? "FREE" : item.price}
-          </CardStatus>
-          <span>Download</span>
-        </CardStats>
       </CardInfo>
     </DownloadCard>
   );

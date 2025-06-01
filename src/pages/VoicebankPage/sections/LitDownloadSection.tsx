@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import styled from "styled-components";
 import { Tab, TabContainer } from "@/components/CardGrid";
-import DownloadModal from "@/components/DownloadModal";
+import DownloadModal from "../components/DownloadModal";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import { Container, Section, SideDecoration } from "@/components/Layout";
 import SectionTitle from "@/components/SectionTitle";

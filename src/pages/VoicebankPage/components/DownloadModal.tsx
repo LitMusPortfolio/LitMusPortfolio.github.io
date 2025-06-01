@@ -182,7 +182,7 @@ const IconWrapper = styled.span`
   }
 `;
 
-const DownloadIcon = (): JSX.Element => (
+const DownloadIcon = () => (
   <svg
     viewBox="0 0 24 24"
     fill="none"
@@ -198,11 +198,7 @@ const DownloadIcon = (): JSX.Element => (
 );
 
 // 構造化コンテンツコンポーネント
-const StructuredContent = ({
-  content,
-}: {
-  content: DownloadContent;
-}): JSX.Element => {
+const StructuredContent = ({ content }: { content: DownloadContent }) => {
   if (!content) {
     return <div>コンテンツが見つかりません</div>;
   }
@@ -210,24 +206,24 @@ const StructuredContent = ({
   return (
     <>
       <ModalDescription>
-        {content.description?.map((text, index) => (
-          <p key={`desc-${text.slice(0, 20)}-${index}`}>{text}</p>
+        {content.description?.map((text) => (
+          <p key={`desc-${text}`}>{text}</p>
         )) || <p>説明がありません</p>}
       </ModalDescription>
 
       {content.notes && content.notes.length > 0 && (
         <ModalNotes>
-          {content.notes.map((note, index) => (
-            <p key={`note-${note.slice(0, 20)}-${index}`}>{note}</p>
+          {content.notes.map((note) => (
+            <p key={`note-${note}`}>{note}</p>
           ))}
         </ModalNotes>
       )}
 
       <ModalButtons>
         {content.links && content.links.length > 0 ? (
-          content.links.map((link, index) => (
+          content.links.map((link) => (
             <ModalButton
-              key={`link-${link.url}-${index}`}
+              key={`link-${link.text}`}
               href={link.url}
               target="_blank"
               rel="noopener noreferrer"
@@ -255,7 +251,7 @@ export default function DownloadModal({
   defaultImage = "/001_top/Moviedummy.png",
   content,
   children,
-}: DownloadModalProps): JSX.Element {
+}: DownloadModalProps) {
   return (
     <Modal
       isOpen={isOpen}

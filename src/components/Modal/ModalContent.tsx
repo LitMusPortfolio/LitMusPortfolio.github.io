@@ -10,8 +10,7 @@ export const ModalContainer = styled.div<{
 }>`
   position: relative;
   border-radius: 20px;
-  max-width: ${(props) => props.$maxWidth || "900px"};
-  width: 100%;
+  width: 80%;
   max-height: 90vh;
   overflow: hidden;
   display: ${(props) => (props.$hasImage ? "flex" : "block")};
