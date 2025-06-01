@@ -211,6 +211,7 @@ const VideoBackground = styled.video`
   transform: translate(-50%, -50%);
   z-index: -1;
   object-fit: cover;
+  opacity: 0.5;
 `;
 
 export default function LitMainSection() {

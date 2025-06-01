@@ -57,9 +57,18 @@ const ModalContainer = styled.div<{
         `;
       case "download":
         return css`
-          background: rgba(20, 20, 30, 0.98);
-          backdrop-filter: blur(20px);
-          border: 1px solid rgba(138, 97, 255, 0.3);
+          background: linear-gradient(
+            135deg,
+            rgba(20, 20, 30, 0.98) 0%,
+            rgba(30, 20, 40, 0.98) 100%
+          );
+          backdrop-filter: blur(30px) saturate(150%);
+          border: 1px solid rgba(138, 97, 255, 0.2);
+          box-shadow: 
+            0 30px 60px rgba(0, 0, 0, 0.5),
+            0 0 120px rgba(139, 92, 246, 0.15),
+            inset 0 0 60px rgba(139, 92, 246, 0.08),
+            inset 0 1px 0 rgba(255, 255, 255, 0.1);
         `;
       default:
         return css`
@@ -83,12 +92,18 @@ const ModalContainer = styled.div<{
 // 閉じるボタン
 const CloseButton = styled.button<{ $variant?: string }>`
   position: absolute;
-  top: ${(props) => (props.$variant === "download" ? "-15px" : "1.5rem")};
-  right: ${(props) => (props.$variant === "download" ? "-15px" : "1.5rem")};
-  width: 40px;
-  height: 40px;
-  background: rgba(139, 92, 246, 0.2);
-  border: 1px solid rgba(139, 92, 246, 0.4);
+  top: ${(props) => (props.$variant === "download" ? "-20px" : "1.5rem")};
+  right: ${(props) => (props.$variant === "download" ? "-20px" : "1.5rem")};
+  width: ${(props) => (props.$variant === "download" ? "45px" : "40px")};
+  height: ${(props) => (props.$variant === "download" ? "45px" : "40px")};
+  background: ${(props) =>
+    props.$variant === "download"
+      ? "linear-gradient(135deg, rgba(139, 92, 246, 0.9), rgba(92, 107, 192, 0.9))"
+      : "rgba(139, 92, 246, 0.2)"};
+  border: ${(props) =>
+    props.$variant === "download"
+      ? "2px solid rgba(255, 255, 255, 0.2)"
+      : "1px solid rgba(139, 92, 246, 0.4)"};
   border-radius: 50%;
   color: white;
   font-size: 1.5rem;
@@ -98,12 +113,21 @@ const CloseButton = styled.button<{ $variant?: string }>`
   justify-content: center;
   transition: all 0.3s ease;
   z-index: 10;
+  backdrop-filter: blur(10px);
+  box-shadow: ${(props) =>
+    props.$variant === "download"
+      ? "0 4px 20px rgba(139, 92, 246, 0.4)"
+      : "none"};
   
   &:hover {
     transform: rotate(90deg) scale(1.1);
     background: ${theme.colors.primary.main};
-    border-color: ${theme.colors.primary.main};
-    box-shadow: 0 5px 20px rgba(139, 92, 246, 0.5);
+    border-color: ${theme.colors.primary.light};
+    box-shadow: 0 8px 30px rgba(139, 92, 246, 0.6);
+  }
+  
+  &:active {
+    transform: rotate(90deg) scale(1.05);
   }
 `;
 
@@ -141,10 +165,30 @@ const ModalContent = styled.div<{ $variant?: string }>`
 `;
 
 // モーダルタイトル
-const ModalTitle = styled.h3`
+const ModalTitle = styled.h3<{ $variant?: string }>`
   font-size: 2.5rem;
   margin-bottom: 1.5rem;
-  color: ${theme.colors.primary.main};
+  background: ${(props) =>
+    props.$variant === "download"
+      ? `linear-gradient(135deg, ${theme.colors.primary.main}, ${theme.colors.primary.light})`
+      : theme.colors.primary.main};
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  position: relative;
+  
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -0.5rem;
+    left: 0;
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, ${theme.colors.primary.main}, transparent);
+    border-radius: 2px;
+  }
   
   @media (max-width: ${theme.breakpoints.mobile}) {
     font-size: 2rem;
@@ -289,7 +333,7 @@ export default function Modal({
         )}
         {variant === "download" && title ? (
           <ModalContent $variant={variant}>
-            <ModalTitle>{title}</ModalTitle>
+            <ModalTitle $variant={variant}>{title}</ModalTitle>
             {children}
           </ModalContent>
         ) : (

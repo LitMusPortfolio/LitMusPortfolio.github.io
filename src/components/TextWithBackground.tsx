@@ -24,12 +24,12 @@ const Background = styled.div<{ $backgroundImage: string }>`
   /* テキストの実際の高さに合わせる */
   top: 0.18em;
   bottom: 0.05em;
-  left: -0em;
-  right: -0em;
+  left: -0.001rem;
+  right: -0.001rem;
   background-image: url(${(props) => props.$backgroundImage});
-  background-size: 100% 100%;
+  background-size: auto 100%;
   background-position: center;
-  background-repeat: no-repeat;
+  background-repeat: repeat-x;
   z-index: -1;
 `;
 

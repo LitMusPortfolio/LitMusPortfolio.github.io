@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import styled from "styled-components";
 import { Section, SideDecoration } from "../../../components/Layout";
-import LitCharacterSection from "./LitCharacterSection";
-import LitDownloadSection from "./LitDownloadSection";
-import LitMainSection from "./LitMainSection";
-import LitRulesSection from "./LitRulesSection";
+import LitCharacterSection from "../sections/LitCharacterSection";
+import LitDownloadSection from "../sections/LitDownloadSection";
+import LitMainSection from "../sections/LitMainSection";
+import LitRulesSection from "../sections/LitRulesSection";
 
 const CharacterSection = styled(Section)`
   overflow: hidden;

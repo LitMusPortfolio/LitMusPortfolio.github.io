@@ -57,10 +57,12 @@ export const Structured: Story = {
       description: [
         "無料で使える中品質なテキスト読み上げソフトウェア",
         "商用・非商用問わず利用可能です。",
+        "豊富な音声パラメータで感情表現が可能",
       ],
       notes: [
         "※ 音声の二次利用は禁止されています",
         "※ クレジット表記が必要です",
+        "※ 個人利用・商用利用ともに無料",
       ],
       links: [
         {
@@ -70,6 +72,11 @@ export const Structured: Story = {
         },
         {
           text: "ダウンロード (Mac版)",
+          url: "#",
+          primary: false,
+        },
+        {
+          text: "利用規約を確認する",
           url: "#",
           primary: false,
         },

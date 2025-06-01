@@ -5,7 +5,7 @@ import TitleWithLine from "@/components/TitleWithLine";
 import { theme } from "@/styles/theme";
 // 型定義
 import type { ProfileData } from "@/types";
-import ProfileSection from "./ProfileSection";
+import ProfileSection from "../components/ProfileSection";
 
 interface DemoSong {
   id: string;

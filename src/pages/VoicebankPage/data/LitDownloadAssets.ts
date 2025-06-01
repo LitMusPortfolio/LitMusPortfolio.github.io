@@ -38,7 +38,25 @@ export const DOWNLOAD_ITEMS: DownloadItem[] = [
     status: "free",
     image: "/101_Lit/Litlogo.webp",
     links: {
-      primary: { text: "ダウンロード", url: "#" },
+      primary: {
+        text: "ダウンロード (Windows版)",
+        url: "https://example.com/download/windows",
+      },
+      secondary: {
+        text: "ダウンロード (Mac版)",
+        url: "https://example.com/download/mac",
+      },
+    },
+    modalContent: {
+      detailedDescription: [
+        "VOICEVOX 離途は、無料で使える中品質なテキスト読み上げソフトウェアです。",
+        "商用・非商用問わず利用可能で、豊富な音声パラメータで感情表現が可能です。",
+      ],
+      notes: [
+        "※ 音声の二次利用は禁止されています",
+        "※ クレジット表記が必要です",
+        "※ 個人利用・商用利用ともに無料",
+      ],
     },
   },
   {
