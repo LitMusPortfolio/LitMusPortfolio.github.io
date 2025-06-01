@@ -31,13 +31,12 @@ const ContentWrapper = styled(Container)`
 
 const StickyHeader = styled.div.attrs({ className: "works-sticky-header" })`
   position: sticky;
-  top: 95px; /* Headerの高さ分 */
+  top: 95px; /* header + margin */
   z-index: 10;
   margin-bottom: 2rem;
   
   @media (max-width: ${theme.breakpoints.mobile}) {
     top: 50px;
-    padding: 1rem 0;
   }
 `;
 StickyHeader.displayName = "WorksStickyHeader";
