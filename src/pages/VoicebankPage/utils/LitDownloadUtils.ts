@@ -33,22 +33,32 @@ export const filterItemsByTab = (
 };
 
 const transformLinksForModal = (links: DownloadItem["links"]) => {
+  if (!links) return [];
+
   return Object.entries(links)
     .filter(([_, link]) => link !== undefined && link !== null)
-    .map(([key, link]) => ({
-      text: link?.text || "",
-      url: link?.url || "",
-      primary: key === "primary",
-    }))
-    .filter((item) => item.text && item.url);
+    .map(([key, link]) => {
+      if (!link) return null;
+      return {
+        text: link.text || "",
+        url: link.url || "",
+        primary: key === "primary",
+      };
+    })
+    .filter(
+      (item): item is { text: string; url: string; primary: boolean } =>
+        item !== null && Boolean(item.text) && Boolean(item.url),
+    );
 };
 
 export const prepareModalContent = (item: DownloadItem | null) => {
   if (!item) return null;
 
+  const links = transformLinksForModal(item.links);
+
   return {
     description: item.modalContent?.detailedDescription || [item.description],
-    notes: item.modalContent?.notes,
-    links: transformLinksForModal(item.links),
+    notes: item.modalContent?.notes || [],
+    links: links,
   };
 };

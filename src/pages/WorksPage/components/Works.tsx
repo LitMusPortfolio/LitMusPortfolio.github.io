@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import styled from "styled-components";
 import { Tab, TabContainer } from "@/components/CardGrid";
 import { Container, Section } from "@/components/Layout";
@@ -141,10 +141,11 @@ export default function Works() {
   const tabsRef = useRef<HTMLDivElement>(null);
   const tabs = ["all", "music", "illustration", "movie", "other"];
 
-  const filteredWorks =
-    activeTab === "all"
+  const filteredWorks = useMemo(() => {
+    return activeTab === "all"
       ? worksData
       : worksData.filter((work) => work.type === activeTab);
+  }, [activeTab]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {

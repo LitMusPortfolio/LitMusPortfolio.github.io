@@ -1,4 +1,4 @@
-import styled, { keyframes } from "styled-components";
+import styled, { css, keyframes } from "styled-components";
 import Modal from "@/components/Modal";
 import { theme } from "@/styles/theme";
 
@@ -120,7 +120,7 @@ const ModalButton = styled.a<{ $primary?: boolean }>`
   
   ${({ $primary }) =>
     $primary &&
-    `
+    css`
     background-size: 200% 100%;
     background-image: linear-gradient(
       135deg,
@@ -198,40 +198,50 @@ const DownloadIcon = () => (
 );
 
 // 構造化コンテンツコンポーネント
-const StructuredContent = ({ content }: { content: DownloadContent }) => (
-  <>
-    <ModalDescription>
-      {content.description.map((text) => (
-        <p key={text}>{text}</p>
-      ))}
-    </ModalDescription>
+const StructuredContent = ({ content }: { content: DownloadContent }) => {
+  if (!content) {
+    return <div>コンテンツが見つかりません</div>;
+  }
 
-    {content.notes && content.notes.length > 0 && (
-      <ModalNotes>
-        {content.notes.map((note) => (
-          <p key={note}>{note}</p>
-        ))}
-      </ModalNotes>
-    )}
+  return (
+    <>
+      <ModalDescription>
+        {content.description?.map((text, index) => (
+          <p key={`desc-${index}`}>{text}</p>
+        )) || <p>説明がありません</p>}
+      </ModalDescription>
 
-    <ModalButtons>
-      {content.links.map((link) => (
-        <ModalButton
-          key={link.url}
-          href={link.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          $primary={link.primary}
-        >
-          <IconWrapper>
-            <DownloadIcon />
-          </IconWrapper>
-          {link.text}
-        </ModalButton>
-      ))}
-    </ModalButtons>
-  </>
-);
+      {content.notes && content.notes.length > 0 && (
+        <ModalNotes>
+          {content.notes.map((note, index) => (
+            <p key={`note-${index}`}>{note}</p>
+          ))}
+        </ModalNotes>
+      )}
+
+      <ModalButtons>
+        {content.links && content.links.length > 0 ? (
+          content.links.map((link, index) => (
+            <ModalButton
+              key={`link-${index}`}
+              href={link.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              $primary={link.primary}
+            >
+              <IconWrapper>
+                <DownloadIcon />
+              </IconWrapper>
+              {link.text}
+            </ModalButton>
+          ))
+        ) : (
+          <div>ダウンロードリンクがありません</div>
+        )}
+      </ModalButtons>
+    </>
+  );
+};
 
 export default function DownloadModal({
   isOpen,
@@ -252,7 +262,11 @@ export default function DownloadModal({
       maxWidth="900px"
       ariaLabel={`Download modal for ${title}`}
     >
-      {content ? <StructuredContent content={content} /> : children}
+      {content ? (
+        <StructuredContent content={content} />
+      ) : (
+        children || <div>コンテンツを読み込んでいます...</div>
+      )}
     </Modal>
   );
 }

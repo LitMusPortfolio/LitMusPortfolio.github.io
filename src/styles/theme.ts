@@ -59,6 +59,8 @@ export const theme = {
     sectionPadding: "2rem 2rem",
     titleMargin: "2rem",
     containerMaxWidth: "90%",
+    headerHeight: "95px",
+    headerHeightMobile: "50px",
   },
   typography: {
     heading: {
@@ -133,9 +135,12 @@ export const theme = {
   // アニメーション
   animation: {
     duration: {
-      fast: "0.15s",
+      fast: "0.3s",
+      normal: "0.6s",
+      slow: "1s",
+      scrolling: "20s",
+      // Legacy names for backward compatibility
       base: "0.3s",
-      slow: "0.5s",
       slower: "1s",
       slowest: "3s",
     },
@@ -189,5 +194,12 @@ export const theme = {
       xl: "1200px",
       "2xl": "1400px",
     },
+  },
+  // アスペクト比
+  aspectRatio: {
+    video: "56.25%", // 16:9
+    thumbnail: "75%", // 4:3
+    square: "100%", // 1:1
+    portrait: "133.33%", // 3:4
   },
 } as const;

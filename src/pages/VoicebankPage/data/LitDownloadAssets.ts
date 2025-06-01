@@ -1,31 +1,4 @@
-// 型定義
-type ItemType = "talk" | "sing" | "other";
-type ItemStatus = "free" | "paid";
-
-interface DownloadLink {
-  text: string;
-  url: string;
-}
-
-interface DownloadItem {
-  id: number;
-  type: ItemType;
-  category: string;
-  name: string;
-  description: string;
-  status: ItemStatus;
-  price?: string;
-  image?: string;
-  links: {
-    primary?: DownloadLink;
-    secondary?: DownloadLink;
-    tertiary?: DownloadLink;
-  };
-  modalContent?: {
-    detailedDescription: string[];
-    notes?: string[];
-  };
-}
+import type { DownloadItem } from "../types";
 
 // ダウンロードデータ
 export const DOWNLOAD_ITEMS: DownloadItem[] = [
@@ -69,6 +42,13 @@ export const DOWNLOAD_ITEMS: DownloadItem[] = [
     image: "/101_Lit/LitA_差し替え前提.webp",
     links: {
       primary: { text: "無料ダウンロード", url: "#" },
+    },
+    modalContent: {
+      detailedDescription: [
+        "離途 -FLOW- は、豊かな声色で感情的な歌唱が可能な大容量のライブラリです。",
+        "流れるような歌声と表現力豊かな音声が特徴です。",
+      ],
+      notes: ["※ 利用規約をご確認の上ご利用ください", "※ 商用利用可能"],
     },
   },
   {

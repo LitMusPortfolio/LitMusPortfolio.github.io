@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import styled from "styled-components";
 import { Tab, TabContainer } from "@/components/CardGrid";
 import DownloadModal from "@/components/DownloadModal";
+import ErrorBoundary from "@/components/ErrorBoundary";
 import { Container, Section, SideDecoration } from "@/components/Layout";
 import SectionTitle from "@/components/SectionTitle";
 import { theme } from "@/styles/theme";
@@ -79,15 +80,22 @@ export default function LitDownloadSection() {
         </Container>
       </Section>
 
-      {selectedItem && modalContent && (
+      <ErrorBoundary
+        fallback={
+          <div>
+            ダウンロードモーダルでエラーが発生しました。
+            コンソールを確認してください。
+          </div>
+        }
+      >
         <DownloadModal
           isOpen={isOpen}
           onClose={closeModal}
-          image={selectedItem.image}
-          title={selectedItem.name}
+          image={selectedItem?.image}
+          title={selectedItem?.name || ""}
           content={modalContent}
         />
-      )}
+      </ErrorBoundary>
     </>
   );
 }
