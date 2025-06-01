@@ -2,23 +2,23 @@ import styled from "styled-components";
 import { Container, Section, SideDecoration } from "@/components/Layout";
 import SectionTitle from "@/components/SectionTitle";
 import TitleWithLine from "@/components/TitleWithLine";
+import { theme } from "@/styles/theme";
 
 const RulesContent = styled.div`
-  margin-top: 3rem;
+  margin-top: ${theme.space.xl};
 `;
 
 const RulesList = styled.ul`
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin: ${theme.space.lg} 0;
 `;
 
 const RuleItem = styled.li`
   color: ${({ theme }) => theme.colors.text};
-  font-size: 1rem;
-  line-height: 1.8;
-  margin-bottom: 20px;
-  padding-left: 30px;
+  font-size: ${theme.typography.fontSize.base};
+  line-height: ${theme.typography.body.lineHeight};
+  padding-left: ${theme.space.lg};
   position: relative;
 
   &::before {
@@ -26,28 +26,28 @@ const RuleItem = styled.li`
     position: absolute;
     left: 0;
     color: ${({ theme }) => theme.colors.primary};
-    font-size: 1.2rem;
+    font-size: ${theme.typography.fontSize.md};
   }
 
   &:last-child {
     margin-bottom: 0;
   }
 
-  @media (max-width: 768px) {
-    font-size: 0.9rem;
+  @media (max-width: ${theme.breakpoints.mobile}) {
+    font-size: ${theme.typography.fontSize.sm};
     padding-left: 25px;
   }
 `;
 
 const RulesTitle = styled.h3`
-  font-size: 2rem;
+  font-size: ${theme.typography.fontSize.xl};
   font-weight: bold;
   color: ${({ theme }) => theme.colors.text};
   margin: 0;
   white-space: nowrap;
   
-  @media (max-width: 768px) {
-    font-size: 1.5rem;
+  @media (max-width: ${theme.breakpoints.mobile}) {
+    font-size: ${theme.typography.fontSize.lg};
   }
 `;
 
@@ -62,38 +62,96 @@ export default function LitRulesSection() {
         <SectionTitle>RULES</SectionTitle>
         <RulesContent>
           <TitleWithLine>
+            <RulesTitle>定義</RulesTitle>
+          </TitleWithLine>
+          <RulesList>
+            <RuleItem>
+              「キャラクター」とは、「離途」のキャラクターデザインやキャラクター設定等により表現される抽象的概念のことをいいます。
+            </RuleItem>
+            <RuleItem>
+              「音声波形」とは、UTAU用ライブラリおよびエクストラボイスとして提供するLitMus本人の音声および、UTAU・VOICEVOX・COEIROINKから出力した「離途」の音声をいいます。
+            </RuleItem>
+          </RulesList>
+          <TitleWithLine>
+            <RulesTitle>特記事項</RulesTitle>
+          </TitleWithLine>
+          <RulesList>
+            <RuleItem>
+              キャラクター「離途」を使用した場合は、「離途」のクレジット表記を必ず行ってください。
+            </RuleItem>
+            <RuleItem>
+              音声波形「UTAU
+              離途」及び「エクストラボイス」を使用した場合は、「離途」のクレジット表記を必ず行ってください。
+            </RuleItem>
+            <RuleItem>
+              音声波形「VOICEVOX 離途」を使用した場合は、「VOICEVOX
+              離途」のクレジット表記を必ず行ってください。
+            </RuleItem>
+            <RuleItem>
+              音声波形「MYCOEIROINK 離途」を使用した場合は、「MYCOEIROINK
+              離途」のクレジット表記を必ず行ってください。
+            </RuleItem>
+          </RulesList>
+          <TitleWithLine>
             <RulesTitle>禁止事項</RulesTitle>
           </TitleWithLine>
           <RulesList>
-            <RuleItem>音源の二次配布</RuleItem>
-            <RuleItem>許諾事項に記載のない形での利用</RuleItem>
+            <RuleItem>当サイトのコンテンツを二次配布すること。</RuleItem>
+            <RuleItem>当サイトのコンテンツを機械学習に利用すること。</RuleItem>
             <RuleItem>
-              AI学習に類すること（離途のAIファンアートや音声等を作成することを含む）
+              「離途」のキャラクター及び音声波形を、政治的表現、宗教的表現に利用すること。
+            </RuleItem>
+            <RuleItem>
+              「離途」のキャラクター及び音声波形を用いて、性行為・性器を露出する場面など過激なアダルト的表現を行うコンテンツを作成し、それをSNS等の不特定多数が閲覧できる場所で公開すること。
+            </RuleItem>
+            <RuleItem>
+              「離途」のキャラクターを用いたイラストを、生成AIを利用して作成し、それを不特定多数が閲覧できる場所で公開すること。
+            </RuleItem>
+            <RuleItem>
+              法人が許諾なく「離途」のキャラクターを使用すること。（法人が音声波形のみを利用する場合は、無料で商用利用可能）
             </RuleItem>
             <RuleItem>
               公式からの発信と誤認識されかねない言動（なりきりアカウント等含む）
-            </RuleItem>
-            <RuleItem>政治的表現、宗教的表現</RuleItem>
-            <RuleItem>
-              SNS等の公共の場での投稿で、性行為・性器を露出するなど過激なアダルト的表現
             </RuleItem>
           </RulesList>
           <TitleWithLine>
             <RulesTitle>許諾事項</RulesTitle>
           </TitleWithLine>
           <RulesList>
-            <RuleItem>二次創作</RuleItem>
-            <RuleItem>コスプレ</RuleItem>
-            <RuleItem>グッズ作成・頒布</RuleItem>
             <RuleItem>
-              商用利用（CD頒布やYoutube、ニコニコ動画など収益を得ることができるサブスクリプション等含む）
+              二次創作（コスプレ、グッズ作成・頒布などを含む）
             </RuleItem>
             <RuleItem>
-              著作者が関わっていない場面での個人間による金銭の発生する依頼（イラストレーターに離途のイラスト制作を依頼することや、調声依頼をすること）
+              個人によるキャラクターの商用利用（法人がキャラクターを利用する場合、別途使用許諾を必要とする。）
             </RuleItem>
-            <RuleItem>他キャラクターへのイメージCVのような形での使用</RuleItem>
             <RuleItem>
-              性行為・性器を露出する表現のない軽度なアダルト的表現、軽度な暴力・グロテスク表現（ゾーニングを必ず行うこと。ｺｯｿﾘやってね）
+              音声波形の商用利用（個人利用・法人利用問わず、無料で商用利用可能）
+            </RuleItem>
+            <RuleItem>
+              著作者が関わっていない場面での、個人間による金銭の発生する依頼を行うこと。
+            </RuleItem>
+            <RuleItem>
+              音声波形を離途以外のキャラクターにイメージCVのような形で使用すること。
+            </RuleItem>
+            <RuleItem>
+              キャラクター、音声波形を利用し、性行為・性器を露出する表現のない軽度なアダルト的表現、軽度な暴力・グロテスク表現のコンテンツを作成し、それを不特定多数が閲覧できる場所で公開すること。
+            </RuleItem>
+          </RulesList>
+          <TitleWithLine>
+            <RulesTitle>免責事項</RulesTitle>
+          </TitleWithLine>
+          <RulesList>
+            <RuleItem>
+              このサイトにて公開された音源やイラストを使用したことによるトラブル・損害等について著作者は一切の責任を負いません
+            </RuleItem>
+            <RuleItem>
+              このサイトにて公開された音源やイラストを使用する際は、このページに記載されている利用規約に同意したものとみなします。
+            </RuleItem>
+            <RuleItem>
+              この利用規約は予告なく変更されることがあります。
+            </RuleItem>
+            <RuleItem>
+              利用規約の変更による効力は、最終改定日以降に発表される作品のみに適用されることとします。
             </RuleItem>
           </RulesList>
         </RulesContent>

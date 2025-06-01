@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { theme } from "../styles/theme";
 import TextWithBackground from "./TextWithBackground";
 
 // セクションタイトルのラッパー
@@ -6,12 +7,12 @@ const SectionTitleWrapper = styled.h1`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  font-size: 8rem;
-  margin-bottom: 4rem;
+  font-size: ${theme.typography.fontSize["5xl"]};
+  margin-bottom: ${theme.space["2xl"]};
   
-  @media (max-width: 768px) {
-    font-size: 4rem;
-    margin-bottom: 2rem;
+  @media (max-width: ${theme.breakpoints.mobile}) {
+    font-size: ${theme.typography.fontSize["4xl"]};
+    margin-bottom: ${theme.space.lg};
   }
 `;
 

@@ -46,7 +46,6 @@ const CharacterDetailSection = styled(GridContainer)`
 // コンテンツコンテナのカスタマイズ
 const StyledContentContainer = styled(ContentContainer)`
   margin-left: 2rem;
-  padding-top: 8rem;
   padding-bottom: 2rem;
   padding-right: 4rem;
   

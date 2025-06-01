@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { createGradient } from "@/styles/utils";
+import { theme } from "../styles/theme";
 
 interface PageTitleProps {
   children: React.ReactNode;
@@ -12,18 +13,18 @@ interface PageTitleProps {
 const StyledPageTitle = styled.h1<{
   $gradientColors?: PageTitleProps["gradientColors"];
 }>`
-  font-size: clamp(2rem, 5vw, 4rem);
+  font-size: clamp(${theme.typography.fontSize.xl}, 5vw, ${theme.typography.fontSize["4xl"]});
   font-weight: 800;
   text-align: center;
-  margin-bottom: 4rem;
+  margin-bottom: ${theme.space["2xl"]};
   ${({ $gradientColors }) =>
     $gradientColors
       ? createGradient($gradientColors.color1, $gradientColors.color2)
-      : createGradient("#8a61ff", "#87ceeb")};
+      : createGradient(theme.colors.primary.main, theme.colors.primary.light)};
   
   @media (max-width: ${({ theme }) => theme.breakpoints?.mobile || "768px"}) {
-    font-size: clamp(1.5rem, 4vw, 2.5rem);
-    margin-bottom: 2rem;
+    font-size: clamp(${theme.typography.fontSize.lg}, 4vw, ${theme.typography.fontSize["2xl"]});
+    margin-bottom: ${theme.space.lg};
   }
 `;
 

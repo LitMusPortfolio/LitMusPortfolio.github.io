@@ -1,16 +1,17 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { theme } from "../styles/theme";
 
 const HeaderContainer = styled.header`
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  z-index: 9999;
-  background: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(10px);
-  padding: 1rem 0;
+  z-index: ${theme.zIndex.max};
+  background: ${theme.effects.glassmorphism.background};
+  backdrop-filter: ${theme.effects.glassmorphism.backdropFilter};
+  padding: ${theme.space.sm} 0;
 `;
 
 const Nav = styled.nav`
@@ -19,10 +20,10 @@ const Nav = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 2rem;
+  padding: 0 ${theme.space.lg};
   
-  @media (max-width: 768px) {
-    padding: 0 1rem;
+  @media (max-width: ${theme.breakpoints.mobile}) {
+    padding: 0 ${theme.space.sm};
   }
 `;
 
@@ -30,30 +31,30 @@ const Logo = styled(Link)`
   display: inline-block;
   
   img {
-    height: 40px;
+    height: ${theme.sizes.button.md};
     cursor: pointer;
   }
 `;
 
 const MenuList = styled.ul<{ $isOpen: boolean }>`
   display: flex;
-  gap: 2rem;
+  gap: ${theme.space.lg};
   list-style: none;
   margin: 0;
   padding: 0;
   align-items: center;
 
-  @media (max-width: 768px) {
+  @media (max-width: ${theme.breakpoints.mobile}) {
     position: fixed;
     top: 0;
     right: ${(props) => (props.$isOpen ? "0" : "-100%")};
     width: 100%;
     height: 100vh;
-    background: rgba(0, 0, 0, 0.95);
+    background: rgba(0, 0, 0, ${theme.opacity[95]});
     flex-direction: column;
     justify-content: center;
-    gap: 3rem;
-    transition: right 0.3s ease;
+    gap: ${theme.space.xl};
+    transition: right ${theme.animation.duration.base} ease;
   }
 `;
 
@@ -65,12 +66,12 @@ const MenuItem = styled.li`
     color: #fff;
     text-decoration: none;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    transition: color 0.3s ease;
-    font-size: 0.9rem;
+    letter-spacing: ${theme.typography.heading.letterSpacingEn};
+    transition: color ${theme.animation.duration.base} ease;
+    font-size: ${theme.typography.fontSize.sm};
     
     &:hover {
-      color: #00bfff;
+      color: ${theme.colors.primary.light};
     }
   }
 `;

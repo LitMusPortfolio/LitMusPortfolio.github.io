@@ -12,16 +12,16 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-  margin-bottom: 2rem;
+  margin-bottom: ${theme.space.lg};
 `;
 
 // 罫線
 const Line = styled.div`
   flex: 1;
-  height: 2px;
+  height: ${theme.borders.width.base};
   background: ${theme.colors.text.primary};
-  opacity: 0.8;
-  margin-left: 1rem;
+  opacity: ${theme.opacity[80]};
+  margin-left: ${theme.space.sm};
 `;
 
 export default function TitleWithLine({

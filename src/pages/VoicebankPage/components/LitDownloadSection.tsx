@@ -7,7 +7,7 @@ import SectionTitle from "@/components/SectionTitle";
 import { theme } from "@/styles/theme";
 import { cardHoverEffect, glassmorphism } from "@/styles/utils";
 import { DOWNLOAD_ITEMS } from "./LitDownloadAssets";
-import { type DownloadItem, ModalContent } from "./LitDownloadModal";
+import type { DownloadItem } from "./LitDownloadModal";
 
 // 型定義
 type ItemType = "talk" | "sing" | "other";
@@ -237,9 +237,29 @@ export default function LitDownloadSection() {
         onClose={handleModalClose}
         image={selectedItem?.image}
         title={selectedItem?.name || ""}
-      >
-        {selectedItem && <ModalContent item={selectedItem} />}
-      </DownloadModal>
+        variant="structured"
+        content={{
+          description: selectedItem?.modalContent?.detailedDescription || [
+            selectedItem?.description || "",
+          ],
+          notes: selectedItem?.modalContent?.notes,
+          links: selectedItem
+            ? Object.entries(selectedItem.links)
+                .filter(([_, link]) => link)
+                .map(([key, link]) => {
+                  if (!link) return null;
+                  return {
+                    text: link.text,
+                    url: link.url,
+                    primary: key === "primary",
+                  };
+                })
+                .filter(
+                  (item): item is NonNullable<typeof item> => item !== null,
+                )
+            : [],
+        }}
+      />
     </>
   );
 }

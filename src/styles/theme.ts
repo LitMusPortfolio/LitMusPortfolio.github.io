@@ -56,7 +56,7 @@ export const theme = {
     desktop: "1200px",
   },
   spacing: {
-    sectionPadding: "8rem 2rem",
+    sectionPadding: "2rem 2rem",
     titleMargin: "4rem",
     containerMaxWidth: "90%",
   },
@@ -73,6 +73,121 @@ export const theme = {
       fontWeight: 900,
       letterSpacing: "0.06em", // 字間0.6
       lineHeight: 1.8,
+    },
+    // フォントサイズ
+    fontSize: {
+      xs: "0.7rem", // 極小
+      sm: "0.85rem", // 小
+      base: "1rem", // 基本
+      md: "1.2rem", // 中
+      lg: "1.5rem", // 大
+      xl: "2rem", // 特大
+      "2xl": "2.5rem", // 超特大
+      "3xl": "3rem", // 巨大
+      "4xl": "4rem", // 超巨大
+      "5xl": "8rem", // 最大
+    },
+  },
+  // スペーシング（余白）
+  space: {
+    xs: "0.5rem", // 極小
+    sm: "1rem", // 小
+    md: "1.5rem", // 中
+    lg: "2rem", // 大
+    xl: "3rem", // 特大
+    "2xl": "4rem", // 超特大
+    "3xl": "6rem", // 巨大
+    "4xl": "8rem", // 超巨大
+  },
+  // 境界線
+  borders: {
+    width: {
+      thin: "1px",
+      base: "2px",
+      thick: "4px",
+    },
+    radius: {
+      sm: "4px",
+      md: "8px",
+      lg: "12px",
+      xl: "20px",
+      "2xl": "30px",
+      full: "9999px",
+      circle: "50%",
+    },
+  },
+  // 透明度
+  opacity: {
+    5: 0.05,
+    10: 0.1,
+    20: 0.2,
+    30: 0.3,
+    40: 0.4,
+    50: 0.5,
+    60: 0.6,
+    70: 0.7,
+    80: 0.8,
+    90: 0.9,
+    95: 0.95,
+  },
+  // アニメーション
+  animation: {
+    duration: {
+      fast: "0.15s",
+      base: "0.3s",
+      slow: "0.5s",
+      slower: "1s",
+      slowest: "3s",
+    },
+    easing: {
+      ease: "ease",
+      easeIn: "ease-in",
+      easeOut: "ease-out",
+      easeInOut: "ease-in-out",
+      linear: "linear",
+    },
+  },
+  // z-index
+  zIndex: {
+    behind: -1,
+    base: 0,
+    content: 1,
+    front: 2,
+    dropdown: 10,
+    sticky: 50,
+    fixed: 100,
+    modalBackdrop: 1000,
+    modal: 1050,
+    popover: 1100,
+    tooltip: 1200,
+    max: 9999,
+  },
+  // サイズ
+  sizes: {
+    icon: {
+      sm: "16px",
+      md: "24px",
+      lg: "32px",
+      xl: "40px",
+    },
+    avatar: {
+      sm: "32px",
+      md: "48px",
+      lg: "64px",
+      xl: "96px",
+    },
+    button: {
+      sm: "32px",
+      md: "40px",
+      lg: "48px",
+      xl: "56px",
+    },
+    container: {
+      sm: "640px",
+      md: "768px",
+      lg: "1024px",
+      xl: "1200px",
+      "2xl": "1400px",
     },
   },
 } as const;
