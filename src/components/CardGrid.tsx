@@ -19,7 +19,7 @@ export const TabContainer = styled.div`
     margin-left: 2rem;
   }
   
-  @media (max-width: 768px) {
+  @media (max-width: ${theme.breakpoints.mobile}) {
     flex-wrap: wrap;
     
     &::after {

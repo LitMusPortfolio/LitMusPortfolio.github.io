@@ -73,7 +73,7 @@ const ModalContainer = styled.div<{
     }
   }}
   
-  @media (max-width: ${(props) => props.theme.breakpoints?.mobile || "768px"}) {
+  @media (max-width: ${theme.breakpoints.mobile}) {
     flex-direction: column;
     max-height: 95vh;
   }
@@ -134,7 +134,7 @@ const ModalContent = styled.div<{ $variant?: string }>`
     }
   `}
   
-  @media (max-width: ${(props) => props.theme.breakpoints?.mobile || "768px"}) {
+  @media (max-width: ${theme.breakpoints.mobile}) {
     padding: 2rem;
   }
 `;
@@ -145,7 +145,7 @@ const ModalTitle = styled.h3`
   margin-bottom: 1.5rem;
   color: ${theme.colors.primary.main};
   
-  @media (max-width: ${(props) => props.theme.breakpoints?.mobile || "768px"}) {
+  @media (max-width: ${theme.breakpoints.mobile}) {
     font-size: 2rem;
   }
 `;
@@ -169,7 +169,7 @@ const ModalImageSection = styled.div`
     object-fit: cover;
   }
   
-  @media (max-width: ${(props) => props.theme.breakpoints?.mobile || "768px"}) {
+  @media (max-width: ${theme.breakpoints.mobile}) {
     flex: 0 0 200px;
   }
 `;

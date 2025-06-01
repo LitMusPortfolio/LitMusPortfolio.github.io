@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { theme } from "@/styles/theme";
 
 // 基本セクションコンポーネント
 export const Section = styled.section`
@@ -34,7 +35,7 @@ export const SideDecoration = styled.div<SideDecorationProps>`
     opacity: 0.3;
   }
   
-  @media (max-width: ${(props) => props.theme.breakpoints?.mobile || "768px"}) {
+  @media (max-width: ${theme.breakpoints.mobile}) {
     display: none;
   }
 `;
@@ -51,7 +52,7 @@ export const GridContainer = styled.div<GridContainerProps>`
   grid-template-columns: ${(props) => props.$columns || "1fr"};
   gap: ${(props) => props.$gap || "2rem"};
   
-  @media (max-width: ${(props) => props.theme.breakpoints?.tablet || "968px"}) {
+  @media (max-width: ${theme.breakpoints.tablet}) {
     grid-template-columns: ${(props) => props.$mobileColumns || "1fr"};
   }
 `;
@@ -66,7 +67,7 @@ export const ContentContainer = styled.div`
   z-index: 2;
   padding: 2rem;
   
-  @media (max-width: ${(props) => props.theme.breakpoints?.tablet || "968px"}) {
+  @media (max-width: ${theme.breakpoints.tablet}) {
     align-items: center;
   }
 `;

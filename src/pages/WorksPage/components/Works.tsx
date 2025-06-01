@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Tab, TabContainer } from "@/components/CardGrid";
 import { Container, Section } from "@/components/Layout";
 import SectionTitle from "@/components/SectionTitle";
+import { theme } from "@/styles/theme";
 import { glassmorphism } from "@/styles/utils";
 import { categoryColors } from "@/types";
 import { worksData } from "./WorksAssets";
@@ -26,7 +27,7 @@ const ContentWrapper = styled(Container)`
   position: relative;
   z-index: 1;
   
-  @media (max-width: ${(props) => props.theme.breakpoints?.mobile || "768px"}) {
+  @media (max-width: ${theme.breakpoints.mobile}) {
     padding-top: 100px;
   }
 `;
@@ -36,7 +37,7 @@ const WorksGrid = styled.div`
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 2rem;
   
-  @media (max-width: 768px) {
+  @media (max-width: ${theme.breakpoints.mobile}) {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }

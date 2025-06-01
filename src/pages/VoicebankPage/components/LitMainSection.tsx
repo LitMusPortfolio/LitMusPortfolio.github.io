@@ -67,7 +67,7 @@ const ContentContainer = styled.div`
   position: relative;
   z-index: 2;
   
-  @media (max-width: 968px) {
+  @media (max-width: ${theme.breakpoints.tablet}) {
     padding: 0 2rem;
     align-items: center;
   }
@@ -81,7 +81,7 @@ const Logo = styled.img`
   filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.9))
           drop-shadow(${theme.shadows.glow.large});
   
-  @media (max-width: 768px) {
+  @media (max-width: ${theme.breakpoints.mobile}) {
     max-height: 20vw;
   }
 `;
@@ -93,7 +93,7 @@ const TextWrapper = styled.div`
   flex-direction: column;
   align-items: flex-start;
   
-  @media (max-width: 968px) {
+  @media (max-width: ${theme.breakpoints.tablet}) {
     align-items: center;
     max-width: 90%;
   }
@@ -138,7 +138,7 @@ const DescriptionText = styled.div`
     }
   }
   
-  @media (max-width: 768px) {
+  @media (max-width: ${theme.breakpoints.mobile}) {
     font-size: 1rem;
   }
 `;
@@ -191,7 +191,7 @@ const DownloadButton = styled.button`
       inset 0 1px 0 rgba(255, 255, 255, 0.3);
   }
   
-  @media (max-width: 968px) {
+  @media (max-width: ${theme.breakpoints.tablet}) {
     position: absolute;
     bottom: 2rem;
     right: 50%;

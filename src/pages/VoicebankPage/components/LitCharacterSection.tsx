@@ -49,7 +49,7 @@ const StyledContentContainer = styled(ContentContainer)`
   padding-bottom: 2rem;
   padding-right: 4rem;
   
-  @media (max-width: ${(props) => props.theme.breakpoints?.tablet || "968px"}) {
+  @media (max-width: ${theme.breakpoints.tablet}) {
     padding: 0 2rem;
     margin-left: 0;
   }
@@ -63,7 +63,7 @@ const TitleText = styled.h2`
   margin: 0;
   white-space: nowrap;
   
-  @media (max-width: 768px) {
+  @media (max-width: ${theme.breakpoints.mobile}) {
     font-size: 2rem;
   }
 `;
@@ -76,7 +76,7 @@ const ProfileWrapper = styled.div`
   margin-top: 1rem;
   width: 100%;
   
-  @media (max-width: 768px) {
+  @media (max-width: ${theme.breakpoints.mobile}) {
     grid-template-columns: 1fr;
   }
 `;
@@ -93,7 +93,7 @@ const DemoSongContainer = styled.div`
   grid-template-columns: 1fr 1fr;
   gap: 2rem;
   
-  @media (max-width: 968px) {
+  @media (max-width: ${theme.breakpoints.tablet}) {
     grid-template-columns: 1fr;
   }
 `;
@@ -121,7 +121,7 @@ const LeftSection = styled.div`
   align-items: flex-end;
   justify-content: center;
   
-  @media (max-width: 968px) {
+  @media (max-width: ${theme.breakpoints.tablet}) {
     display: none;
   }
 `;

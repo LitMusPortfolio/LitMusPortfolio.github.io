@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import styled from "styled-components";
 import TextWithBackground from "../../../components/TextWithBackground";
+import { theme } from "../../../styles/theme";
 
 const HomeSection = styled.section`
   position: fixed;
@@ -30,7 +31,7 @@ const HomeContent = styled.div`
   text-align: left;
   color: #fff;
   
-  @media (max-width: 768px) {
+  @media (max-width: ${theme.breakpoints.mobile}) {
     left: 2rem;
     bottom: 8rem;
   }
@@ -69,7 +70,7 @@ const SocialLinks = styled.div`
   gap: 1.5rem;
   z-index: 10;
   
-  @media (max-width: 768px) {
+  @media (max-width: ${theme.breakpoints.mobile}) {
     right: 2rem;
     bottom: 10rem;
   }
@@ -94,7 +95,7 @@ const VoicevoxLogo = styled.div`
   right: 3rem;
   top: 6rem;
   
-  @media (max-width: 768px) {
+  @media (max-width: ${theme.breakpoints.mobile}) {
     right: 2rem;
     top: 5rem;
   }
@@ -125,7 +126,7 @@ const NewsBar = styled.div`
   gap: 2rem;
   overflow: hidden;
   
-  @media (max-width: 768px) {
+  @media (max-width: ${theme.breakpoints.mobile}) {
     padding: 1rem 2rem;
     gap: 1rem;
   }
