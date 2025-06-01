@@ -27,7 +27,6 @@ const ProfileItem = styled.div`
 `;
 
 const ProfileLabel = styled.span`
-  font-weight: bold;
   font-size: 1.3rem;
 `;
 

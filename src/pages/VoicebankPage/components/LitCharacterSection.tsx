@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { ContentContainer, GridContainer } from "../../../components/Layout";
-import SectionTitle from "../../../components/SectionTitle";
-import { theme } from "../../../styles/theme";
+import { ContentContainer, GridContainer } from "@/components/Layout";
+import SectionTitle from "@/components/SectionTitle";
+import { theme } from "@/styles/theme";
 import ProfileSection from "./ProfileSection";
 
 // 型定義
@@ -68,8 +68,8 @@ const TitleWithLineContainer = styled.div`
 `;
 
 // 共通タイトルテキスト
-const TitleText = styled.h2<{ $size?: "large" | "medium" }>`
-  font-size: ${(props) => (props.$size === "large" ? "4rem" : "2.5rem")};
+const TitleText = styled.h2`
+  font-size: 3rem;
   font-weight: bold;
   color: ${theme.colors.text.primary};
   margin: 0;
@@ -77,7 +77,7 @@ const TitleText = styled.h2<{ $size?: "large" | "medium" }>`
   white-space: nowrap;
   
   @media (max-width: 768px) {
-    font-size: ${(props) => (props.$size === "large" ? "3rem" : "2rem")};
+    font-size: 2rem;
   }
 `;
 
@@ -92,19 +92,12 @@ const TitleLine = styled.div`
 // 共通タイトル付き罫線コンポーネント
 interface TitleWithLineProps {
   title: string;
-  size?: "large" | "medium";
   className?: string;
 }
 
-const TitleWithLine: React.FC<TitleWithLineProps> = ({
-  title,
-  size = "medium",
-  className,
-}) => (
+const TitleWithLine: React.FC<TitleWithLineProps> = ({ title, className }) => (
   <TitleWithLineContainer className={className}>
-    <TitleText as={size === "large" ? "h2" : "h3"} $size={size}>
-      {title}
-    </TitleText>
+    <TitleText>{title}</TitleText>
     <TitleLine />
   </TitleWithLineContainer>
 );
@@ -187,13 +180,13 @@ export default function LitCharacterSection() {
         </LeftSection>
         <StyledContentContainer>
           <SectionTitle>CHARACTER</SectionTitle>
-          <TitleWithLine title="離途" size="large" />
+          <TitleWithLine title="離途" />
           <ProfileWrapper>
             <ProfileSection data={PROFILE_DATA_LEFT} />
             <ProfileSection data={PROFILE_DATA_RIGHT} />
           </ProfileWrapper>
           <DemoSongSection>
-            <TitleWithLine title="デモソング" size="medium" />
+            <TitleWithLine title="デモソング" />
             <DemoSongContainer>
               {DEMO_SONGS.map((song) => (
                 <DemoSongItem key={song.id}>
