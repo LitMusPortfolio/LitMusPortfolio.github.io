@@ -73,6 +73,13 @@ const CardDescription = styled.p`
   margin: 0.5rem 0;
 `;
 
+const TagContainer = styled.div`
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+`;
+
 const CategoryTag = styled.span<{ $category: string }>`
   display: inline-block;
   padding: 0.3rem 0.8rem;
@@ -86,7 +93,21 @@ const CategoryTag = styled.span<{ $category: string }>`
   border-radius: 15px;
   font-size: 0.75rem;
   color: rgba(255, 255, 255, 0.9);
-  margin-bottom: 0.5rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+`;
+
+const StatusBadge = styled.span<{ $status: "free" | "paid" }>`
+  display: inline-block;
+  padding: 0.3rem 0.8rem;
+  background: ${({ $status }) => 
+    $status === "free" 
+      ? "linear-gradient(135deg, #4CAF5040, #66BB6A40)" 
+      : "linear-gradient(135deg, #FF980040, #FFA72640)"
+  };
+  border-radius: 15px;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.9);
   font-weight: 600;
   letter-spacing: 0.05em;
 `;
@@ -112,7 +133,14 @@ export default function DownloadItemCard({
         )}
       </ThumbnailWrapper>
       <CardInfo>
-        <CategoryTag $category={item.category}>{item.category}</CategoryTag>
+        <TagContainer>
+          <CategoryTag $category={item.category}>{item.category}</CategoryTag>
+          {item.status && (
+            <StatusBadge $status={item.status}>
+              {item.status === "free" ? "FREE" : item.price || "PAID"}
+            </StatusBadge>
+          )}
+        </TagContainer>
         <CardTitle>{item.name}</CardTitle>
         <CardDescription>{item.description}</CardDescription>
       </CardInfo>

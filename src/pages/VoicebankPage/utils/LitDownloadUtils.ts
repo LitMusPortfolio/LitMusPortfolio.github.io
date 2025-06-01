@@ -54,11 +54,38 @@ const transformLinksForModal = (links: DownloadItem["links"]) => {
 export const prepareModalContent = (item: DownloadItem | null) => {
   if (!item) return null;
 
-  const links = transformLinksForModal(item.links);
+  // リンクの処理：複数のソースから統合
+  let links: { text: string; url: string; primary: boolean }[] = [];
+  
+  // modalContent.linksを優先
+  if (item.modalContent?.links && Array.isArray(item.modalContent.links)) {
+    links = item.modalContent.links.map((link, index) => ({
+      text: link.text,
+      url: link.url,
+      primary: index === 0,
+    }));
+  }
+  // 直接定義されたlinksを次に確認
+  else if ((item as any).links && Array.isArray((item as any).links)) {
+    links = (item as any).links.map((link: any, index: number) => ({
+      text: link.text,
+      url: link.url,
+      primary: index === 0,
+    }));
+  }
+  // item.linksオブジェクトから変換
+  else if (item.links && typeof item.links === 'object') {
+    links = transformLinksForModal(item.links);
+  }
+
+  // descriptionが二次元配列の場合は段落ごとに分けて保持
+  const description = item.modalContent?.description 
+    ? item.modalContent.description.map(paragraph => paragraph.join(' '))
+    : [item.description];
 
   return {
-    description: item.modalContent?.detailedDescription || [item.description],
-    notes: item.modalContent?.notes || [],
-    links: links,
+    description,
+    notes: [],
+    links,
   };
 };

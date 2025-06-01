@@ -10,17 +10,17 @@ interface DownloadItem {
   category: string;
   name: string;
   description: string;
-  status: "free" | "paid";
+  status?: "free" | "paid";
   price?: string;
   image?: string;
-  links: {
+  links?: {
     primary?: DownloadLink;
     secondary?: DownloadLink;
     tertiary?: DownloadLink;
-  };
+  } | DownloadLink[];
   modalContent?: {
-    detailedDescription: string[];
-    notes?: string[];
+    description: string[][];
+    links?: DownloadLink[];
   };
 }
 

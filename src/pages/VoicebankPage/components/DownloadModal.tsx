@@ -69,25 +69,6 @@ const ModalDescription = styled.div`
   }
 `;
 
-const ModalNotes = styled.div`
-  margin-top: 2rem;
-  padding: 1.5rem;
-  background: rgba(255, 255, 255, 0.05);
-  border-left: 3px solid ${theme.colors.primary.main};
-  border-radius: 8px;
-  font-size: 0.9rem;
-  animation: ${slideInUp} 0.7s ease-out;
-  
-  p {
-    margin-bottom: 0.5rem;
-    opacity: 0.9;
-    
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
-`;
-
 const ModalButtons = styled.div`
   display: flex;
   flex-direction: column;
@@ -210,15 +191,6 @@ const StructuredContent = ({ content }: { content: DownloadContent }) => {
           <p key={`desc-${text}`}>{text}</p>
         )) || <p>説明がありません</p>}
       </ModalDescription>
-
-      {content.notes && content.notes.length > 0 && (
-        <ModalNotes>
-          {content.notes.map((note) => (
-            <p key={`note-${note}`}>{note}</p>
-          ))}
-        </ModalNotes>
-      )}
-
       <ModalButtons>
         {content.links && content.links.length > 0 ? (
           content.links.map((link) => (

@@ -1,10 +1,8 @@
 import { type ReactNode, useRef } from "react";
 import {
-  CloseButton,
   ModalContainer,
   ModalContent,
   ModalImageSection,
-  ModalTitle,
 } from "./ModalContent";
 import { useModalFocusManager, useScrollLock } from "./ModalFocusManager";
 import { ModalOverlay } from "./ModalOverlay";
@@ -62,27 +60,14 @@ export default function Modal({
         aria-label={ariaLabel || title || "Modal dialog"}
         tabIndex={-1}
       >
-        <CloseButton
-          onClick={onClose}
-          $variant={variant}
-          aria-label="Close modal"
-          type="button"
-        >
-          ×
-        </CloseButton>
         {(hasImage || imageUrl) && (
           <ModalImageSection>
             {imageUrl && <img src={imageUrl} alt={title || "Modal image"} />}
           </ModalImageSection>
         )}
-        {variant === "download" && title ? (
-          <ModalContent $variant={variant}>
-            <ModalTitle $variant={variant}>{title}</ModalTitle>
-            {children}
-          </ModalContent>
-        ) : (
-          children
-        )}
+        <ModalContent $variant={variant} title={title}>
+          {children}
+        </ModalContent>
       </ModalContainer>
     </ModalOverlay>
   );

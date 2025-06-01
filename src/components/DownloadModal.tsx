@@ -47,47 +47,6 @@ const shimmer = keyframes`
   }
 `;
 
-// スタイルコンポーネント
-const ModalDescription = styled.div`
-  margin-bottom: 2rem;
-  line-height: 1.8;
-  color: ${theme.colors.text.secondary};
-  animation: ${slideInUp} 0.6s ease-out;
-  
-  p {
-    margin-bottom: 1rem;
-    position: relative;
-    padding-left: 1.5rem;
-    
-    &::before {
-      content: "▸";
-      position: absolute;
-      left: 0;
-      color: ${theme.colors.primary.main};
-      font-weight: bold;
-    }
-  }
-`;
-
-const ModalNotes = styled.div`
-  margin-top: 2rem;
-  padding: 1.5rem;
-  background: rgba(255, 255, 255, 0.05);
-  border-left: 3px solid ${theme.colors.primary.main};
-  border-radius: 8px;
-  font-size: 0.9rem;
-  animation: ${slideInUp} 0.7s ease-out;
-  
-  p {
-    margin-bottom: 0.5rem;
-    opacity: 0.9;
-    
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
-`;
-
 const ModalButtons = styled.div`
   display: flex;
   flex-direction: column;
@@ -209,20 +168,6 @@ const StructuredContent = ({
 
   return (
     <>
-      <ModalDescription>
-        {content.description?.map((text, index) => (
-          <p key={`desc-${text.slice(0, 20)}-${index}`}>{text}</p>
-        )) || <p>説明がありません</p>}
-      </ModalDescription>
-
-      {content.notes && content.notes.length > 0 && (
-        <ModalNotes>
-          {content.notes.map((note, index) => (
-            <p key={`note-${note.slice(0, 20)}-${index}`}>{note}</p>
-          ))}
-        </ModalNotes>
-      )}
-
       <ModalButtons>
         {content.links && content.links.length > 0 ? (
           content.links.map((link, index) => (
