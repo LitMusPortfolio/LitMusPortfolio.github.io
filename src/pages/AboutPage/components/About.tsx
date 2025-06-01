@@ -1,168 +1,121 @@
 import styled from "styled-components";
 import { Container, Section, SideDecoration } from "@/components/Layout/";
-import SectionTitle from "@/components/SectionTitle";
 import { theme } from "@/styles/theme";
 import { glassmorphism } from "@/styles/utils";
 
-const GridContainer = styled(Container)`
+const AboutContainer = styled(Container)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+`;
+
+const ContentCard = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-  align-items: start;
+  grid-template-columns: 300px 1fr;
+  gap: 3rem;
+  ${glassmorphism}
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 20px;
+  padding: 3rem;
+  backdrop-filter: blur(20px);
+  border: 2px solid rgba(139, 92, 246, 0.2);
+  max-width: 1000px;
+  width: 100%;
   
   @media (max-width: ${theme.breakpoints.tablet}) {
     grid-template-columns: 1fr;
-    gap: 3rem;
+    padding: 2rem;
+    gap: 2rem;
   }
 `;
 
-const ContentWrapper = styled.div`
-  position: relative;
-`;
-
-const Description = styled.p`
-  font-size: 1.2rem;
-  line-height: 1.8;
-  margin-bottom: 1.5rem;
-  color: rgba(255, 255, 255, 0.85);
-  font-weight: 300;
-`;
-
-const ProfileInfo = styled.div`
-  margin-top: 3rem;
-  ${glassmorphism}
-  padding: 2rem;
-  border-radius: 20px;
-  background: rgba(0, 0, 0, 0.3);
-`;
-
-const ProfileItem = styled.div`
+const CharacterSection = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
-  margin-bottom: 1.5rem;
-  padding-bottom: 1.5rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+`;
+
+const CharacterImageWrapper = styled.div`
+  position: relative;
+  width: 100%;
+  border-radius: 15px;
+  overflow: hidden;
+  border: 3px solid ${theme.colors.primary.main};
+  box-shadow: 0 0 30px rgba(139, 92, 246, 0.5);
   
-  &:last-child {
-    margin-bottom: 0;
-    padding-bottom: 0;
-    border-bottom: none;
-  }
-  
-  strong {
-    min-width: 140px;
-    color: ${theme.colors.primary.light};
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-  
-  span {
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 1.1rem;
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, transparent 60%, rgba(139, 92, 246, 0.3));
+    pointer-events: none;
   }
 `;
 
-const ImageWrapper = styled.div`
-  position: relative;
+const CharacterImage = styled.img`
+  width: 100%;
+  height: auto;
+  display: block;
+`;
+
+const ContentSection = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
+`;
+
+const AboutTitle = styled.h1`
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  background: linear-gradient(135deg, ${theme.colors.primary.light}, ${theme.colors.primary.main});
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 0.2em;
+  
+  @media (max-width: ${theme.breakpoints.mobile}) {
+    font-size: 2.5rem;
+  }
+`;
+
+const ProfileName = styled.h2`
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #fff;
+  font-weight: 600;
+`;
+
+const ProfileDescription = styled.p`
+  font-size: 1rem;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 2rem;
+  white-space: pre-line;
+`;
+
+const InfoList = styled.ul`
+  list-style: none;
+  padding: 0;
+  margin: 0;
+`;
+
+const InfoItem = styled.li`
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.7);
+  display: flex;
   align-items: center;
   
   &::before {
-    content: '';
-    position: absolute;
-    top: -40px;
-    left: -40px;
-    right: -40px;
-    bottom: -40px;
-    background: radial-gradient(circle at center, ${theme.colors.primary.main}, transparent);
-    opacity: 0.3;
-    filter: blur(60px);
-    z-index: -1;
-  }
-`;
-
-const ProfileImage = styled.img`
-  width: 100%;
-  max-width: 500px;
-  border-radius: 30px;
-  box-shadow: 
-    0 20px 60px rgba(139, 92, 246, 0.3),
-    0 0 0 2px rgba(139, 92, 246, 0.2);
-  transition: transform 0.3s ease;
-  
-  &:hover {
-    transform: scale(1.02);
-  }
-`;
-
-const SkillsSection = styled.div`
-  margin-top: 3rem;
-`;
-
-const SkillsTitle = styled.h3`
-  font-size: 1.3rem;
-  margin-bottom: 1.5rem;
-  color: ${theme.colors.primary.light};
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-`;
-
-const SkillsList = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-`;
-
-const SkillTag = styled.span`
-  padding: 0.7rem 1.5rem;
-  background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(139, 92, 246, 0.1));
-  border: 1px solid rgba(139, 92, 246, 0.3);
-  border-radius: 25px;
-  font-size: 0.95rem;
-  font-weight: 500;
-  transition: all 0.3s ease;
-  cursor: default;
-  
-  &:hover {
-    background: linear-gradient(135deg, rgba(139, 92, 246, 0.3), rgba(139, 92, 246, 0.2));
-    border-color: ${theme.colors.primary.main};
-    transform: translateY(-3px);
-    box-shadow: 0 5px 20px rgba(139, 92, 246, 0.3);
-  }
-`;
-
-const StatsContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-  margin-top: 3rem;
-  
-  @media (max-width: ${theme.breakpoints.mobile}) {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-`;
-
-const StatCard = styled.div`
-  ${glassmorphism}
-  padding: 1.5rem;
-  border-radius: 15px;
-  text-align: center;
-  background: rgba(0, 0, 0, 0.3);
-  
-  h4 {
-    font-size: 2rem;
-    color: ${theme.colors.primary.main};
-    margin-bottom: 0.5rem;
-  }
-  
-  p {
-    font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.7);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+    content: '▸';
+    color: ${theme.colors.primary.light};
+    margin-right: 0.5rem;
+    font-weight: bold;
   }
 `;
 
@@ -173,65 +126,45 @@ export default function About() {
         <img src="/010_PageSideTitleSvg/ABOUT.svg" alt="ABOUT" />
       </SideDecoration>
 
-      <GridContainer>
-        <ContentWrapper>
-          <SectionTitle>ABOUT</SectionTitle>
-          <Description>
-            LitMus9は音楽制作を中心に、イラストレーション、デザイン、
-            3DCG、映像制作など幅広いクリエイティブ活動を展開しています。
-          </Description>
-          <Description>
-            VOCALOIDプロデューサーとして、感情に訴える楽曲制作を心がけ、
-            聴く人の心に残る作品づくりを目指しています。
-          </Description>
+      <AboutContainer>
+        <ContentCard>
+          <CharacterSection>
+            <CharacterImageWrapper>
+              <CharacterImage src="/002_about/LitMusIcon.webp" alt="LitMus9" />
+            </CharacterImageWrapper>
+          </CharacterSection>
 
-          <ProfileInfo>
-            <ProfileItem>
-              <strong>活動開始</strong>
-              <span>2020年〜</span>
-            </ProfileItem>
-            <ProfileItem>
-              <strong>主な活動</strong>
-              <span>音楽制作 / イラスト / デザイン</span>
-            </ProfileItem>
-            <ProfileItem>
-              <strong>使用ソフト</strong>
-              <span>Logic Pro / Photoshop / Blender</span>
-            </ProfileItem>
-          </ProfileInfo>
+          <ContentSection>
+            <AboutTitle>ABOUT</AboutTitle>
+            <ProfileName>LitMus9</ProfileName>
+            <ProfileDescription>{`音楽 / イラスト / デザイン / 動画 / 合成音声用ライブラリ提供
 
-          <SkillsSection>
-            <SkillsTitle>Skills & Expertise</SkillsTitle>
-            <SkillsList>
-              <SkillTag>音楽制作</SkillTag>
-              <SkillTag>作詞・作曲</SkillTag>
-              <SkillTag>イラスト</SkillTag>
-              <SkillTag>3DCG</SkillTag>
-              <SkillTag>映像編集</SkillTag>
-              <SkillTag>デザイン</SkillTag>
-            </SkillsList>
-          </SkillsSection>
+2020年5月3日生まれ。
 
-          <StatsContainer>
-            <StatCard>
-              <h4>50+</h4>
-              <p>楽曲制作</p>
-            </StatCard>
-            <StatCard>
-              <h4>100+</h4>
-              <p>イラスト作品</p>
-            </StatCard>
-            <StatCard>
-              <h4>5年</h4>
-              <p>活動年数</p>
-            </StatCard>
-          </StatsContainer>
-        </ContentWrapper>
+22才あたりからかろうじてONIイラストを描き、
+イラストを描く中で、現在制作される動画を自作で制作を始める。
+また、VOCALOID等で音楽制作を始める。
 
-        <ImageWrapper>
-          <ProfileImage src="/002_about/LitMusIcon.webp" alt="LitMus9" />
-        </ImageWrapper>
-      </GridContainer>
+ジャンルに囚われず自分が好きなものに挑戦するのが好き。
+メインの活動を更新せず、音楽とイラストも描きも同じ熱量で活動している。
+
+合成音声に深く関係を持ち、オープンソースの各種GentleDataの提供からリリースまで
+あり、合成音声ライブラリ『離途』ではあらゆる音声調教からイラスト、動画制作
+までマルチに制作を行う。
+
+好きな食べ物は焼肉。`}</ProfileDescription>
+
+            <InfoList>
+              <InfoItem>音楽制作 - VOCALOID・合成音声楽曲の作詞作曲</InfoItem>
+              <InfoItem>
+                イラスト制作 - キャラクターデザイン・イラストレーション
+              </InfoItem>
+              <InfoItem>動画制作 - MV・PV制作</InfoItem>
+              <InfoItem>合成音声ライブラリ開発 - 『離途』開発者</InfoItem>
+            </InfoList>
+          </ContentSection>
+        </ContentCard>
+      </AboutContainer>
     </Section>
   );
 }

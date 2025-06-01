@@ -40,12 +40,6 @@ const DownloadCard = styled.article`
   overflow: hidden;
   ${cardHoverEffect}
   cursor: pointer;
-  
-  &:hover {
-    .download-icon {
-      transform: translate(-50%, -50%) scale(1.1);
-    }
-  }
 `;
 
 // サムネイル表示エリア（16:9アスペクト比）
@@ -87,29 +81,6 @@ const DefaultThumbnail = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-  }
-`;
-
-// ダウンロードアイコン
-const DownloadIcon = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 60px;
-  height: 60px;
-  background: rgba(139, 92, 246, 0.9);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-  
-  &::before {
-    content: '↓';
-    font-size: 24px;
-    color: white;
-    font-weight: bold;
   }
 `;
 
@@ -190,7 +161,6 @@ const DownloadItemCard = ({ item, onClick }: DownloadItemCardProps) => (
       ) : (
         <DefaultThumbnail />
       )}
-      <DownloadIcon className="download-icon" />
     </ThumbnailWrapper>
     <CardInfo>
       <CategoryTag $category={item.category}>{item.category}</CategoryTag>

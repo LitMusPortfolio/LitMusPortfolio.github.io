@@ -150,7 +150,7 @@ const HighlightedText = styled.span`
   font-size: 3rem;
   font-weight: bold;
   display: inline;
-  line-height: 1.3;
+  line-height: 1.6;
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
   white-space: nowrap;
