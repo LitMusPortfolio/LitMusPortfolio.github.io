@@ -29,19 +29,37 @@ const ContentWrapper = styled(Container)`
   z-index: 1;
 `;
 
-const StickyHeader = styled.div.attrs({ className: "works-sticky-header" })`
+const StickyHeader = styled.div`
   position: sticky;
   top: 95px; /* header + margin */
   z-index: 10;
   margin-bottom: 2rem;
+  padding: 2rem;
+  margin-left: -20px;
+  margin-right: -20px;
+  
+  /* グラスモーフィズム効果 */
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  
+  /* スムーズなトランジション */
+  transition: all 0.3s ease;
+  
+  /* タイトルとタブの視認性を確保 */
+  > * {
+    position: relative;
+    z-index: 1;
+  }
   
   @media (max-width: ${theme.breakpoints.mobile}) {
     top: 50px;
+    padding: 1.5rem;
   }
 `;
-StickyHeader.displayName = "WorksStickyHeader";
 
-const WorksGrid = styled.div.attrs({ className: "works-grid" })`
+const WorksGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 2rem;
@@ -51,9 +69,8 @@ const WorksGrid = styled.div.attrs({ className: "works-grid" })`
     gap: 1.5rem;
   }
 `;
-WorksGrid.displayName = "WorksGrid";
 
-const WorkCard = styled.article.attrs({ className: "work-card" })`
+const WorkCard = styled.article`
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -62,18 +79,16 @@ const WorkCard = styled.article.attrs({ className: "work-card" })`
   cursor: default;
   pointer-events: none;
 `;
-WorkCard.displayName = "WorkCard";
 
-const VideoWrapper = styled.div.attrs({ className: "work-video-wrapper" })`
+const VideoWrapper = styled.div`
   position: relative;
   width: 100%;
   padding-bottom: 55%; /* 16:9 アスペクト比 */
   background: #000;
   overflow: hidden;
 `;
-VideoWrapper.displayName = "WorkVideoWrapper";
 
-const VideoThumbnail = styled.img.attrs({ className: "work-video-thumbnail" })`
+const VideoThumbnail = styled.img`
   position: absolute;
   top: 0;
   left: 0;
@@ -81,17 +96,13 @@ const VideoThumbnail = styled.img.attrs({ className: "work-video-thumbnail" })`
   height: 100%;
   object-fit: cover;
 `;
-VideoThumbnail.displayName = "WorkVideoThumbnail";
 
-const WorkInfo = styled.div.attrs({ className: "work-info" })`
+const WorkInfo = styled.div`
   padding: 1.5rem;
   background: rgba(0, 0, 0, 0.5);
 `;
-WorkInfo.displayName = "WorkInfo";
 
-const WorkCategory = styled.span.attrs<{ $category: string }>((props) => ({
-  className: `work-category work-category--${props.$category}`,
-}))<{ $category: string }>`
+const WorkCategory = styled.span<{ $category: string }>`
   display: inline-block;
   padding: 0.3rem 0.8rem;
   background: ${({ $category }) => {
@@ -108,17 +119,15 @@ const WorkCategory = styled.span.attrs<{ $category: string }>((props) => ({
   font-weight: 600;
   letter-spacing: 0.05em;
 `;
-WorkCategory.displayName = "WorkCategory";
 
-const WorkTitle = styled.h3.attrs({ className: "work-title" })`
+const WorkTitle = styled.h3`
   color: #fff;
   font-size: 1.1rem;
   font-weight: 600;
   line-height: 1.4;
 `;
-WorkTitle.displayName = "WorkTitle";
 
-const WorkStats = styled.div.attrs({ className: "work-stats" })`
+const WorkStats = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -126,7 +135,6 @@ const WorkStats = styled.div.attrs({ className: "work-stats" })`
   font-size: 0.85rem;
   color: rgba(255, 255, 255, 0.7);
 `;
-WorkStats.displayName = "WorkStats";
 
 export default function Works() {
   const [activeTab, setActiveTab] = useState("all");
