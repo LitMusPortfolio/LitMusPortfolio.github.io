@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { theme } from "../../../styles/theme";
+import { theme } from "@/styles/theme";
 
 // 型定義
 interface ProfileData {
@@ -21,13 +21,14 @@ const ProfileContainer = styled.div`
 const ProfileItem = styled.div`
   display: flex;
   align-items: center;
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   color: ${theme.colors.text.primary};
   width: 100%;
 `;
 
 const ProfileLabel = styled.span`
-  font-size: 1.3rem;
+  font-weight: bold;
+  font-size: 1.5rem;
 `;
 
 const ProfileLine = styled.div`

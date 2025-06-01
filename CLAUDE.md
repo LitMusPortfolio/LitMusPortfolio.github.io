@@ -5,9 +5,6 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## 重要
 
 - サーバーは常に起動しています。自分で起動する必要はありません。
-- mcpサーバーを積極的に使用します。
-- `git add -A` ではなく `git add {ファイル名}` を行います。
-- 未使用変数は削除します。
 
 ## 開発コマンド
 

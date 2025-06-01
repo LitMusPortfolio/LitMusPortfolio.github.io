@@ -1,14 +1,11 @@
 import styled from "styled-components";
 import { ContentContainer, GridContainer } from "@/components/Layout";
 import SectionTitle from "@/components/SectionTitle";
+import TitleWithLine from "@/components/TitleWithLine";
 import { theme } from "@/styles/theme";
-import ProfileSection from "./ProfileSection";
-
 // 型定義
-interface ProfileData {
-  label: string;
-  value: string;
-}
+import type { ProfileData } from "@/types";
+import ProfileSection from "./ProfileSection";
 
 interface DemoSong {
   id: string;
@@ -59,48 +56,18 @@ const StyledContentContainer = styled(ContentContainer)`
   }
 `;
 
-// 共通タイトルコンテナ
-const TitleWithLineContainer = styled.div`
-  display: flex;
-  align-items: center;
-  width: 100%;
-  margin-bottom: 2rem;
-`;
-
-// 共通タイトルテキスト
+// タイトルテキスト
 const TitleText = styled.h2`
   font-size: 3rem;
   font-weight: bold;
   color: ${theme.colors.text.primary};
   margin: 0;
-  padding-right: 1rem;
   white-space: nowrap;
   
   @media (max-width: 768px) {
     font-size: 2rem;
   }
 `;
-
-// 共通罫線
-const TitleLine = styled.div`
-  flex: 1;
-  height: 2px;
-  background: ${theme.colors.text.primary};
-  opacity: 0.5;
-`;
-
-// 共通タイトル付き罫線コンポーネント
-interface TitleWithLineProps {
-  title: string;
-  className?: string;
-}
-
-const TitleWithLine: React.FC<TitleWithLineProps> = ({ title, className }) => (
-  <TitleWithLineContainer className={className}>
-    <TitleText>{title}</TitleText>
-    <TitleLine />
-  </TitleWithLineContainer>
-);
 
 // プロフィールコンテナ（全体）
 const ProfileWrapper = styled.div`
@@ -180,13 +147,17 @@ export default function LitCharacterSection() {
         </LeftSection>
         <StyledContentContainer>
           <SectionTitle>CHARACTER</SectionTitle>
-          <TitleWithLine title="離途" />
+          <TitleWithLine>
+            <TitleText>離途</TitleText>
+          </TitleWithLine>
           <ProfileWrapper>
             <ProfileSection data={PROFILE_DATA_LEFT} />
             <ProfileSection data={PROFILE_DATA_RIGHT} />
           </ProfileWrapper>
           <DemoSongSection>
-            <TitleWithLine title="デモソング" />
+            <TitleWithLine>
+              <TitleText>デモソング</TitleText>
+            </TitleWithLine>
             <DemoSongContainer>
               {DEMO_SONGS.map((song) => (
                 <DemoSongItem key={song.id}>

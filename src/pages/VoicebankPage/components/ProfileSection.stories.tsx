@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import ProfileSection from "./ProfileSection";
 
 const meta = {
-  title: "Pages/Voicebank/Components/ProfileSection",
+  title: "Components/ProfileSection",
   component: ProfileSection,
   parameters: {
     layout: "centered",

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Container, Section, SideDecoration } from "@/components/Layout";
 import SectionTitle from "@/components/SectionTitle";
+import TitleWithLine from "@/components/TitleWithLine";
 
 const RulesContent = styled.div`
   margin-top: 3rem;
@@ -38,31 +39,16 @@ const RuleItem = styled.li`
   }
 `;
 
-const TitleWithLineContainer = styled.div`
-  display: flex;
-  align-items: center;
-  width: 100%;
-  margin-bottom: 2rem;
-`;
-
 const RulesTitle = styled.h3`
   font-size: 2rem;
   font-weight: bold;
   color: ${({ theme }) => theme.colors.text};
   margin: 0;
-  padding-right: 1rem;
   white-space: nowrap;
   
   @media (max-width: 768px) {
     font-size: 1.5rem;
   }
-`;
-
-const TitleLine = styled.div`
-  flex: 1;
-  height: 2px;
-  background: ${({ theme }) => theme.colors.text};
-  opacity: 0.5;
 `;
 
 export default function LitRulesSection() {
@@ -75,10 +61,9 @@ export default function LitRulesSection() {
       <Container>
         <SectionTitle>RULES</SectionTitle>
         <RulesContent>
-          <TitleWithLineContainer>
+          <TitleWithLine>
             <RulesTitle>禁止事項</RulesTitle>
-            <TitleLine />
-          </TitleWithLineContainer>
+          </TitleWithLine>
           <RulesList>
             <RuleItem>音源の二次配布</RuleItem>
             <RuleItem>許諾事項に記載のない形での利用</RuleItem>
@@ -93,10 +78,9 @@ export default function LitRulesSection() {
               SNS等の公共の場での投稿で、性行為・性器を露出するなど過激なアダルト的表現
             </RuleItem>
           </RulesList>
-          <TitleWithLineContainer>
+          <TitleWithLine>
             <RulesTitle>許諾事項</RulesTitle>
-            <TitleLine />
-          </TitleWithLineContainer>
+          </TitleWithLine>
           <RulesList>
             <RuleItem>二次創作</RuleItem>
             <RuleItem>コスプレ</RuleItem>
