@@ -1,11 +1,11 @@
-import React from "react";
+import type { FC, ReactNode } from "react";
 
 /**
  * テキスト内の英数字部分を<span class="en">で囲む
  * @param text 処理するテキスト
  * @returns 処理されたReact要素
  */
-export const wrapAlphanumeric = (text: string): React.ReactNode => {
+export const wrapAlphanumeric = (text: string): ReactNode => {
   // 英数字とそれ以外を分離する正規表現
   const parts = text.split(/([A-Za-z0-9\s]+)/g);
 
@@ -32,7 +32,7 @@ interface StyledHeadingProps {
   className?: string;
 }
 
-export const StyledHeading: React.FC<StyledHeadingProps> = ({
+export const StyledHeading: FC<StyledHeadingProps> = ({
   level,
   children,
   className,

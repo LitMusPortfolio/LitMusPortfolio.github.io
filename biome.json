@@ -23,9 +23,6 @@
         "noUnusedLabels": "error",
         "noUnusedFunctionParameters": "error",
         "noUnusedPrivateClassMembers": "error"
-      },
-      "style": {
-        "useImportType": "off"
       }
     }
   },
