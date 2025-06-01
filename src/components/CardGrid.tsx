@@ -45,7 +45,7 @@ export const CardTag = styled.span`
 `;
 
 // カード画像
-export const CardImage = styled.img`
+const _CardImage = styled.img`
   width: 100%;
   height: 250px;
   object-fit: cover;
@@ -77,7 +77,7 @@ export const CardDescription = styled.p`
 `;
 
 // カードオーバーレイ
-export const CardOverlay = styled.div`
+const _CardOverlay = styled.div`
   position: absolute;
   top: 0;
   left: 0;
@@ -100,10 +100,6 @@ export const CardOverlay = styled.div`
     color: ${theme.colors.primary.main};
   }
 `;
-
-export { default as DownloadModal } from "./DownloadModal";
-// 共通Modalコンポーネントを使用
-export { default as Modal, ModalContent, ModalTitle } from "./Modal";
 
 // タブコンポーネント
 export const TabContainer = styled.div`
@@ -138,7 +134,7 @@ interface CardGridLayoutProps {
 }
 
 // レイアウトコンポーネント
-export function CardGridLayout({
+function _CardGridLayout({
   children,
   title,
   sideDecorationSrc,

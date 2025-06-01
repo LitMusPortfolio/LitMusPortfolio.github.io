@@ -19,19 +19,6 @@ export interface SocialLink {
   icon: string;
 }
 
-export interface DownloadItem {
-  title: string;
-  description: string;
-  downloadUrl: string;
-  requirements?: string[];
-}
-
-export interface PageSection {
-  title: string;
-  subtitle?: string;
-  content: string | React.ReactNode;
-}
-
 // カテゴリーの色定義
 export const categoryColors: Record<
   string,

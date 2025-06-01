@@ -107,7 +107,7 @@ const CloseButton = styled.button<{ $variant?: string }>`
 `;
 
 // モーダルコンテンツエリア
-export const ModalContent = styled.div<{ $variant?: string }>`
+const ModalContent = styled.div<{ $variant?: string }>`
   padding: ${(props) => (props.$variant === "download" ? "2.5rem" : "3rem")};
   overflow-y: auto;
   max-height: ${(props) => (props.$variant === "download" ? "calc(90vh - 60px)" : "100%")};
@@ -140,7 +140,7 @@ export const ModalContent = styled.div<{ $variant?: string }>`
 `;
 
 // モーダルタイトル
-export const ModalTitle = styled.h3`
+const ModalTitle = styled.h3`
   font-size: 2.5rem;
   margin-bottom: 1.5rem;
   color: ${theme.colors.primary.main};
@@ -151,7 +151,7 @@ export const ModalTitle = styled.h3`
 `;
 
 // モーダル画像エリア（オプション）
-export const ModalImageSection = styled.div`
+const ModalImageSection = styled.div`
   flex: 0 0 350px;
   background: linear-gradient(
     135deg,

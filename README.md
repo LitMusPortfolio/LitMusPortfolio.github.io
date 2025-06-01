@@ -36,3 +36,44 @@ npm run preview
 - [TypeScript](https://www.typescriptlang.org/)
 - [styled-components](https://styled-components.com/)
 - [Biome](https://biomejs.dev/) (Linter/Formatter)
+- [Storybook](https://storybook.js.org/) (コンポーネントカタログ)
+- [storycap](https://github.com/reg-viz/storycap) (スクリーンショット撮影)
+- [reg-suit](https://github.com/reg-viz/reg-suit) (ビジュアルリグレッションテスト)
+
+## Storybook とビジュアルリグレッションテスト
+
+### Storybook の起動
+
+```bash
+# Storybook の起動
+npm run storybook
+```
+
+### ビジュアルリグレッションテスト
+
+複数のビューポート（iPhone 6, iPhone 12, iPad, Desktop, Full HD）でスクリーンショットを撮影し、変更を検出します。
+
+```bash
+# スクリーンショットの撮影
+npm run screenshot
+
+# ビジュアルリグレッションテストの実行
+npm run visual-test
+
+# 期待値の更新（新しいスクリーンショットを正とする）
+npm run visual-test:update
+```
+
+### ビューポート設定
+
+各ストーリーで個別にビューポートを設定できます：
+
+```typescript
+export const MyStory: Story = {
+  parameters: {
+    viewport: {
+      viewports: ["iPhone 6", "iPad", "Desktop"],
+    },
+  },
+};
+```

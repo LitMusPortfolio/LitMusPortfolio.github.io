@@ -1,0 +1,26 @@
+{
+  "core": {
+    "workingDir": ".reg",
+    "actualDir": "actual",
+    "expectedDir": "expected",
+    "diffDir": "diff",
+    "reportDir": "report",
+    "ximgdiff": {
+      "invocationType": "client"
+    }
+  },
+  "plugins": {
+    "reg-keygen-git-hash-plugin": {
+      "commitHash": "HEAD"
+    },
+    "reg-simple-storage-plugin": {
+      "bucketName": ".reg-storage"
+    },
+    "reg-notify-slack-plugin": false,
+    "reg-notify-github-plugin": false
+  },
+  "notification": {
+    "prComment": false,
+    "prCommentBehavior": "default"
+  }
+}

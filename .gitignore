@@ -28,3 +28,10 @@ dist-ssr
 .claude/
 .cursor/
 .specstory/
+
+storybook-static/
+
+# reg-suit
+.reg/
+.reg-storage/
+__screenshots__/
