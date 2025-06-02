@@ -36,22 +36,22 @@ const CharacterImage = styled(LazyImage)`
 
 const RightSection = styled.div`
   color: ${({ theme }) => theme.colors.text.primary};
-  padding-right: ${({ theme }) => theme.space['2xl']};
+  padding-right: ${({ theme }) => theme.space["2xl"]};
 `;
 
 const ProfileTitle = styled.h2`
-  font-size: ${({ theme }) => theme.typography.fontSize['4xl']};
+  font-size: ${({ theme }) => theme.typography.fontSize["4xl"]};
   font-weight: 700;
   margin-bottom: ${({ theme }) => theme.space.sm};
   letter-spacing: ${({ theme }) => theme.typography.heading.letterSpacingEn};
   
   @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-    font-size: ${({ theme }) => theme.typography.fontSize['3xl']};
+    font-size: ${({ theme }) => theme.typography.fontSize["3xl"]};
   }
 `;
 
 const ProfileSubtitle = styled.p`
-  font-size: 1.3rem;
+  font-size: ${({ theme }) => theme.typography.fontSize.lg};
   color: ${({ theme }) => theme.colors.text.secondary};
   margin-bottom: ${({ theme }) => theme.space.xl};
   padding-bottom: ${({ theme }) => theme.space.md};
@@ -59,7 +59,7 @@ const ProfileSubtitle = styled.p`
 `;
 
 const ProfileDescription = styled.div`
-  font-size: 1.2rem;
+  font-size: ${({ theme }) => theme.typography.fontSize.lg};
   line-height: 2;
   color: ${({ theme }) => `rgba(255, 255, 255, ${theme.opacity[95]})`};
   

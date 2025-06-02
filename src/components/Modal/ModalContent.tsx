@@ -11,7 +11,7 @@ interface ModalContentProps {
 }
 
 const ContentContainer = styled.div<{ $variant?: string }>`
-  padding: ${(props) => (props.$variant === "download" ? theme.space['2xl'] : theme.space.xl)};
+  padding: ${(props) => (props.$variant === "download" ? theme.space["2xl"] : theme.space.xl)};
 `;
 
 export const ModalContent = ({

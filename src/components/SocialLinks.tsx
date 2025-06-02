@@ -16,9 +16,17 @@ const SocialLinksContainer = styled.div`
 const SocialLinkItem = styled.a<{ $size: string }>`
   display: inline-block;
   width: ${({ $size, theme }) =>
-    $size === "small" ? theme.sizes.icon.md : $size === "large" ? theme.sizes.icon.xl : theme.sizes.icon.lg};
+    $size === "small"
+      ? theme.sizes.icon.md
+      : $size === "large"
+        ? theme.sizes.icon.xl
+        : theme.sizes.icon.lg};
   height: ${({ $size, theme }) =>
-    $size === "small" ? theme.sizes.icon.md : $size === "large" ? theme.sizes.icon.xl : theme.sizes.icon.lg};
+    $size === "small"
+      ? theme.sizes.icon.md
+      : $size === "large"
+        ? theme.sizes.icon.xl
+        : theme.sizes.icon.lg};
   transition: transform ${({ theme }) => theme.animation.duration.fast} ${({ theme }) => theme.animation.easing.ease};
   
   &:hover {

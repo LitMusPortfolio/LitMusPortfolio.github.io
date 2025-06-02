@@ -16,20 +16,20 @@ const HomeSection = styled.section`
 const HomeContent = styled.div`
   position: absolute;
   left: ${({ theme }) => theme.space.xl};
-  bottom: 10rem;
+  bottom: ${({ theme }) => theme.space["4xl"]};
   z-index: 1;
   text-align: left;
   color: ${({ theme }) => theme.colors.text.primary};
   
   @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
     left: ${({ theme }) => theme.space.lg};
-    bottom: 8rem;
+    bottom: ${({ theme }) => theme.space["4xl"]};
   }
 `;
 
 const MainTitle = styled.h1`
   font-family: 'Montserrat', sans-serif;
-  font-size: clamp(${({ theme }) => theme.typography.fontSize['3xl']}, 8vw, 8rem);
+  font-size: clamp(${({ theme }) => theme.typography.fontSize["3xl"]}, 8vw, 8rem);
   font-weight: 900;
   letter-spacing: 0.15em;
   margin: 0;
@@ -41,7 +41,7 @@ const TagsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.space.sm};
-  margin-top: 2.5rem;
+  margin-top: ${({ theme }) => theme.space["2xl"]};
 `;
 
 const TagLine = styled.div`
@@ -55,23 +55,23 @@ const TagLine = styled.div`
 const SocialLinksWrapper = styled.div`
   position: absolute;
   right: ${({ theme }) => theme.space.xl};
-  bottom: 10rem;
+  bottom: ${({ theme }) => theme.space["4xl"]};
   z-index: 10;
   
   @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
     right: ${({ theme }) => theme.space.lg};
-    bottom: 10rem;
+    bottom: ${({ theme }) => theme.space["4xl"]};
   }
 `;
 
 const VoicevoxBanner = styled.div`
   position: absolute;
   right: ${({ theme }) => theme.space.xl};
-  top: ${({ theme }) => theme.space['3xl']};
+  top: ${({ theme }) => theme.space["3xl"]};
   
   @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
     right: ${({ theme }) => theme.space.lg};
-    top: 5rem;
+    top: ${({ theme }) => theme.space["3xl"]};
   }
   
   opacity: ${({ theme }) => theme.opacity[90]};

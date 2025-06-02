@@ -4,7 +4,7 @@ import { theme } from "@/styles/theme";
 // 基本セクションコンポーネント
 export const Section = styled.section`
   min-height: 100vh;
-  padding: ${theme.space['2xl']} 0;
+  padding: ${theme.space["2xl"]} 0;
   position: relative;
   background-size: cover;
   background-position: center;
