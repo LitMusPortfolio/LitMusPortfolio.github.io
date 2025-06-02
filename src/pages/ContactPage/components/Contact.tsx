@@ -37,7 +37,7 @@ export default function Contact() {
       <Container>
         <SectionTitle>CONTACT</SectionTitle>
 
-        <GridContainer $columns="0.6fr 0.4fr" $gap="${theme.space.lg}">
+        <GridContainer $columns="0.6fr 0.4fr">
           <LeftSection>
             {NOTICES.map((notice) => (
               <div key={notice.title}>

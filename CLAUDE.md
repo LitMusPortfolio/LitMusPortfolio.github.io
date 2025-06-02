@@ -26,7 +26,7 @@ Git worktreeは、同じリポジトリで複数のブランチを同時に扱�
 ### よく使うコマンド
 ```bash
 # worktreeの作成
-git worktree add worktrees/feature -b feature/new-feature
+git worktree add -b feature/new-feature worktrees/feature
 
 # worktreeの一覧表示
 git worktree list
