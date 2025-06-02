@@ -92,8 +92,8 @@ describe("LazyImage", () => {
     expect(screen.queryByRole("img", { name: "Test image" })).not.toBeInTheDocument();
 
     // IntersectionObserver のコールバックを実行
-    const entries = [{ isIntersecting: true, target: {} }];
-    intersectionObserverCallback(entries as any, {} as any);
+    const entries = [{ isIntersecting: true, target: {} }] as IntersectionObserverEntry[];
+    intersectionObserverCallback(entries, {} as IntersectionObserver);
 
     // 画像が表示される
     await waitFor(() => {

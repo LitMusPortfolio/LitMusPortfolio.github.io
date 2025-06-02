@@ -45,8 +45,8 @@ describe("ImageCacheManager", () => {
 
     it("新しい画像をプリロードする", async () => {
       const mockImage = {
-        onload: null as any,
-        onerror: null as any,
+        onload: null as ((this: GlobalEventHandlers, ev: Event) => void) | null,
+        onerror: null as ((this: GlobalEventHandlers, ev: Event | string) => void) | null,
         src: "",
       };
 
@@ -76,8 +76,8 @@ describe("ImageCacheManager", () => {
 
     it("同じ画像の重複読み込みでImageコンストラクタは1回のみ呼ばれる", async () => {
       const mockImage = {
-        onload: null as any,
-        onerror: null as any,
+        onload: null as ((this: GlobalEventHandlers, ev: Event) => void) | null,
+        onerror: null as ((this: GlobalEventHandlers, ev: Event | string) => void) | null,
         src: "",
       };
 
@@ -99,8 +99,8 @@ describe("ImageCacheManager", () => {
 
     it("読み込みエラー時は適切にエラーを返す", async () => {
       const mockImage = {
-        onload: null as any,
-        onerror: null as any,
+        onload: null as ((this: GlobalEventHandlers, ev: Event) => void) | null,
+        onerror: null as ((this: GlobalEventHandlers, ev: Event | string) => void) | null,
         src: "",
       };
 
@@ -145,7 +145,7 @@ describe("ImageCacheManager", () => {
         .mockResolvedValueOnce(undefined);
 
       // エラーをキャッチしてログに出力することを確認
-      const consoleWarnSpy = vi.spyOn(console, "warn").mockImplementation();
+      const consoleWarnSpy = vi.spyOn(console, "warn").mockImplementation(() => {});
 
       await imageCache.preloadImages(sources);
 

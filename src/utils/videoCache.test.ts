@@ -77,7 +77,14 @@ describe("VideoCacheManager", () => {
   });
 
   describe("preloadVideo", () => {
-    let mockVideo: any;
+    let mockVideo: {
+      preload: string;
+      addEventListener: ReturnType<typeof vi.fn>;
+      src: string;
+      duration: number;
+      videoWidth: number;
+      videoHeight: number;
+    };
 
     beforeEach(() => {
       mockVideo = {
@@ -101,7 +108,7 @@ describe("VideoCacheManager", () => {
 
       // loadedmetadataイベントリスナーを取得して実行
       const loadedMetadataCall = mockVideo.addEventListener.mock.calls.find(
-        (call: any[]) => call[0] === "loadedmetadata",
+        (call) => call[0] === "loadedmetadata",
       );
       loadedMetadataCall[1]();
 
@@ -132,7 +139,7 @@ describe("VideoCacheManager", () => {
 
       // loadedmetadataを実行
       const loadedMetadataCall = mockVideo.addEventListener.mock.calls.find(
-        (call: any[]) => call[0] === "loadedmetadata",
+        (call) => call[0] === "loadedmetadata",
       );
       loadedMetadataCall[1]();
 
@@ -148,7 +155,7 @@ describe("VideoCacheManager", () => {
 
       // errorイベントリスナーを取得して実行
       const errorCall = mockVideo.addEventListener.mock.calls.find(
-        (call: any[]) => call[0] === "error",
+        (call) => call[0] === "error",
       );
       errorCall[1]();
 
@@ -185,7 +192,7 @@ describe("VideoCacheManager", () => {
         .mockRejectedValueOnce(new Error("Failed"))
         .mockResolvedValueOnce(undefined);
 
-      const consoleWarnSpy = vi.spyOn(console, "warn").mockImplementation();
+      const consoleWarnSpy = vi.spyOn(console, "warn").mockImplementation(() => {});
 
       await videoCache.preloadVideos(sources);
 

@@ -49,27 +49,27 @@ describe("typography utils", () => {
 
       // 実際の分割結果を確認
       expect(result).toHaveLength(9);
-      expect(result[0]).toBe("");
-      expect(result[1]).toMatchObject({
+      expect((result as any)[0]).toBe("");
+      expect((result as any)[1]).toMatchObject({
         type: "span",
         props: { className: "en", children: "UTAU" },
       });
-      expect(result[2]).toBe("ボイスバンク「離途");
-      expect(result[3]).toMatchObject({
+      expect((result as any)[2]).toBe("ボイスバンク「離途");
+      expect((result as any)[3]).toMatchObject({
         type: "span",
         props: { className: "en", children: " Lit" },
       });
-      expect(result[4]).toBe("」");
-      expect(result[5]).toMatchObject({
+      expect((result as any)[4]).toBe("」");
+      expect((result as any)[5]).toMatchObject({
         type: "span",
         props: { className: "en", children: "ver1" },
       });
-      expect(result[6]).toBe(".");
-      expect(result[7]).toMatchObject({
+      expect((result as any)[6]).toBe(".");
+      expect((result as any)[7]).toMatchObject({
         type: "span",
         props: { className: "en", children: "0 " },
       });
-      expect(result[8]).toBe("配布中！");
+      expect((result as any)[8]).toBe("配布中！");
     });
   });
 
