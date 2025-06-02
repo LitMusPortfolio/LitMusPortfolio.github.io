@@ -97,6 +97,16 @@ class VideoCacheManager {
     return loadPromise;
   }
 
+  // 複数のビデオを一度にプリロード
+  async preloadVideos(sources: string[]): Promise<void> {
+    const promises = sources.map((src) =>
+      this.preloadVideo(src).catch((err) => {
+        console.warn(`Failed to preload video: ${src}`, err);
+      }),
+    );
+    await Promise.all(promises);
+  }
+
   // キャッシュをクリア（必要に応じて）
   clearCache(): void {
     this.cache.clear();
