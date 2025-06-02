@@ -18,12 +18,18 @@ const SectionTitleWrapper = styled.h1`
 
 interface SectionTitleProps {
   children: string;
+  isPurple?: boolean;
 }
 
-export default function SectionTitle({ children }: SectionTitleProps) {
+export default function SectionTitle({
+  children,
+  isPurple = false,
+}: SectionTitleProps) {
   return (
     <SectionTitleWrapper>
-      <TextWithBackground>{children}</TextWithBackground>
+      <TextWithBackground isPurple={isPurple || false}>
+        {children}
+      </TextWithBackground>
     </SectionTitleWrapper>
   );
 }

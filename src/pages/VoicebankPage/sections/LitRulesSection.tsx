@@ -68,7 +68,7 @@ export default function LitRulesSection() {
       </SideDecoration>
 
       <Container>
-        <SectionTitle>RULES</SectionTitle>
+        <SectionTitle isPurple>RULES</SectionTitle>
         {RULES.map((rule) => (
           <div key={rule.title}>
             <TitleWithLine title={rule.title} />

@@ -142,7 +142,7 @@ export default function LitCharacterSection() {
           />
         </LeftSection>
         <StyledContentContainer>
-          <SectionTitle>CHARACTER</SectionTitle>
+          <SectionTitle isPurple>CHARACTER</SectionTitle>
           <TitleWithLine title="離途" />
           <ProfileWrapper>
             <ProfileSection data={PROFILE_DATA_LEFT} />

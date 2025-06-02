@@ -26,7 +26,7 @@ export const theme = {
       },
     },
     text: {
-      primary: "#ffffff",
+      primary: "#eeeeee",
       secondary: "rgba(255, 255, 255, 0.9)",
       muted: "rgba(255, 255, 255, 0.7)",
     },
@@ -66,13 +66,13 @@ export const theme = {
     heading: {
       fontFamilyJa: "'Source Han Sans JP', 'Noto Sans JP', sans-serif",
       fontFamilyEn: "'Montserrat', sans-serif",
-      fontWeight: 900,
+      fontWeight: 600,
       letterSpacingJa: "0.07em", // 字間0.7
       letterSpacingEn: "0.1em", // 字間1.0
     },
     body: {
       fontFamily: "'Zen Kaku Gothic New', 'Noto Sans JP', sans-serif",
-      fontWeight: 900,
+      fontWeight: 600,
       letterSpacing: "0.06em", // 字間0.6
       lineHeight: 1.8,
     },
@@ -80,13 +80,15 @@ export const theme = {
     fontSize: {
       xs: "0.7rem", // 極小
       sm: "0.85rem", // 小
-      base: "1.3rem", // 基本
+      base: "0.90625rem", // 基本
       lg: "1.5rem", // 大
       xl: "2rem", // 特大
       "2xl": "2.5rem", // 超特大
       "3xl": "3rem", // 巨大
       "4xl": "4rem", // 超巨大
       "5xl": "6rem", // 最大
+      h1: "4rem",
+      h2: "1.5rem",
     },
   },
   // スペーシング（余白）

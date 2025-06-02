@@ -16,7 +16,7 @@ export const GlobalStyles = createGlobalStyle`
     margin: 0;
     padding: 0;
     font-family: 'ZenKaku Gothic New', 'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    font-weight: 900;
+    font-weight: 600;
     letter-spacing: 0.06em; /* 字間0.6 = 0.06em */
     background: #000;
     overflow-x: hidden;
@@ -37,8 +37,6 @@ export const GlobalStyles = createGlobalStyle`
   /* 見出しスタイル - 日本語と英数字で異なるフォント */
   h1, h2, h3, h4, h5, h6 {
     margin: 0;
-    font-family: 'Source Han Sans JP', 'Noto Sans JP', sans-serif;
-    font-weight: 900;
     letter-spacing: 0.07em; /* 字間0.7 = 0.07em */
     line-height: 1.4;
   }
@@ -56,14 +54,13 @@ export const GlobalStyles = createGlobalStyle`
   h4 span[lang="en"], h5 span[lang="en"], h6 span[lang="en"],
   h1 .en, h2 .en, h3 .en, h4 .en, h5 .en, h6 .en {
     font-family: 'Montserrat', sans-serif;
-    font-weight: 900;
+    font-weight: 600;
     letter-spacing: 0.1em; /* 字間1.0 = 0.1em */
   }
 
   /* 本文スタイル */
   p, div, span, li, td, th {
     font-family: 'ZenKaku Gothic New', 'Noto Sans JP', sans-serif;
-    font-weight: 900;
     letter-spacing: 0.06em; /* 字間0.6 = 0.06em */
     line-height: 1.8;
   }

@@ -40,7 +40,7 @@ export default function LitDownloadSection() {
         </SideDecoration>
 
         <Container>
-          <SectionTitle>DOWNLOAD</SectionTitle>
+          <SectionTitle isPurple>DOWNLOAD</SectionTitle>
 
           <FilterTabs
             tabs={[...TABS]}
