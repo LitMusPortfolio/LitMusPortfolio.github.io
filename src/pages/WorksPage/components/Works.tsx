@@ -6,8 +6,7 @@ import { Container, Section } from "@/components/Layout";
 import LazyImage from "@/components/LazyImage";
 import SectionTitle from "@/components/SectionTitle";
 import { theme } from "@/styles/theme";
-import { categoryColors } from "@/types";
-import { worksData } from "./WorksAssets";
+import { type Category, worksData } from "../data/WorksAssets";
 
 const WorksSection = styled(Section)`
   background-image: url('/LitMusBG.webp');
@@ -36,6 +35,7 @@ const WorkCard = styled.article`
   overflow: hidden;
   cursor: default;
   pointer-events: none;
+  height: 23rem;
 `;
 
 const VideoWrapper = styled.div`
@@ -63,24 +63,7 @@ const VideoThumbnail = styled(LazyImage)`
 const WorkInfo = styled.div`
   padding: 1.5rem;
   background: rgba(0, 0, 0, 0.5);
-`;
-
-const WorkCategory = styled.span<{ $category: string }>`
-  display: inline-block;
-  padding: 0.3rem 0.8rem;
-  background: ${({ $category }) => {
-    const colors = categoryColors[$category] || {
-      primary: "#8a61ff",
-      secondary: "#a78bff",
-    };
-    return `linear-gradient(135deg, ${colors.primary}40, ${colors.secondary}40)`;
-  }};
-  border-radius: 15px;
-  font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.9);
-  margin-bottom: 0.5rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
+  height: 100%;
 `;
 
 const WorkTitle = styled.h3`
@@ -90,16 +73,7 @@ const WorkTitle = styled.h3`
   line-height: 1.4;
 `;
 
-const WorkStats = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 0.8rem;
-  font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.7);
-`;
-
-const WORK_TABS: TabItem[] = [
+const WORK_TABS: TabItem<Category | "all">[] = [
   { id: "all", label: "ALL" },
   { id: "music", label: "MUSIC" },
   { id: "illustration", label: "ILLUST" },
@@ -114,7 +88,9 @@ export default function Works() {
   const filteredWorks = useMemo(() => {
     return activeTab === "all"
       ? worksData
-      : worksData.filter((work) => work.type === activeTab);
+      : worksData.filter((work) =>
+          work.category.includes(activeTab as Category),
+        );
   }, [activeTab]);
 
   return (
@@ -137,21 +113,16 @@ export default function Works() {
           renderItem={(work) => (
             <WorkCard>
               <VideoWrapper>
-                <VideoThumbnail src={work.image} alt={work.title} />
+                <VideoThumbnail src={work.thumbnailPath} alt={work.title} />
               </VideoWrapper>
               <WorkInfo>
-                <WorkCategory $category={work.category}>
-                  {work.category}
-                </WorkCategory>
                 <WorkTitle>{work.title}</WorkTitle>
-                <WorkStats>
-                  <span>{work.views}</span>
-                  <span>{work.date}</span>
-                </WorkStats>
+                <p>{work.description}</p>
+                <p>{work.requester}</p>
               </WorkInfo>
             </WorkCard>
           )}
-          keyExtractor={(work) => work.id}
+          keyExtractor={(work) => work.title}
           id="works-grid"
           role="tabpanel"
           aria-label="Works grid"
