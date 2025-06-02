@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { theme } from "../../styles/theme";
+import { StyledButton } from "./StyledButton";
 
 // Interfaceの定義
 interface TabConfig {
@@ -43,41 +44,8 @@ const TabList = styled.div`
   }
 `;
 
-const TabButton = styled.button<{ $active: boolean }>`
-  font-family: ${theme.typography.body.fontFamily};
-  font-size: ${theme.typography.fontSize.sm};
-  font-weight: ${theme.typography.body.fontWeight};
-  color: ${(props) =>
-    props.$active ? theme.colors.primary : theme.colors.text.primary};
-  background: transparent;
-  border: none;
-  padding: ${theme.space.sm} ${theme.space.md};
-  cursor: pointer;
-  position: relative;
-  white-space: nowrap;
-  transition: color ${theme.animation.duration.base} ease;
-  
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: ${theme.colors.primary};
-    transform: scaleX(${(props) => (props.$active ? 1 : 0)});
-    transition: transform ${theme.animation.duration.base} ease;
-  }
-  
-  &:hover {
-    color: ${theme.colors.primary};
-  }
-  
-  &:focus-visible {
-    outline: 2px solid ${theme.colors.primary};
-    outline-offset: 2px;
-  }
-`;
+// StyledButtonをタブ用にカスタマイズ
+const TabButton = StyledButton;
 
 const TabPanel = styled.div`
   width: 100%;

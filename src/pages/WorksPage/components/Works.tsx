@@ -37,13 +37,8 @@ const StickyHeader = styled.div`
   padding: 2rem;
   margin-left: -20px;
   margin-right: -20px;
-  
-  /* グラスモーフィズム効果 */
-  background: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  
+  width: 100%;
+
   /* スムーズなトランジション */
   transition: all 0.3s ease;
   
