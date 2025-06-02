@@ -23,27 +23,27 @@ export const StyledButton = styled.button<StyledButtonProps>`
     &::after {
       content: '';
       position: absolute;
-      bottom: -2px;
+      bottom: -${theme.borders.width.base};
       left: 0;
       right: 0;
-      height: 2px;
-      background: ${theme.colors.primary};
+      height: ${theme.borders.width.base};
+      background: ${theme.colors.primary.main};
       transform: scaleX(${props.$active ? 1 : 0});
       transition: transform ${theme.animation.duration.base} ease;
     }
   `}
   
   &:hover {
-    color: ${theme.colors.primary};
+    color: ${theme.colors.primary.main};
   }
   
   &:focus-visible {
-    outline: 2px solid ${theme.colors.primary};
-    outline-offset: 2px;
+    outline: ${theme.borders.width.base} solid ${theme.colors.primary.main};
+    outline-offset: ${theme.borders.width.base};
   }
   
   &:disabled {
-    opacity: 0.6;
+    opacity: ${theme.opacity[60]};
     cursor: not-allowed;
   }
 `;
@@ -60,18 +60,18 @@ export const ButtonVariants = {
   // プライマリボタン（塗りつぶし）
   Primary: styled(StyledButton)`
     background: ${(props) =>
-      props.$active ? theme.colors.primary : "transparent"};
-    border: 1px solid ${theme.colors.primary};
+      props.$active ? theme.colors.primary.main : "transparent"};
+    border: ${theme.borders.width.thin} solid ${theme.colors.primary.main};
     
     &:hover {
-      background: ${theme.colors.primary};
-      color: #fff;
+      background: ${theme.colors.primary.main};
+      color: ${theme.colors.text.primary};
     }
   `,
 
   // ラウンドボタン
   Rounded: styled(StyledButton)`
-    border-radius: 9999px;
+    border-radius: ${theme.borders.radius.full};
     padding: ${theme.space.sm} ${theme.space.lg};
   `,
 
@@ -85,11 +85,11 @@ export const ButtonVariants = {
   // ゴーストボタン（枠線のみ）
   Ghost: styled(StyledButton)`
     background: transparent;
-    border: 1px solid ${theme.colors.primary};
+    border: ${theme.borders.width.thin} solid ${theme.colors.primary.main};
     
     &:hover {
-      background: rgba(255, 255, 255, 0.05);
-      border-color: ${theme.colors.primary};
+      background: rgba(255, 255, 255, ${theme.opacity[5]});
+      border-color: ${theme.colors.primary.main};
     }
   `,
 };

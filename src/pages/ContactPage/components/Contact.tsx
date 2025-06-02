@@ -16,7 +16,7 @@ const RightSection = styled.div`
 const ContentGrid = styled.div`
   display: grid;
   grid-template-columns: 0.6fr 0.4fr;
-  gap: 2rem;
+  gap: ${({ theme }) => theme.space.lg};
 `;
 
 const NOTICES = [

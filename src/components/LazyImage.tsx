@@ -23,7 +23,7 @@ const StyledImage = styled.img<{ $isLoaded: boolean }>`
   height: 100%;
   object-fit: contain;
   opacity: ${(props) => (props.$isLoaded ? 1 : 0)};
-  transition: opacity 0.3s ease-in-out;
+  transition: opacity ${({ theme }) => theme.animation.duration.fast} ${({ theme }) => theme.animation.easing.easeInOut};
 `;
 
 const PlaceholderImage = styled.img`

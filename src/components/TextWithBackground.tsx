@@ -33,13 +33,13 @@ const Background = styled.div<{
   background-size: auto 100%;
   background-position: center;
   background-repeat: repeat-x;
-  z-index: -1;
+  z-index: ${({ theme }) => theme.zIndex.behind};
   filter: ${(props) => (props.isPurple ? "hue-rotate(30deg)" : "none")};
 `;
 
 const Content = styled.span`
   position: relative;
-  z-index: 1;
+  z-index: ${({ theme }) => theme.zIndex.content};
   display: block;
   /* 上下の余白を削除 */
   line-height: 0.8;

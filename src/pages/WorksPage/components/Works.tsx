@@ -11,24 +11,24 @@ import { type Category, worksData } from "../data/WorksAssets";
 
 const ContentWrapper = styled(Container)`
   position: relative;
-  z-index: 1;
+  z-index: ${theme.zIndex.content};
 `;
 
 const StickyHeader = styled.div`
   position: sticky;
-  z-index: 10;
+  z-index: ${theme.zIndex.dropdown};
   
   @media (max-width: ${theme.breakpoints.mobile}) {
-    top: 50px;
-    padding: 1.5rem;
+    top: ${theme.spacing.headerHeightMobile};
+    padding: ${theme.space.md};
   }
 `;
 
 const WorkCard = styled.article`
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, ${theme.opacity[5]});
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
+  border: ${theme.borders.width.thin} solid rgba(255, 255, 255, ${theme.opacity[10]});
+  border-radius: ${theme.borders.radius.lg};
   overflow: hidden;
   cursor: default;
   pointer-events: none;
@@ -39,13 +39,13 @@ const WorkCard = styled.article`
 
 const VideoWrapper = styled.div`
   display: flex;
-  padding: 1em;
+  padding: ${theme.space.sm};
 `;
 
 const WorkInfo = styled.div`
-  padding: 1rem;
-  padding-bottom: 1.5rem;
-  background: rgba(0, 0, 0, 0.5);
+  padding: ${theme.space.sm};
+  padding-bottom: ${theme.space.md};
+  background: rgba(0, 0, 0, ${theme.opacity[50]});
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -55,7 +55,7 @@ const WorkInfo = styled.div`
 `;
 
 const WorkRequester = styled.p`
-  font-size: 0.7rem;
+  font-size: ${theme.typography.fontSize.xs};
 `;
 
 type TabId = Category | "all";

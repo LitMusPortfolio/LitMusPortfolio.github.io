@@ -9,17 +9,17 @@ interface SocialLinksProps {
 
 const SocialLinksContainer = styled.div`
   display: flex;
-  gap: 1.5rem;
+  gap: ${({ theme }) => theme.space.md};
   align-items: center;
 `;
 
 const SocialLinkItem = styled.a<{ $size: string }>`
   display: inline-block;
-  width: ${({ $size }) =>
-    $size === "small" ? "24px" : $size === "large" ? "40px" : "32px"};
-  height: ${({ $size }) =>
-    $size === "small" ? "24px" : $size === "large" ? "40px" : "32px"};
-  transition: transform 0.3s ease;
+  width: ${({ $size, theme }) =>
+    $size === "small" ? theme.sizes.icon.md : $size === "large" ? theme.sizes.icon.xl : theme.sizes.icon.lg};
+  height: ${({ $size, theme }) =>
+    $size === "small" ? theme.sizes.icon.md : $size === "large" ? theme.sizes.icon.xl : theme.sizes.icon.lg};
+  transition: transform ${({ theme }) => theme.animation.duration.fast} ${({ theme }) => theme.animation.easing.ease};
   
   &:hover {
     transform: scale(1.1);

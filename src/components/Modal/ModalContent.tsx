@@ -11,7 +11,7 @@ interface ModalContentProps {
 }
 
 const ContentContainer = styled.div<{ $variant?: string }>`
-  padding: ${(props) => (props.$variant === "download" ? "2.5rem" : "3rem")};
+  padding: ${(props) => (props.$variant === "download" ? theme.space['2xl'] : theme.space.xl)};
 `;
 
 export const ModalContent = ({
@@ -30,13 +30,13 @@ const ModalTitleContainer = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-  margin-bottom: 2rem;
+  margin-bottom: ${theme.space.lg};
 `;
 
 // モーダルタイトル
 const ModalTitleText = styled.h2<{ $variant?: string }>`
-  font-size: 2rem;
-  color: #ffffff;
+  font-size: ${theme.typography.fontSize.xl};
+  color: ${theme.colors.text.primary};
   font-weight: 600;
   margin: 0;
   white-space: nowrap;
@@ -86,8 +86,8 @@ export const ModalContainer = styled.div<{
   $variant?: string;
 }>`
   position: relative;
-  border-radius: 5px;
-  padding: 2rem;
+  border-radius: ${theme.borders.radius.md};
+  padding: ${theme.space.lg};
   width: 80%;
   height: 70%;
   overflow: hidden;
@@ -95,7 +95,7 @@ export const ModalContainer = styled.div<{
   grid-template-columns: ${(props) => (props.$hasImage ? "2fr 3fr" : "1fr")};
   transform: scale(0.95);
   opacity: 0;
-  animation: modalFadeIn 0.3s ease forwards;
+  animation: modalFadeIn ${theme.animation.duration.fast} ${theme.animation.easing.ease} forwards;
   
   @keyframes modalFadeIn {
     to {
@@ -109,7 +109,7 @@ export const ModalContainer = styled.div<{
       case "glass":
         return css`
           ${glassmorphism}
-          border-radius: 20px;
+          border-radius: ${theme.borders.radius.xl};
         `;
       case "download":
         return css`
@@ -118,22 +118,22 @@ export const ModalContainer = styled.div<{
             rgba(20, 20, 30, 0.98) 0%,
             rgba(30, 20, 40, 0.98) 100%
           );
-          border: 1px solid rgba(138, 97, 255, 0.2);
+          border: ${theme.borders.width.thin} solid rgba(138, 97, 255, ${theme.opacity[20]});
           box-shadow: 
-            0 30px 60px rgba(0, 0, 0, 0.5),
+            0 30px 60px rgba(0, 0, 0, ${theme.opacity[50]}),
             0 0 120px rgba(139, 92, 246, 0.15),
             inset 0 0 60px rgba(139, 92, 246, 0.08),
-            inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            inset 0 ${theme.borders.width.thin} 0 rgba(255, 255, 255, ${theme.opacity[10]});
         `;
       default:
         return css`
-          background: rgba(20, 20, 30, 0.95);
+          background: rgba(20, 20, 30, ${theme.opacity[95]});
           backdrop-filter: blur(20px);
-          border: 1px solid rgba(139, 92, 246, 0.3);
+          border: ${theme.borders.width.thin} solid rgba(139, 92, 246, ${theme.opacity[30]});
           box-shadow: 
-            0 25px 50px rgba(0, 0, 0, 0.5),
-            0 0 100px rgba(139, 92, 246, 0.1),
-            inset 0 0 50px rgba(139, 92, 246, 0.05);
+            0 25px 50px rgba(0, 0, 0, ${theme.opacity[50]}),
+            0 0 100px rgba(139, 92, 246, ${theme.opacity[10]}),
+            inset 0 0 50px rgba(139, 92, 246, ${theme.opacity[5]});
         `;
     }
   }}

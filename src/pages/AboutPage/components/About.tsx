@@ -3,7 +3,6 @@ import { BackgroundSection } from "@/components/BackgroundSection";
 import { Container, GridContainer } from "@/components/Layout";
 import LazyImage from "@/components/LazyImage";
 import SectionTitle from "@/components/SectionTitle";
-import { theme } from "@/styles/theme";
 
 const StyledGridContainer = styled(GridContainer)`
   align-items: center;
@@ -18,8 +17,8 @@ const LeftSection = styled.div`
 const ImageFrame = styled.div`
   position: relative;
   width: 100%;
-  border: 4px solid #4a90e2;
-  border-radius: 15px;
+  border: ${({ theme }) => theme.borders.width.thick} solid ${({ theme }) => theme.colors.primary.main};
+  border-radius: ${({ theme }) => theme.borders.radius.lg};
   overflow: hidden;
 `;
 
@@ -36,36 +35,36 @@ const CharacterImage = styled(LazyImage)`
 `;
 
 const RightSection = styled.div`
-  color: #ffffff;
-  padding-right: 4rem;
+  color: ${({ theme }) => theme.colors.text.primary};
+  padding-right: ${({ theme }) => theme.space['2xl']};
 `;
 
 const ProfileTitle = styled.h2`
-  font-size: 4rem;
+  font-size: ${({ theme }) => theme.typography.fontSize['4xl']};
   font-weight: 700;
-  margin-bottom: 1rem;
-  letter-spacing: 0.1em;
+  margin-bottom: ${({ theme }) => theme.space.sm};
+  letter-spacing: ${({ theme }) => theme.typography.heading.letterSpacingEn};
   
-  @media (max-width: ${theme.breakpoints.mobile}) {
-    font-size: 3rem;
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    font-size: ${({ theme }) => theme.typography.fontSize['3xl']};
   }
 `;
 
 const ProfileSubtitle = styled.p`
   font-size: 1.3rem;
-  color: rgba(255, 255, 255, 0.9);
-  margin-bottom: 3rem;
-  padding-bottom: 1.5rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  color: ${({ theme }) => theme.colors.text.secondary};
+  margin-bottom: ${({ theme }) => theme.space.xl};
+  padding-bottom: ${({ theme }) => theme.space.md};
+  border-bottom: ${({ theme }) => theme.borders.width.thin} solid ${({ theme }) => `rgba(255, 255, 255, ${theme.opacity[30]})`};
 `;
 
 const ProfileDescription = styled.div`
   font-size: 1.2rem;
   line-height: 2;
-  color: rgba(255, 255, 255, 0.95);
+  color: ${({ theme }) => `rgba(255, 255, 255, ${theme.opacity[95]})`};
   
   p {
-    margin-bottom: 1.5rem;
+    margin-bottom: ${({ theme }) => theme.space.md};
   }
 `;
 
