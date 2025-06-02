@@ -113,7 +113,9 @@ const CharacterImage = styled.div`
   position: absolute;
   bottom: 0;
   right: 0;
-  max-height: 10vh;
+  width: auto;
+  height: 90vh;
+  max-height: 90vh;
   display: flex;
   align-items: flex-end;
   justify-content: flex-end;
@@ -121,8 +123,41 @@ const CharacterImage = styled.div`
   pointer-events: none;
   
   img {
-    object-fit: unset;
+    width: auto;
+    height: 100%;
+    max-height: 90vh;
+    object-fit: contain;
+    object-position: bottom right;
     filter: drop-shadow(${theme.shadows.glow.small});
+  }
+  
+  @media (max-width: ${theme.breakpoints.desktop}) {
+    height: 85vh;
+    max-height: 85vh;
+    
+    img {
+      max-height: 85vh;
+    }
+  }
+  
+  @media (max-width: ${theme.breakpoints.tablet}) {
+    height: 70vh;
+    max-height: 70vh;
+    right: -5%;
+    
+    img {
+      max-height: 70vh;
+    }
+  }
+  
+  @media (max-width: ${theme.breakpoints.mobile}) {
+    height: 60vh;
+    max-height: 60vh;
+    right: -10%;
+    
+    img {
+      max-height: 60vh;
+    }
   }
 `;
 

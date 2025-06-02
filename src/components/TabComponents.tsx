@@ -9,6 +9,13 @@ export const TabContainer = styled.div`
   gap: 2rem;
   margin-bottom: 2rem;
   position: relative;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  
+  &::-webkit-scrollbar {
+    display: none;
+  }
   
   /* 右端まで伸びる罫線 */
   &::after {
@@ -19,11 +26,20 @@ export const TabContainer = styled.div`
     margin-left: 2rem;
   }
   
-  @media (max-width: ${theme.breakpoints.mobile}) {
-    flex-wrap: wrap;
+  @media (max-width: ${theme.breakpoints.tablet}) {
+    gap: 1.5rem;
     
     &::after {
       display: none;
     }
+  }
+  
+  @media (max-width: ${theme.breakpoints.mobile}) {
+    gap: 1rem;
+    padding-bottom: 0.5rem;
+  }
+  
+  @media (max-width: ${theme.breakpoints.small}) {
+    gap: 0.75rem;
   }
 `;

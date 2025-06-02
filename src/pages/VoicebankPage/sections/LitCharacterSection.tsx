@@ -64,6 +64,10 @@ const StyledContentContainer = styled(ContentContainer)`
 const ProfileWrapper = styled(GridContainer)`
   margin-top: 1rem;
   width: 100%;
+  
+  @media (max-width: ${theme.breakpoints.small}) {
+    margin-top: 0.5rem;
+  }
 `;
 
 // デモソングセクション

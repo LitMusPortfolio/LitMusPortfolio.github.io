@@ -25,18 +25,41 @@ const Nav = styled.nav`
   
   @media (max-width: ${theme.breakpoints.mobile}) {
     padding: 0 ${theme.space.sm};
+    flex-wrap: wrap;
+    gap: ${theme.space.xs};
   }
 `;
 
 const Logo = styled(Link)`
   display: inline-block;
   height: ${theme.sizes.button.md};
+  flex-shrink: 0;
+  
+  @media (max-width: ${theme.breakpoints.mobile}) {
+    height: ${theme.sizes.button.sm};
+  }
 `;
 
 const MenuList = styled.ul<{ $isOpen: boolean }>`
   display: flex;
   flex-direction: row;
   gap: ${theme.space.lg};
+  align-items: center;
+  flex-wrap: wrap;
+  
+  @media (max-width: ${theme.breakpoints.tablet}) {
+    gap: ${theme.space.md};
+  }
+  
+  @media (max-width: ${theme.breakpoints.mobile}) {
+    gap: ${theme.space.sm};
+    font-size: ${theme.typography.fontSize.sm};
+  }
+  
+  @media (max-width: ${theme.breakpoints.small}) {
+    gap: ${theme.space.xs};
+    font-size: ${theme.typography.fontSize.xs};
+  }
 `;
 
 const MenuItem = styled.li`
@@ -47,6 +70,7 @@ const MenuItem = styled.li`
     text-decoration: none;
     text-transform: uppercase;
     letter-spacing: ${theme.typography.heading.letterSpacingEn};
+    white-space: nowrap;
     
     &:hover {
       color: ${theme.colors.primary.light};
