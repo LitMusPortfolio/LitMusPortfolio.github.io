@@ -1,10 +1,10 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import styled from "styled-components";
+import FilterTabs, { type TabItem } from "@/components/FilterTabs";
 import Grid from "@/components/Grid";
 import { Container, Section } from "@/components/Layout";
 import LazyImage from "@/components/LazyImage";
 import SectionTitle from "@/components/SectionTitle";
-import { Tab, TabContainer } from "@/components/TabComponents";
 import { theme } from "@/styles/theme";
 import { categoryColors } from "@/types";
 import { worksData } from "./WorksAssets";
@@ -99,10 +99,17 @@ const WorkStats = styled.div`
   color: rgba(255, 255, 255, 0.7);
 `;
 
+const WORK_TABS: TabItem[] = [
+  { id: "all", label: "ALL" },
+  { id: "music", label: "MUSIC" },
+  { id: "illustration", label: "ILLUST" },
+  { id: "movie", label: "MOVIE" },
+  { id: "other", label: "OTHER" },
+];
+
 export default function Works() {
   const [activeTab, setActiveTab] = useState("all");
   const tabsRef = useRef<HTMLDivElement>(null);
-  const tabs = ["all", "music", "illustration", "movie", "other"];
 
   const filteredWorks = useMemo(() => {
     return activeTab === "all"
@@ -110,107 +117,19 @@ export default function Works() {
       : worksData.filter((work) => work.type === activeTab);
   }, [activeTab]);
 
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (!tabsRef.current) return;
-
-      const currentIndex = tabs.indexOf(activeTab);
-      let newIndex = currentIndex;
-
-      if (e.key === "ArrowRight") {
-        e.preventDefault();
-        newIndex = (currentIndex + 1) % tabs.length;
-      } else if (e.key === "ArrowLeft") {
-        e.preventDefault();
-        newIndex = currentIndex === 0 ? tabs.length - 1 : currentIndex - 1;
-      } else if (e.key === "Home") {
-        e.preventDefault();
-        newIndex = 0;
-      } else if (e.key === "End") {
-        e.preventDefault();
-        newIndex = tabs.length - 1;
-      }
-
-      if (newIndex !== currentIndex) {
-        setActiveTab(tabs[newIndex]);
-        const buttons = tabsRef.current.querySelectorAll('[role="tab"]');
-        (buttons[newIndex] as HTMLElement)?.focus();
-      }
-    };
-
-    const tabContainer = tabsRef.current;
-    if (tabContainer) {
-      tabContainer.addEventListener("keydown", handleKeyDown);
-    }
-
-    return () => {
-      if (tabContainer) {
-        tabContainer.removeEventListener("keydown", handleKeyDown);
-      }
-    };
-  }, [activeTab]);
-
   return (
     <WorksSection>
       <ContentWrapper>
         <StickyHeader>
           <SectionTitle>WORKS</SectionTitle>
-          <TabContainer
+          <FilterTabs
             ref={tabsRef}
-            role="tablist"
-            aria-label="Filter works by category"
-          >
-            <Tab
-              $active={activeTab === "all"}
-              onClick={() => setActiveTab("all")}
-              role="tab"
-              aria-selected={activeTab === "all"}
-              aria-controls="works-grid"
-              tabIndex={activeTab === "all" ? 0 : -1}
-            >
-              ALL
-            </Tab>
-            <Tab
-              $active={activeTab === "music"}
-              onClick={() => setActiveTab("music")}
-              role="tab"
-              aria-selected={activeTab === "music"}
-              aria-controls="works-grid"
-              tabIndex={activeTab === "music" ? 0 : -1}
-            >
-              MUSIC
-            </Tab>
-            <Tab
-              $active={activeTab === "illustration"}
-              onClick={() => setActiveTab("illustration")}
-              role="tab"
-              aria-selected={activeTab === "illustration"}
-              aria-controls="works-grid"
-              tabIndex={activeTab === "illustration" ? 0 : -1}
-            >
-              ILLUST
-            </Tab>
-            <Tab
-              $active={activeTab === "movie"}
-              onClick={() => setActiveTab("movie")}
-              role="tab"
-              aria-selected={activeTab === "movie"}
-              aria-controls="works-grid"
-              tabIndex={activeTab === "movie" ? 0 : -1}
-            >
-              MOVIE
-            </Tab>
-            <Tab
-              $active={activeTab === "other"}
-              onClick={() => setActiveTab("other")}
-              role="tab"
-              aria-selected={activeTab === "other"}
-              aria-controls="works-grid"
-              tabIndex={activeTab === "other" ? 0 : -1}
-            >
-              OTHER
-            </Tab>
-          </TabContainer>
+            tabs={WORK_TABS}
+            activeTab={activeTab}
+            onTabChange={setActiveTab}
+            ariaLabel="Filter works by category"
+            ariaControls="works-grid"
+          />
         </StickyHeader>
 
         <Grid

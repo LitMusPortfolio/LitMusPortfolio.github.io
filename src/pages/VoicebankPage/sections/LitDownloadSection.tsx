@@ -1,9 +1,9 @@
 import { useMemo, useState } from "react";
 import ErrorBoundary from "@/components/ErrorBoundary";
+import FilterTabs from "@/components/FilterTabs";
 import Grid from "@/components/Grid";
 import { Container, Section, SideDecoration } from "@/components/Layout";
 import SectionTitle from "@/components/SectionTitle";
-import { Tab, TabContainer } from "@/components/TabComponents";
 import DownloadItemCard from "../components/DownloadItemCard";
 import DownloadModal from "../components/DownloadModal";
 import { DOWNLOAD_ITEMS } from "../data/LitDownloadAssets";
@@ -42,17 +42,12 @@ export default function LitDownloadSection() {
         <Container>
           <SectionTitle>DOWNLOAD</SectionTitle>
 
-          <TabContainer>
-            {TABS.map((tab) => (
-              <Tab
-                key={tab.id}
-                $active={activeTab === tab.id}
-                onClick={() => setActiveTab(tab.id)}
-              >
-                {tab.label}
-              </Tab>
-            ))}
-          </TabContainer>
+          <FilterTabs
+            tabs={[...TABS]}
+            activeTab={activeTab}
+            onTabChange={(tabId) => setActiveTab(tabId as TabId)}
+            ariaLabel="Filter downloads by category"
+          />
 
           <Grid
             items={filteredItems}

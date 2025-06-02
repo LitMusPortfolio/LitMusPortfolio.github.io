@@ -27,28 +27,3 @@ export const TabContainer = styled.div`
     }
   }
 `;
-
-export const Tab = styled.button<{ $active: boolean }>`
-  padding: 0.8rem 2rem;
-  background: ${(props) => (props.$active ? "rgba(139, 92, 246, 0.2)" : "transparent")};
-  border: 2px solid ${(props) => (props.$active ? theme.colors.primary.main : "rgba(255, 255, 255, 0.2)")};
-  border-radius: 30px;
-  color: ${(props) => (props.$active ? theme.colors.primary.main : "#fff")};
-  font-weight: 600;
-  transition: all 0.3s ease;
-  cursor: pointer;
-  
-  &:hover {
-    background: rgba(139, 92, 246, 0.1);
-    border-color: ${theme.colors.primary.main};
-  }
-  
-  &:focus {
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.4);
-  }
-  
-  &:focus:not(:focus-visible) {
-    box-shadow: none;
-  }
-`;

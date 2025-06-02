@@ -9,11 +9,6 @@ interface StyledButtonProps {
 }
 
 export const StyledButton = styled.button<StyledButtonProps>`
-  font-family: ${theme.typography.body.fontFamily};
-  font-size: ${theme.typography.fontSize.sm};
-  font-weight: ${theme.typography.body.fontWeight};
-  color: ${(props) =>
-    props.$active ? theme.colors.primary : theme.colors.text.primary};
   background: transparent;
   border: none;
   padding: ${theme.space.sm} ${theme.space.md};
@@ -66,7 +61,6 @@ export const ButtonVariants = {
   Primary: styled(StyledButton)`
     background: ${(props) =>
       props.$active ? theme.colors.primary : "transparent"};
-    color: ${(props) => (props.$active ? "#fff" : theme.colors.text.primary)};
     border: 1px solid ${theme.colors.primary};
     
     &:hover {

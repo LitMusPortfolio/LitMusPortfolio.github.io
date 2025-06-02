@@ -5,6 +5,7 @@ export const GlobalStyles = createGlobalStyle`
 
   * {
     box-sizing: border-box;
+    color: ${theme.colors.text.primary};
   }
 
   html {
@@ -18,7 +19,6 @@ export const GlobalStyles = createGlobalStyle`
     font-weight: 900;
     letter-spacing: 0.06em; /* 字間0.6 = 0.06em */
     background: #000;
-    color: #fff;
     overflow-x: hidden;
     font-size: ${theme.typography.fontSize.base};
   }
