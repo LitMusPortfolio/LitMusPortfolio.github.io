@@ -7,6 +7,50 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - サーバーは常に起動しています。自分で起動する必要はありません。
 - StoryでUIコンポーネントの動作を確認できます: `npm run storybook`
 
+## Git Worktreeの使い方
+
+### Worktreeとは
+Git worktreeは、同じリポジトリで複数のブランチを同時に扱える機能です。ブランチの切り替えなしに、並行して作業できます。
+
+### 基本構造
+```
+リポジトリ/
+├── .git/          # メインのGit管理ファイル（共有）
+├── src/           # メインブランチの作業ファイル
+└── worktrees/
+    └── phase1/    # 別ブランチの作業ファイル（独立）
+        ├── src/
+        └── ...
+```
+
+### よく使うコマンド
+```bash
+# worktreeの作成
+git worktree add worktrees/feature -b feature/new-feature
+
+# worktreeの一覧表示
+git worktree list
+
+# worktreeで作業
+cd worktrees/feature
+# 通常通りgit操作が可能
+git add .
+git commit -m "feat: 新機能"
+
+# 不要になったら削除
+git worktree remove worktrees/feature
+```
+
+### メリット
+1. **複数ブランチの同時作業**: ブランチ切り替え不要
+2. **作業の中断が不要**: 緊急対応時も現在の作業を維持
+3. **ビルド結果を保持**: 各worktreeは独立したnode_modules
+
+### 注意点
+- 同じブランチは1つのworktreeでしか使えない
+- 各worktreeで別々に`npm install`が必要
+- .gitignoreされたファイルは共有されない
+
 ## 開発コマンド
 
 ```bash

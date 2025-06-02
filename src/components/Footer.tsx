@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import LazyImage from "./LazyImage";
 import { SocialLinks } from "./SocialLinks";
 
 const FooterContainer = styled.footer`
@@ -33,7 +34,7 @@ const Copyright = styled.div`
   font-size: 0.9rem;
 `;
 
-const PageTop = styled.img`
+const PageTop = styled(LazyImage)`
   cursor: pointer;
   width: 10rem;
 `;
