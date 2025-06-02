@@ -1,4 +1,25 @@
-import { categorizeAssets } from "./collectAssetsV2";
+// 画像・ビデオの拡張子パターン
+const IMAGE_EXTENSIONS = /\.(jpg|jpeg|png|webp|gif|svg|ico)$/i;
+const VIDEO_EXTENSIONS = /\.(mp4|webm|mov|avi)$/i;
+
+// アセットを分類する関数
+function categorizeAssets(paths: string[]): {
+  images: string[];
+  videos: string[];
+} {
+  const images: string[] = [];
+  const videos: string[] = [];
+
+  paths.forEach((path) => {
+    if (IMAGE_EXTENSIONS.test(path)) {
+      images.push(path);
+    } else if (VIDEO_EXTENSIONS.test(path)) {
+      videos.push(path);
+    }
+  });
+
+  return { images, videos };
+}
 
 // ページコンポーネントのローダー定義
 const pageLoaders = {
