@@ -22,7 +22,7 @@ const StyledPageTitle = styled.h1<{
       ? createGradient($gradientColors.color1, $gradientColors.color2)
       : createGradient(theme.colors.primary.main, theme.colors.primary.light)};
   
-  @media (max-width: ${({ theme }) => theme.breakpoints?.mobile || "768px"}) {
+  @media (max-width: ${theme.breakpoints.mobile}) {
     font-size: clamp(${theme.typography.fontSize.lg}, 4vw, ${theme.typography.fontSize["2xl"]});
     margin-bottom: ${theme.space.lg};
   }

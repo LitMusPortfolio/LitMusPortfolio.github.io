@@ -93,7 +93,7 @@ export default function LitDownloadSection() {
           onClose={closeModal}
           image={selectedItem?.image}
           title={selectedItem?.name || ""}
-          content={modalContent}
+          content={modalContent || undefined}
         />
       </ErrorBoundary>
     </>

@@ -4,13 +4,13 @@ import { theme } from "@/styles/theme";
 // 基本セクションコンポーネント
 export const Section = styled.section`
   min-height: 100vh;
-  padding: ${(props) => props.theme.spacing?.sectionPadding || "2rem 2rem"};
+  padding: 2rem 2rem;
   position: relative;
 `;
 
 // コンテナコンポーネント
 export const Container = styled.div`
-  max-width: ${(props) => props.theme.spacing?.containerMaxWidth || "1400px"};
+  max-width: 1400px;
   margin: 0 auto;
   position: relative;
   z-index: 1;

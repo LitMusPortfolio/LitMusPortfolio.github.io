@@ -146,7 +146,7 @@ const IconWrapper = styled.span`
   }
 `;
 
-const DownloadIcon = (): JSX.Element => (
+const DownloadIcon = () => (
   <svg
     viewBox="0 0 24 24"
     fill="none"
@@ -170,11 +170,7 @@ const DescriptionParagraph = styled.p`
 `;
 
 // 構造化コンテンツコンポーネント
-const StructuredContent = ({
-  content,
-}: {
-  content: DownloadContent;
-}): JSX.Element => {
+const StructuredContent = ({ content }: { content: DownloadContent }) => {
   if (!content) {
     return <div>コンテンツが見つかりません</div>;
   }
@@ -223,7 +219,7 @@ export default function DownloadModal({
   defaultImage = "/001_top/Moviedummy.png",
   content,
   children,
-}: DownloadModalProps): JSX.Element {
+}: DownloadModalProps) {
   return (
     <Modal
       isOpen={isOpen}

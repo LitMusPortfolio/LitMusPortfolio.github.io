@@ -13,7 +13,6 @@ const HomePage = lazy(() => import("../pages/HomePage"));
 const AboutPage = lazy(() => import("../pages/AboutPage"));
 const WorksPage = lazy(() => import("../pages/WorksPage"));
 const VoicebankPage = lazy(() => import("../pages/VoicebankPage"));
-const ShopPage = lazy(() => import("../pages/ShopPage"));
 const ContactPage = lazy(() => import("../pages/ContactPage"));
 
 // 完全なアプリケーション環境を再現
@@ -58,14 +57,6 @@ const FullApp = () => {
               }
             />
             <Route
-              path="shop"
-              element={
-                <Suspense fallback={<LoadingSpinner />}>
-                  <ShopPage />
-                </Suspense>
-              }
-            />
-            <Route
               path="contact"
               element={
                 <Suspense fallback={<LoadingSpinner />}>
@@ -100,7 +91,6 @@ const meta = {
 - **About**: アバウトページ
 - **Works**: 作品一覧ページ
 - **Voicebank**: 音声ライブラリページ（離途）
-- **Shop**: ショップページ
 - **Contact**: お問い合わせページ
         `,
       },

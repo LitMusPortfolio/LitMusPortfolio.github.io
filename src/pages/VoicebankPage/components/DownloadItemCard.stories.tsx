@@ -15,4 +15,16 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  args: {
+    item: {
+      id: 1,
+      type: "talk",
+      category: "トークソフト",
+      name: "UTAUインストーラー",
+      description: "UTAU音声合成ソフトウェアの最新版インストーラー",
+      image: "/101_Lit/LitA_差し替え前提.webp",
+    },
+    onClick: () => console.log("Download card clicked"),
+  },
+};

@@ -15,7 +15,7 @@ const RulesList = styled.ul`
 `;
 
 const RuleItem = styled.li`
-  color: ${({ theme }) => theme.colors.text};
+  color: ${theme.colors.text.primary};
   font-size: ${theme.typography.fontSize.base};
   line-height: ${theme.typography.body.lineHeight};
   padding-left: ${theme.space.lg};
@@ -25,7 +25,7 @@ const RuleItem = styled.li`
     content: "▸";
     position: absolute;
     left: 0;
-    color: ${({ theme }) => theme.colors.primary};
+    color: ${theme.colors.primary.main};
     font-size: ${theme.typography.fontSize.md};
   }
 
@@ -42,7 +42,7 @@ const RuleItem = styled.li`
 const RulesTitle = styled.h3`
   font-size: ${theme.typography.fontSize.xl};
   font-weight: bold;
-  color: ${({ theme }) => theme.colors.text};
+  color: ${theme.colors.text.primary};
   margin: 0;
   white-space: nowrap;
   

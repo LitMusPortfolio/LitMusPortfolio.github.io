@@ -1,4 +1,4 @@
-import { type ReactNode, useRef } from "react";
+import React, { type ReactNode, useRef } from "react";
 import {
   ModalContainer,
   ModalContent,
@@ -31,11 +31,15 @@ export default function Modal({
   imageUrl,
   variant = "default",
   ariaLabel,
-}: ModalProps): JSX.Element {
+}: ModalProps): React.JSX.Element {
   const modalRef = useRef<HTMLDivElement>(null);
 
   // フォーカス管理とESCキー処理
-  useModalFocusManager({ isOpen, modalRef, onClose });
+  useModalFocusManager({
+    isOpen,
+    modalRef: modalRef as React.RefObject<HTMLDivElement>,
+    onClose,
+  });
 
   // スクロールロック
   useScrollLock(isOpen);

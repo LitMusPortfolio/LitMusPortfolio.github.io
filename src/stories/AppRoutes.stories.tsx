@@ -4,7 +4,6 @@ import MainLayout from "../layouts/MainLayout";
 import AboutPage from "../pages/AboutPage";
 import ContactPage from "../pages/ContactPage";
 import HomePage from "../pages/HomePage";
-import ShopPage from "../pages/ShopPage";
 import VoicebankPage from "../pages/VoicebankPage";
 import WorksPage from "../pages/WorksPage";
 
@@ -17,7 +16,6 @@ const AppWithRoute = () => {
         <Route path="about" element={<AboutPage />} />
         <Route path="works" element={<WorksPage />} />
         <Route path="voicebank" element={<VoicebankPage />} />
-        <Route path="shop" element={<ShopPage />} />
         <Route path="contact" element={<ContactPage />} />
       </Route>
     </Routes>
@@ -71,16 +69,6 @@ export const Voicebank: Story = {
   decorators: [
     (Story) => (
       <MemoryRouter initialEntries={["/voicebank"]}>
-        <Story />
-      </MemoryRouter>
-    ),
-  ],
-};
-
-export const Shop: Story = {
-  decorators: [
-    (Story) => (
-      <MemoryRouter initialEntries={["/shop"]}>
         <Story />
       </MemoryRouter>
     ),

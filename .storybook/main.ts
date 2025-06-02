@@ -7,7 +7,7 @@ const config: StorybookConfig = {
     "@storybook/addon-interactions",
     "@storybook/addon-viewport",
   ],
-  features: {
+  docs: {
     autodocs: true,
   },
   framework: {
