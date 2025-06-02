@@ -16,7 +16,11 @@ pre-commit:
       fail_text: "Storybookストーリーが見つからないコンポーネントがあります。'npm run generate-stories'を実行してください。"
 
 pre-push:
+  parallel: true
   jobs:
-    - run: npm run check-all
+    - run: npm run knip --fix
+    - run: npm run lint --write .
+    - run: npm run typecheck
+    - run: npm run typecheck:stories
     - run: npm run build
       glob: "*.{js,ts,jsx,tsx}"
