@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { BackgroundSection } from "@/components/BackgroundSection";
-import { Container } from "@/components/Layout";
+import { Container, GridContainer } from "@/components/Layout";
 import SectionTitle from "@/components/SectionTitle";
 import TitleWithLine from "@/components/TitleWithLine";
 
@@ -11,12 +11,6 @@ const LeftSection = styled.div`
 
 const RightSection = styled.div`
   display: flex;
-`;
-
-const ContentGrid = styled.div`
-  display: grid;
-  grid-template-columns: 0.6fr 0.4fr;
-  gap: ${({ theme }) => theme.space.lg};
 `;
 
 const NOTICES = [
@@ -43,7 +37,7 @@ export default function Contact() {
       <Container>
         <SectionTitle>CONTACT</SectionTitle>
 
-        <ContentGrid>
+        <GridContainer $columns="0.6fr 0.4fr" $gap="${theme.space.lg}">
           <LeftSection>
             {NOTICES.map((notice) => (
               <div key={notice.title}>
@@ -57,7 +51,7 @@ export default function Contact() {
             ))}
           </LeftSection>
           <RightSection></RightSection>
-        </ContentGrid>
+        </GridContainer>
       </Container>
     </BackgroundSection>
   );

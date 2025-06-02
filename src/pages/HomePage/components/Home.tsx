@@ -1,16 +1,19 @@
 import styled from "styled-components";
+import { Section } from "../../../components/Layout";
 import LazyImage from "../../../components/LazyImage";
 import LazyVideo from "../../../components/LazyVideo";
 import { SocialLinks as SocialLinksComponent } from "../../../components/SocialLinks";
 import TextWithBackground from "../../../components/TextWithBackground";
 
-const HomeSection = styled.section`
+const HomeSection = styled(Section)`
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100vh;
   overflow: hidden;
+  padding: 0;
+  min-height: 100vh;
 `;
 
 const HomeContent = styled.div`
@@ -89,8 +92,9 @@ const NewsBar = styled.div`
   bottom: 0;
   left: 0;
   right: 0;
-  background: ${({ theme }) => `rgba(0, 0, 0, ${theme.opacity[80]})`};
-  backdrop-filter: blur(10px);
+  background: ${({ theme }) => theme.effects.glassmorphism.background};
+  backdrop-filter: ${({ theme }) => theme.effects.glassmorphism.backdropFilter};
+  -webkit-backdrop-filter: ${({ theme }) => theme.effects.glassmorphism.backdropFilter};
   padding: ${({ theme }) => theme.space.sm} ${({ theme }) => theme.space.xl};
   display: flex;
   align-items: center;

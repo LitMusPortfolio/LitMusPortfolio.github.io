@@ -61,16 +61,9 @@ const StyledContentContainer = styled(ContentContainer)`
 `;
 
 // プロフィールコンテナ（全体）
-const ProfileWrapper = styled.div`
-  display: grid;
-  grid-template-columns: 4fr 6fr;
-  gap: 3rem;
+const ProfileWrapper = styled(GridContainer)`
   margin-top: 1rem;
   width: 100%;
-  
-  @media (max-width: ${theme.breakpoints.mobile}) {
-    grid-template-columns: 1fr;
-  }
 `;
 
 // デモソングセクション
@@ -80,14 +73,7 @@ const DemoSongSection = styled.div`
 `;
 
 // デモソングコンテナ
-const DemoSongContainer = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-  
-  @media (max-width: ${theme.breakpoints.tablet}) {
-    grid-template-columns: 1fr;
-  }
+const DemoSongContainer = styled(GridContainer)`
 `;
 
 // デモソングアイテム
@@ -144,13 +130,17 @@ export default function LitCharacterSection() {
         <StyledContentContainer>
           <SectionTitle isPurple>CHARACTER</SectionTitle>
           <TitleWithLine title="離途" />
-          <ProfileWrapper>
+          <ProfileWrapper $columns="4fr 6fr" $gap="3rem" $mobileColumns="1fr">
             <ProfileSection data={PROFILE_DATA_LEFT} />
             <ProfileSection data={PROFILE_DATA_RIGHT} />
           </ProfileWrapper>
           <DemoSongSection>
             <TitleWithLine title="デモソング" />
-            <DemoSongContainer>
+            <DemoSongContainer
+              $columns="1fr 1fr"
+              $gap="2rem"
+              $mobileColumns="1fr"
+            >
               {DEMO_SONGS.map((song) => (
                 <DemoSongItem key={song.id}>
                   <iframe

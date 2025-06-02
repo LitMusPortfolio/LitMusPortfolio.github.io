@@ -25,10 +25,11 @@ const StickyHeader = styled.div`
 `;
 
 const WorkCard = styled.article`
-  background: rgba(255, 255, 255, ${theme.opacity[5]});
-  backdrop-filter: blur(10px);
-  border: ${theme.borders.width.thin} solid rgba(255, 255, 255, ${theme.opacity[10]});
-  border-radius: ${theme.borders.radius.lg};
+  background: ${theme.effects.glassmorphism.background};
+  backdrop-filter: ${theme.effects.glassmorphism.backdropFilter};
+  -webkit-backdrop-filter: ${theme.effects.glassmorphism.backdropFilter};
+  border: ${theme.effects.glassmorphism.border};
+  border-radius: ${theme.effects.glassmorphism.borderRadius};
   overflow: hidden;
   cursor: default;
   pointer-events: none;

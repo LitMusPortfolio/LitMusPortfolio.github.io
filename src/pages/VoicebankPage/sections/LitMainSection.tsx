@@ -1,4 +1,5 @@
 import styled, { keyframes } from "styled-components";
+import { Section } from "@/components/Layout";
 import LazyImage from "@/components/LazyImage";
 import LazyVideo from "@/components/LazyVideo";
 import { theme } from "../../../styles/theme";
@@ -21,14 +22,13 @@ const gradientMoveAnimation = keyframes`
 `;
 
 // メインセクション（離途紹介）
-const MainSection = styled.div`
-  min-height: 100vh;
+const MainSection = styled(Section)`
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  position: relative;
   background: transparent;
   overflow: hidden;
+  padding: 0;
   
   &::before {
     content: '';
