@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Container, Section } from "@/components/Layout";
+import { Container, GridContainer, Section } from "@/components/Layout";
 import LazyImage from "@/components/LazyImage";
 import SectionTitle from "@/components/SectionTitle";
 import { theme } from "@/styles/theme";
@@ -8,16 +8,8 @@ const AboutSection = styled(Section)`
   background-image: url('/LitMusBG.webp');
 `;
 
-const ContentGrid = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 6rem;
+const StyledGridContainer = styled(GridContainer)`
   align-items: center;
-  
-  @media (max-width: ${theme.breakpoints.tablet}) {
-    grid-template-columns: 1fr;
-    gap: 3rem;
-  }
 `;
 
 const LeftSection = styled.div`
@@ -86,7 +78,11 @@ export default function About() {
       <Container>
         <SectionTitle>ABOUT</SectionTitle>
 
-        <ContentGrid>
+        <StyledGridContainer
+          $columns="1fr 1fr"
+          $gap="6rem"
+          $mobileColumns="1fr"
+        >
           <LeftSection>
             <ImageFrame>
               <CharacterImage
@@ -123,7 +119,7 @@ export default function About() {
               <p>好きな食べ物は回鍋肉。</p>
             </ProfileDescription>
           </RightSection>
-        </ContentGrid>
+        </StyledGridContainer>
       </Container>
     </AboutSection>
   );
