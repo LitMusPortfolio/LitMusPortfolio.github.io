@@ -85,23 +85,19 @@ export const ModalContainer = styled.div<{
   $hasImage?: boolean;
   $variant?: string;
 }>`
-  position: relative;
-  border-radius: ${theme.borders.radius.md};
-  padding: ${theme.space.lg};
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(20, 20, 30, 0.98);
+  border-radius: 12px;
+  padding: 2rem;
   width: 80%;
   height: 70%;
   display: ${(props) => (props.$hasImage ? "grid" : "block")};
   grid-template-columns: ${(props) => (props.$hasImage ? "0.4fr 0.6fr" : "1fr")};
-  transform: scale(0.95);
-  opacity: 0;
-  animation: modalFadeIn ${theme.animation.duration.fast} ${theme.animation.easing.ease} forwards;
-  
-  @keyframes modalFadeIn {
-    to {
-      transform: scale(1);
-      opacity: 1;
-    }
-  }
+  overflow: hidden;
+  z-index: 10000;
   
   ${(props) => {
     switch (props.$variant) {

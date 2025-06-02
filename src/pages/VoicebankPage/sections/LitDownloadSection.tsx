@@ -33,31 +33,29 @@ export default function LitDownloadSection() {
   );
 
   return (
-    <>
-      <Section id="downloads">
-        <SideDecoration>
-          <img src="/010_PageSideTitleSvg/DOWNLOAD.svg" alt="DOWNLOAD" />
-        </SideDecoration>
+    <Section id="downloads">
+      <SideDecoration>
+        <img src="/010_PageSideTitleSvg/DOWNLOAD.svg" alt="DOWNLOAD" />
+      </SideDecoration>
 
-        <Container>
-          <SectionTitle isPurple>DOWNLOAD</SectionTitle>
+      <Container>
+        <SectionTitle isPurple>DOWNLOAD</SectionTitle>
 
-          <FilterTabs
-            tabs={[...TABS]}
-            activeTab={activeTab}
-            onTabChange={(tabId) => setActiveTab(tabId as TabId)}
-            ariaLabel="Filter downloads by category"
-          />
+        <FilterTabs
+          tabs={[...TABS]}
+          activeTab={activeTab}
+          onTabChange={(tabId) => setActiveTab(tabId as TabId)}
+          ariaLabel="Filter downloads by category"
+        />
 
-          <Grid
-            items={filteredItems}
-            renderItem={(item) => (
-              <DownloadItemCard item={item} onClick={() => openModal(item)} />
-            )}
-            keyExtractor={(item) => item.id}
-          />
-        </Container>
-      </Section>
+        <Grid
+          items={filteredItems}
+          renderItem={(item) => (
+            <DownloadItemCard item={item} onClick={() => openModal(item)} />
+          )}
+          keyExtractor={(item) => item.id}
+        />
+      </Container>
 
       <ErrorBoundary
         fallback={
@@ -75,6 +73,6 @@ export default function LitDownloadSection() {
           content={modalContent || undefined}
         />
       </ErrorBoundary>
-    </>
+    </Section>
   );
 }
