@@ -89,13 +89,13 @@ export default function LazyImage({
 
   const handleError = (event: React.SyntheticEvent<HTMLImageElement>) => {
     const img = event.currentTarget;
-    
+
     // フォールバック画像でもエラーが発生した場合は、それ以上リトライしない
     if (img.src === fallback) {
       console.error(`Failed to load fallback image: ${fallback}`);
       return;
     }
-    
+
     setHasError(true);
     onError?.();
   };

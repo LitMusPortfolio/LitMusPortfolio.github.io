@@ -74,13 +74,17 @@ export default class ErrorBoundary extends Component<Props, State> {
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
     // エラー情報を整形
     formatErrorInfo(error, errorInfo);
-    
+
     // 親コンポーネントにエラーを通知
     this.props.onError?.(error, errorInfo);
   }
 
   handleReset = () => {
-    this.setState({ hasError: false, error: undefined, errorMessage: undefined });
+    this.setState({
+      hasError: false,
+      error: undefined,
+      errorMessage: undefined,
+    });
   };
 
   handleReload = () => {
@@ -100,7 +104,10 @@ export default class ErrorBoundary extends Component<Props, State> {
             {this.state.errorMessage || "予期しないエラーが発生しました。"}
           </ErrorMessage>
           <RetryButton onClick={this.handleReset}>もう一度試す</RetryButton>
-          <RetryButton onClick={this.handleReload} style={{ marginLeft: "1rem" }}>
+          <RetryButton
+            onClick={this.handleReload}
+            style={{ marginLeft: "1rem" }}
+          >
             ページを再読み込み
           </RetryButton>
         </ErrorContainer>

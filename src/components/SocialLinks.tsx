@@ -34,10 +34,7 @@ const SocialLinkItem = styled.a<{ $size: string }>`
   }
 `;
 
-export const SocialLinks = ({
-  links,
-  size = "medium",
-}: SocialLinksProps) => {
+export const SocialLinks = ({ links, size = "medium" }: SocialLinksProps) => {
   return (
     <SocialLinksContainer>
       {links.map((link) => (
