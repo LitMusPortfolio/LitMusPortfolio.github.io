@@ -84,8 +84,6 @@ const Logo = styled(LazyImage)`
   img {
     max-height: 20vw;
     width: auto;
-    filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.9))
-            drop-shadow(${theme.shadows.glow.large});
   }
   
   @media (max-width: ${theme.breakpoints.mobile}) {
@@ -141,8 +139,8 @@ const DescriptionText = styled.div`
   font-weight: 600;
   
   p {
-    margin: 0 0 0.6rem 0;
-    line-height: 1.2;
+    margin: 0 0 0.9rem 0;
+    line-height: 1.5;
     
     &:last-child {
       margin-bottom: 0;
