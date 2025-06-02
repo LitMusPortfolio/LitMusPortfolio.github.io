@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Tab } from "./CardGrid";
+import { Tab } from "./TabComponents";
 
 const meta = {
   title: "Components/Tab",

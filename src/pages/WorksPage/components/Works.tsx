@@ -1,8 +1,9 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import styled from "styled-components";
-import { Tab, TabContainer } from "@/components/CardGrid";
+import Grid from "@/components/Grid";
 import { Container, Section } from "@/components/Layout";
 import SectionTitle from "@/components/SectionTitle";
+import { Tab, TabContainer } from "@/components/TabComponents";
 import { theme } from "@/styles/theme";
 import { categoryColors } from "@/types";
 import { worksData } from "./WorksAssets";
@@ -19,30 +20,10 @@ const ContentWrapper = styled(Container)`
 const StickyHeader = styled.div`
   position: sticky;
   z-index: 10;
-
-  /* スムーズなトランジション */
-  transition: all 0.3s ease;
-  
-  /* タイトルとタブの視認性を確保 */
-  > * {
-    position: relative;
-    z-index: 1;
-  }
   
   @media (max-width: ${theme.breakpoints.mobile}) {
     top: 50px;
     padding: 1.5rem;
-  }
-`;
-
-const WorksGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 2rem;
-  
-  @media (max-width: ${theme.breakpoints.mobile}) {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
   }
 `;
 
@@ -226,9 +207,10 @@ export default function Works() {
           </TabContainer>
         </StickyHeader>
 
-        <WorksGrid id="works-grid" role="tabpanel" aria-label="Works grid">
-          {filteredWorks.map((work) => (
-            <WorkCard key={work.id}>
+        <Grid
+          items={filteredWorks}
+          renderItem={(work) => (
+            <WorkCard>
               <VideoWrapper>
                 <VideoThumbnail src={work.image} alt={work.title} />
               </VideoWrapper>
@@ -243,8 +225,12 @@ export default function Works() {
                 </WorkStats>
               </WorkInfo>
             </WorkCard>
-          ))}
-        </WorksGrid>
+          )}
+          keyExtractor={(work) => work.id}
+          id="works-grid"
+          role="tabpanel"
+          aria-label="Works grid"
+        />
       </ContentWrapper>
     </WorksSection>
   );

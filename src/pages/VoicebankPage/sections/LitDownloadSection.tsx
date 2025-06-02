@@ -1,10 +1,9 @@
 import { useMemo, useState } from "react";
-import styled from "styled-components";
-import { Tab, TabContainer } from "@/components/CardGrid";
 import ErrorBoundary from "@/components/ErrorBoundary";
+import Grid from "@/components/Grid";
 import { Container, Section, SideDecoration } from "@/components/Layout";
 import SectionTitle from "@/components/SectionTitle";
-import { theme } from "@/styles/theme";
+import { Tab, TabContainer } from "@/components/TabComponents";
 import DownloadItemCard from "../components/DownloadItemCard";
 import DownloadModal from "../components/DownloadModal";
 import { DOWNLOAD_ITEMS } from "../data/LitDownloadAssets";
@@ -15,19 +14,6 @@ import {
   TABS,
   type TabId,
 } from "../utils/LitDownloadUtils";
-
-// スタイルコンポーネント
-// レスポンシブグリッドコンテナ（Worksと同じスタイル）
-const DownloadGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 2rem;
-  
-  @media (max-width: ${theme.breakpoints.mobile}) {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-`;
 
 // メインコンポーネント
 export default function LitDownloadSection() {
@@ -68,15 +54,13 @@ export default function LitDownloadSection() {
             ))}
           </TabContainer>
 
-          <DownloadGrid>
-            {filteredItems.map((item) => (
-              <DownloadItemCard
-                key={item.id}
-                item={item}
-                onClick={() => openModal(item)}
-              />
-            ))}
-          </DownloadGrid>
+          <Grid
+            items={filteredItems}
+            renderItem={(item) => (
+              <DownloadItemCard item={item} onClick={() => openModal(item)} />
+            )}
+            keyExtractor={(item) => item.id}
+          />
         </Container>
       </Section>
 
