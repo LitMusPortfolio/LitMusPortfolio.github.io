@@ -71,7 +71,7 @@ export const ModalImageSection = styled.div`
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  
+  padding: 2rem;
   img {
     width: 100%;
     height: 100%;
@@ -92,7 +92,7 @@ export const ModalContainer = styled.div<{
   height: 70%;
   overflow: hidden;
   display: ${(props) => (props.$hasImage ? "grid" : "block")};
-  grid-template-columns: ${(props) => (props.$hasImage ? "2fr 3fr" : "1fr")};
+  grid-template-columns: ${(props) => (props.$hasImage ? "0.4fr 0.6fr" : "1fr")};
   transform: scale(0.95);
   opacity: 0;
   animation: modalFadeIn ${theme.animation.duration.fast} ${theme.animation.easing.ease} forwards;
