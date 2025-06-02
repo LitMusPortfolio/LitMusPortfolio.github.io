@@ -269,7 +269,7 @@ export default function LitMainSection() {
         </TextWrapper>
       </ContentContainer>
       <CharacterImage>
-        <img
+        <LazyImage
           src="/101_Lit/LitA_差し替え前提.webp"
           alt="離途 メインビジュアル"
         />
