@@ -9,7 +9,7 @@ export const ModalOverlay = styled.div<{ $isOpen: boolean }>`
   height: 100%;
   background: rgba(0, 0, 0, ${({ theme }) => theme.opacity[80]});
   backdrop-filter: blur(10px);
-  z-index: ${({ theme }) => theme.zIndex.modalBackdrop};
+  z-index: ${({ theme }) => theme.zIndex.max};
   display: flex;
   align-items: center;
   justify-content: center;

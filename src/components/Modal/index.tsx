@@ -51,7 +51,11 @@ export default function Modal({
     }
   };
 
-  // モーダルを常にレンダリングして、isOpenで表示/非表示を制御
+  // isOpenがfalseの場合は何もレンダリングしない
+  if (!isOpen) {
+    return <></>;
+  }
+
   return (
     <ModalOverlay $isOpen={isOpen} onClick={handleOverlayClick}>
       <ModalContainer

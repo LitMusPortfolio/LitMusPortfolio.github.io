@@ -95,6 +95,7 @@ export const ModalContainer = styled.div<{
   grid-template-columns: ${(props) => (props.$hasImage ? "0.4fr 0.6fr" : "1fr")};
   transform: scale(0.95);
   opacity: 0;
+  z-index: ${theme.zIndex.max};
   animation: modalFadeIn ${theme.animation.duration.fast} ${theme.animation.easing.ease} forwards;
   
   @keyframes modalFadeIn {
