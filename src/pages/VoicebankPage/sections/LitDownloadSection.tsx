@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import FilterTabs from "@/components/FilterTabs";
 import Grid from "@/components/Grid";
@@ -32,6 +32,19 @@ export default function LitDownloadSection() {
     [selectedItem],
   );
 
+  // タブ変更ハンドラーをメモ化
+  const handleTabChange = useCallback((tabId: string) => {
+    setActiveTab(tabId as TabId);
+  }, []);
+
+  // グリッドアイテムのレンダリング関数をメモ化
+  const renderGridItem = useCallback((item: typeof DOWNLOAD_ITEMS[0]) => (
+    <DownloadItemCard item={item} onClick={() => openModal(item)} />
+  ), [openModal]);
+
+  // キー抽出関数をメモ化
+  const keyExtractor = useCallback((item: typeof DOWNLOAD_ITEMS[0]) => item.id, []);
+
   return (
     <>
       <Section id="downloads">
@@ -45,16 +58,14 @@ export default function LitDownloadSection() {
           <FilterTabs
             tabs={[...TABS]}
             activeTab={activeTab}
-            onTabChange={(tabId) => setActiveTab(tabId as TabId)}
+            onTabChange={handleTabChange}
             ariaLabel="Filter downloads by category"
           />
 
           <Grid
             items={filteredItems}
-            renderItem={(item) => (
-              <DownloadItemCard item={item} onClick={() => openModal(item)} />
-            )}
-            keyExtractor={(item) => item.id}
+            renderItem={renderGridItem}
+            keyExtractor={keyExtractor}
           />
         </Container>
       </Section>

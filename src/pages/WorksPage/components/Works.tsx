@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 import styled from "styled-components";
 import { BackgroundSection } from "@/components/BackgroundSection";
 import FilterTabs, { type TabItem } from "@/components/FilterTabs";
@@ -79,6 +79,28 @@ export default function Works() {
       : worksData.filter((work) => work.category.includes(activeTab));
   }, [activeTab]);
 
+  // タブ変更ハンドラーをメモ化
+  const handleTabChange = useCallback((tabId: string) => {
+    setActiveTab(tabId as TabId);
+  }, []);
+
+  // グリッドアイテムのレンダリング関数をメモ化
+  const renderWorkItem = useCallback((work: typeof worksData[0]) => (
+    <WorkCard>
+      <VideoWrapper>
+        <LazyImage src={work.thumbnailPath} alt={work.title} />
+      </VideoWrapper>
+      <WorkInfo>
+        <WorkRequester>{work.requester}</WorkRequester>
+        <h3>{work.title}</h3>
+        <p>{work.description}</p>
+      </WorkInfo>
+    </WorkCard>
+  ), []);
+
+  // キー抽出関数をメモ化
+  const keyExtractor = useCallback((work: typeof worksData[0]) => work.title, []);
+
   return (
     <BackgroundSection backgroundImage="/LitMusBG.webp">
       <ContentWrapper>
@@ -88,7 +110,7 @@ export default function Works() {
             ref={tabsRef}
             tabs={WORK_TABS}
             activeTab={activeTab}
-            onTabChange={(tabId) => setActiveTab(tabId as TabId)}
+            onTabChange={handleTabChange}
             ariaLabel="Filter works by category"
             ariaControls="works-grid"
           />
@@ -96,19 +118,8 @@ export default function Works() {
 
         <Grid
           items={filteredWorks}
-          renderItem={(work) => (
-            <WorkCard>
-              <VideoWrapper>
-                <LazyImage src={work.thumbnailPath} alt={work.title} />
-              </VideoWrapper>
-              <WorkInfo>
-                <WorkRequester>{work.requester}</WorkRequester>
-                <h3>{work.title}</h3>
-                <p>{work.description}</p>
-              </WorkInfo>
-            </WorkCard>
-          )}
-          keyExtractor={(work) => work.title}
+          renderItem={renderWorkItem}
+          keyExtractor={keyExtractor}
           id="works-grid"
           role="tabpanel"
           aria-label="Works grid"

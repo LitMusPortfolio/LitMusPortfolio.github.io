@@ -1,3 +1,4 @@
+import React from "react";
 import styled from "styled-components";
 import LazyImage from "@/components/LazyImage";
 import { cardHoverEffect, glassmorphism } from "@/styles/utils";
@@ -110,10 +111,10 @@ interface DownloadItemCardProps {
 }
 
 // ダウンロードアイテムカードコンポーネント
-export default function DownloadItemCard({
+const DownloadItemCard = React.memo(({
   item,
   onClick,
-}: DownloadItemCardProps) {
+}: DownloadItemCardProps) => {
   return (
     <DownloadCard onClick={onClick} tabIndex={0}>
       <ThumbnailWrapper>
@@ -132,4 +133,6 @@ export default function DownloadItemCard({
       </CardInfo>
     </DownloadCard>
   );
-}
+});
+
+export default DownloadItemCard;
