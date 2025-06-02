@@ -3,6 +3,7 @@ import { Outlet, useLocation } from "react-router-dom";
 import { preloadAssetsForPage } from "@/utils/preloadAssets";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
+import { SkipLinks } from "../components/SkipLinks";
 
 export default function MainLayout() {
   const location = useLocation();
@@ -15,8 +16,9 @@ export default function MainLayout() {
 
   return (
     <>
+      <SkipLinks />
       <Header />
-      <main>
+      <main id="main-content">
         <Outlet />
       </main>
       {!isHomePage && <Footer />}

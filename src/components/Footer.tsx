@@ -68,6 +68,13 @@ export default function Footer() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      scrollToTop();
+    }
+  };
+
   const socialLinks = [
     {
       platform: "X (Twitter)",
@@ -90,11 +97,10 @@ export default function Footer() {
     <>
       <FooterContainer>
         <LeftSection>
-          <PageTop onClick={scrollToTop}>
+          <PageTop onClick={scrollToTop} onKeyDown={handleKeyDown} role="button" aria-label="ページトップへ戻る" tabIndex={0}>
             <LazyImage
               src="/001_top/FooterPageTop.svg"
-              alt=""
-              aria-hidden="true"
+              alt="ページトップへ"
             />
           </PageTop>
         </LeftSection>

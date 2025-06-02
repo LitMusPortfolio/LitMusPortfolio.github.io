@@ -128,4 +128,28 @@ export const GlobalStyles = createGlobalStyle`
       transition-duration: 0.01ms !important;
     }
   }
+
+  /* フォーカススタイルの改善 */
+  *:focus {
+    outline: none;
+  }
+
+  *:focus-visible {
+    outline: 3px solid ${theme.colors.primary.main};
+    outline-offset: 2px;
+    border-radius: ${theme.radius.sm};
+  }
+
+  /* スクリーンリーダー専用クラス */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
 `;

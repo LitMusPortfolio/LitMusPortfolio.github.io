@@ -97,7 +97,7 @@ const Header = React.memo(() => {
 
   return (
     <HeaderContainer>
-      <Nav aria-label="Main navigation">
+      <Nav id="main-navigation" aria-label="Main navigation">
         <Logo
           to="/"
           onClick={() => window.scrollTo(0, 0)}
