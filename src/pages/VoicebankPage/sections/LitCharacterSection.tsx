@@ -33,7 +33,11 @@ const PROFILE_DATA_RIGHT: ProfileData[] = [
 
 // デモソングデータ
 const DEMO_SONGS: DemoSong[] = [
-  { id: "1", title: "デモソング1", embedId: "dQw4w9WgXcQ" },
+  {
+    id: "1",
+    title: "僕の人生は僕だけのものだった/離途",
+    embedId: "szoC6fCe4dU",
+  },
   { id: "2", title: "牢 - 離途", embedId: "Am0LJH7ipv0" },
 ];
 

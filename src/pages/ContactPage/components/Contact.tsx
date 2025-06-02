@@ -18,7 +18,7 @@ const RightSection = styled.div`
 
 const ContentGrid = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 0.6fr 0.4fr;
   gap: 2rem;
 `;
 

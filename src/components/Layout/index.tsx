@@ -15,6 +15,7 @@ export const Section = styled.section`
 export const Container = styled.div`
   margin: 0 auto;
   padding: 2% 4%;
+  width: 70%;
   position: relative;
   z-index: 1;
 `;
