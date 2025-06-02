@@ -1,12 +1,9 @@
 import styled from "styled-components";
-import { Container, GridContainer, Section } from "@/components/Layout";
+import { BackgroundSection } from "@/components/BackgroundSection";
+import { Container, GridContainer } from "@/components/Layout";
 import LazyImage from "@/components/LazyImage";
 import SectionTitle from "@/components/SectionTitle";
 import { theme } from "@/styles/theme";
-
-const AboutSection = styled(Section)`
-  background-image: url('/LitMusBG.webp');
-`;
 
 const StyledGridContainer = styled(GridContainer)`
   align-items: center;
@@ -74,7 +71,7 @@ const ProfileDescription = styled.div`
 
 export default function About() {
   return (
-    <AboutSection id="about">
+    <BackgroundSection id="about" backgroundImage="/LitMusBG.webp">
       <Container>
         <SectionTitle>ABOUT</SectionTitle>
 
@@ -121,6 +118,6 @@ export default function About() {
           </RightSection>
         </StyledGridContainer>
       </Container>
-    </AboutSection>
+    </BackgroundSection>
   );
 }

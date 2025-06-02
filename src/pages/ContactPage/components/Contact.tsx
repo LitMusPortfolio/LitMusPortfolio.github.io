@@ -1,11 +1,8 @@
 import styled from "styled-components";
-import { Container, Section } from "@/components/Layout";
+import { BackgroundSection } from "@/components/BackgroundSection";
+import { Container } from "@/components/Layout";
 import SectionTitle from "@/components/SectionTitle";
 import TitleWithLine from "@/components/TitleWithLine";
-
-const ContactSectionWrapper = styled(Section)`
-  background-image: url('/LitMusBG.webp');
-`;
 
 const LeftSection = styled.div`
   display: flex;
@@ -42,7 +39,7 @@ const NOTICES = [
 
 export default function Contact() {
   return (
-    <ContactSectionWrapper id="contact">
+    <BackgroundSection id="contact" backgroundImage="/LitMusBG.webp">
       <Container>
         <SectionTitle>CONTACT</SectionTitle>
 
@@ -62,6 +59,6 @@ export default function Contact() {
           <RightSection></RightSection>
         </ContentGrid>
       </Container>
-    </ContactSectionWrapper>
+    </BackgroundSection>
   );
 }

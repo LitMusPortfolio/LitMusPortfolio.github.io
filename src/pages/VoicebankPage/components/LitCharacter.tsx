@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import styled from "styled-components";
+import { BackgroundSection } from "@/components/BackgroundSection";
 import { Section, SideDecoration } from "../../../components/Layout";
 import LitCharacterSection from "../sections/LitCharacterSection";
 import LitDownloadSection from "../sections/LitDownloadSection";
@@ -12,14 +13,9 @@ const CharacterSection = styled(Section)`
 `;
 
 // CharacterSectionとDownloadSectionを統合するコンテナ
-const IntegratedSection = styled.div`
-  position: relative;
-  background: url("/LitBG.webp") no-repeat center center;
-  background-size: cover;
-  background-attachment: fixed;
-  
+const IntegratedSection = styled(BackgroundSection)`
   /* 幾何学模様のオーバーレイ */
-  &::before {
+  &::after {
     content: '';
     position: absolute;
     top: 0;
@@ -34,6 +30,11 @@ const IntegratedSection = styled.div`
     background-size: 30px 30px;
     background-position: 0 0, 0 15px, 15px -15px, -15px 0px;
     z-index: 0;
+  }
+  
+  > * {
+    position: relative;
+    z-index: 1;
   }
 `;
 
@@ -60,7 +61,7 @@ export default function LitCharacter() {
       <LitMainSection />
 
       {/* CharacterSectionとDownloadSectionを統合 */}
-      <IntegratedSection>
+      <IntegratedSection backgroundImage="/LitBG.webp">
         {/* キャラクター詳細セクション */}
         <LitCharacterSection />
 

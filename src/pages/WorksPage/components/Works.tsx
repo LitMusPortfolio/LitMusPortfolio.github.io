@@ -1,16 +1,13 @@
 import { useMemo, useRef, useState } from "react";
 import styled from "styled-components";
+import { BackgroundSection } from "@/components/BackgroundSection";
 import FilterTabs, { type TabItem } from "@/components/FilterTabs";
 import Grid from "@/components/Grid";
-import { Container, Section } from "@/components/Layout";
+import { Container } from "@/components/Layout";
 import LazyImage from "@/components/LazyImage";
 import SectionTitle from "@/components/SectionTitle";
 import { theme } from "@/styles/theme";
 import { type Category, worksData } from "../data/WorksAssets";
-
-const WorksSection = styled(Section)`
-  background-image: url('/LitMusBG.webp');
-`;
 
 const ContentWrapper = styled(Container)`
   position: relative;
@@ -82,7 +79,7 @@ export default function Works() {
   }, [activeTab]);
 
   return (
-    <WorksSection>
+    <BackgroundSection backgroundImage="/LitMusBG.webp">
       <ContentWrapper>
         <StickyHeader>
           <SectionTitle>WORKS</SectionTitle>
@@ -116,6 +113,6 @@ export default function Works() {
           aria-label="Works grid"
         />
       </ContentWrapper>
-    </WorksSection>
+    </BackgroundSection>
   );
 }
