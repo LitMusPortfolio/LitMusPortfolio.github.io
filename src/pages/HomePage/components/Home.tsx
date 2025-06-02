@@ -170,8 +170,7 @@ export default function Home() {
         <TagsWrapper>
           <TagLine>
             <TextWithBackground>#MUSIC</TextWithBackground>
-            <TextWithBackground>#VOCALOID</TextWithBackground>
-            <TextWithBackground>#PRODUCE</TextWithBackground>
+            <TextWithBackground>#VOCALOIDPRODUCE</TextWithBackground>
           </TagLine>
           <TagLine>
             <TextWithBackground>#ILLUSTRATION</TextWithBackground>

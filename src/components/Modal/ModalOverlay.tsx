@@ -7,7 +7,6 @@ export const ModalOverlay = styled.div<{ $isOpen: boolean }>`
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(10px);
   z-index: 9999;
   display: flex;

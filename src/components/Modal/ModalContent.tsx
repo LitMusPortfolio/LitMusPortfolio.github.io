@@ -71,7 +71,7 @@ export const ModalImageSection = styled.div`
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  
+  padding: 2rem;
   img {
     width: 100%;
     height: 100%;
@@ -92,7 +92,7 @@ export const ModalContainer = styled.div<{
   height: 70%;
   overflow: hidden;
   display: ${(props) => (props.$hasImage ? "grid" : "block")};
-  grid-template-columns: ${(props) => (props.$hasImage ? "2fr 3fr" : "1fr")};
+  grid-template-columns: ${(props) => (props.$hasImage ? "0.4fr 0.6fr" : "1fr")};
   transform: scale(0.95);
   opacity: 0;
   animation: modalFadeIn 0.3s ease forwards;
@@ -113,12 +113,7 @@ export const ModalContainer = styled.div<{
         `;
       case "download":
         return css`
-          background: linear-gradient(
-            135deg,
-            rgba(20, 20, 30, 0.98) 0%,
-            rgba(30, 20, 40, 0.98) 100%
-          );
-          border: 1px solid rgba(138, 97, 255, 0.2);
+          background: rgba(37, 37, 37, 0.584);
           box-shadow: 
             0 30px 60px rgba(0, 0, 0, 0.5),
             0 0 120px rgba(139, 92, 246, 0.15),
@@ -128,8 +123,6 @@ export const ModalContainer = styled.div<{
       default:
         return css`
           background: rgba(20, 20, 30, 0.95);
-          backdrop-filter: blur(20px);
-          border: 1px solid rgba(139, 92, 246, 0.3);
           box-shadow: 
             0 25px 50px rgba(0, 0, 0, 0.5),
             0 0 100px rgba(139, 92, 246, 0.1),
