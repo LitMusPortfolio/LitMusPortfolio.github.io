@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import LazyVideo from "../../../components/LazyVideo";
+import { SocialLinks as SocialLinksComponent } from "../../../components/SocialLinks";
 import TextWithBackground from "../../../components/TextWithBackground";
 import { theme } from "../../../styles/theme";
 
@@ -51,31 +52,15 @@ const TagLine = styled.div`
   font-family: 'Montserrat', sans-serif;
 `;
 
-const SocialLinks = styled.div`
+const SocialLinksWrapper = styled.div`
   position: absolute;
   right: 3rem;
   bottom: 10rem;
-  display: flex;
-  gap: 1.5rem;
   z-index: 10;
   
   @media (max-width: ${theme.breakpoints.mobile}) {
     right: 2rem;
     bottom: 10rem;
-  }
-  
-  a {
-    opacity: 0.8;
-    transition: opacity 0.3s ease;
-    
-    &:hover {
-      opacity: 1;
-    }
-  }
-  
-  img {
-    width: 24px;
-    height: 24px;
   }
 `;
 
@@ -158,6 +143,24 @@ export default function Home() {
     { src: "/001_top/LitMusHPTopMovie.webm", type: "video/webm" },
   ];
 
+  const socialLinks = [
+    {
+      platform: "X (Twitter)",
+      url: "https://twitter.com/litmus9",
+      icon: "/001_top/icon_X.svg",
+    },
+    {
+      platform: "YouTube",
+      url: "https://www.youtube.com/@litmus9",
+      icon: "/001_top/icon_youtube.svg",
+    },
+    {
+      platform: "niconico",
+      url: "https://www.nicovideo.jp/user/12345678",
+      icon: "/001_top/icon_niconico.svg",
+    },
+  ];
+
   return (
     <HomeSection>
       <VideoBackground sources={videoSources} autoPlay loop muted playsInline />
@@ -188,29 +191,9 @@ export default function Home() {
         <img src="/001_top/離途バナー_差し替え予定.webp" alt="VOICEVOX" />
       </VoicevoxBanner>
 
-      <SocialLinks>
-        <a
-          href="https://twitter.com/litmus9"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img src="/001_top/icon_X.svg" alt="X (Twitter)" />
-        </a>
-        <a
-          href="https://www.youtube.com/@litmus9"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img src="/001_top/icon_youtube.svg" alt="YouTube" />
-        </a>
-        <a
-          href="https://www.nicovideo.jp/user/12345678"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img src="/001_top/icon_niconico.svg" alt="niconico" />
-        </a>
-      </SocialLinks>
+      <SocialLinksWrapper>
+        <SocialLinksComponent links={socialLinks} size="small" />
+      </SocialLinksWrapper>
 
       <NewsBar>
         <NewsText>

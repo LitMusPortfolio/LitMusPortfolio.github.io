@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { SocialLinks } from "./SocialLinks";
 
 const FooterContainer = styled.footer`
   background: #000;
@@ -48,23 +49,41 @@ const Contact = styled.div`
   font-size: 1.5rem;
 `;
 
-const SNSLinks = styled.div`
+const SNSLinksWrapper = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   gap: 1rem;
   margin-bottom: 1.5rem;
-`;
-
-const SNSLink = styled.img`
-  width: 2rem;
+  
+  span {
+    margin-right: 0.5rem;
+  }
 `;
 
 export default function Footer() {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
+
+  const socialLinks = [
+    {
+      platform: "X (Twitter)",
+      url: "https://twitter.com/litmus9",
+      icon: "/001_top/icon_X.svg",
+    },
+    {
+      platform: "YouTube",
+      url: "https://www.youtube.com/@litmus9",
+      icon: "/001_top/icon_youtube.svg",
+    },
+    {
+      platform: "niconico",
+      url: "https://www.nicovideo.jp/user/12345678",
+      icon: "/001_top/icon_niconico.svg",
+    },
+  ];
 
   return (
     <>
@@ -78,12 +97,10 @@ export default function Footer() {
           />
         </LeftSection>
         <RightSection>
-          <SNSLinks>
+          <SNSLinksWrapper>
             <span>SNS</span>
-            <SNSLink src="/001_top/icon_X.svg" />
-            <SNSLink src="/001_top/icon_youtube.svg" />
-            <SNSLink src="/001_top/icon_niconico.svg" />
-          </SNSLinks>
+            <SocialLinks links={socialLinks} size="small" />
+          </SNSLinksWrapper>
           <Contact>
             <Link to="/contact">CONTACT ▶</Link>
           </Contact>
