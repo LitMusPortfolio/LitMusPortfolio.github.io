@@ -2,13 +2,15 @@ pre-commit:
   parallel: true
   jobs:
     - run: git status
+    - run: npm run knip --fix
+      glob: "*.{js,ts,jsx,tsx}"
+      fail_text: "未使用のコード、依存関係、またはファイルが検出されました。'npx knip --fix'で修正するか、手動で削除してください。"
     - run: npm run lint --fix {staged_files}
       glob: "*.{js,ts,jsx,tsx}"
     - run: npm run typecheck
       glob: "*.{js,ts,jsx,tsx}"
-    - run: npm run knip
-      glob: "*.{js,ts,jsx,tsx}"
-      fail_text: "未使用のコード、依存関係、またはファイルが検出されました。'npx knip --fix'で修正するか、手動で削除してください。"
+    - run: npm run typecheck:stories
+      glob: "*.stories.tsx"
     - run: npm run check-stories
       glob: "src/components/**/*.tsx"
       fail_text: "Storybookストーリーが見つからないコンポーネントがあります。'npm run generate-stories'を実行してください。"
