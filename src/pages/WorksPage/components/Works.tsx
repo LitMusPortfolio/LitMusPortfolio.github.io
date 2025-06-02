@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import styled from "styled-components";
 import Grid from "@/components/Grid";
 import { Container, Section } from "@/components/Layout";
+import LazyImage from "@/components/LazyImage";
 import SectionTitle from "@/components/SectionTitle";
 import { Tab, TabContainer } from "@/components/TabComponents";
 import { theme } from "@/styles/theme";
@@ -45,13 +46,18 @@ const VideoWrapper = styled.div`
   overflow: hidden;
 `;
 
-const VideoThumbnail = styled.img`
+const VideoThumbnail = styled(LazyImage)`
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 `;
 
 const WorkInfo = styled.div`
