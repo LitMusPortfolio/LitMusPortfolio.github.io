@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Container, Section } from "./index";
+import { Container, Section } from "./Layout";
 
 const meta = {
   title: "Components/Layout/Section",

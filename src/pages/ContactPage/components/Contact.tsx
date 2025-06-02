@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Container, Section } from "@/components/Layout/";
+import { Container, Section } from "@/components/Layout";
 import SectionTitle from "@/components/SectionTitle";
 import TitleWithLine from "@/components/TitleWithLine";
 

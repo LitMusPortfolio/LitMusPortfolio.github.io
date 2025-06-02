@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { ContentContainer, GridContainer } from "@/components/Layout";
+import LazyImage from "@/components/LazyImage";
 import SectionTitle from "@/components/SectionTitle";
 import TitleWithLine from "@/components/TitleWithLine";
 import { theme } from "@/styles/theme";
@@ -118,11 +119,16 @@ const LeftSection = styled.div`
 `;
 
 // キャラクター画像
-const CharacterImage = styled.img`
+const CharacterImage = styled(LazyImage)`
   max-height: 100vh;
   width: auto;
-  object-fit: contain;
-  filter: drop-shadow(${theme.shadows.glow.medium});
+  
+  img {
+    max-height: 100vh;
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(${theme.shadows.glow.medium});
+  }
 `;
 
 export default function LitCharacterSection() {

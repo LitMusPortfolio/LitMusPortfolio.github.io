@@ -1,14 +1,22 @@
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 
-interface LazyVideoProps {
+interface VideoSource {
   src: string;
+  type: string;
+}
+
+interface LazyVideoProps {
+  src?: string;
+  sources?: VideoSource[];
   poster?: string;
   autoPlay?: boolean;
   loop?: boolean;
   muted?: boolean;
+  playsInline?: boolean;
   className?: string;
   onLoadedData?: () => void;
+  onError?: () => void;
 }
 
 const VideoWrapper = styled.div`
@@ -28,16 +36,21 @@ const StyledVideo = styled.video<{ $isLoaded: boolean }>`
 
 export default function LazyVideo({
   src,
+  sources,
   poster,
   autoPlay = false,
   loop = false,
   muted = false,
+  playsInline = false,
   className,
   onLoadedData,
+  onError,
 }: LazyVideoProps) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isInView, setIsInView] = useState(false);
+  const [hasError, setHasError] = useState(false);
   const videoRef = useRef<HTMLDivElement>(null);
+  const videoElementRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -61,24 +74,44 @@ export default function LazyVideo({
     };
   }, []);
 
+  useEffect(() => {
+    if (isInView && autoPlay && videoElementRef.current) {
+      videoElementRef.current.play().catch((error) => {
+        console.error("Video autoplay failed:", error);
+      });
+    }
+  }, [isInView, autoPlay]);
+
   const handleLoadedData = () => {
     setIsLoaded(true);
     onLoadedData?.();
   };
 
+  const handleError = () => {
+    setHasError(true);
+    onError?.();
+  };
+
   return (
     <VideoWrapper ref={videoRef} className={className}>
-      {isInView && (
+      {isInView && !hasError && (
         <StyledVideo
+          ref={videoElementRef}
           src={src}
           poster={poster}
           autoPlay={autoPlay}
           loop={loop}
           muted={muted}
+          playsInline={playsInline}
           onLoadedData={handleLoadedData}
+          onError={handleError}
           $isLoaded={isLoaded}
           preload="metadata"
-        />
+        >
+          {sources?.map((source) => (
+            <source key={source.src} src={source.src} type={source.type} />
+          ))}
+        </StyledVideo>
       )}
     </VideoWrapper>
   );

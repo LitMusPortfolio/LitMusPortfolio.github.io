@@ -142,6 +142,8 @@ theme = {
 
 ### スタイリングパターン
 
+独自のスタイル定義をすることは必要最低限とすること。基本的には GlobalStyle.ts にすべてまとまるようにする。
+
 ```typescript
 // styled-componentsでのテーマ使用
 const StyledComponent = styled.div`

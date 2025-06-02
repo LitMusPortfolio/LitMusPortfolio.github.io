@@ -1,5 +1,5 @@
-import { useEffect, useRef } from "react";
 import styled from "styled-components";
+import LazyVideo from "../../../components/LazyVideo";
 import TextWithBackground from "../../../components/TextWithBackground";
 import { theme } from "../../../styles/theme";
 
@@ -137,31 +137,30 @@ const NewsText = styled.span`
   }
 `;
 
-const VideoBackground = styled.video`
+const VideoBackground = styled(LazyVideo)`
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
   z-index: -1;
+  
+  video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 `;
 
 export default function Home() {
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.play();
-    }
-  }, []);
+  const videoSources = [
+    { src: "/001_top/LitMusHPTopMovie.mp4", type: "video/mp4" },
+    { src: "/001_top/LitMusHPTopMovie.webm", type: "video/webm" },
+  ];
 
   return (
     <HomeSection>
-      <VideoBackground ref={videoRef} autoPlay loop muted playsInline>
-        <source src="/001_top/LitMusHPTopMovie.mp4" type="video/mp4" />
-        <source src="/001_top/LitMusHPTopMovie.webm" type="video/webm" />
-      </VideoBackground>
+      <VideoBackground sources={videoSources} autoPlay loop muted playsInline />
 
       <HomeContent>
         <MainTitle>
