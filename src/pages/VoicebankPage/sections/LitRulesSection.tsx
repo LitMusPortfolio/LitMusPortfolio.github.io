@@ -1,55 +1,6 @@
-import styled from "styled-components";
 import { Container, Section, SideDecoration } from "@/components/Layout";
 import SectionTitle from "@/components/SectionTitle";
 import TitleWithLine from "@/components/TitleWithLine";
-import { theme } from "@/styles/theme";
-
-const RulesContent = styled.div`
-  margin-top: ${theme.space.xl};
-`;
-
-const RulesList = styled.ul`
-  list-style: none;
-  padding: 0;
-  margin: ${theme.space.lg} 0;
-`;
-
-const RuleItem = styled.li`
-  color: ${theme.colors.text.primary};
-  font-size: ${theme.typography.fontSize.base};
-  line-height: ${theme.typography.body.lineHeight};
-  padding-left: ${theme.space.lg};
-  position: relative;
-
-  &::before {
-    content: "▸";
-    position: absolute;
-    left: 0;
-    color: ${theme.colors.primary.main};
-    font-size: ${theme.typography.fontSize.md};
-  }
-
-  &:last-child {
-    margin-bottom: 0;
-  }
-
-  @media (max-width: ${theme.breakpoints.mobile}) {
-    font-size: ${theme.typography.fontSize.sm};
-    padding-left: 25px;
-  }
-`;
-
-const RulesTitle = styled.h3`
-  font-size: ${theme.typography.fontSize.xl};
-  font-weight: bold;
-  color: ${theme.colors.text.primary};
-  margin: 0;
-  white-space: nowrap;
-  
-  @media (max-width: ${theme.breakpoints.mobile}) {
-    font-size: ${theme.typography.fontSize.lg};
-  }
-`;
 
 const RULES = [
   {
@@ -72,12 +23,12 @@ const RULES = [
     title: "禁止事項",
     items: [
       "当サイトのコンテンツを二次配布すること。",
-      "当サイトのコンテンツを機械学習に利用すること。",
+      "当サイトのコンテンツ及び「離途」の音声波形を機械学習に利用すること。",
       "「離途」のキャラクター及び音声波形を用いて、政治的表現、宗教的表現に利用すること。",
       "「離途」のキャラクター及び音声波形を用いて、性行為・性器を露出する場面など過激なアダルト的表現を行うコンテンツを作成し、それをSNS等の不特定多数が閲覧できる場所で公開すること。",
       "「離途」のキャラクターを用いたイラストを、生成AIを利用して作成し、それを不特定多数が閲覧できる場所で公開すること。",
       "法人が許諾なく「離途」のキャラクターを使用すること。（法人が音声波形のみを利用する場合は、無料で商用利用可能）",
-      "公式からの発信と誤認識されかねない言動（なりきりアカウント等含む）",
+      "公式からの発信と誤認識されかねない言動を行うこと。（なりきりアカウント等も含む）",
     ],
   },
   {
@@ -119,16 +70,14 @@ export default function LitRulesSection() {
       <Container>
         <SectionTitle>RULES</SectionTitle>
         {RULES.map((rule) => (
-          <RulesContent key={rule.title}>
-            <TitleWithLine>
-              <RulesTitle>{rule.title}</RulesTitle>
-            </TitleWithLine>
-            <RulesList>
+          <div key={rule.title}>
+            <TitleWithLine title={rule.title} />
+            <ul>
               {rule.items.map((item) => (
-                <RuleItem key={item}>{item}</RuleItem>
+                <li key={item}>{item}</li>
               ))}
-            </RulesList>
-          </RulesContent>
+            </ul>
+          </div>
         ))}
       </Container>
     </Section>

@@ -3,7 +3,7 @@ import { theme } from "../styles/theme";
 
 // 共通タイトル付き罫線コンポーネント
 interface TitleWithLineProps {
-  children: React.ReactNode;
+  title: string;
   className?: string;
 }
 
@@ -24,13 +24,17 @@ const Line = styled.div`
   margin-left: ${theme.space.sm};
 `;
 
+const Title = styled.h2`
+  font-weight: ${theme.typography.heading.fontWeight};
+`;
+
 export default function TitleWithLine({
-  children,
+  title,
   className,
 }: TitleWithLineProps) {
   return (
     <Container className={className}>
-      {children}
+      <Title>{title}</Title>
       <Line />
     </Container>
   );

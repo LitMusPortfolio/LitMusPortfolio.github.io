@@ -5,20 +5,6 @@ import { theme } from "@/styles/theme";
 
 const AboutSection = styled(Section)`
   background-image: url('/LitMusBG.webp');
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  position: relative;
-  min-height: 100vh;
-  padding-top: 6rem;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: 0;
-  }
 `;
 
 const ContentGrid = styled.div`
@@ -41,29 +27,10 @@ const LeftSection = styled.div`
 
 const ImageFrame = styled.div`
   position: relative;
-  width: 80%;
+  width: 100%;
   border: 4px solid #4a90e2;
   border-radius: 15px;
   overflow: hidden;
-  box-shadow: 
-    0 0 40px rgba(74, 144, 226, 0.8),
-    inset 0 0 20px rgba(74, 144, 226, 0.4);
-  background: #000;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    inset: -4px;
-    background: linear-gradient(45deg, #4a90e2, #8b5cf6, #4a90e2);
-    border-radius: 15px;
-    z-index: -1;
-    animation: glow 3s ease-in-out infinite;
-  }
-  
-  @keyframes glow {
-    0%, 100% { opacity: 0.6; }
-    50% { opacity: 1; }
-  }
 `;
 
 const CharacterImage = styled.img`

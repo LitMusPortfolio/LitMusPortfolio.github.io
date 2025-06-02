@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { MemoryRouter } from "react-router-dom";
 import App from "./App";
 
 const meta = {
@@ -8,13 +7,6 @@ const meta = {
   parameters: {
     layout: "fullscreen",
   },
-  decorators: [
-    (Story) => (
-      <MemoryRouter initialEntries={["/"]}>
-        <Story />
-      </MemoryRouter>
-    ),
-  ],
 } satisfies Meta<typeof App>;
 
 export default meta;
@@ -22,67 +14,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 // ホームページ
-export const HomePage: Story = {
-  decorators: [
-    (Story) => (
-      <MemoryRouter initialEntries={["/"]}>
-        <Story />
-      </MemoryRouter>
-    ),
-  ],
-};
+export const HomePage: Story = {};
 
-// Aboutページ
-export const AboutPage: Story = {
-  decorators: [
-    (Story) => (
-      <MemoryRouter initialEntries={["/about"]}>
-        <Story />
-      </MemoryRouter>
-    ),
-  ],
-};
-
-// Worksページ
-export const WorksPage: Story = {
-  decorators: [
-    (Story) => (
-      <MemoryRouter initialEntries={["/works"]}>
-        <Story />
-      </MemoryRouter>
-    ),
-  ],
-};
-
-// Voicebankページ（離途）
-export const VoicebankPage: Story = {
-  decorators: [
-    (Story) => (
-      <MemoryRouter initialEntries={["/voicebank"]}>
-        <Story />
-      </MemoryRouter>
-    ),
-  ],
-};
-
-// Shopページ
-export const ShopPage: Story = {
-  decorators: [
-    (Story) => (
-      <MemoryRouter initialEntries={["/shop"]}>
-        <Story />
-      </MemoryRouter>
-    ),
-  ],
-};
-
-// Contactページ
-export const ContactPage: Story = {
-  decorators: [
-    (Story) => (
-      <MemoryRouter initialEntries={["/contact"]}>
-        <Story />
-      </MemoryRouter>
-    ),
-  ],
-};
+// 他のページのStoryは、react-router-storybookを使うか、
+// もしくはページコンポーネントを直接表示するStoriesファイルを作成する方が良い

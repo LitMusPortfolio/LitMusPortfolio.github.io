@@ -5,7 +5,7 @@ pre-commit:
     - run: npm run knip --fix
       glob: "*.{js,ts,jsx,tsx}"
       fail_text: "未使用のコード、依存関係、またはファイルが検出されました。'npx knip --fix'で修正するか、手動で削除してください。"
-    - run: npm run lint --fix {staged_files}
+    - run: npm run lint --write {staged_files}
       glob: "*.{js,ts,jsx,tsx}"
     - run: npm run typecheck
       glob: "*.{js,ts,jsx,tsx}"

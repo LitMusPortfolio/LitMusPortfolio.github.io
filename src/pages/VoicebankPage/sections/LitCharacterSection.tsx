@@ -55,19 +55,6 @@ const StyledContentContainer = styled(ContentContainer)`
   }
 `;
 
-// タイトルテキスト
-const TitleText = styled.h2`
-  font-size: 3rem;
-  font-weight: bold;
-  color: ${theme.colors.text.primary};
-  margin: 0;
-  white-space: nowrap;
-  
-  @media (max-width: ${theme.breakpoints.mobile}) {
-    font-size: 2rem;
-  }
-`;
-
 // プロフィールコンテナ（全体）
 const ProfileWrapper = styled.div`
   display: grid;
@@ -146,17 +133,13 @@ export default function LitCharacterSection() {
         </LeftSection>
         <StyledContentContainer>
           <SectionTitle>CHARACTER</SectionTitle>
-          <TitleWithLine>
-            <TitleText>離途</TitleText>
-          </TitleWithLine>
+          <TitleWithLine title="離途" />
           <ProfileWrapper>
             <ProfileSection data={PROFILE_DATA_LEFT} />
             <ProfileSection data={PROFILE_DATA_RIGHT} />
           </ProfileWrapper>
           <DemoSongSection>
-            <TitleWithLine>
-              <TitleText>デモソング</TitleText>
-            </TitleWithLine>
+            <TitleWithLine title="デモソング" />
             <DemoSongContainer>
               {DEMO_SONGS.map((song) => (
                 <DemoSongItem key={song.id}>

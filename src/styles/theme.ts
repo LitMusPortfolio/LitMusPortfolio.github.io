@@ -80,14 +80,13 @@ export const theme = {
     fontSize: {
       xs: "0.7rem", // 極小
       sm: "0.85rem", // 小
-      base: "1rem", // 基本
-      md: "1.2rem", // 中
+      base: "1.3rem", // 基本
       lg: "1.5rem", // 大
       xl: "2rem", // 特大
       "2xl": "2.5rem", // 超特大
       "3xl": "3rem", // 巨大
       "4xl": "4rem", // 超巨大
-      "5xl": "8rem", // 最大
+      "5xl": "6rem", // 最大
     },
   },
   // スペーシング（余白）

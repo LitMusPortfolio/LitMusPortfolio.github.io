@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { lazy, Suspense } from "react";
-import { MemoryRouter, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import LoadingSpinner from "../components/LoadingSpinner";
 import ScrollToTop from "../components/ScrollToTop";
@@ -15,59 +15,57 @@ const WorksPage = lazy(() => import("../pages/WorksPage"));
 const VoicebankPage = lazy(() => import("../pages/VoicebankPage"));
 const ContactPage = lazy(() => import("../pages/ContactPage"));
 
-// 完全なアプリケーション環境を再現
+// 完全なアプリケーション環境を再現（MemoryRouterはpreview.tsxで設定済み）
 const FullApp = () => {
   return (
-    <MemoryRouter initialEntries={["/"]}>
-      <ThemeProvider theme={theme}>
-        <GlobalStyles />
-        <ScrollToTop />
-        <Routes>
-          <Route path="/" element={<MainLayout />}>
-            <Route
-              index
-              element={
-                <Suspense fallback={<LoadingSpinner />}>
-                  <HomePage />
-                </Suspense>
-              }
-            />
-            <Route
-              path="about"
-              element={
-                <Suspense fallback={<LoadingSpinner />}>
-                  <AboutPage />
-                </Suspense>
-              }
-            />
-            <Route
-              path="works"
-              element={
-                <Suspense fallback={<LoadingSpinner />}>
-                  <WorksPage />
-                </Suspense>
-              }
-            />
-            <Route
-              path="voicebank"
-              element={
-                <Suspense fallback={<LoadingSpinner />}>
-                  <VoicebankPage />
-                </Suspense>
-              }
-            />
-            <Route
-              path="contact"
-              element={
-                <Suspense fallback={<LoadingSpinner />}>
-                  <ContactPage />
-                </Suspense>
-              }
-            />
-          </Route>
-        </Routes>
-      </ThemeProvider>
-    </MemoryRouter>
+    <ThemeProvider theme={theme}>
+      <GlobalStyles />
+      <ScrollToTop />
+      <Routes>
+        <Route path="/" element={<MainLayout />}>
+          <Route
+            index
+            element={
+              <Suspense fallback={<LoadingSpinner />}>
+                <HomePage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="about"
+            element={
+              <Suspense fallback={<LoadingSpinner />}>
+                <AboutPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="works"
+            element={
+              <Suspense fallback={<LoadingSpinner />}>
+                <WorksPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="voicebank"
+            element={
+              <Suspense fallback={<LoadingSpinner />}>
+                <VoicebankPage />
+              </Suspense>
+            }
+          />
+          <Route
+            path="contact"
+            element={
+              <Suspense fallback={<LoadingSpinner />}>
+                <ContactPage />
+              </Suspense>
+            }
+          />
+        </Route>
+      </Routes>
+    </ThemeProvider>
   );
 };
 

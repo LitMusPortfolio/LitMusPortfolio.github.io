@@ -9,19 +9,6 @@ import { worksData } from "./WorksAssets";
 
 const WorksSection = styled(Section)`
   background-image: url('/LitMusBG.webp');
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-  min-height: 100vh;
-  padding-top: 6rem;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: url('/001_top/LitMusBG.webp');
-    z-index: 0;
-  }
 `;
 
 const ContentWrapper = styled(Container)`
@@ -31,13 +18,7 @@ const ContentWrapper = styled(Container)`
 
 const StickyHeader = styled.div`
   position: sticky;
-  top: 95px; /* header + margin */
   z-index: 10;
-  margin-bottom: 2rem;
-  padding: 2rem;
-  margin-left: -20px;
-  margin-right: -20px;
-  width: 100%;
 
   /* スムーズなトランジション */
   transition: all 0.3s ease;

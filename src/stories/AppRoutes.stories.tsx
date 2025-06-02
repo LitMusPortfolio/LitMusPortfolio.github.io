@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { MemoryRouter, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
 import AboutPage from "../pages/AboutPage";
 import ContactPage from "../pages/ContactPage";
@@ -35,52 +35,67 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 // 各ルートのストーリー
-export const Home: Story = {
-  decorators: [
-    (Story) => (
-      <MemoryRouter initialEntries={["/"]}>
-        <Story />
-      </MemoryRouter>
-    ),
-  ],
+export const AllRoutes: Story = {
+  name: "All Routes (Navigate manually)",
 };
 
-export const About: Story = {
-  decorators: [
-    (Story) => (
-      <MemoryRouter initialEntries={["/about"]}>
-        <Story />
-      </MemoryRouter>
-    ),
-  ],
+// 以下は個別のルートを表示するStory（もしルーティングのテストが必要な場合）
+// ただし、Storybookの制約上、これらは正しく動作しない可能性があります
+export const HomeRoute: Story = {
+  name: "Home (/) Route",
+  parameters: {
+    docs: {
+      description: {
+        story: "Shows the home page route. Use the navigation to test routing.",
+      },
+    },
+  },
 };
 
-export const Works: Story = {
-  decorators: [
-    (Story) => (
-      <MemoryRouter initialEntries={["/works"]}>
-        <Story />
-      </MemoryRouter>
-    ),
-  ],
+export const AboutRoute: Story = {
+  name: "About Route",
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Shows the about page route. Use the navigation to test routing.",
+      },
+    },
+  },
 };
 
-export const Voicebank: Story = {
-  decorators: [
-    (Story) => (
-      <MemoryRouter initialEntries={["/voicebank"]}>
-        <Story />
-      </MemoryRouter>
-    ),
-  ],
+export const WorksRoute: Story = {
+  name: "Works Route",
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Shows the works page route. Use the navigation to test routing.",
+      },
+    },
+  },
 };
 
-export const Contact: Story = {
-  decorators: [
-    (Story) => (
-      <MemoryRouter initialEntries={["/contact"]}>
-        <Story />
-      </MemoryRouter>
-    ),
-  ],
+export const VoicebankRoute: Story = {
+  name: "Voicebank Route",
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Shows the voicebank page route. Use the navigation to test routing.",
+      },
+    },
+  },
+};
+
+export const ContactRoute: Story = {
+  name: "Contact Route",
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Shows the contact page route. Use the navigation to test routing.",
+      },
+    },
+  },
 };

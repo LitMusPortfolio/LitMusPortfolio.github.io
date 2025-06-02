@@ -11,7 +11,7 @@ const HeaderContainer = styled.header`
   z-index: ${theme.zIndex.max};
   background: ${theme.effects.glassmorphism.background};
   backdrop-filter: ${theme.effects.glassmorphism.backdropFilter};
-  padding: ${theme.space.sm} 0;
+  padding: ${theme.space.xs} 0;
 `;
 
 const Nav = styled.nav`
@@ -38,44 +38,26 @@ const Logo = styled(Link)`
 
 const MenuList = styled.ul<{ $isOpen: boolean }>`
   display: flex;
+  flex-direction: row;
   gap: ${theme.space.lg};
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  align-items: center;
-
-  @media (max-width: ${theme.breakpoints.mobile}) {
-    position: fixed;
-    top: 0;
-    right: ${(props) => (props.$isOpen ? "0" : "-100%")};
-    width: 100%;
-    height: 100vh;
-    background: rgba(0, 0, 0, ${theme.opacity[95]});
-    flex-direction: column;
-    justify-content: center;
-    gap: ${theme.space.xl};
-    transition: right ${theme.animation.duration.base} ease;
-  }
 `;
 
 const MenuItem = styled.li`
   font-family: 'Montserrat', sans-serif;
-  font-weight: 900;
-  
+
   a {
     color: #fff;
     text-decoration: none;
     text-transform: uppercase;
     letter-spacing: ${theme.typography.heading.letterSpacingEn};
-    transition: color ${theme.animation.duration.base} ease;
-    font-size: ${theme.typography.fontSize.sm};
-    display: inline-flex;
-    align-items: center;
-    gap: 0.3em;
     
     &:hover {
       color: ${theme.colors.primary.light};
     }
+  }
+
+  &::before {
+    content: '';
   }
 `;
 

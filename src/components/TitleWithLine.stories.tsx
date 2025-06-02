@@ -9,9 +9,9 @@ const meta = {
   },
   tags: ["autodocs"],
   argTypes: {
-    children: {
+    title: {
       control: { type: "text" },
-      description: "Child content",
+      description: "Title",
     },
   },
 } satisfies Meta<typeof TitleWithLine>;
@@ -22,8 +22,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    children: (
-      <div style={{ padding: "2rem", color: "white" }}>Content goes here</div>
-    ),
+    title: "Title",
   },
 };

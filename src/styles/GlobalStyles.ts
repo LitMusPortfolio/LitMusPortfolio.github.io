@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import { theme } from "./theme";
 
 export const GlobalStyles = createGlobalStyle`
 
@@ -19,6 +20,7 @@ export const GlobalStyles = createGlobalStyle`
     background: #000;
     color: #fff;
     overflow-x: hidden;
+    font-size: ${theme.typography.fontSize.base};
   }
   
   #root {
@@ -41,6 +43,14 @@ export const GlobalStyles = createGlobalStyle`
     line-height: 1.4;
   }
 
+  h1 {
+    font-size: ${theme.typography.fontSize["5xl"]};
+  }
+
+  h2 {
+    font-size: ${theme.typography.fontSize["3xl"]};
+  }
+
   /* 見出し内の英数字 */
   h1 span[lang="en"], h2 span[lang="en"], h3 span[lang="en"], 
   h4 span[lang="en"], h5 span[lang="en"], h6 span[lang="en"],
@@ -60,6 +70,25 @@ export const GlobalStyles = createGlobalStyle`
 
   p {
     margin: 0;
+  }
+
+  ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+
+    > li {
+      display: flex;
+
+      &::before {
+        content: "▶";
+        margin-right: 0.5em;
+        font-size: ${theme.typography.fontSize.xs};
+        position: relative;
+        top: 0.7em;
+      }
+    }
   }
 
   a {

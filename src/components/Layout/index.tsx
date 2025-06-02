@@ -4,17 +4,19 @@ import { theme } from "@/styles/theme";
 // 基本セクションコンポーネント
 export const Section = styled.section`
   min-height: 100vh;
-  padding: 2rem 2rem;
+  padding: 4rem 0;
   position: relative;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 `;
 
 // コンテナコンポーネント
 export const Container = styled.div`
-  max-width: 1400px;
   margin: 0 auto;
+  padding: 2% 4%;
   position: relative;
   z-index: 1;
-  padding: 0 1rem;
 `;
 
 // サイドデコレーションコンポーネント
