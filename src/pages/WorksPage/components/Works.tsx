@@ -6,8 +6,7 @@ import { Container, Section } from "@/components/Layout";
 import LazyImage from "@/components/LazyImage";
 import SectionTitle from "@/components/SectionTitle";
 import { theme } from "@/styles/theme";
-import { categoryColors } from "@/types";
-import { worksData } from "./WorksAssets";
+import { type Category, worksData } from "../data/WorksAssets";
 
 const WorksSection = styled(Section)`
   background-image: url('/LitMusBG.webp');
@@ -36,70 +35,35 @@ const WorkCard = styled.article`
   overflow: hidden;
   cursor: default;
   pointer-events: none;
+  height: 22rem;
+  display: flex;
+  flex-direction: column;
 `;
 
 const VideoWrapper = styled.div`
-  position: relative;
-  width: 100%;
-  padding-bottom: 55%; /* 16:9 アスペクト比 */
-  background: #000;
-  overflow: hidden;
-`;
-
-const VideoThumbnail = styled(LazyImage)`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
+  display: flex;
+  padding: 1em;
 `;
 
 const WorkInfo = styled.div`
-  padding: 1.5rem;
+  padding: 1rem;
+  padding-bottom: 1.5rem;
   background: rgba(0, 0, 0, 0.5);
-`;
-
-const WorkCategory = styled.span<{ $category: string }>`
-  display: inline-block;
-  padding: 0.3rem 0.8rem;
-  background: ${({ $category }) => {
-    const colors = categoryColors[$category] || {
-      primary: "#8a61ff",
-      secondary: "#a78bff",
-    };
-    return `linear-gradient(135deg, ${colors.primary}40, ${colors.secondary}40)`;
-  }};
-  border-radius: 15px;
-  font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.9);
-  margin-bottom: 0.5rem;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-`;
-
-const WorkTitle = styled.h3`
-  color: #fff;
-  font-size: 1.1rem;
-  font-weight: 600;
-  line-height: 1.4;
-`;
-
-const WorkStats = styled.div`
+  height: 100%;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
-  margin-top: 0.8rem;
-  font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.7);
+  justify-content: flex-end;
+  gap: 0.2rem;
 `;
 
-const WORK_TABS: TabItem[] = [
+const WorkRequester = styled.p`
+  font-size: 0.7rem;
+`;
+
+type TabId = Category | "all";
+
+const WORK_TABS: TabItem<TabId>[] = [
   { id: "all", label: "ALL" },
   { id: "music", label: "MUSIC" },
   { id: "illustration", label: "ILLUST" },
@@ -108,13 +72,13 @@ const WORK_TABS: TabItem[] = [
 ];
 
 export default function Works() {
-  const [activeTab, setActiveTab] = useState("all");
+  const [activeTab, setActiveTab] = useState<TabId>("all");
   const tabsRef = useRef<HTMLDivElement>(null);
 
   const filteredWorks = useMemo(() => {
     return activeTab === "all"
       ? worksData
-      : worksData.filter((work) => work.type === activeTab);
+      : worksData.filter((work) => work.category.includes(activeTab));
   }, [activeTab]);
 
   return (
@@ -126,7 +90,7 @@ export default function Works() {
             ref={tabsRef}
             tabs={WORK_TABS}
             activeTab={activeTab}
-            onTabChange={setActiveTab}
+            onTabChange={(tabId) => setActiveTab(tabId as TabId)}
             ariaLabel="Filter works by category"
             ariaControls="works-grid"
           />
@@ -137,21 +101,16 @@ export default function Works() {
           renderItem={(work) => (
             <WorkCard>
               <VideoWrapper>
-                <VideoThumbnail src={work.image} alt={work.title} />
+                <LazyImage src={work.thumbnailPath} alt={work.title} />
               </VideoWrapper>
               <WorkInfo>
-                <WorkCategory $category={work.category}>
-                  {work.category}
-                </WorkCategory>
-                <WorkTitle>{work.title}</WorkTitle>
-                <WorkStats>
-                  <span>{work.views}</span>
-                  <span>{work.date}</span>
-                </WorkStats>
+                <WorkRequester>{work.requester}</WorkRequester>
+                <h3>{work.title}</h3>
+                <p>{work.description}</p>
               </WorkInfo>
             </WorkCard>
           )}
-          keyExtractor={(work) => work.id}
+          keyExtractor={(work) => work.title}
           id="works-grid"
           role="tabpanel"
           aria-label="Works grid"

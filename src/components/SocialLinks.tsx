@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import type { SocialLink } from "@/types";
+import LazyImage from "./LazyImage";
 
 interface SocialLinksProps {
   links: SocialLink[];
@@ -23,12 +24,6 @@ const SocialLinkItem = styled.a<{ $size: string }>`
   &:hover {
     transform: scale(1.1);
   }
-  
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-  }
 `;
 
 export const SocialLinks: React.FC<SocialLinksProps> = ({
@@ -46,7 +41,7 @@ export const SocialLinks: React.FC<SocialLinksProps> = ({
           $size={size}
           aria-label={link.platform}
         >
-          <img src={link.icon} alt={link.platform} />
+          <LazyImage src={link.icon} alt={link.platform} eager />
         </SocialLinkItem>
       ))}
     </SocialLinksContainer>

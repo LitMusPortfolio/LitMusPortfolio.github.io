@@ -1,17 +1,19 @@
 import {
   collectAboutPageAssets,
+  collectContactPageAssets,
   collectDownloadAssets,
   collectHomePageAssets,
+  collectRuntimeAssets,
   collectVoicebankPageAssets,
   collectWorksPageAssets,
-} from "./collectAssets";
+} from "./collectDynamicAssets";
 import { imageCache } from "./imageCache";
 import { videoCache } from "./videoCache";
 
 // ページ別のプリロード関数
 export async function preloadHomePage(): Promise<void> {
   console.log("Preloading home page assets...");
-  const assets = collectHomePageAssets();
+  const assets = await collectHomePageAssets();
   await Promise.all([
     imageCache.preloadImages(assets.images),
     videoCache.preloadVideos(assets.videos),
@@ -20,7 +22,7 @@ export async function preloadHomePage(): Promise<void> {
 
 export async function preloadAboutPage(): Promise<void> {
   console.log("Preloading about page assets...");
-  const assets = collectAboutPageAssets();
+  const assets = await collectAboutPageAssets();
   await imageCache.preloadImages(assets.images);
 }
 
@@ -138,6 +140,18 @@ export async function preloadAssetsForPage(currentPath: string): Promise<void> {
     case "/voicebank":
       await preloadVoicebankPage();
       break;
+    case "/contact":
+      await preloadContactPage();
+      break;
+    default: {
+      // 未知のページの場合、実行時にDOMからアセットを収集
+      console.log(`Collecting runtime assets for ${currentPath}...`);
+      const runtimeAssets = collectRuntimeAssets();
+      await Promise.all([
+        imageCache.preloadImages(runtimeAssets.images),
+        videoCache.preloadVideos(runtimeAssets.videos),
+      ]);
+    }
   }
 
   // 現在のページのロードが完了したら、他のページのアセットをバックグラウンドでロード
@@ -145,4 +159,11 @@ export async function preloadAssetsForPage(currentPath: string): Promise<void> {
   setTimeout(async () => {
     await preloadNextPageAssets(currentPath);
   }, 1000); // 1秒後に他のページのプリロードを開始
+}
+
+// ContactPage用のプリロード関数
+export async function preloadContactPage(): Promise<void> {
+  console.log("Preloading contact page assets...");
+  const assets = await collectContactPageAssets();
+  await imageCache.preloadImages(assets.images);
 }

@@ -28,8 +28,8 @@ const DEFAULT_COLUMNS = {
 };
 
 const DEFAULT_GAP = {
-  default: "2rem",
-  mobile: "1.5rem",
+  default: "1rem",
+  mobile: "0.5rem",
 };
 
 // スタイル付きグリッドコンテナ

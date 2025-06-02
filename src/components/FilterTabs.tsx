@@ -2,8 +2,8 @@ import { forwardRef, useEffect, useRef } from "react";
 import { StyledButton } from "./StyledButton";
 import { TabContainer } from "./TabComponents";
 
-export interface TabItem {
-  id: string;
+export interface TabItem<T extends string = string> {
+  id: T;
   label: string;
 }
 

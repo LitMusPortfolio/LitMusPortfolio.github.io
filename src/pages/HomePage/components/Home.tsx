@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import LazyImage from "../../../components/LazyImage";
 import LazyVideo from "../../../components/LazyVideo";
 import { SocialLinks as SocialLinksComponent } from "../../../components/SocialLinks";
 import TextWithBackground from "../../../components/TextWithBackground";
@@ -74,10 +75,7 @@ const VoicevoxBanner = styled.div`
     top: 5rem;
   }
   
-  img {
-    width: 100%;
-    opacity: 0.9;
-  }
+  opacity: 0.9;
   
   p {
     font-size: 0.7rem;
@@ -188,7 +186,7 @@ export default function Home() {
       </HomeContent>
 
       <VoicevoxBanner>
-        <img src="/001_top/離途バナー_差し替え予定.webp" alt="VOICEVOX" />
+        <LazyImage src="/001_top/離途バナー_差し替え予定.webp" alt="VOICEVOX" />
       </VoicevoxBanner>
 
       <SocialLinksWrapper>

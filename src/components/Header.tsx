@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { theme } from "../styles/theme";
+import LazyImage from "./LazyImage";
 
 const HeaderContainer = styled.header`
   position: fixed;
@@ -29,11 +30,7 @@ const Nav = styled.nav`
 
 const Logo = styled(Link)`
   display: inline-block;
-  
-  img {
-    height: ${theme.sizes.button.md};
-    cursor: pointer;
-  }
+  height: ${theme.sizes.button.md};
 `;
 
 const MenuList = styled.ul<{ $isOpen: boolean }>`
@@ -109,7 +106,7 @@ export default function Header() {
           onClick={() => window.scrollTo(0, 0)}
           aria-label="LitMus9 home"
         >
-          <img src="/001_top/LitMus9_logo.webp" alt="LitMus9" />
+          <LazyImage src="/001_top/LitMus9_logo.webp" alt="LitMus9" eager />
         </Logo>
         <MenuList $isOpen={isMenuOpen}>
           <MenuItem>

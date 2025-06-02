@@ -10,6 +10,7 @@ interface LazyImageProps {
   onLoad?: () => void;
   onError?: () => void;
   fallback?: string;
+  eager?: boolean; // ヘッダーなど、即座にロードすべき画像用
 }
 
 const ImageWrapper = styled.div`
@@ -44,16 +45,17 @@ export default function LazyImage({
   onLoad,
   onError,
   fallback = "/path/to/default-image.webp",
+  eager = false,
 }: LazyImageProps) {
   // キャッシュされている場合は初期状態でロード済みにする
   const [isLoaded, setIsLoaded] = useState(() => imageCache.isLoaded(src));
-  const [isInView, setIsInView] = useState(false);
+  const [isInView, setIsInView] = useState(eager); // eagerならすぐに表示
   const [hasError, setHasError] = useState(false);
   const imgRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // キャッシュされている場合は即座に表示
-    if (imageCache.isLoaded(src)) {
+    // eagerまたはキャッシュされている場合は即座に表示
+    if (eager || imageCache.isLoaded(src)) {
       setIsInView(true);
       return;
     }
@@ -77,7 +79,7 @@ export default function LazyImage({
     return () => {
       observer.disconnect();
     };
-  }, [src]);
+  }, [src, eager]);
 
   const handleLoad = () => {
     setIsLoaded(true);
