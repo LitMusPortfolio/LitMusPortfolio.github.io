@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
+import { videoCache } from "@/utils/videoCache";
 
 interface VideoSource {
   src: string;
@@ -46,13 +47,22 @@ export default function LazyVideo({
   onLoadedData,
   onError,
 }: LazyVideoProps) {
-  const [isLoaded, setIsLoaded] = useState(false);
+  // キャッシュされている場合は初期状態でロード済みにする
+  const [isLoaded, setIsLoaded] = useState(() =>
+    videoCache.isLoaded(src, sources),
+  );
   const [isInView, setIsInView] = useState(false);
   const [hasError, setHasError] = useState(false);
   const videoRef = useRef<HTMLDivElement>(null);
   const videoElementRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
+    // キャッシュされている場合は即座に表示
+    if (videoCache.isLoaded(src, sources)) {
+      setIsInView(true);
+      return;
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -72,7 +82,7 @@ export default function LazyVideo({
     return () => {
       observer.disconnect();
     };
-  }, []);
+  }, [src, sources]);
 
   useEffect(() => {
     if (isInView && autoPlay && videoElementRef.current) {
@@ -84,6 +94,7 @@ export default function LazyVideo({
 
   const handleLoadedData = () => {
     setIsLoaded(true);
+    videoCache.markAsLoaded(src, sources);
     onLoadedData?.();
   };
 

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
+import { imageCache } from "@/utils/imageCache";
 
 interface LazyImageProps {
   src: string;
@@ -44,12 +45,19 @@ export default function LazyImage({
   onError,
   fallback = "/path/to/default-image.webp",
 }: LazyImageProps) {
-  const [isLoaded, setIsLoaded] = useState(false);
+  // キャッシュされている場合は初期状態でロード済みにする
+  const [isLoaded, setIsLoaded] = useState(() => imageCache.isLoaded(src));
   const [isInView, setIsInView] = useState(false);
   const [hasError, setHasError] = useState(false);
   const imgRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // キャッシュされている場合は即座に表示
+    if (imageCache.isLoaded(src)) {
+      setIsInView(true);
+      return;
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -69,10 +77,11 @@ export default function LazyImage({
     return () => {
       observer.disconnect();
     };
-  }, []);
+  }, [src]);
 
   const handleLoad = () => {
     setIsLoaded(true);
+    imageCache.markAsLoaded(src);
     onLoad?.();
   };
 
