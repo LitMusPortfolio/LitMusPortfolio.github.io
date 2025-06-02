@@ -1,17 +1,5 @@
 import { css } from "styled-components";
 
-// グラデーション生成関数
-export const createGradient = (
-  color1: string,
-  color2: string,
-  angle = 45,
-) => css`
-  background: linear-gradient(${angle}deg, ${color1}, ${color2});
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-`;
-
 // グラスモーフィズム効果
 export const glassmorphism = css`
   background: rgba(255, 255, 255, 0.05);

@@ -49,13 +49,15 @@ export const GlobalStyles = createGlobalStyle`
     font-size: ${theme.typography.fontSize["3xl"]};
   }
 
+  h3 {
+    font-size: ${theme.typography.fontSize.lg};
+  }
+
   /* 見出し内の英数字 */
   h1 span[lang="en"], h2 span[lang="en"], h3 span[lang="en"], 
   h4 span[lang="en"], h5 span[lang="en"], h6 span[lang="en"],
   h1 .en, h2 .en, h3 .en, h4 .en, h5 .en, h6 .en {
     font-family: 'Montserrat', sans-serif;
-    font-weight: 600;
-    letter-spacing: 0.1em; /* 字間1.0 = 0.1em */
   }
 
   /* 本文スタイル */
