@@ -31,6 +31,11 @@ npm run build-storybook  # Storybookビルド
 # ビジュアルテスト
 npm run screenshot    # スクリーンショット生成
 npm run visual-test   # ビジュアル回帰テスト実行
+
+# ユニットテスト
+npm run test          # テスト実行（watchモード）
+npm run test:ui       # Vitest UIでテスト実行
+npm run test:coverage # カバレッジ付きテスト実行
 ```
 
 ## アーキテクチャ概要

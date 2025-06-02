@@ -35,3 +35,6 @@ storybook-static/
 .reg/
 .reg-storage/
 __screenshots__/
+
+# Test coverage
+coverage/
