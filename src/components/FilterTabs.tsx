@@ -1,4 +1,4 @@
-import { forwardRef, useEffect, useRef } from "react";
+import { forwardRef, useEffect, useRef, useCallback } from "react";
 import { StyledButton } from "./StyledButton";
 import { TabContainer } from "./TabComponents";
 
@@ -29,6 +29,10 @@ const FilterTabs = forwardRef<HTMLDivElement, FilterTabsProps>(
   ) => {
     const internalRef = useRef<HTMLDivElement>(null);
     const tabsRef = ref || internalRef;
+
+    const handleTabClick = useCallback((tabId: string) => {
+      onTabChange(tabId);
+    }, [onTabChange]);
 
     useEffect(() => {
       const handleKeyDown = (e: KeyboardEvent) => {
@@ -77,7 +81,7 @@ const FilterTabs = forwardRef<HTMLDivElement, FilterTabsProps>(
           <StyledButton
             key={tab.id}
             $active={activeTab === tab.id}
-            onClick={() => onTabChange(tab.id)}
+            onClick={() => handleTabClick(tab.id)}
             role="tab"
             aria-selected={activeTab === tab.id}
             aria-controls={ariaControls}
@@ -90,7 +94,5 @@ const FilterTabs = forwardRef<HTMLDivElement, FilterTabsProps>(
     );
   },
 );
-
-FilterTabs.displayName = "FilterTabs";
 
 export default FilterTabs;

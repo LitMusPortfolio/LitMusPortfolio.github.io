@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { theme } from "../styles/theme";
@@ -33,7 +33,7 @@ const Logo = styled(Link)`
   height: ${theme.sizes.button.md};
 `;
 
-const MenuList = styled.ul<{ $isOpen: boolean }>`
+const MenuList = styled.ul`
   display: flex;
   flex-direction: row;
   gap: ${theme.space.lg};
@@ -89,11 +89,8 @@ const ExternalLinkIcon = styled.span`
   }
 `;
 
-export default function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
+const Header = React.memo(() => {
   const handleNavClick = () => {
-    setIsMenuOpen(false);
     // Force scroll to top
     window.scrollTo(0, 0);
   };
@@ -108,7 +105,7 @@ export default function Header() {
         >
           <LazyImage src="/001_top/LitMus9_logo.webp" alt="LitMus9" eager />
         </Logo>
-        <MenuList $isOpen={isMenuOpen}>
+        <MenuList>
           <MenuItem>
             <Link to="/about" onClick={handleNavClick}>
               About
@@ -143,4 +140,6 @@ export default function Header() {
       </Nav>
     </HeaderContainer>
   );
-}
+});
+
+export default Header;

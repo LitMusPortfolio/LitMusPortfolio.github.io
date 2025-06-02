@@ -1,3 +1,4 @@
+import React from "react";
 import styled from "styled-components";
 import type { SocialLink } from "@/types";
 import LazyImage from "./LazyImage";
@@ -34,7 +35,7 @@ const SocialLinkItem = styled.a<{ $size: string }>`
   }
 `;
 
-export const SocialLinks: React.FC<SocialLinksProps> = ({
+export const SocialLinks = React.memo<SocialLinksProps>(({
   links,
   size = "medium",
 }) => {
@@ -54,4 +55,4 @@ export const SocialLinks: React.FC<SocialLinksProps> = ({
       ))}
     </SocialLinksContainer>
   );
-};
+});

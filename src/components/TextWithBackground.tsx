@@ -1,3 +1,4 @@
+import React from "react";
 import styled from "styled-components";
 
 interface TextWithBackgroundProps {
@@ -46,14 +47,16 @@ const Content = styled.span`
   padding: 0.1em 0;
 `;
 
-export default function TextWithBackground({
+const TextWithBackground = React.memo(({
   children,
   isPurple = false,
-}: TextWithBackgroundProps) {
+}: TextWithBackgroundProps) => {
   return (
     <Container>
       <Background isPurple={isPurple} />
       <Content>{children}</Content>
     </Container>
   );
-}
+});
+
+export default TextWithBackground;

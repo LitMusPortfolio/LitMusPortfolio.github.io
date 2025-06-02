@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import React, { useCallback, type ReactNode } from "react";
 import styled from "styled-components";
 import { theme } from "@/styles/theme";
 
@@ -48,7 +48,7 @@ const StyledGrid = styled.div<{
 `;
 
 // 汎用Gridコンポーネント
-export default function Grid<T>({
+function Grid<T>({
   items,
   renderItem,
   keyExtractor,
@@ -59,6 +59,14 @@ export default function Grid<T>({
   role,
   "aria-label": ariaLabel,
 }: GridProps<T>) {
+  const getKey = useCallback((item: T, index: number) => {
+    return keyExtractor ? keyExtractor(item, index) : index;
+  }, [keyExtractor]);
+
+  const renderGridItem = useCallback((item: T, index: number) => {
+    return <div key={getKey(item, index)}>{renderItem(item, index)}</div>;
+  }, [getKey, renderItem]);
+
   return (
     <StyledGrid
       $columns={columns}
@@ -68,10 +76,9 @@ export default function Grid<T>({
       role={role}
       aria-label={ariaLabel}
     >
-      {items.map((item, index) => {
-        const key = keyExtractor ? keyExtractor(item, index) : index;
-        return <div key={key}>{renderItem(item, index)}</div>;
-      })}
+      {items.map(renderGridItem)}
     </StyledGrid>
   );
 }
+
+export default React.memo(Grid) as typeof Grid;
