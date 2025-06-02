@@ -35,15 +35,23 @@ function extractStaticAssets(module: unknown): Set<string> {
   const paths = new Set<string>();
 
   // オブジェクトを再帰的に探索してパスを抽出
-  function traverse(obj: unknown, visited = new WeakSet()): void {
-    if (!obj || typeof obj !== "object" || visited.has(obj)) return;
-    visited.add(obj);
+  function traverse(obj: unknown, visited = new WeakSet<object>()): void {
+    if (obj === null || obj === undefined) return;
 
     if (typeof obj === "string") {
       if (obj.startsWith("/") && (obj.includes(".") || obj.includes("/"))) {
         paths.add(obj);
       }
-    } else if (Array.isArray(obj)) {
+      return;
+    }
+
+    if (typeof obj !== "object") return;
+
+    // WeakSetには object のみ追加可能
+    if (visited.has(obj as object)) return;
+    visited.add(obj as object);
+
+    if (Array.isArray(obj)) {
       obj.forEach((item) => traverse(item, visited));
     } else {
       Object.values(obj).forEach((value) => traverse(value, visited));
@@ -114,7 +122,7 @@ export async function collectWorksPageAssets(): Promise<{
   videos: string[];
 }> {
   try {
-    const _module = await pageLoaders.works();
+    await pageLoaders.works();
     const paths = new Set<string>();
 
     // WorksAssets.tsからデータを取得

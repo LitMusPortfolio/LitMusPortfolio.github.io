@@ -13,7 +13,7 @@ import { videoCache } from "./videoCache";
 // ページ別のプリロード関数
 export async function preloadHomePage(): Promise<void> {
   console.log("Preloading home page assets...");
-  const assets = collectHomePageAssets();
+  const assets = await collectHomePageAssets();
   await Promise.all([
     imageCache.preloadImages(assets.images),
     videoCache.preloadVideos(assets.videos),
@@ -22,7 +22,7 @@ export async function preloadHomePage(): Promise<void> {
 
 export async function preloadAboutPage(): Promise<void> {
   console.log("Preloading about page assets...");
-  const assets = collectAboutPageAssets();
+  const assets = await collectAboutPageAssets();
   await imageCache.preloadImages(assets.images);
 }
 
