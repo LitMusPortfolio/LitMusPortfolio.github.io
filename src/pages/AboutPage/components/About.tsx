@@ -1,25 +1,50 @@
 import styled from "styled-components";
 import { BackgroundSection } from "@/components/BackgroundSection";
-import { Container, GridContainer } from "@/components/Layout";
+import { Container } from "@/components/Layout";
 import LazyImage from "@/components/LazyImage";
 import SectionTitle from "@/components/SectionTitle";
 
-const StyledGridContainer = styled(GridContainer)`
-  align-items: center;
+const ContentWrapper = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: start;
+  min-height: 60vh;
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
 `;
 
 const LeftSection = styled.div`
+  position: sticky;
+  top: 50%;
+  transform: translateY(-50%);
   display: flex;
   justify-content: center;
   align-items: center;
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    position: relative;
+    top: auto;
+    transform: none;
+    margin-bottom: ${({ theme }) => theme.space.xl};
+  }
 `;
 
 const ImageFrame = styled.div`
   position: relative;
   width: 100%;
+  max-width: 400px;
   border: ${({ theme }) => theme.borders.width.thick} solid ${({ theme }) => theme.colors.primary.main};
   border-radius: ${({ theme }) => theme.borders.radius.lg};
   overflow: hidden;
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    max-width: 300px;
+    margin: 0 auto;
+  }
 `;
 
 const CharacterImage = styled(LazyImage)`
@@ -37,6 +62,13 @@ const CharacterImage = styled(LazyImage)`
 const RightSection = styled.div`
   color: ${({ theme }) => theme.colors.text.primary};
   padding-right: ${({ theme }) => theme.space["2xl"]};
+  padding-top: ${({ theme }) => theme.space["2xl"]};
+  padding-bottom: ${({ theme }) => theme.space["2xl"]};
+  
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    padding-right: 0;
+    padding-top: 0;
+  }
 `;
 
 const ProfileTitle = styled.h2`
@@ -65,6 +97,10 @@ const ProfileDescription = styled.div`
   
   p {
     margin-bottom: ${({ theme }) => theme.space.md};
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 `;
 
@@ -74,11 +110,7 @@ export default function About() {
       <Container>
         <SectionTitle>ABOUT</SectionTitle>
 
-        <StyledGridContainer
-          $columns="1fr 1fr"
-          $gap="6rem"
-          $mobileColumns="1fr"
-        >
+        <ContentWrapper>
           <LeftSection>
             <ImageFrame>
               <CharacterImage
@@ -115,7 +147,7 @@ export default function About() {
               <p>好きな食べ物は回鍋肉。</p>
             </ProfileDescription>
           </RightSection>
-        </StyledGridContainer>
+        </ContentWrapper>
       </Container>
     </BackgroundSection>
   );
