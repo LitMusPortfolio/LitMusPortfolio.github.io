@@ -1,11 +1,8 @@
 import styled from "styled-components";
-import { Container, Section } from "@/components/Layout";
+import { BackgroundSection } from "@/components/BackgroundSection";
+import { Container, GridContainer } from "@/components/Layout";
 import SectionTitle from "@/components/SectionTitle";
 import TitleWithLine from "@/components/TitleWithLine";
-
-const ContactSectionWrapper = styled(Section)`
-  background-image: url('/LitMusBG.webp');
-`;
 
 const LeftSection = styled.div`
   display: flex;
@@ -14,12 +11,6 @@ const LeftSection = styled.div`
 
 const RightSection = styled.div`
   display: flex;
-`;
-
-const ContentGrid = styled.div`
-  display: grid;
-  grid-template-columns: 0.6fr 0.4fr;
-  gap: 2rem;
 `;
 
 const NOTICES = [
@@ -42,11 +33,11 @@ const NOTICES = [
 
 export default function Contact() {
   return (
-    <ContactSectionWrapper id="contact">
+    <BackgroundSection id="contact" backgroundImage="/LitMusBG.webp">
       <Container>
         <SectionTitle>CONTACT</SectionTitle>
 
-        <ContentGrid>
+        <GridContainer $columns="0.6fr 0.4fr">
           <LeftSection>
             {NOTICES.map((notice) => (
               <div key={notice.title}>
@@ -60,8 +51,8 @@ export default function Contact() {
             ))}
           </LeftSection>
           <RightSection></RightSection>
-        </ContentGrid>
+        </GridContainer>
       </Container>
-    </ContactSectionWrapper>
+    </BackgroundSection>
   );
 }

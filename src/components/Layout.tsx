@@ -4,7 +4,7 @@ import { theme } from "@/styles/theme";
 // 基本セクションコンポーネント
 export const Section = styled.section`
   min-height: 100vh;
-  padding: 4rem 0;
+  padding: ${theme.space["2xl"]} 0;
   position: relative;
   background-size: cover;
   background-position: center;
@@ -17,7 +17,7 @@ export const Container = styled.div`
   padding: 2% 4%;
   width: 85%;
   position: relative;
-  z-index: 1;
+  z-index: ${theme.zIndex.content};
 `;
 
 // サイドデコレーションコンポーネント
@@ -35,7 +35,7 @@ export const SideDecoration = styled.div<SideDecorationProps>`
   
   img {
     height: 200px;
-    opacity: 0.3;
+    opacity: ${theme.opacity[30]};
   }
   
   @media (max-width: ${theme.breakpoints.mobile}) {
@@ -53,7 +53,7 @@ interface GridContainerProps {
 export const GridContainer = styled.div<GridContainerProps>`
   display: grid;
   grid-template-columns: ${(props) => props.$columns || "1fr"};
-  gap: ${(props) => props.$gap || "2rem"};
+  gap: ${(props) => props.$gap || `${theme.space.lg}`};
   
   @media (max-width: ${theme.breakpoints.tablet}) {
     grid-template-columns: ${(props) => props.$mobileColumns || "1fr"};
@@ -67,8 +67,8 @@ export const ContentContainer = styled.div`
   align-items: flex-start;
   justify-content: center;
   position: relative;
-  z-index: 2;
-  padding: 2rem;
+  z-index: ${theme.zIndex.front};
+  padding: ${theme.space.lg};
   
   @media (max-width: ${theme.breakpoints.tablet}) {
     align-items: center;

@@ -1,86 +1,88 @@
 import styled from "styled-components";
+import { Section } from "../../../components/Layout";
 import LazyImage from "../../../components/LazyImage";
 import LazyVideo from "../../../components/LazyVideo";
 import { SocialLinks as SocialLinksComponent } from "../../../components/SocialLinks";
 import TextWithBackground from "../../../components/TextWithBackground";
-import { theme } from "../../../styles/theme";
 
-const HomeSection = styled.section`
+const HomeSection = styled(Section)`
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100vh;
   overflow: hidden;
+  padding: 0;
+  min-height: 100vh;
 `;
 
 const HomeContent = styled.div`
   position: absolute;
-  left: 3rem;
-  bottom: 10rem;
+  left: ${({ theme }) => theme.space.xl};
+  bottom: ${({ theme }) => theme.space["4xl"]};
   z-index: 1;
   text-align: left;
-  color: #fff;
+  color: ${({ theme }) => theme.colors.text.primary};
   
-  @media (max-width: ${theme.breakpoints.mobile}) {
-    left: 2rem;
-    bottom: 8rem;
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    left: ${({ theme }) => theme.space.lg};
+    bottom: ${({ theme }) => theme.space["4xl"]};
   }
 `;
 
 const MainTitle = styled.h1`
   font-family: 'Montserrat', sans-serif;
-  font-size: clamp(3rem, 8vw, 8rem);
+  font-size: clamp(${({ theme }) => theme.typography.fontSize["3xl"]}, 8vw, 8rem);
   font-weight: 900;
   letter-spacing: 0.15em;
   margin: 0;
   line-height: 1;
-  color: #fff;
+  color: ${({ theme }) => theme.colors.text.primary};
 `;
 
 const TagsWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  margin-top: 2.5rem;
+  gap: ${({ theme }) => theme.space.sm};
+  margin-top: ${({ theme }) => theme.space["2xl"]};
 `;
 
 const TagLine = styled.div`
   display: flex;
   justify-content: flex-start;
-  gap: 1rem;
+  gap: ${({ theme }) => theme.space.sm};
   flex-wrap: wrap;
   font-family: 'Montserrat', sans-serif;
 `;
 
 const SocialLinksWrapper = styled.div`
   position: absolute;
-  right: 3rem;
-  bottom: 10rem;
+  right: ${({ theme }) => theme.space.xl};
+  bottom: ${({ theme }) => theme.space["4xl"]};
   z-index: 10;
   
-  @media (max-width: ${theme.breakpoints.mobile}) {
-    right: 2rem;
-    bottom: 10rem;
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    right: ${({ theme }) => theme.space.lg};
+    bottom: ${({ theme }) => theme.space["4xl"]};
   }
 `;
 
 const VoicevoxBanner = styled.div`
   position: absolute;
-  right: 3rem;
-  top: 6rem;
+  right: ${({ theme }) => theme.space.xl};
+  top: ${({ theme }) => theme.space["3xl"]};
   
-  @media (max-width: ${theme.breakpoints.mobile}) {
-    right: 2rem;
-    top: 5rem;
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    right: ${({ theme }) => theme.space.lg};
+    top: ${({ theme }) => theme.space["3xl"]};
   }
   
-  opacity: 0.9;
+  opacity: ${({ theme }) => theme.opacity[90]};
   
   p {
-    font-size: 0.7rem;
-    opacity: 0.7;
-    margin-top: 0.5rem;
+    font-size: ${({ theme }) => theme.typography.fontSize.xs};
+    opacity: ${({ theme }) => theme.opacity[70]};
+    margin-top: ${({ theme }) => theme.space.xs};
     text-align: right;
   }
 `;
@@ -90,25 +92,26 @@ const NewsBar = styled.div`
   bottom: 0;
   left: 0;
   right: 0;
-  background: rgba(0, 0, 0, 0.8);
-  backdrop-filter: blur(10px);
-  padding: 1rem 3rem;
+  background: ${({ theme }) => theme.effects.glassmorphism.background};
+  backdrop-filter: ${({ theme }) => theme.effects.glassmorphism.backdropFilter};
+  -webkit-backdrop-filter: ${({ theme }) => theme.effects.glassmorphism.backdropFilter};
+  padding: ${({ theme }) => theme.space.sm} ${({ theme }) => theme.space.xl};
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: ${({ theme }) => theme.space.lg};
   overflow: hidden;
   
-  @media (max-width: ${theme.breakpoints.mobile}) {
-    padding: 1rem 2rem;
-    gap: 1rem;
+  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
+    padding: ${({ theme }) => theme.space.sm} ${({ theme }) => theme.space.lg};
+    gap: ${({ theme }) => theme.space.sm};
   }
 `;
 
 const NewsText = styled.span`
-  font-size: 0.9rem;
-  opacity: 0.9;
+  font-size: ${({ theme }) => theme.typography.fontSize.base};
+  opacity: ${({ theme }) => theme.opacity[90]};
   white-space: nowrap;
-  animation: scroll 20s linear infinite;
+  animation: scroll ${({ theme }) => theme.animation.duration.scrolling} linear infinite;
   
   @keyframes scroll {
     0% {

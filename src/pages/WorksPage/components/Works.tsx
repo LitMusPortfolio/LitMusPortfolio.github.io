@@ -1,37 +1,35 @@
 import { useMemo, useRef, useState } from "react";
 import styled from "styled-components";
+import { BackgroundSection } from "@/components/BackgroundSection";
 import FilterTabs, { type TabItem } from "@/components/FilterTabs";
 import Grid from "@/components/Grid";
-import { Container, Section } from "@/components/Layout";
+import { Container } from "@/components/Layout";
 import LazyImage from "@/components/LazyImage";
 import SectionTitle from "@/components/SectionTitle";
 import { theme } from "@/styles/theme";
 import { type Category, worksData } from "../data/WorksAssets";
 
-const WorksSection = styled(Section)`
-  background-image: url('/LitMusBG.webp');
-`;
-
 const ContentWrapper = styled(Container)`
   position: relative;
-  z-index: 1;
+  z-index: ${theme.zIndex.content};
 `;
 
 const StickyHeader = styled.div`
   position: sticky;
-  z-index: 10;
+  z-index: ${theme.zIndex.dropdown};
   
   @media (max-width: ${theme.breakpoints.mobile}) {
-    top: 50px;
-    padding: 1.5rem;
+    top: ${theme.spacing.headerHeightMobile};
+    padding: ${theme.space.md};
   }
 `;
 
 const WorkCard = styled.article`
-  background: rgba(255, 255, 255, 0.05);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
+  background: ${theme.effects.glassmorphism.background};
+  backdrop-filter: ${theme.effects.glassmorphism.backdropFilter};
+  -webkit-backdrop-filter: ${theme.effects.glassmorphism.backdropFilter};
+  border: ${theme.effects.glassmorphism.border};
+  border-radius: ${theme.effects.glassmorphism.borderRadius};
   overflow: hidden;
   cursor: default;
   pointer-events: none;
@@ -42,13 +40,13 @@ const WorkCard = styled.article`
 
 const VideoWrapper = styled.div`
   display: flex;
-  padding: 1em;
+  padding: ${theme.space.sm};
 `;
 
 const WorkInfo = styled.div`
-  padding: 1rem;
-  padding-bottom: 1.5rem;
-  background: rgba(0, 0, 0, 0.5);
+  padding: ${theme.space.sm};
+  padding-bottom: ${theme.space.md};
+  background: rgba(0, 0, 0, ${theme.opacity[50]});
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -58,7 +56,7 @@ const WorkInfo = styled.div`
 `;
 
 const WorkRequester = styled.p`
-  font-size: 0.7rem;
+  font-size: ${theme.typography.fontSize.xs};
 `;
 
 type TabId = Category | "all";
@@ -82,7 +80,7 @@ export default function Works() {
   }, [activeTab]);
 
   return (
-    <WorksSection>
+    <BackgroundSection backgroundImage="/LitMusBG.webp">
       <ContentWrapper>
         <StickyHeader>
           <SectionTitle>WORKS</SectionTitle>
@@ -116,6 +114,6 @@ export default function Works() {
           aria-label="Works grid"
         />
       </ContentWrapper>
-    </WorksSection>
+    </BackgroundSection>
   );
 }

@@ -21,22 +21,22 @@ const ProfileContainer = styled.div`
 const ProfileItem = styled.div`
   display: flex;
   align-items: center;
-  font-size: 1.5rem;
+  font-size: ${theme.typography.fontSize.lg};
   color: ${theme.colors.text.primary};
   width: 100%;
 `;
 
 const ProfileLabel = styled.span`
   font-weight: bold;
-  font-size: 1.5rem;
+  font-size: ${theme.typography.fontSize.lg};
 `;
 
 const ProfileLine = styled.div`
   flex: 1;
-  height: 1px;
+  height: ${theme.borders.width.thin};
   background: ${theme.colors.text.primary};
-  opacity: 0.8;
-  margin: 0 1rem;
+  opacity: ${theme.opacity[80]};
+  margin: 0 ${theme.space.sm};
 `;
 
 const ProfileValue = styled.span`

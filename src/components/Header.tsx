@@ -43,7 +43,7 @@ const MenuItem = styled.li`
   font-family: 'Montserrat', sans-serif;
 
   a {
-    color: #fff;
+    color: ${theme.colors.text.primary};
     text-decoration: none;
     text-transform: uppercase;
     letter-spacing: ${theme.typography.heading.letterSpacingEn};
@@ -71,7 +71,7 @@ const ExternalLinkIcon = styled.span`
     right: 0;
     width: 60%;
     height: 60%;
-    border: 2px solid currentColor;
+    border: ${theme.borders.width.base} solid currentColor;
     border-bottom: none;
     border-left: none;
   }
@@ -82,7 +82,7 @@ const ExternalLinkIcon = styled.span`
     top: 30%;
     right: 30%;
     width: 70%;
-    height: 2px;
+    height: ${theme.borders.width.base};
     background: currentColor;
     transform: rotate(-45deg);
     transform-origin: right center;

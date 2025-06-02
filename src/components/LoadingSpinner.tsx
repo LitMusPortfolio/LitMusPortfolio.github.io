@@ -19,12 +19,12 @@ const LoadingContainer = styled.div`
 `;
 
 const Spinner = styled.div`
-  width: 50px;
-  height: 50px;
-  border: 3px solid rgba(139, 92, 246, 0.2);
-  border-radius: 50%;
+  width: ${theme.sizes.button.lg};
+  height: ${theme.sizes.button.lg};
+  border: ${theme.borders.width.thick} solid ${`rgba(139, 92, 246, ${theme.opacity[20]})`};
+  border-radius: ${theme.borders.radius.circle};
   border-top-color: ${theme.colors.primary.main};
-  animation: ${spin} 1s ease-in-out infinite;
+  animation: ${spin} ${theme.animation.duration.slow} ${theme.animation.easing.easeInOut} infinite;
 `;
 
 export default function LoadingSpinner() {

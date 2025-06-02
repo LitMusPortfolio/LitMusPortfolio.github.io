@@ -1,4 +1,5 @@
 import React, { type ReactNode, useRef } from "react";
+import LazyImage from "@/components/LazyImage";
 import {
   ModalContainer,
   ModalContent,
@@ -66,7 +67,9 @@ export default function Modal({
       >
         {(hasImage || imageUrl) && (
           <ModalImageSection>
-            {imageUrl && <img src={imageUrl} alt={title || "Modal image"} />}
+            {imageUrl && (
+              <LazyImage src={imageUrl} alt={title || "Modal image"} />
+            )}
           </ModalImageSection>
         )}
         <ModalContent $variant={variant} title={title}>
