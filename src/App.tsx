@@ -12,7 +12,6 @@ const HomePage = lazy(() => import("./pages/HomePage"));
 const AboutPage = lazy(() => import("./pages/AboutPage"));
 const WorksPage = lazy(() => import("./pages/WorksPage"));
 const VoicebankPage = lazy(() => import("./pages/VoicebankPage"));
-const ShopPage = lazy(() => import("./pages/ShopPage"));
 const ContactPage = lazy(() => import("./pages/ContactPage"));
 
 function App() {
@@ -51,14 +50,6 @@ function App() {
             element={
               <Suspense fallback={<LoadingSpinner />}>
                 <VoicebankPage />
-              </Suspense>
-            }
-          />
-          <Route
-            path="shop"
-            element={
-              <Suspense fallback={<LoadingSpinner />}>
-                <ShopPage />
               </Suspense>
             }
           />

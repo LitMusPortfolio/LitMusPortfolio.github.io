@@ -10,7 +10,7 @@ interface ModalContentProps {
   children: React.ReactNode;
 }
 
-export const ModalContentContainer = styled.div<{ $variant?: string }>`
+const ContentContainer = styled.div<{ $variant?: string }>`
   padding: ${(props) => (props.$variant === "download" ? "2.5rem" : "3rem")};
 `;
 
@@ -19,10 +19,10 @@ export const ModalContent = ({
   title,
   children,
 }: ModalContentProps) => (
-  <ModalContentContainer $variant={$variant}>
-    {title && <ModalTitle $variant={$variant}>{title}</ModalTitle>}
+  <ContentContainer $variant={$variant}>
+    {title && <TitleComponent $variant={$variant}>{title}</TitleComponent>}
     {children}
-  </ModalContentContainer>
+  </ContentContainer>
 );
 
 // モーダルタイトルコンテナ
@@ -52,7 +52,7 @@ const ModalTitleLine = styled.div`
 `;
 
 // モーダルタイトル（コンポーネント）
-export const ModalTitle = ({
+const TitleComponent = ({
   $variant,
   children,
 }: {

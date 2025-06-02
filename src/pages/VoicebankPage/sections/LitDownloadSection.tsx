@@ -1,12 +1,12 @@
 import { useMemo, useState } from "react";
 import styled from "styled-components";
 import { Tab, TabContainer } from "@/components/CardGrid";
-import DownloadModal from "../components/DownloadModal";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import { Container, Section, SideDecoration } from "@/components/Layout";
 import SectionTitle from "@/components/SectionTitle";
 import { theme } from "@/styles/theme";
 import DownloadItemCard from "../components/DownloadItemCard";
+import DownloadModal from "../components/DownloadModal";
 import { DOWNLOAD_ITEMS } from "../data/LitDownloadAssets";
 import { useDownloadModal } from "../hooks/useDownloadModal";
 import {

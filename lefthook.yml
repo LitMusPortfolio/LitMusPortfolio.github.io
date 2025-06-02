@@ -1,6 +1,7 @@
 pre-commit:
   parallel: true
   jobs:
+    - run: git status
     - run: npm run lint --fix {staged_files}
       glob: "*.{js,ts,jsx,tsx}"
     - run: npm run typecheck
@@ -14,5 +15,6 @@ pre-commit:
 
 pre-push:
   jobs:
+    - run: npm run check-all
     - run: npm run build
       glob: "*.{js,ts,jsx,tsx}"

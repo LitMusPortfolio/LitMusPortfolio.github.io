@@ -69,10 +69,44 @@ const MenuItem = styled.li`
     letter-spacing: ${theme.typography.heading.letterSpacingEn};
     transition: color ${theme.animation.duration.base} ease;
     font-size: ${theme.typography.fontSize.sm};
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3em;
     
     &:hover {
       color: ${theme.colors.primary.light};
     }
+  }
+`;
+
+const ExternalLinkIcon = styled.span`
+  display: inline-block;
+  width: 0.8em;
+  height: 0.8em;
+  position: relative;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 60%;
+    height: 60%;
+    border: 2px solid currentColor;
+    border-bottom: none;
+    border-left: none;
+  }
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 30%;
+    right: 30%;
+    width: 70%;
+    height: 2px;
+    background: currentColor;
+    transform: rotate(-45deg);
+    transform-origin: right center;
   }
 `;
 
@@ -112,8 +146,13 @@ export default function Header() {
             </Link>
           </MenuItem>
           <MenuItem>
-            <Link to="/shop" onClick={handleNavClick}>
+            <Link
+              to="https://litmus9.booth.pm"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               Shop
+              <ExternalLinkIcon />
             </Link>
           </MenuItem>
           <MenuItem>
