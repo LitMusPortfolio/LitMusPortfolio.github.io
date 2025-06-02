@@ -1,3 +1,4 @@
+import styled from "styled-components";
 import { Container, Section, SideDecoration } from "@/components/Layout";
 import SectionTitle from "@/components/SectionTitle";
 import TitleWithLine from "@/components/TitleWithLine";
@@ -60,6 +61,10 @@ const RULES = [
   },
 ];
 
+const RulesTitle = styled(TitleWithLine)`
+  margin-top: 3rem;
+`;
+
 export default function LitRulesSection() {
   return (
     <Section id="rules">
@@ -71,7 +76,7 @@ export default function LitRulesSection() {
         <SectionTitle isPurple>RULES</SectionTitle>
         {RULES.map((rule) => (
           <div key={rule.title}>
-            <TitleWithLine title={rule.title} />
+            <RulesTitle title={rule.title} />
             <ul>
               {rule.items.map((item) => (
                 <li key={item}>{item}</li>

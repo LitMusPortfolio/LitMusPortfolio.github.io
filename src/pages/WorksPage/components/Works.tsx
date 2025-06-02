@@ -35,45 +35,35 @@ const WorkCard = styled.article`
   overflow: hidden;
   cursor: default;
   pointer-events: none;
-  height: 23rem;
+  height: 22rem;
+  display: flex;
+  flex-direction: column;
 `;
 
 const VideoWrapper = styled.div`
-  position: relative;
-  width: 100%;
-  padding-bottom: 55%; /* 16:9 アスペクト比 */
-  background: #000;
-  overflow: hidden;
-`;
-
-const VideoThumbnail = styled(LazyImage)`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
+  display: flex;
+  padding: 1em;
 `;
 
 const WorkInfo = styled.div`
-  padding: 1.5rem;
+  padding: 1rem;
+  padding-bottom: 1.5rem;
   background: rgba(0, 0, 0, 0.5);
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.2rem;
 `;
 
-const WorkTitle = styled.h3`
-  color: #fff;
-  font-size: 1.1rem;
-  font-weight: 600;
-  line-height: 1.4;
+const WorkRequester = styled.p`
+  font-size: 0.7rem;
 `;
 
-const WORK_TABS: TabItem<Category | "all">[] = [
+type TabId = Category | "all";
+
+const WORK_TABS: TabItem<TabId>[] = [
   { id: "all", label: "ALL" },
   { id: "music", label: "MUSIC" },
   { id: "illustration", label: "ILLUST" },
@@ -82,15 +72,13 @@ const WORK_TABS: TabItem<Category | "all">[] = [
 ];
 
 export default function Works() {
-  const [activeTab, setActiveTab] = useState("all");
+  const [activeTab, setActiveTab] = useState<TabId>("all");
   const tabsRef = useRef<HTMLDivElement>(null);
 
   const filteredWorks = useMemo(() => {
     return activeTab === "all"
       ? worksData
-      : worksData.filter((work) =>
-          work.category.includes(activeTab as Category),
-        );
+      : worksData.filter((work) => work.category.includes(activeTab));
   }, [activeTab]);
 
   return (
@@ -102,7 +90,7 @@ export default function Works() {
             ref={tabsRef}
             tabs={WORK_TABS}
             activeTab={activeTab}
-            onTabChange={setActiveTab}
+            onTabChange={(tabId) => setActiveTab(tabId as TabId)}
             ariaLabel="Filter works by category"
             ariaControls="works-grid"
           />
@@ -113,12 +101,12 @@ export default function Works() {
           renderItem={(work) => (
             <WorkCard>
               <VideoWrapper>
-                <VideoThumbnail src={work.thumbnailPath} alt={work.title} />
+                <LazyImage src={work.thumbnailPath} alt={work.title} />
               </VideoWrapper>
               <WorkInfo>
-                <WorkTitle>{work.title}</WorkTitle>
+                <WorkRequester>{work.requester}</WorkRequester>
+                <h3>{work.title}</h3>
                 <p>{work.description}</p>
-                <p>{work.requester}</p>
               </WorkInfo>
             </WorkCard>
           )}

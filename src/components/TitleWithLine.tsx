@@ -12,7 +12,7 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   width: 100%;
-  margin-bottom: ${theme.space.lg};
+  margin-bottom: ${theme.space.md};
 `;
 
 // 罫線
@@ -24,17 +24,13 @@ const Line = styled.div`
   margin-left: ${theme.space.sm};
 `;
 
-const Title = styled.h2`
-  font-weight: ${theme.typography.heading.fontWeight};
-`;
-
 export default function TitleWithLine({
   title,
   className,
 }: TitleWithLineProps) {
   return (
     <Container className={className}>
-      <Title>{title}</Title>
+      <h2>{title}</h2>
       <Line />
     </Container>
   );
