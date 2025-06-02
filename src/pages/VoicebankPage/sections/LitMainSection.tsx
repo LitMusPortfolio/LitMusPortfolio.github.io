@@ -1,4 +1,6 @@
 import styled, { keyframes } from "styled-components";
+import LazyImage from "@/components/LazyImage";
+import LazyVideo from "@/components/LazyVideo";
 import { theme } from "../../../styles/theme";
 
 // アニメーション定義
@@ -74,15 +76,24 @@ const ContentContainer = styled.div`
 `;
 
 // ロゴ画像
-const Logo = styled.img`
+const Logo = styled(LazyImage)`
   max-height: 20vw;
   width: auto;
   margin-bottom: 2rem;
-  filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.9))
-          drop-shadow(${theme.shadows.glow.large});
+  
+  img {
+    max-height: 20vw;
+    width: auto;
+    filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.9))
+            drop-shadow(${theme.shadows.glow.large});
+  }
   
   @media (max-width: ${theme.breakpoints.mobile}) {
     max-height: 20vw;
+    
+    img {
+      max-height: 20vw;
+    }
   }
 `;
 
@@ -200,7 +211,7 @@ const DownloadButton = styled.button`
 `;
 
 // 背景動画のスタイル
-const VideoBackground = styled.video`
+const VideoBackground = styled(LazyVideo)`
   position: absolute;
   top: 50%;
   left: 50%;
@@ -210,17 +221,24 @@ const VideoBackground = styled.video`
   height: auto;
   transform: translate(-50%, -50%);
   z-index: -1;
-  object-fit: cover;
   opacity: 0.5;
+  
+  video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 `;
 
 export default function LitMainSection() {
+  const videoSources = [
+    { src: "/101_Lit/LitTopMovie.mp4", type: "video/mp4" },
+    { src: "/101_Lit/LitTopMovie.webm", type: "video/webm" },
+  ];
+
   return (
     <MainSection>
-      <VideoBackground autoPlay loop muted playsInline>
-        <source src="/101_Lit/LitTopMovie.mp4" type="video/mp4" />
-        <source src="/101_Lit/LitTopMovie.webm" type="video/webm" />
-      </VideoBackground>
+      <VideoBackground sources={videoSources} autoPlay loop muted playsInline />
       <ContentContainer>
         <Logo src="/101_Lit/Litlogo.webp" alt="離途" />
         <TextWrapper>

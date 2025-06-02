@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import LazyImage from "@/components/LazyImage";
 import { cardHoverEffect, glassmorphism } from "@/styles/utils";
 import type { DownloadItem } from "../types";
 import { CATEGORY_COLORS } from "../utils/LitDownloadUtils";
@@ -21,13 +22,18 @@ const ThumbnailWrapper = styled.div`
   overflow: hidden;
 `;
 
-const ThumbnailImage = styled.img`
+const ThumbnailImage = styled(LazyImage)`
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 `;
 
 const DefaultThumbnail = styled.div`
