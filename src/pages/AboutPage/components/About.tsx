@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Container, Section } from "@/components/Layout";
+import LazyImage from "@/components/LazyImage";
 import SectionTitle from "@/components/SectionTitle";
 import { theme } from "@/styles/theme";
 
@@ -33,10 +34,16 @@ const ImageFrame = styled.div`
   overflow: hidden;
 `;
 
-const CharacterImage = styled.img`
+const CharacterImage = styled(LazyImage)`
   width: 100%;
   height: auto;
   display: block;
+  
+  img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
 `;
 
 const RightSection = styled.div`
@@ -82,7 +89,11 @@ export default function About() {
         <ContentGrid>
           <LeftSection>
             <ImageFrame>
-              <CharacterImage src="/002_about/LitMusIcon.webp" alt="LitMus" />
+              <CharacterImage
+                src="/002_about/LitMusIcon.webp"
+                alt="LitMus"
+                fallback="/002_about/LitMusIcon.webp"
+              />
             </ImageFrame>
           </LeftSection>
 

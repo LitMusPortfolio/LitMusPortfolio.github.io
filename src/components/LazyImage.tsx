@@ -7,6 +7,8 @@ interface LazyImageProps {
   className?: string;
   placeholder?: string;
   onLoad?: () => void;
+  onError?: () => void;
+  fallback?: string;
 }
 
 const ImageWrapper = styled.div`
@@ -39,9 +41,12 @@ export default function LazyImage({
   className,
   placeholder,
   onLoad,
+  onError,
+  fallback = "/path/to/default-image.webp",
 }: LazyImageProps) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isInView, setIsInView] = useState(false);
+  const [hasError, setHasError] = useState(false);
   const imgRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -71,16 +76,22 @@ export default function LazyImage({
     onLoad?.();
   };
 
+  const handleError = () => {
+    setHasError(true);
+    onError?.();
+  };
+
   return (
     <ImageWrapper ref={imgRef} className={className}>
-      {placeholder && !isLoaded && (
+      {placeholder && !isLoaded && !hasError && (
         <PlaceholderImage src={placeholder} alt="" aria-hidden="true" />
       )}
       {isInView && (
         <StyledImage
-          src={src}
+          src={hasError ? fallback : src}
           alt={alt}
           onLoad={handleLoad}
+          onError={handleError}
           $isLoaded={isLoaded}
         />
       )}
