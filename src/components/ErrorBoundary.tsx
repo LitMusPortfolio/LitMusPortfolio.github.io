@@ -2,15 +2,18 @@ import type { ReactNode } from "react";
 import { Component } from "react";
 import styled from "styled-components";
 import { theme } from "../styles/theme";
+import { formatErrorInfo, getErrorMessage } from "../utils/errorReporting";
 
 interface Props {
   children: ReactNode;
   fallback?: ReactNode;
+  onError?: (error: Error, errorInfo: React.ErrorInfo) => void;
 }
 
 interface State {
   hasError: boolean;
   error?: Error;
+  errorMessage?: string;
 }
 
 const ErrorContainer = styled.div`
@@ -62,16 +65,26 @@ export default class ErrorBoundary extends Component<Props, State> {
     this.state = { hasError: false };
   }
 
-  static getDerivedStateFromError(error: Error): State {
-    return { hasError: true, error };
+  static getDerivedStateFromError(error: Error) {
+    // エラーメッセージを生成
+    const errorMessage = getErrorMessage(error);
+    return { hasError: true, error, errorMessage };
   }
 
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-    console.error("ErrorBoundary caught an error:", error, errorInfo);
+    // エラー情報を整形
+    formatErrorInfo(error, errorInfo);
+    
+    // 親コンポーネントにエラーを通知
+    this.props.onError?.(error, errorInfo);
   }
 
   handleReset = () => {
-    this.setState({ hasError: false, error: undefined });
+    this.setState({ hasError: false, error: undefined, errorMessage: undefined });
+  };
+
+  handleReload = () => {
+    window.location.reload();
   };
 
   render() {
@@ -84,10 +97,12 @@ export default class ErrorBoundary extends Component<Props, State> {
         <ErrorContainer>
           <ErrorTitle>エラーが発生しました</ErrorTitle>
           <ErrorMessage>
-            申し訳ございません。予期しないエラーが発生しました。
-            ページを再読み込みするか、時間をおいて再度お試しください。
+            {this.state.errorMessage || "予期しないエラーが発生しました。"}
           </ErrorMessage>
           <RetryButton onClick={this.handleReset}>もう一度試す</RetryButton>
+          <RetryButton onClick={this.handleReload} style={{ marginLeft: "1rem" }}>
+            ページを再読み込み
+          </RetryButton>
         </ErrorContainer>
       );
     }

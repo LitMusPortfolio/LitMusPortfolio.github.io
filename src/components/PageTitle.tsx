@@ -28,10 +28,10 @@ const StyledPageTitle = styled.h1<{
   }
 `;
 
-export const PageTitle: React.FC<PageTitleProps> = ({
+export const PageTitle = ({
   children,
   gradientColors,
-}) => {
+}: PageTitleProps) => {
   return (
     <StyledPageTitle $gradientColors={gradientColors}>
       {children}
