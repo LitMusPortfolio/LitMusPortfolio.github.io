@@ -8,10 +8,6 @@ export const GlobalStyles = createGlobalStyle`
     color: ${theme.colors.text.primary};
   }
 
-  html {
-    scroll-behavior: smooth;
-  }
-
   body {
     margin: 0;
     padding: 0;
@@ -120,14 +116,5 @@ export const GlobalStyles = createGlobalStyle`
 
   ::-webkit-scrollbar-thumb:hover {
     background: #555;
-  }
-
-  /* アニメーション設定 */
-  @media (prefers-reduced-motion: reduce) {
-    * {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-    }
   }
 `;

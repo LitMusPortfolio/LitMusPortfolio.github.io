@@ -71,19 +71,12 @@ const VoicevoxBanner = styled.div`
   position: absolute;
   right: ${({ theme }) => theme.space.xl};
   top: ${({ theme }) => theme.space["3xl"]};
-  
+  backdrop-filter: ${({ theme }) => theme.effects.glassmorphism.backdropFilter};
+  -webkit-backdrop-filter: ${({ theme }) => theme.effects.glassmorphism.backdropFilter};
+
   @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
     right: ${({ theme }) => theme.space.lg};
     top: ${({ theme }) => theme.space["3xl"]};
-  }
-  
-  opacity: ${({ theme }) => theme.opacity[90]};
-  
-  p {
-    font-size: ${({ theme }) => theme.typography.fontSize.xs};
-    opacity: ${({ theme }) => theme.opacity[70]};
-    margin-top: ${({ theme }) => theme.space.xs};
-    text-align: right;
   }
 `;
 
@@ -92,12 +85,12 @@ const NewsBar = styled.div`
   bottom: 0;
   left: 0;
   right: 0;
+  width: 100%;
   background: ${({ theme }) => theme.effects.glassmorphism.background};
   backdrop-filter: ${({ theme }) => theme.effects.glassmorphism.backdropFilter};
   -webkit-backdrop-filter: ${({ theme }) => theme.effects.glassmorphism.backdropFilter};
   padding: ${({ theme }) => theme.space.sm} ${({ theme }) => theme.space.xl};
   display: flex;
-  align-items: center;
   gap: ${({ theme }) => theme.space.lg};
   overflow: hidden;
   
@@ -108,9 +101,6 @@ const NewsBar = styled.div`
 `;
 
 const NewsText = styled.span`
-  font-size: ${({ theme }) => theme.typography.fontSize.base};
-  opacity: ${({ theme }) => theme.opacity[90]};
-  white-space: nowrap;
   animation: scroll ${({ theme }) => theme.animation.duration.scrolling} linear infinite;
   
   @keyframes scroll {
@@ -144,24 +134,6 @@ export default function Home() {
     { src: "/001_top/LitMusHPTopMovie.webm", type: "video/webm" },
   ];
 
-  const socialLinks = [
-    {
-      platform: "X (Twitter)",
-      url: "https://twitter.com/litmus9",
-      icon: "/001_top/icon_X.svg",
-    },
-    {
-      platform: "YouTube",
-      url: "https://www.youtube.com/@litmus9",
-      icon: "/001_top/icon_youtube.svg",
-    },
-    {
-      platform: "niconico",
-      url: "https://www.nicovideo.jp/user/12345678",
-      icon: "/001_top/icon_niconico.svg",
-    },
-  ];
-
   return (
     <HomeSection>
       <VideoBackground sources={videoSources} autoPlay loop muted playsInline />
@@ -192,14 +164,11 @@ export default function Home() {
       </VoicevoxBanner>
 
       <SocialLinksWrapper>
-        <SocialLinksComponent links={socialLinks} size="small" />
+        <SocialLinksComponent size="large" />
       </SocialLinksWrapper>
 
       <NewsBar>
-        <NewsText>
-          2025.06.09 新曲「VOICEVOX楽曲 001」を公開しました | 2025.05.30
-          Webサイトをリニューアルしました
-        </NewsText>
+        <NewsText>××× 2025/06/06 VOICEVOX離途 がリリース！ ×××</NewsText>
       </NewsBar>
     </HomeSection>
   );

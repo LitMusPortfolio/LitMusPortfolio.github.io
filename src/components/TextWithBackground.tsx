@@ -28,13 +28,12 @@ const Background = styled.div<{
   bottom: 0.05em;
   left: -0.001rem;
   right: -0.001rem;
-  background-image: url("/001_top/nameBG.webp");
-  
+  background-image: ${(props) =>
+    props.isPurple ? "url('/titleBG.webp')" : "url('/nameBG.webp')"};
   background-size: auto 100%;
   background-position: center;
   background-repeat: repeat-x;
   z-index: ${({ theme }) => theme.zIndex.behind};
-  filter: ${(props) => (props.isPurple ? "hue-rotate(30deg)" : "none")};
 `;
 
 const Content = styled.span`
