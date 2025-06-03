@@ -52,7 +52,7 @@ const CharacterDetailSection = styled(GridContainer)`
 const StyledContentContainer = styled(ContentContainer)`
   margin-left: 2rem;
   padding-bottom: 2rem;
-  padding-right: 4rem;
+  padding-right: 8rem;
   
   @media (max-width: ${theme.breakpoints.tablet}) {
     padding: 0 2rem;
@@ -62,7 +62,6 @@ const StyledContentContainer = styled(ContentContainer)`
 
 // プロフィールコンテナ（全体）
 const ProfileWrapper = styled(GridContainer)`
-  margin-top: 1rem;
   width: 100%;
 `;
 
@@ -120,7 +119,11 @@ const CharacterImage = styled(LazyImage)`
 export default function LitCharacterSection() {
   return (
     <>
-      <CharacterDetailSection $columns="45% 55%" $mobileColumns="1fr">
+      <CharacterDetailSection
+        id="character"
+        $columns="45% 55%"
+        $mobileColumns="1fr"
+      >
         <LeftSection>
           <CharacterImage
             src="/101_Lit/LitB_差し替え前提.webp"

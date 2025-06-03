@@ -19,10 +19,6 @@ const ImageWrapper = styled.div`
 `;
 
 const StyledImage = styled.img<{ $isLoaded: boolean }>`
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  opacity: ${(props) => (props.$isLoaded ? 1 : 0)};
   transition: opacity ${({ theme }) => theme.animation.duration.fast} ${({ theme }) => theme.animation.easing.easeInOut};
 `;
 

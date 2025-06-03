@@ -3,7 +3,7 @@ import type { SocialLink } from "@/types";
 import LazyImage from "./LazyImage";
 
 interface SocialLinksProps {
-  links: SocialLink[];
+  links?: SocialLink[];
   size?: "small" | "medium" | "large";
 }
 
@@ -34,7 +34,28 @@ const SocialLinkItem = styled.a<{ $size: string }>`
   }
 `;
 
-export const SocialLinks = ({ links, size = "medium" }: SocialLinksProps) => {
+const SOCIAL_LINKS = [
+  {
+    platform: "X (Twitter)",
+    url: "https://x.com/litmus9_",
+    icon: "/001_top/icon_X.svg",
+  },
+  {
+    platform: "YouTube",
+    url: "https://www.youtube.com/@LitMus9_",
+    icon: "/001_top/icon_youtube.svg",
+  },
+  {
+    platform: "niconico",
+    url: "https://www.nicovideo.jp/user/116098698",
+    icon: "/001_top/icon_niconico.svg",
+  },
+];
+
+export const SocialLinks = ({
+  links = SOCIAL_LINKS,
+  size = "medium",
+}: SocialLinksProps) => {
   return (
     <SocialLinksContainer>
       {links.map((link) => (

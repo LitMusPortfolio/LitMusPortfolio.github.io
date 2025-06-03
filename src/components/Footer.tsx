@@ -27,16 +27,12 @@ const RightSection = styled.div`
 `;
 
 const Copyright = styled.div`
-  text-align: center;
-  padding-top: ${({ theme }) => theme.space.lg};
-  border-top: ${({ theme }) => theme.borders.width.thin} solid ${({ theme }) => `rgba(255, 255, 255, ${theme.opacity[10]})`};
-  color: ${({ theme }) => `rgba(255, 255, 255, ${theme.opacity[50]})`};
-  font-size: ${({ theme }) => theme.typography.fontSize.base};
+  padding-top: ${({ theme }) => theme.space.md};
 `;
 
 const PageTop = styled.div`
   cursor: pointer;
-  width: ${({ theme }) => theme.sizes.button.xl};
+  width: 12vw;
 `;
 
 const Contact = styled.div`
@@ -44,17 +40,14 @@ const Contact = styled.div`
   flex-direction: column;
   align-items: flex-end;
   justify-content: center;
-  border: ${({ theme }) => theme.borders.width.thin} solid ${({ theme }) => theme.colors.text.primary};
+  border: ${({ theme }) => theme.borders.width.thin} solid;
   padding: ${({ theme }) => theme.space.xs} ${({ theme }) => theme.space["2xl"]};
   border-radius: ${({ theme }) => theme.borders.radius["2xl"]};
-  font-size: ${({ theme }) => theme.typography.fontSize.lg};
+  font-size: ${({ theme }) => theme.typography.fontSize.sm};
 `;
 
 const SNSLinksWrapper = styled.div`
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
   gap: ${({ theme }) => theme.space.sm};
   margin-bottom: ${({ theme }) => theme.space.md};
   
@@ -64,36 +57,14 @@ const SNSLinksWrapper = styled.div`
 `;
 
 export default function Footer() {
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
-  const socialLinks = [
-    {
-      platform: "X (Twitter)",
-      url: "https://twitter.com/litmus9",
-      icon: "/001_top/icon_X.svg",
-    },
-    {
-      platform: "YouTube",
-      url: "https://www.youtube.com/@litmus9",
-      icon: "/001_top/icon_youtube.svg",
-    },
-    {
-      platform: "niconico",
-      url: "https://www.nicovideo.jp/user/12345678",
-      icon: "/001_top/icon_niconico.svg",
-    },
-  ];
-
   return (
     <>
       <FooterContainer>
         <LeftSection>
-          <PageTop onClick={scrollToTop}>
+          <PageTop>
             <LazyImage
               src="/001_top/FooterPageTop.svg"
-              alt=""
+              alt="Pageの一番上に移動するボタン。Page Topと書かれている。"
               aria-hidden="true"
             />
           </PageTop>
@@ -101,10 +72,10 @@ export default function Footer() {
         <RightSection>
           <SNSLinksWrapper>
             <span>SNS</span>
-            <SocialLinks links={socialLinks} size="small" />
+            <SocialLinks size="small" />
           </SNSLinksWrapper>
           <Contact>
-            <Link to="/contact">CONTACT ▶</Link>
+            <Link to="/contact">CONTACT</Link>
           </Contact>
           <Copyright>
             <p>&copy; 2022 - 2025 LitMus9_. All rights reserved.</p>

@@ -3,7 +3,6 @@ import { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import LoadingSpinner from "../components/LoadingSpinner";
-import ScrollToTop from "../components/ScrollToTop";
 import MainLayout from "../layouts/MainLayout";
 import { GlobalStyles } from "../styles/GlobalStyles";
 import { theme } from "../styles/theme";
@@ -20,7 +19,6 @@ const FullApp = () => {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
-      <ScrollToTop />
       <Routes>
         <Route path="/" element={<MainLayout />}>
           <Route

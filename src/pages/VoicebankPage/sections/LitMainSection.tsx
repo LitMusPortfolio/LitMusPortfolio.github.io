@@ -113,7 +113,7 @@ const CharacterImage = styled.div`
   position: absolute;
   bottom: 0;
   right: 0;
-  max-height: 10vh;
+  max-height: 100%;
   display: flex;
   align-items: flex-end;
   justify-content: flex-end;
@@ -121,7 +121,6 @@ const CharacterImage = styled.div`
   pointer-events: none;
   
   img {
-    object-fit: unset;
     filter: drop-shadow(${theme.shadows.glow.small});
   }
 `;
@@ -133,10 +132,7 @@ const MainTagline = styled.div`
 
 // 説明テキスト
 const DescriptionText = styled.div`
-  font-size: 1.5rem;
   color: rgba(255, 255, 255, 0.95);
-  line-height: 1.7;
-  font-weight: 600;
   
   p {
     margin: 0 0 0.9rem 0;
@@ -153,20 +149,13 @@ const DescriptionText = styled.div`
 `;
 
 // 背景付きテキスト
-const HighlightedText = styled.span`
+const HighlightedText = styled.h2`
   background: ${theme.colors.primary.main};
-  border-radius: 2px;
-  font-size: 3rem;
-  font-weight: bold;
   display: inline;
   line-height: 1.6;
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
-  white-space: nowrap;
-  
-  br {
-    line-height: 0.8;
-  }
+  white-space: nowrap;  
 `;
 
 // ダウンロードボタン
@@ -174,12 +163,12 @@ const DownloadButton = styled.button`
   position: absolute;
   bottom: 4rem;
   right: 4rem;
-  padding: 1.5rem 4rem;
+  padding: 8rem 2rem;
   background: ${theme.colors.primary.gradient};
   color: #fff;
   border: none;
-  border-radius: 60px;
-  font-size: 1.4rem;
+  border-radius: 9999px;
+  font-size: 3rem;
   font-weight: bold;
   cursor: pointer;
   animation: ${floatAnimation} 3s ease-in-out infinite;
@@ -235,7 +224,7 @@ export default function LitMainSection() {
   ];
 
   return (
-    <MainSection>
+    <MainSection id="main">
       <VideoBackground sources={videoSources} autoPlay loop muted playsInline />
       <ContentContainer>
         <Logo src="/101_Lit/Litlogo.webp" alt="離途" />
