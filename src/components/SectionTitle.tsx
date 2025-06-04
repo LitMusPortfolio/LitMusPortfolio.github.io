@@ -7,12 +7,10 @@ const SectionTitleWrapper = styled.h1`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  font-size: ${theme.typography.fontSize["5xl"]};
   margin-bottom: ${theme.space.lg};
   
   @media (max-width: ${theme.breakpoints.mobile}) {
-    font-size: ${theme.typography.fontSize["4xl"]};
-    margin-bottom: ${theme.space.lg};
+   margin-bottom: ${theme.space.lg};
   }
 `;
 

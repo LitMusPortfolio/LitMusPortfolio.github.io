@@ -83,12 +83,9 @@ export const theme = {
       base: "1.1rem", // 基本
       lg: "1.5rem", // 大
       xl: "2rem", // 特大
-      "2xl": "2.5rem", // 超特大
-      "3xl": "3rem", // 巨大
-      "4xl": "4rem", // 超巨大
-      "5xl": "6rem", // 最大
       h1: "4rem",
-      h2: "1.5rem",
+      h2: "2.2rem",
+      h3: "1.5rem",
     },
   },
   // スペーシング（余白）

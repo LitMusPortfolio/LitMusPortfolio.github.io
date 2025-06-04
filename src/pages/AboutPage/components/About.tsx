@@ -9,8 +9,8 @@ const ContentWrapper = styled.div`
   display: grid;
   grid-template-columns: 6fr 7fr;
   gap: 4rem;
-  align-items: start;
-  min-height: 60vh;
+  align-items: center;
+  max-height: 62vh;
   
   @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
     grid-template-columns: 1fr;
@@ -32,15 +32,17 @@ const ImageFrame = styled.div`
 `;
 
 const CharacterImage = styled(LazyImage)`
-  width: 100%;
-  height: auto;
-  display: block;
-  
   img {
     width: 100%;
     height: auto;
     display: block;
   }
+`;
+
+const Profile = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 `;
 
 export default function About() {
@@ -62,13 +64,13 @@ export default function About() {
 
           <div>
             <TitleWithLine title="LitMus" />
-            <h3>
+            <h3 style={{ marginBottom: "1rem" }}>
               音楽 / イラスト / デザイン
               <br />
               動画 / 合成音声用ライブラリ提供
             </h3>
 
-            <div>
+            <Profile>
               <p>2000年9月9日生まれ。</p>
               <p>
                 2022年よりボーカロイドのMVイラストを担当。
@@ -86,7 +88,7 @@ export default function About() {
                 合成音声に深く興味を持ち、オープンソースであるOpenUtauの開発に携わったり、合成音声ライブラリ「離途」では自分が音声提供からイラスト、楽曲制作までマルチに制作を行う。
               </p>
               <p>好きな食べ物は回鍋肉。</p>
-            </div>
+            </Profile>
           </div>
         </ContentWrapper>
       </Container>
