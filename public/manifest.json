@@ -1,0 +1,17 @@
+{
+  "name": "LitMus9 - Music, Illustration, Design",
+  "short_name": "LitMus9",
+  "description": "音楽・イラスト・デザイン・動画制作を手がけるクリエイター LitMus の公式サイト",
+  "icons": [
+    {
+      "src": "/favicon.webp",
+      "sizes": "512x512",
+      "type": "image/webp"
+    }
+  ],
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#6B46C1",
+  "background_color": "#0F0F23",
+  "lang": "ja"
+}
