@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { BackgroundSection } from "@/components/BackgroundSection";
+import EmailProtected from "@/components/EmailProtected";
 import { Container, GridContainer } from "@/components/Layout";
 import SectionTitle from "@/components/SectionTitle";
 import TitleWithLine from "@/components/TitleWithLine";
@@ -44,7 +45,13 @@ export default function Contact() {
                 <TitleWithLine title={notice.title} />
                 <ul>
                   {notice.items.map((item) => (
-                    <li key={item}>{item}</li>
+                    <li key={item}>
+                      {item === "【 6litmus9@gmail.com 】" ? (
+                        <EmailProtected email="6litmus9@gmail.com" />
+                      ) : (
+                        item
+                      )}
+                    </li>
                   ))}
                 </ul>
               </div>
