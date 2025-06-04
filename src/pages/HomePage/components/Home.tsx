@@ -2,9 +2,9 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Section } from "../../../components/Layout";
 import LazyImage from "../../../components/LazyImage";
-import LazyVideo from "../../../components/LazyVideo";
 import { SocialLinks as SocialLinksComponent } from "../../../components/SocialLinks";
 import TextWithBackground from "../../../components/TextWithBackground";
+import { VideoBackground } from "../../../components/VideoBackground";
 
 const HomeSection = styled(Section)`
   position: fixed;
@@ -32,10 +32,6 @@ const HomeContent = styled.div`
 `;
 
 const MainTitle = styled.h1`
-  font-family: 'Montserrat', sans-serif;
-  font-size: clamp(${({ theme }) => theme.typography.fontSize["3xl"]}, 8vw, 8rem);
-  font-weight: 900;
-  letter-spacing: 0.15em;
   margin: 0;
   line-height: 1;
   color: ${({ theme }) => theme.colors.text.primary};
@@ -114,21 +110,6 @@ const NewsText = styled.span`
   }
 `;
 
-const VideoBackground = styled(LazyVideo)`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  
-  video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-`;
-
 export default function Home() {
   const videoSources = [
     { src: "/001_top/LitMusHPTopMovie.mp4", type: "video/mp4" },
@@ -139,7 +120,6 @@ export default function Home() {
   return (
     <HomeSection>
       <VideoBackground sources={videoSources} autoPlay loop muted playsInline />
-
       <HomeContent>
         <MainTitle>
           <TextWithBackground>LITMUS</TextWithBackground>

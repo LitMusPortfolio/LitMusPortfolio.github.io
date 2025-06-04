@@ -7,8 +7,8 @@ import TitleWithLine from "@/components/TitleWithLine";
 
 const ContentWrapper = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 6rem;
+  grid-template-columns: 6fr 7fr;
+  gap: 4rem;
   align-items: start;
   min-height: 60vh;
   
@@ -63,7 +63,9 @@ export default function About() {
           <div>
             <TitleWithLine title="LitMus" />
             <h3>
-              音楽 / イラスト / デザイン / 動画 / 合成音声用ライブラリ提供
+              音楽 / イラスト / デザイン
+              <br />
+              動画 / 合成音声用ライブラリ提供
             </h3>
 
             <div>

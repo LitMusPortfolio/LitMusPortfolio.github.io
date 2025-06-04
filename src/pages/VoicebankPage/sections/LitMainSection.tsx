@@ -1,7 +1,7 @@
 import styled, { keyframes } from "styled-components";
 import { Section } from "@/components/Layout";
 import LazyImage from "@/components/LazyImage";
-import LazyVideo from "@/components/LazyVideo";
+import { VideoBackground } from "@/components/VideoBackground";
 import { theme } from "../../../styles/theme";
 
 // アニメーション定義
@@ -77,12 +77,12 @@ const ContentContainer = styled.div`
 
 // ロゴ画像
 const Logo = styled(LazyImage)`
-  max-height: 20vw;
+  max-height: 37vh;
   width: auto;
   margin-bottom: 2rem;
   
   img {
-    max-height: 20vw;
+    height: 100%;
     width: auto;
   }
   
@@ -113,14 +113,21 @@ const CharacterImage = styled.div`
   position: absolute;
   bottom: 0;
   right: 0;
-  max-height: 100%;
-  display: flex;
-  align-items: flex-end;
-  justify-content: flex-end;
+  height: 95%; // ← ここを変更でサイズ調整
+  width: auto;
   z-index: 1;
   pointer-events: none;
+`;
+
+// キャラクター画像スタイル
+const StyledCharacterImage = styled(LazyImage)`
+  height: 100%;
+  width: auto;
   
   img {
+    height: 100%;
+    width: auto;
+    object-fit: contain;
     filter: drop-shadow(${theme.shadows.glow.small});
   }
 `;
@@ -197,26 +204,6 @@ const DownloadButton = styled.button`
   }
 `;
 
-// 背景動画のスタイル
-const VideoBackground = styled(LazyVideo)`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  min-width: 100%;
-  min-height: 100%;
-  width: auto;
-  height: auto;
-  transform: translate(-50%, -50%);
-  z-index: -1;
-  opacity: 0.5;
-  
-  video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-`;
-
 export default function LitMainSection() {
   const videoSources = [
     { src: "/101_Lit/LitTopMovie.mp4", type: "video/mp4" },
@@ -225,7 +212,14 @@ export default function LitMainSection() {
 
   return (
     <MainSection id="main">
-      <VideoBackground sources={videoSources} autoPlay loop muted playsInline />
+      <VideoBackground
+        sources={videoSources}
+        autoPlay
+        loop
+        muted
+        playsInline
+        opacity={0.5}
+      />
       <ContentContainer>
         <Logo src="/101_Lit/Litlogo.webp" alt="離途" />
         <TextWrapper>
@@ -256,7 +250,7 @@ export default function LitMainSection() {
         </TextWrapper>
       </ContentContainer>
       <CharacterImage>
-        <LazyImage
+        <StyledCharacterImage
           src="/101_Lit/LitA_差し替え前提.webp"
           alt="離途 メインビジュアル"
         />

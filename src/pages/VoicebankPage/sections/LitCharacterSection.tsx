@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { ContentContainer, GridContainer } from "@/components/Layout";
+import styled, { css } from "styled-components";
+import { Container, GridContainer, Section } from "@/components/Layout";
 import LazyImage from "@/components/LazyImage";
 import SectionTitle from "@/components/SectionTitle";
 import TitleWithLine from "@/components/TitleWithLine";
@@ -7,6 +7,34 @@ import { theme } from "@/styles/theme";
 // 型定義
 import type { ProfileData } from "@/types";
 import ProfileSection from "../components/ProfileSection";
+import type { CharacterDisplayConfig } from "../config/characterConfig";
+import { getCharacterConfig } from "../config/characterConfig";
+
+interface LitCharacterSectionProps {
+  // サイズプリセット: "default" | "large" | "small" | "compact"
+  sizePreset?: keyof typeof import("../config/characterConfig").CHARACTER_PRESETS;
+  // カスタム設定（プリセットを上書き）
+  customConfig?: Partial<CharacterDisplayConfig>;
+}
+
+// CSS変数を生成する関数
+const generateCharacterSizeVars = (config: CharacterDisplayConfig) => css`
+  --character-height: ${config.desktop.height};
+  --character-max-width: ${config.desktop.maxWidth};
+  --spacer-width: ${config.desktop.spacerWidth};
+  --character-z-index: ${config.desktop.zIndex || 1};
+  --character-position: ${config.desktop.imagePosition || "left bottom"};
+  
+  @media (max-width: ${theme.breakpoints.tablet}) {
+    --character-height: ${config.tablet.height};
+    --character-max-width: ${config.tablet.maxWidth};
+    --spacer-width: ${config.tablet.spacerWidth};
+  }
+  
+  @media (max-width: ${theme.breakpoints.mobile}) {
+    --character-display: ${config.mobile.display};
+  }
+`;
 
 interface DemoSong {
   id: string;
@@ -42,24 +70,6 @@ const DEMO_SONGS: DemoSong[] = [
   { id: "2", title: "牢 - 離途", embedId: "Am0LJH7ipv0" },
 ];
 
-// キャラクター詳細セクション
-const CharacterDetailSection = styled(GridContainer)`
-  min-height: 100vh;
-  align-items: center;
-`;
-
-// コンテンツコンテナのカスタマイズ
-const StyledContentContainer = styled(ContentContainer)`
-  margin-left: 2rem;
-  padding-bottom: 2rem;
-  padding-right: 8rem;
-  
-  @media (max-width: ${theme.breakpoints.tablet}) {
-    padding: 0 2rem;
-    margin-left: 0;
-  }
-`;
-
 // プロフィールコンテナ（全体）
 const ProfileWrapper = styled(GridContainer)`
   width: 100%;
@@ -90,47 +100,89 @@ const DemoSongItem = styled.div`
   }
 `;
 
-// 左側のエリア（キャラクター画像用）
-const LeftSection = styled.div`
+// キャラクター画像コンテナ
+const CharacterImageContainer = styled.div`
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: var(--character-height);
+  max-width: var(--character-max-width);
+  width: auto;
+  z-index: var(--character-z-index);
+  transition: all 0.3s ease;
+  
+  @media (max-width: ${theme.breakpoints.mobile}) {
+    display: var(--character-display, none);
+  }
+`;
+
+// キャラクター画像
+const CharacterImage = styled(LazyImage)`
+  height: 100%;
+  width: auto;
+  
+  img {
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+    object-position: var(--character-position);
+    filter: drop-shadow(${theme.shadows.glow.medium});
+  }
+`;
+
+const CharacterSection = styled(Section)<{ $config: CharacterDisplayConfig }>`
   position: relative;
-  height: 100vh;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
+  padding: 0;
+  ${({ $config }) => generateCharacterSizeVars($config)}
+`;
+
+// 左側スペーサー
+const LeftSpacer = styled.div`
+  width: var(--spacer-width);
+  flex-shrink: 0;
+  transition: width 0.3s ease;
   
   @media (max-width: ${theme.breakpoints.tablet}) {
     display: none;
   }
 `;
 
-// キャラクター画像
-const CharacterImage = styled(LazyImage)`
-  max-height: 100vh;
-  width: auto;
+// コンテンツエリア
+const ContentArea = styled.div`
+  flex: 1;
+`;
+
+// メインコンテナ
+const MainContainer = styled(Container)`
+  display: flex;
+  gap: 3rem;
+  align-items: flex-start;
   
-  img {
-    max-height: 100vh;
-    width: auto;
-    object-fit: contain;
-    filter: drop-shadow(${theme.shadows.glow.medium});
+  @media (max-width: ${theme.breakpoints.tablet}) {
+    flex-direction: column;
   }
 `;
 
-export default function LitCharacterSection() {
+export default function LitCharacterSection({
+  sizePreset = "default",
+  customConfig,
+}: LitCharacterSectionProps = {}) {
+  const config = {
+    ...getCharacterConfig(sizePreset),
+    ...customConfig,
+  } as CharacterDisplayConfig;
+
   return (
-    <>
-      <CharacterDetailSection
-        id="character"
-        $columns="45% 55%"
-        $mobileColumns="1fr"
-      >
-        <LeftSection>
-          <CharacterImage
-            src="/101_Lit/LitB_差し替え前提.webp"
-            alt="離途 キャラクター"
-          />
-        </LeftSection>
-        <StyledContentContainer>
+    <CharacterSection id="character" $config={config}>
+      <CharacterImageContainer>
+        <CharacterImage
+          src="/101_Lit/LitB_差し替え前提.webp"
+          alt="離途 キャラクター"
+        />
+      </CharacterImageContainer>
+      <MainContainer>
+        <LeftSpacer />
+        <ContentArea>
           <SectionTitle isPurple>CHARACTER</SectionTitle>
           <TitleWithLine title="離途" />
           <ProfileWrapper $columns="4fr 6fr" $gap="3rem" $mobileColumns="1fr">
@@ -156,8 +208,8 @@ export default function LitCharacterSection() {
               ))}
             </DemoSongContainer>
           </DemoSongSection>
-        </StyledContentContainer>
-      </CharacterDetailSection>
-    </>
+        </ContentArea>
+      </MainContainer>
+    </CharacterSection>
   );
 }

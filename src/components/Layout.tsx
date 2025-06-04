@@ -59,18 +59,3 @@ export const GridContainer = styled.div<GridContainerProps>`
     grid-template-columns: ${(props) => props.$mobileColumns || "1fr"};
   }
 `;
-
-// コンテンツコンテナ
-export const ContentContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  position: relative;
-  z-index: ${theme.zIndex.front};
-  padding: ${theme.space.lg};
-  
-  @media (max-width: ${theme.breakpoints.tablet}) {
-    align-items: center;
-  }
-`;

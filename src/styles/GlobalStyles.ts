@@ -38,11 +38,11 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   h1 {
-    font-size: ${theme.typography.fontSize["5xl"]};
+    font-size: ${theme.typography.fontSize.h1};
   }
 
   h2 {
-    font-size: ${theme.typography.fontSize["3xl"]};
+    font-size: ${theme.typography.fontSize.h2};
   }
 
   h3 {

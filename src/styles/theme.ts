@@ -80,7 +80,7 @@ export const theme = {
     fontSize: {
       xs: "0.7rem", // 極小
       sm: "0.85rem", // 小
-      base: "0.90625rem", // 基本
+      base: "1.1rem", // 基本
       lg: "1.5rem", // 大
       xl: "2rem", // 特大
       "2xl": "2.5rem", // 超特大

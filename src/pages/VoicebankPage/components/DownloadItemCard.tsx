@@ -66,9 +66,7 @@ const CardInfo = styled.div`
 
 const CardTitle = styled.h3`
   color: #fff;
-  font-size: 1.1rem;
   margin: 0.5rem 0;
-  font-weight: 600;
   line-height: 1.4;
 `;
 

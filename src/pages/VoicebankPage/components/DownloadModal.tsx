@@ -76,7 +76,6 @@ const ModalButton = styled.a<{ $primary?: boolean }>`
   border: 2px solid ${({ $primary }) =>
     $primary ? "transparent" : "rgba(255, 255, 255, 0.15)"};
   border-radius: 50px;
-  font-weight: 600;
   text-align: center;
   text-decoration: none;
   transition: all 0.3s ease;

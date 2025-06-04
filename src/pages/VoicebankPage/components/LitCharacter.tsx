@@ -63,7 +63,7 @@ export default function LitCharacter() {
       {/* CharacterSectionとDownloadSectionを統合 */}
       <IntegratedSection backgroundImage="/LitBG.webp">
         {/* キャラクター詳細セクション */}
-        <LitCharacterSection />
+        <LitCharacterSection sizePreset="default" />
 
         {/* ダウンロードセクション */}
         <LitDownloadSection />
