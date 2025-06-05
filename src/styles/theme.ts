@@ -154,8 +154,9 @@ export const theme = {
   zIndex: {
     behind: -1,
     base: 0,
-    content: 1,
-    front: 2,
+    decoration: 1,
+    content: 2,
+    front: 3,
     dropdown: 10,
     sticky: 50,
     fixed: 100,

@@ -8,7 +8,7 @@ export const DOWNLOAD_ITEMS: DownloadItem[] = [
     category: "トークソフト",
     name: "VOICEVOX 離途",
     description: "無料で使える中品質なテキスト読み上げソフトウェア",
-    image: "/101_Lit/Litlogo.webp",
+    image: "/102_DOWNLOAD/01_VOICEVOX.png",
     modalContent: {
       description: [
         ["商用・非商用問わず無料で使用可能。すぐに使えるソフトウェアです。"],
@@ -28,7 +28,7 @@ export const DOWNLOAD_ITEMS: DownloadItem[] = [
     category: "UTAUソングライブラリ",
     name: "離途 -FLOW-",
     description: "豊かな声色で感情的な歌唱が可能な大容量のライブラリ",
-    image: "/101_Lit/LitA_差し替え前提.webp",
+    image: "/102_DOWNLOAD/02_UTAU_Flow.png",
     links: {
       primary: { text: "無料ダウンロード", url: "#" },
     },
@@ -63,7 +63,7 @@ export const DOWNLOAD_ITEMS: DownloadItem[] = [
     category: "UTAUソングライブラリ",
     name: "離途 -HABIT-",
     description: "癖と勢いのある発音をコンセプトとした有料アペンドライブラリ",
-    image: "/101_Lit/LitB_差し替え前提.webp",
+    image: "/102_DOWNLOAD/03_UTAU_Habit.png",
     modalContent: {
       description: [
         [
@@ -91,7 +91,7 @@ export const DOWNLOAD_ITEMS: DownloadItem[] = [
     category: "UTAUソングライブラリ",
     name: "離途 -ORIGINAL V2-",
     description: "LitMusが収録した無加工の音声のみを収録したレガシーライブラリ",
-    image: "/101_Lit/LitC_差し替え前提.webp",
+    image: "/102_DOWNLOAD/04_UTAU_OliginalV2.png",
     modalContent: {
       description: [
         [
@@ -111,7 +111,7 @@ export const DOWNLOAD_ITEMS: DownloadItem[] = [
     category: "トークソフト",
     name: "MYCOEIROINK 離途",
     description: "寂しさと吐息感を意識して収録したトーク用レガシーライブラリ",
-    image: "/101_Lit/LitD_差し替え前提.webp",
+    image: "/102_DOWNLOAD/05_MYCOEIROINK.png",
     modalContent: {
       description: [
         [
@@ -134,7 +134,7 @@ export const DOWNLOAD_ITEMS: DownloadItem[] = [
     category: "画像素材",
     name: "離途立ち絵イラスト",
     description: "これまでの離途の立ち絵イラストを一括でダウンロード",
-    image: "/101_Lit/LitE_差し替え前提.webp",
+    image: "/102_DOWNLOAD/06_ALL_Illust.png",
     modalContent: {
       description: [
         [
@@ -157,7 +157,7 @@ export const DOWNLOAD_ITEMS: DownloadItem[] = [
     category: "画像素材",
     name: "離途ちびキャライラストPSD",
     description: "PSDTool対応の差分ありのちびキャライラスト",
-    image: "/101_Lit/LitF_差し替え前提.webp",
+    image: "/102_DOWNLOAD/07_tibi_psd.png",
     modalContent: {
       description: [
         [
@@ -178,7 +178,7 @@ export const DOWNLOAD_ITEMS: DownloadItem[] = [
     category: "音声素材",
     name: "離途エクストラボイス素材",
     description: "CVを担当するLitMus本人が、離途をイメージして収録したボイス集",
-    image: "/101_Lit/LitG_差し替え前提.webp",
+    image: "/102_DOWNLOAD/08_Extra_voice.png",
     modalContent: {
       description: [
         [
@@ -199,7 +199,7 @@ export const DOWNLOAD_ITEMS: DownloadItem[] = [
     category: "3Dモデル",
     name: "ちびりと3D",
     description: "ローポリゴンのかわいらしい3Dモデル",
-    image: "/101_Lit/LitH_差し替え前提.webp",
+    image: "/102_DOWNLOAD/09_tibi_3D.png",
     modalContent: {
       description: [
         [

@@ -12,18 +12,6 @@ export const TABS = [
   { id: "other" as const, label: "OTHER" },
 ] as const;
 
-// カテゴリー別の色設定
-export const CATEGORY_COLORS: Record<
-  string,
-  { primary: string; secondary: string }
-> = {
-  トークソフト: { primary: "#00BCD4", secondary: "#0097A7" },
-  UTAUソングライブラリ: { primary: "#9C27B0", secondary: "#7B1FA2" },
-  画像素材: { primary: "#FF6B6B", secondary: "#EE5A6F" },
-  音声素材: { primary: "#4CAF50", secondary: "#388E3C" },
-  "3Dモデル": { primary: "#FF9800", secondary: "#F57C00" },
-};
-
 // ユーティリティ関数
 export const filterItemsByTab = (
   items: DownloadItem[],

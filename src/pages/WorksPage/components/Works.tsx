@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { BackgroundSection } from "@/components/BackgroundSection";
 import FilterTabs, { type TabItem } from "@/components/FilterTabs";
 import Grid from "@/components/Grid";
-import { Container } from "@/components/Layout";
+import { Container, SideDecoration } from "@/components/Layout";
 import LazyImage from "@/components/LazyImage";
 import SectionTitle from "@/components/SectionTitle";
 import { theme } from "@/styles/theme";
@@ -81,6 +81,7 @@ export default function Works() {
 
   return (
     <BackgroundSection backgroundImage="/LitMusBG.webp">
+      <SideDecoration svgPath="/010_PageSideTitleSvg/WORKS.svg" />
       <ContentWrapper>
         <StickyHeader>
           <SectionTitle>WORKS</SectionTitle>

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { BackgroundSection } from "@/components/BackgroundSection";
-import { Container } from "@/components/Layout";
+import { Container, SideDecoration } from "@/components/Layout";
 import LazyImage from "@/components/LazyImage";
 import SectionTitle from "@/components/SectionTitle";
 import TitleWithLine from "@/components/TitleWithLine";
@@ -17,22 +17,9 @@ const ContentWrapper = styled.div`
   }
 `;
 
-const ImageFrame = styled.div`
-  position: relative;
-  width: 100%;
-  border: ${({ theme }) => theme.borders.width.thick} solid ${({ theme }) => theme.colors.primary.main};
-  border-radius: ${({ theme }) => theme.borders.radius.lg};
-  overflow: hidden;
-  
-  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-    max-width: 300px;
-    margin: 0 auto;
-  }
-`;
-
 const CharacterImage = styled(LazyImage)`
   img {
-    width: 100%;
+    width: 80%;
     height: auto;
     display: block;
   }
@@ -44,21 +31,24 @@ const Profile = styled.div`
   gap: 0.5rem;
 `;
 
+const AboutSection = styled(BackgroundSection)`
+  min-height: 0;
+`;
+
 export default function About() {
   return (
-    <BackgroundSection id="about" backgroundImage="/LitMusBG.webp">
+    <AboutSection id="about" backgroundImage="/LitMusBG.webp">
+      <SideDecoration svgPath="/010_PageSideTitleSvg/ABOUT.svg" />
       <Container>
         <SectionTitle>ABOUT</SectionTitle>
 
         <ContentWrapper>
           <div>
-            <ImageFrame>
-              <CharacterImage
-                src="/002_about/LitMusIcon.webp"
-                alt="LitMus"
-                fallback="/002_about/LitMusIcon.webp"
-              />
-            </ImageFrame>
+            <CharacterImage
+              src="/002_about/LitMusIcon.webp"
+              alt="LitMus"
+              fallback="/002_about/LitMusIcon.webp"
+            />
           </div>
 
           <div>
@@ -91,6 +81,6 @@ export default function About() {
           </div>
         </ContentWrapper>
       </Container>
-    </BackgroundSection>
+    </AboutSection>
   );
 }

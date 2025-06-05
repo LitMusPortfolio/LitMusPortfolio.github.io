@@ -23,8 +23,8 @@ interface GridProps<T> {
 
 // デフォルトのグリッド設定
 const DEFAULT_COLUMNS = {
-  default: "repeat(auto-fill, minmax(320px, 1fr))",
-  mobile: "1fr",
+  default: "repeat(auto-fill, minmax(20%, 1fr))",
+  mobile: "repeat(auto-fill, minmax(20vh, 1fr))",
 };
 
 const DEFAULT_GAP = {
@@ -40,6 +40,12 @@ const StyledGrid = styled.div<{
   display: grid;
   grid-template-columns: ${({ $columns }) => $columns.default || DEFAULT_COLUMNS.default};
   gap: ${({ $gap }) => $gap.default || DEFAULT_GAP.default};
+  grid-auto-rows: 1fr; /* すべての行の高さを揃える */
+  
+  /* 直下の子要素（グリッドアイテム）の高さを100%に */
+  > * {
+    height: 100%;
+  }
   
   @media (max-width: ${theme.breakpoints.mobile}) {
     grid-template-columns: ${({ $columns }) => $columns.mobile || DEFAULT_COLUMNS.mobile};

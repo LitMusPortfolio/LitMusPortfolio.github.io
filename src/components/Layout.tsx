@@ -1,3 +1,4 @@
+import type React from "react";
 import styled from "styled-components";
 import { theme } from "@/styles/theme";
 
@@ -21,27 +22,71 @@ export const Container = styled.div`
 `;
 
 // サイドデコレーションコンポーネント
-interface SideDecorationProps {
-  $side?: "left" | "right";
-}
+export const SideDecoration: React.FC<{ svgPath?: string }> = ({ svgPath }) => {
+  if (!svgPath) return null;
 
-export const SideDecoration = styled.div<SideDecorationProps>`
-  position: absolute;
-  ${(props) => (props.$side === "right" ? "right" : "left")}: -100px;
-  top: 50%;
-  transform: translateY(-50%);
-  writing-mode: vertical-rl;
-  text-orientation: mixed;
-  
-  img {
-    height: 200px;
-    opacity: ${theme.opacity[30]};
-  }
-  
-  @media (max-width: ${theme.breakpoints.mobile}) {
-    display: none;
-  }
-`;
+  return (
+    <>
+      {/* 右側に配置 - 下半分を表示 */}
+      <div
+        style={{
+          position: "fixed",
+          right: "-20vw",
+          top: "50%",
+          transform: "translateY(-50%) rotate(-90deg)",
+          width: "40vw",
+          height: "15vh",
+          zIndex: 1,
+          pointerEvents: "none",
+        }}
+      >
+        <img
+          src={svgPath}
+          alt=""
+          style={{
+            position: "absolute",
+            left: "50%",
+            top: "50%",
+            transform: "translate(-50%, -50%)",
+            height: "100%",
+            width: "auto",
+            opacity: 0.8,
+            clipPath: "inset(0 0 50% 0)", // 上半分をクリップ（下半分を表示）
+          }}
+        />
+      </div>
+
+      {/* 左側に配置 - 上半分を表示 */}
+      <div
+        style={{
+          position: "fixed",
+          left: "-20vw",
+          top: "50%",
+          transform: "translateY(-50%) rotate(-90deg)",
+          width: "40vw",
+          height: "15vh",
+          zIndex: 1,
+          pointerEvents: "none",
+        }}
+      >
+        <img
+          src={svgPath}
+          alt=""
+          style={{
+            position: "absolute",
+            left: "50%",
+            top: "50%",
+            transform: "translate(-50%, -50%)",
+            height: "100%",
+            width: "auto",
+            opacity: 0.8,
+            clipPath: "inset(50% 0 0 0)", // 下半分をクリップ（上半分を表示）
+          }}
+        />
+      </div>
+    </>
+  );
+};
 
 // グリッドコンテナ
 interface GridContainerProps {

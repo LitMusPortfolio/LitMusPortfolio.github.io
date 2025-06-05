@@ -2,7 +2,6 @@ import styled from "styled-components";
 import LazyImage from "@/components/LazyImage";
 import { cardHoverEffect, glassmorphism } from "@/styles/utils";
 import type { DownloadItem } from "../types";
-import { CATEGORY_COLORS } from "../utils/LitDownloadUtils";
 
 // スタイルコンポーネント
 const DownloadCard = styled.article`
@@ -12,6 +11,9 @@ const DownloadCard = styled.article`
   ${cardHoverEffect}
   cursor: pointer;
   min-width: 80%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 `;
 
 const ThumbnailWrapper = styled.div`
@@ -62,6 +64,10 @@ const DefaultThumbnail = styled.div`
 const CardInfo = styled.div`
   padding: 1.5rem;
   background: rgba(0, 0, 0, 0.5);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;
 
 const CardTitle = styled.h3`
@@ -75,30 +81,6 @@ const CardDescription = styled.p`
   color: rgba(255, 255, 255, 0.7);
   line-height: 1.5;
   margin: 0.5rem 0;
-`;
-
-const TagContainer = styled.div`
-  display: flex;
-  gap: 0.5rem;
-  margin-bottom: 0.5rem;
-  flex-wrap: wrap;
-`;
-
-const CategoryTag = styled.span<{ $category: string }>`
-  display: inline-block;
-  padding: 0.3rem 0.8rem;
-  background: ${({ $category }) => {
-    const colors = CATEGORY_COLORS[$category] || {
-      primary: "#8a61ff",
-      secondary: "#a78bff",
-    };
-    return `linear-gradient(135deg, ${colors.primary}40, ${colors.secondary}40)`;
-  }};
-  border-radius: 15px;
-  font-size: 0.75rem;
-  color: rgba(255, 255, 255, 0.9);
-  font-weight: 600;
-  letter-spacing: 0.05em;
 `;
 
 // コンポーネントのProps
@@ -122,9 +104,6 @@ export default function DownloadItemCard({
         )}
       </ThumbnailWrapper>
       <CardInfo>
-        <TagContainer>
-          <CategoryTag $category={item.category}>{item.category}</CategoryTag>
-        </TagContainer>
         <CardTitle>{item.name}</CardTitle>
         <CardDescription>{item.description}</CardDescription>
       </CardInfo>

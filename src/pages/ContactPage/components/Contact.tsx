@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { BackgroundSection } from "@/components/BackgroundSection";
 import EmailProtected from "@/components/EmailProtected";
-import { Container, GridContainer } from "@/components/Layout";
+import { Container, GridContainer, SideDecoration } from "@/components/Layout";
 import SectionTitle from "@/components/SectionTitle";
 import TitleWithLine from "@/components/TitleWithLine";
 
@@ -35,6 +35,7 @@ const NOTICES = [
 export default function Contact() {
   return (
     <BackgroundSection id="contact" backgroundImage="/LitMusBG.webp">
+      <SideDecoration svgPath="/010_PageSideTitleSvg/CONTACT.svg" />
       <Container>
         <SectionTitle>CONTACT</SectionTitle>
 

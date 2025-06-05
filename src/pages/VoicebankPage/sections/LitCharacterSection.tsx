@@ -175,7 +175,7 @@ export default function LitCharacterSection({
     <CharacterSection id="character" $config={config}>
       <CharacterImageContainer>
         <CharacterImage
-          src="/101_Lit/LitB_差し替え前提.webp"
+          src="/201_Lit立ち絵/LitB.webp"
           alt="離途 キャラクター"
         />
       </CharacterImageContainer>

@@ -68,9 +68,7 @@ const RulesTitle = styled(TitleWithLine)`
 export default function LitRulesSection() {
   return (
     <Section id="rules">
-      <SideDecoration>
-        <img src="/010_PageSideTitleSvg/RULES.svg" alt="RULES" />
-      </SideDecoration>
+      <SideDecoration svgPath="/010_PageSideTitleSvg/RULES.svg" />
 
       <Container>
         <SectionTitle isPurple>RULES</SectionTitle>

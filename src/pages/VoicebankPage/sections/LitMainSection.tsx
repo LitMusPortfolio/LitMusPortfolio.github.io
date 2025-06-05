@@ -251,7 +251,7 @@ export default function LitMainSection() {
       </ContentContainer>
       <CharacterImage>
         <StyledCharacterImage
-          src="/101_Lit/LitA_差し替え前提.webp"
+          src="/201_Lit立ち絵/LitA.webp"
           alt="離途 メインビジュアル"
         />
       </CharacterImage>

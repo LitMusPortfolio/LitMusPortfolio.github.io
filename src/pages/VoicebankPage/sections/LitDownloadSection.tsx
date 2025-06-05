@@ -34,9 +34,7 @@ export default function LitDownloadSection() {
 
   return (
     <Section id="downloads">
-      <SideDecoration>
-        <img src="/010_PageSideTitleSvg/DOWNLOAD.svg" alt="DOWNLOAD" />
-      </SideDecoration>
+      <SideDecoration svgPath="/010_PageSideTitleSvg/DOWNLOAD.svg" />
 
       <Container>
         <SectionTitle isPurple>DOWNLOAD</SectionTitle>

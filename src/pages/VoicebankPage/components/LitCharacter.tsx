@@ -53,9 +53,7 @@ export default function LitCharacter() {
 
   return (
     <CharacterSection id="voicebank">
-      <SideDecoration>
-        <img src="/010_PageSideTitleSvg/Character.svg" alt="CHARACTER" />
-      </SideDecoration>
+      <SideDecoration svgPath="/010_PageSideTitleSvg/Character.svg" />
 
       {/* メインセクション - 離途紹介 */}
       <LitMainSection />

@@ -143,10 +143,10 @@ export default function Home() {
 
       <VoicevoxBanner
         onClick={() => {
-          navigate("/voicebank#downloads");
+          navigate("/voicebank");
         }}
       >
-        <LazyImage src="/001_top/離途バナー_差し替え予定.webp" alt="VOICEVOX" />
+        <LazyImage src="/001_top/離途バナー.webp" alt="VOICEVOX" />
       </VoicevoxBanner>
 
       <SocialLinksWrapper>

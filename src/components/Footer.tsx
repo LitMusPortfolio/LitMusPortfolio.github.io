@@ -10,6 +10,8 @@ const FooterContainer = styled.footer`
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: ${({ theme }) => theme.space.lg};
+  position: relative;
+  z-index: ${({ theme }) => theme.zIndex.content};
 `;
 
 const LeftSection = styled.div`
