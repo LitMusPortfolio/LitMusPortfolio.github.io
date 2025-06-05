@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Container, Section, SideDecoration } from "@/components/Layout";
+import { Container, Section } from "@/components/Layout";
 import SectionTitle from "@/components/SectionTitle";
 import TitleWithLine from "@/components/TitleWithLine";
 
@@ -68,8 +68,6 @@ const RulesTitle = styled(TitleWithLine)`
 export default function LitRulesSection() {
   return (
     <Section id="rules">
-      <SideDecoration svgPath="/010_PageSideTitleSvg/RULES.svg" />
-
       <Container>
         <SectionTitle isPurple>RULES</SectionTitle>
         {RULES.map((rule) => (

@@ -14,7 +14,7 @@ export const VideoBackground = styled(LazyVideo)<VideoBackgroundProps>`
   width: auto;
   height: 100%;
   transform: translate(-50%, -50%);
-  z-index: -1;
+  z-index: -100;
   opacity: ${({ opacity = 1 }) => opacity};
   
   video {

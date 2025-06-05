@@ -2,7 +2,7 @@ import { useMemo, useState } from "react";
 import ErrorBoundary from "@/components/ErrorBoundary";
 import FilterTabs from "@/components/FilterTabs";
 import Grid from "@/components/Grid";
-import { Container, Section, SideDecoration } from "@/components/Layout";
+import { Container, Section } from "@/components/Layout";
 import SectionTitle from "@/components/SectionTitle";
 import DownloadItemCard from "../components/DownloadItemCard";
 import DownloadModal from "../components/DownloadModal";
@@ -34,8 +34,6 @@ export default function LitDownloadSection() {
 
   return (
     <Section id="downloads">
-      <SideDecoration svgPath="/010_PageSideTitleSvg/DOWNLOAD.svg" />
-
       <Container>
         <SectionTitle isPurple>DOWNLOAD</SectionTitle>
 

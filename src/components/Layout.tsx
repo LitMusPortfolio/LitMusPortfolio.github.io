@@ -36,7 +36,7 @@ export const SideDecoration: React.FC<{ svgPath?: string }> = ({ svgPath }) => {
           transform: "translateY(-50%) rotate(-90deg)",
           width: "40vw",
           height: "15vh",
-          zIndex: 1,
+          zIndex: -200,
           pointerEvents: "none",
         }}
       >
@@ -65,7 +65,7 @@ export const SideDecoration: React.FC<{ svgPath?: string }> = ({ svgPath }) => {
           transform: "translateY(-50%) rotate(-90deg)",
           width: "40vw",
           height: "15vh",
-          zIndex: 1,
+          zIndex: -50,
           pointerEvents: "none",
         }}
       >

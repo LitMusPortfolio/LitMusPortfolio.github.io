@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import styled from "styled-components";
 import { BackgroundSection } from "@/components/BackgroundSection";
-import { Section, SideDecoration } from "../../../components/Layout";
+import { Section } from "../../../components/Layout";
 import LitCharacterSection from "../sections/LitCharacterSection";
 import LitDownloadSection from "../sections/LitDownloadSection";
 import LitMainSection from "../sections/LitMainSection";
@@ -53,8 +53,6 @@ export default function LitCharacter() {
 
   return (
     <CharacterSection id="voicebank">
-      <SideDecoration svgPath="/010_PageSideTitleSvg/Character.svg" />
-
       {/* メインセクション - 離途紹介 */}
       <LitMainSection />
 
