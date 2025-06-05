@@ -8,7 +8,8 @@ export const useIsMobile = () => {
       const userAgent =
         navigator.userAgent ||
         navigator.vendor ||
-        (window as Window & { opera?: string }).opera;
+        (window as Window & { opera?: string }).opera ||
+        "";
       const mobileRegex =
         /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
       const isMobileUA = mobileRegex.test(userAgent);
