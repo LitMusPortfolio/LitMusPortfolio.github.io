@@ -131,7 +131,10 @@ const CharacterImage = styled(LazyImage)`
 
 const CharacterSection = styled(Section)<{ $config: CharacterDisplayConfig }>`
   position: relative;
-  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   ${({ $config }) => generateCharacterSizeVars($config)}
 `;
 
@@ -149,13 +152,17 @@ const LeftSpacer = styled.div`
 // コンテンツエリア
 const ContentArea = styled.div`
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 `;
 
 // メインコンテナ
 const MainContainer = styled(Container)`
   display: flex;
   gap: 3rem;
-  align-items: flex-start;
+  align-items: center;
+  height: 100%;
   
   @media (max-width: ${theme.breakpoints.tablet}) {
     flex-direction: column;
