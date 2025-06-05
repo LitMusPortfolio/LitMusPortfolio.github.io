@@ -98,7 +98,7 @@ const Logo = styled(LazyImage)`
 // テキストコンテナ
 const TextWrapper = styled.div`
   display: flex;
-  margin-left: 7rem;
+  margin-left: 11rem;
   flex-direction: column;
   align-items: flex-start;
   
@@ -257,7 +257,8 @@ export default function LitMainSection() {
       </CharacterImage>
       <DownloadButton
         onClick={() => {
-          window.location.href = "#downloads";
+          const element = document.getElementById("downloads");
+          element?.scrollIntoView({ behavior: "smooth" });
         }}
       >
         FREE DL
