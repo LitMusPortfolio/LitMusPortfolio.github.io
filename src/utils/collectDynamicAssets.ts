@@ -125,17 +125,6 @@ export async function collectWorksPageAssets(): Promise<{
     await pageLoaders.works();
     const paths = new Set<string>();
 
-    // WorksAssets.tsからデータを取得
-    const worksModule = await import("@/pages/WorksPage/data/WorksAssets");
-    const { worksData } = worksModule;
-
-    // 各作品のサムネイルパスを収集
-    worksData.forEach((work) => {
-      if (work.thumbnailPath) {
-        paths.add(work.thumbnailPath);
-      }
-    });
-
     // 背景画像とSVG
     paths.add("/LitMusBG.webp");
     paths.add("/010_PageSideTitleSvg/WORKS.svg");
