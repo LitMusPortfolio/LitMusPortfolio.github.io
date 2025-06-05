@@ -11,7 +11,7 @@ const NoticeContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: ${({ theme }) => theme.space["2xl"]};
+  padding: 2rem;
   text-align: center;
   z-index: 9999;
 `;
@@ -51,7 +51,11 @@ export const MobileNotice = () => {
   return (
     <NoticeContainer>
       <IconWrapper>💻</IconWrapper>
-      <Title>PCでの閲覧をお願いします</Title>
+      <Title>
+        PCでの閲覧を
+        <br />
+        お願いいたします
+      </Title>
       <Message>
         申し訳ございません。
         <br />
