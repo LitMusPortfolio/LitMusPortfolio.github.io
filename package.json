@@ -10,7 +10,7 @@
     "typecheck": "tsc --noEmit",
     "typecheck:stories": "tsc --project tsconfig.stories.json",
     "preview": "vite preview",
-    "knip": "knip",
+    "knip": "node scripts/knip-wrapper.js",
     "check-all": "npm run knip && npm run lint && npm run typecheck && npm run typecheck:stories",
     "prepare": "lefthook install",
     "launch-playwright-sse": "npx -y @playwright/mcp@latest --port 8931 --headless",
@@ -37,7 +37,8 @@
       "src/stories/**",
       ".storybook/**",
       "src/**/*.d.ts",
-      "src/utils/**"
+      "src/utils/**",
+      ".git/**"
     ],
     "ignoreDependencies": [
       "@types/styled-components",

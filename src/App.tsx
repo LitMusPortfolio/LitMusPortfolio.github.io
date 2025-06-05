@@ -2,6 +2,8 @@ import { lazy, useEffect } from "react";
 import { createHashRouter, RouterProvider } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import ErrorBoundary from "./components/ErrorBoundary";
+import { MobileNotice } from "./components/MobileNotice";
+import { useIsMobile } from "./hooks/useIsMobile";
 import MainLayout from "./layouts/MainLayout";
 import { GlobalStyles } from "./styles/GlobalStyles";
 import { theme } from "./styles/theme";
@@ -45,6 +47,8 @@ const router = createHashRouter([
 ]);
 
 function App() {
+  const isMobile = useIsMobile();
+
   useEffect(() => {
     // グローバルエラーハンドラーをセットアップ
     setupGlobalErrorHandlers();
@@ -56,7 +60,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <GlobalStyles />
       <ErrorBoundary>
-        <RouterProvider router={router} />
+        {isMobile ? <MobileNotice /> : <RouterProvider router={router} />}
       </ErrorBoundary>
     </ThemeProvider>
   );
