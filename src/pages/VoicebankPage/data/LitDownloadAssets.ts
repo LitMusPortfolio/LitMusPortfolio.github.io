@@ -18,7 +18,7 @@ export const DOWNLOAD_ITEMS: DownloadItem[] = [
         ],
       ],
       links: [
-        { text: "VOICEVOX公式サイトへ", url: "#" }, // TODO: 変える
+        { text: "VOICEVOX公式サイトへ", url: "https://voicevox.hiroshiba.jp" }, // TODO: 変える
       ],
     },
   },
@@ -50,7 +50,10 @@ export const DOWNLOAD_ITEMS: DownloadItem[] = [
         ],
       ],
       links: [
-        { text: "無料ダウンロード", url: "#" }, // TODO: 変える
+        {
+          text: "無料ダウンロード",
+          url: "https://drive.google.com/drive/folders/1t5JduvLjoz1r-MwR8FmM_KhBWalYQlrq?usp=drive_link",
+        }, // TODO: 変える
       ],
     },
   },
@@ -78,7 +81,7 @@ export const DOWNLOAD_ITEMS: DownloadItem[] = [
         ],
       ],
       links: [
-        { text: "BOOTHで購入", url: "#" }, // TODO: 変える
+        { text: "BOOTHで購入", url: "https://litmus9.booth.pm/items/6193924" }, // TODO: 変える
       ],
     },
   },
@@ -98,7 +101,7 @@ export const DOWNLOAD_ITEMS: DownloadItem[] = [
         ["連続音+VC音素切り出し済み。", "A#2、F3、A#3、F4の4音階を収録。"],
       ],
       links: [
-        { text: "無料ダウンロード", url: "#" }, // TODO: 変える
+        { text: "無料ダウンロード", url: "https://bowlroll.net/file/310978" }, // TODO: 変える
       ],
     },
   },
@@ -122,7 +125,7 @@ export const DOWNLOAD_ITEMS: DownloadItem[] = [
       ],
     },
     links: [
-      { text: "無料ダウンロード", url: "#" }, // TODO: 変える
+      { text: "無料ダウンロード", url: "https://bowlroll.net/file/314288" }, // TODO: 変える
     ],
   },
   {
@@ -144,7 +147,7 @@ export const DOWNLOAD_ITEMS: DownloadItem[] = [
         ],
       ],
       links: [
-        { text: "無料ダウンロード", url: "#" }, // TODO: 変える
+        { text: "無料ダウンロード", url: "https://bowlroll.net/file/337131" }, // TODO: 変える
       ],
     },
   },
@@ -165,7 +168,9 @@ export const DOWNLOAD_ITEMS: DownloadItem[] = [
         ["使用する際には利用規約に則ってご使用ください。"],
       ],
     },
-    links: [{ text: "無料ダウンロード", url: "#" }], // TODO: 変える
+    links: [
+      { text: "無料ダウンロード", url: "https://bowlroll.net/file/337132" },
+    ], // TODO: 変える
   },
   {
     id: 8,
@@ -184,7 +189,7 @@ export const DOWNLOAD_ITEMS: DownloadItem[] = [
         ["使用する際には利用規約に則ってご使用ください。"],
       ],
       links: [
-        { text: "無料ダウンロード", url: "#" }, // TODO: 変える
+        { text: "無料ダウンロード", url: "https://bowlroll.net/file/337133" }, // TODO: 変える
       ],
     },
   },
@@ -192,7 +197,7 @@ export const DOWNLOAD_ITEMS: DownloadItem[] = [
     id: 9,
     type: "other",
     category: "3Dモデル",
-    name: "ちびりとすりーでぃー",
+    name: "ちびりと3D",
     description: "ローポリゴンのかわいらしい3Dモデル",
     image: "/101_Lit/LitH_差し替え前提.webp",
     modalContent: {
@@ -208,7 +213,7 @@ export const DOWNLOAD_ITEMS: DownloadItem[] = [
         ["使用する際には利用規約に則ってご使用ください。"],
       ],
       links: [
-        { text: "無料ダウンロード", url: "#" }, // TODO: 変える
+        { text: "無料ダウンロード", url: "https://bowlroll.net/file/337134" }, // TODO: 変える
       ],
     },
   },

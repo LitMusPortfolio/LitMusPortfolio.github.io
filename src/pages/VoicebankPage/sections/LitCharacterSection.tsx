@@ -105,8 +105,7 @@ const CharacterImageContainer = styled.div`
   position: absolute;
   left: 0;
   bottom: 0;
-  height: var(--character-height);
-  max-width: var(--character-max-width);
+  height: 95%;
   width: auto;
   z-index: var(--character-z-index);
   transition: all 0.3s ease;

@@ -61,7 +61,9 @@ export default function Footer() {
     <>
       <FooterContainer>
         <LeftSection>
-          <PageTop>
+          <PageTop
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          >
             <LazyImage
               src="/001_top/FooterPageTop.svg"
               alt="Pageの一番上に移動するボタン。Page Topと書かれている。"
