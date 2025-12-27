@@ -6,7 +6,7 @@ import Grid from "@/components/Grid";
 import { Container, SideDecoration } from "@/components/Layout";
 import SectionTitle from "@/components/SectionTitle";
 import { theme } from "@/styles/theme";
-import { type Category, worksData } from "../data/WorksAssets";
+import { CATEGORIES, type Category, worksData } from "../data/WorksAssets";
 
 const ContentWrapper = styled(Container)`
   position: relative;
@@ -172,12 +172,17 @@ function VideoPreview({ link }: VideoPreviewProps) {
   return <EmptyPreview />;
 }
 
+const CATEGORY_LABELS: Record<Category, string> = {
+  music: "MUSIC",
+  illustration: "ILLUST",
+  movie: "MOVIE",
+  direction: "DIRECTION",
+  other: "OTHER",
+} as const;
+
 const WORK_TABS: TabItem<TabId>[] = [
   { id: "all", label: "ALL" },
-  { id: "music", label: "MUSIC" },
-  { id: "illustration", label: "ILLUST" },
-  { id: "movie", label: "MOVIE" },
-  { id: "other", label: "OTHER" },
+  ...CATEGORIES.map((cat) => ({ id: cat, label: CATEGORY_LABELS[cat] })),
 ];
 
 export default function Works() {

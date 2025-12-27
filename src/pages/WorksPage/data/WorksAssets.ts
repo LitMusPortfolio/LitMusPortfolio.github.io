@@ -1,9 +1,12 @@
-export type Category =
-  | "music"
-  | "illustration"
-  | "movie"
-  | "direction"
-  | "other";
+export const CATEGORIES = [
+  "music",
+  "illustration",
+  "movie",
+  "direction",
+  "other",
+] as const;
+
+export type Category = (typeof CATEGORIES)[number];
 
 type Work = {
   title: string;
