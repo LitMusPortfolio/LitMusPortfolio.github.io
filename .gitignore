@@ -26,8 +26,7 @@ worktrees/
 *.sln
 *.sw?
 
-# For AI Tools
-.claude/
+!.claude/
 .cursor/
 .specstory/
 
