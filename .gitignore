@@ -29,6 +29,7 @@ worktrees/
 !.claude/
 .cursor/
 .specstory/
+.serena/
 
 storybook-static/
 

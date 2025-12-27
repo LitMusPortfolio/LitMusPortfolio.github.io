@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import LazyImage from "@/components/LazyImage";
 import { cardHoverEffect, glassmorphism } from "@/styles/utils";
-import type { DownloadItem } from "../types";
+import type { DownloadItem } from "./data";
 
 // スタイルコンポーネント
 const DownloadCard = styled.article`

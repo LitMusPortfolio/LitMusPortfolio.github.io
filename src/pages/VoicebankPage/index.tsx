@@ -1,12 +1,22 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import LitCharacter from "./components/LitCharacter";
+import styled from "styled-components";
+import { BackgroundSection } from "@/components/BackgroundSection";
+import { Section } from "@/components/Layout";
+import LitCharacterSection from "./LitCharacterSection";
+import LitDownloadSection from "./LitDownloadSection";
+import LitMainSection from "./LitMainSection";
+import LitRulesSection from "./LitRulesSection";
+
+const CharacterSection = styled(Section)`
+  overflow: hidden;
+  padding: 0;
+`;
 
 export default function VoicebankPage() {
   const location = useLocation();
 
   useEffect(() => {
-    // URLハッシュがある場合、該当セクションにスクロール
     if (location.hash) {
       const element = document.querySelector(location.hash);
       if (element) {
@@ -15,5 +25,15 @@ export default function VoicebankPage() {
     }
   }, [location]);
 
-  return <LitCharacter />;
+  return (
+    <CharacterSection id="voicebank">
+      <LitMainSection />
+
+      <BackgroundSection backgroundImage="/LitBG.webp">
+        <LitCharacterSection sizePreset="default" />
+        <LitDownloadSection />
+        <LitRulesSection />
+      </BackgroundSection>
+    </CharacterSection>
+  );
 }

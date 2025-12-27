@@ -1,6 +1,36 @@
-import type { DownloadItem } from "../types";
+// ============================================
+// 型定義
+// ============================================
 
-// ダウンロードデータ
+type DownloadLink = {
+  text: string;
+  url: string;
+};
+
+export type DownloadItem = {
+  id: number;
+  type: "talk" | "sing" | "other";
+  category: string;
+  name: string;
+  description: string;
+  image?: string;
+  links?:
+    | {
+        primary?: DownloadLink;
+        secondary?: DownloadLink;
+        tertiary?: DownloadLink;
+      }
+    | DownloadLink[];
+  modalContent?: {
+    description: string[][];
+    links?: DownloadLink[];
+  };
+};
+
+// ============================================
+// データ
+// ============================================
+
 export const DOWNLOAD_ITEMS: DownloadItem[] = [
   {
     id: 1,
@@ -18,7 +48,7 @@ export const DOWNLOAD_ITEMS: DownloadItem[] = [
         ],
       ],
       links: [
-        { text: "VOICEVOX公式サイトへ", url: "https://voicevox.hiroshiba.jp" }, // TODO: 変える
+        { text: "VOICEVOX公式サイトへ", url: "https://voicevox.hiroshiba.jp" },
       ],
     },
   },
@@ -53,7 +83,7 @@ export const DOWNLOAD_ITEMS: DownloadItem[] = [
         {
           text: "無料ダウンロード",
           url: "https://drive.google.com/drive/folders/1t5JduvLjoz1r-MwR8FmM_KhBWalYQlrq?usp=drive_link",
-        }, // TODO: 変える
+        },
       ],
     },
   },
@@ -81,7 +111,7 @@ export const DOWNLOAD_ITEMS: DownloadItem[] = [
         ],
       ],
       links: [
-        { text: "BOOTHで購入", url: "https://litmus9.booth.pm/items/6193924" }, // TODO: 変える
+        { text: "BOOTHで購入", url: "https://litmus9.booth.pm/items/6193924" },
       ],
     },
   },
@@ -101,7 +131,7 @@ export const DOWNLOAD_ITEMS: DownloadItem[] = [
         ["連続音+VC音素切り出し済み。", "A#2、F3、A#3、F4の4音階を収録。"],
       ],
       links: [
-        { text: "無料ダウンロード", url: "https://bowlroll.net/file/310978" }, // TODO: 変える
+        { text: "無料ダウンロード", url: "https://bowlroll.net/file/310978" },
       ],
     },
   },
@@ -125,7 +155,7 @@ export const DOWNLOAD_ITEMS: DownloadItem[] = [
       ],
     },
     links: [
-      { text: "無料ダウンロード", url: "https://bowlroll.net/file/314288" }, // TODO: 変える
+      { text: "無料ダウンロード", url: "https://bowlroll.net/file/314288" },
     ],
   },
   {
@@ -147,7 +177,7 @@ export const DOWNLOAD_ITEMS: DownloadItem[] = [
         ],
       ],
       links: [
-        { text: "無料ダウンロード", url: "https://bowlroll.net/file/337131" }, // TODO: 変える
+        { text: "無料ダウンロード", url: "https://bowlroll.net/file/337131" },
       ],
     },
   },
@@ -170,7 +200,7 @@ export const DOWNLOAD_ITEMS: DownloadItem[] = [
     },
     links: [
       { text: "無料ダウンロード", url: "https://bowlroll.net/file/337132" },
-    ], // TODO: 変える
+    ],
   },
   {
     id: 8,
@@ -189,7 +219,7 @@ export const DOWNLOAD_ITEMS: DownloadItem[] = [
         ["使用する際には利用規約に則ってご使用ください。"],
       ],
       links: [
-        { text: "無料ダウンロード", url: "https://bowlroll.net/file/337133" }, // TODO: 変える
+        { text: "無料ダウンロード", url: "https://bowlroll.net/file/337133" },
       ],
     },
   },
@@ -213,7 +243,7 @@ export const DOWNLOAD_ITEMS: DownloadItem[] = [
         ["使用する際には利用規約に則ってご使用ください。"],
       ],
       links: [
-        { text: "無料ダウンロード", url: "https://bowlroll.net/file/337134" }, // TODO: 変える
+        { text: "無料ダウンロード", url: "https://bowlroll.net/file/337134" },
       ],
     },
   },

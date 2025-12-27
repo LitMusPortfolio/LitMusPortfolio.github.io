@@ -29,13 +29,14 @@
   "knip": {
     "entry": [
       "src/main.tsx",
-      "src/stories/**"
+      "src/**/*.stories.tsx"
     ],
     "project": [
       "src/**/*.{ts,tsx}"
     ],
     "ignore": [
-      ".storybook/**"
+      ".storybook/**",
+      "src/styles/styled.d.ts"
     ],
     "ignoreDependencies": [
       "@types/styled-components",

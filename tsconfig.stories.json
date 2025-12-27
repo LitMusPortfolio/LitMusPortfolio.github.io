@@ -2,8 +2,8 @@
   "extends": "./tsconfig.app.json",
   "compilerOptions": {
     "noEmit": true,
-    "noUnusedLocals": false,
-    "noUnusedParameters": false
+    "noUnusedLocals": true,
+    "noUnusedParameters": true
   },
   "include": [
     "src/**/*.stories.tsx",

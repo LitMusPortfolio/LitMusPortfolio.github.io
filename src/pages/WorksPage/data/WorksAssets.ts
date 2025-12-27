@@ -1,4 +1,9 @@
-export type Category = "music" | "illustration" | "movie" | "direction" | "other";
+export type Category =
+  | "music"
+  | "illustration"
+  | "movie"
+  | "direction"
+  | "other";
 
 type Work = {
   title: string;

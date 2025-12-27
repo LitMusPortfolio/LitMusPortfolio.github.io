@@ -54,7 +54,7 @@ class ImageCacheManager {
   }
 
   // 複数の画像を一度にプリロード
-  async preloadImages(sources: string[]): Promise<void> {
+  async preloadImages(sources: readonly string[]): Promise<void> {
     const promises = sources.map((src) =>
       this.preloadImage(src).catch((err) => {
         console.warn(`Failed to preload image: ${src}`, err);
