@@ -1,4 +1,5 @@
-import { cn } from "@/lib/utils";
+import { Separator } from "@/components/ui/separator";
+import { cn } from "@/utils/cn";
 
 type TitleWithLineProps = {
   title: string;
@@ -12,7 +13,7 @@ export default function TitleWithLine({
   return (
     <div className={cn("mb-6 flex w-full items-center", className)}>
       <h2>{title}</h2>
-      <div className="ml-4 h-0.5 flex-1 bg-[var(--color-text-primary)] opacity-80" />
+      <Separator className="ml-4 h-0.5 flex-1 bg-[var(--color-text-primary)] opacity-80" />
     </div>
   );
 }

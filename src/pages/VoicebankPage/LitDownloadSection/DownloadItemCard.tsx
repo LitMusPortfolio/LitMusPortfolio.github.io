@@ -1,4 +1,5 @@
 import LazyImage from "@/components/LazyImage";
+import { Button } from "@/components/ui/button";
 import type { DownloadItem } from "./data";
 
 // コンポーネントのProps
@@ -13,10 +14,10 @@ export default function DownloadItemCard({
   onClick,
 }: DownloadItemCardProps) {
   return (
-    <button
-      type="button"
+    <Button
+      variant="ghost"
       onClick={onClick}
-      className="glass flex h-full min-w-[80%] cursor-pointer flex-col overflow-hidden rounded-xl border-none text-left transition-all duration-300 hover:-translate-y-2.5 hover:border-[rgba(138,97,255,0.5)] hover:shadow-[0_20px_40px_rgba(138,97,255,0.4)]"
+      className="glass flex h-full min-w-[80%] cursor-pointer flex-col overflow-hidden rounded-xl border-none p-0 text-left transition-all duration-300 hover:-translate-y-2.5 hover:border-[rgba(138,97,255,0.5)] hover:bg-transparent hover:shadow-[0_20px_40px_rgba(138,97,255,0.4)]"
       aria-label={`${item.name}のダウンロード詳細を開く`}
     >
       {/* Thumbnail */}
@@ -43,6 +44,6 @@ export default function DownloadItemCard({
           {item.description}
         </p>
       </div>
-    </button>
+    </Button>
   );
 }

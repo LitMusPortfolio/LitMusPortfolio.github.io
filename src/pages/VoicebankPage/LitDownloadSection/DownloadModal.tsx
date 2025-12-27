@@ -1,5 +1,6 @@
 import Modal from "@/components/Modal";
-import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/utils/cn";
 
 // 型定義（DownloadModal固有の拡張型）
 type DownloadModalLink = {
@@ -71,13 +72,12 @@ function StructuredContent({ content }: { content: DownloadContent }) {
           content.links.map((link, index) => {
             const isPrimary = link.primary || index === 0;
             return (
-              <a
+              <Button
                 key={`link-${link.url}-${index}`}
-                href={link.url}
-                target="_blank"
-                rel="noopener noreferrer"
+                variant={isPrimary ? "default" : "outline"}
+                asChild
                 className={cn(
-                  "relative flex items-center justify-center gap-4 overflow-hidden rounded-full px-10 py-[1.2rem] text-center text-[var(--color-text-primary)] no-underline transition-all duration-300",
+                  "relative h-auto gap-4 overflow-hidden rounded-full px-10 py-[1.2rem] text-center text-[var(--color-text-primary)] no-underline transition-all duration-300",
                   "before:absolute before:left-1/2 before:top-1/2 before:h-0 before:w-0 before:-translate-x-1/2 before:-translate-y-1/2 before:rounded-full before:bg-white/20 before:transition-[width,height] before:duration-[0.6s] before:ease-out before:content-['']",
                   "hover:-translate-y-[3px] hover:shadow-[0_10px_30px_rgba(139,92,246,0.4)] hover:before:h-[300px] hover:before:w-[300px]",
                   "active:-translate-y-px active:shadow-[0_5px_15px_rgba(139,92,246,0.3)]",
@@ -86,11 +86,13 @@ function StructuredContent({ content }: { content: DownloadContent }) {
                     : "border-2 border-white/15 bg-white/[0.08] hover:border-primary",
                 )}
               >
-                <span className="inline-flex h-6 w-6 items-center justify-center">
-                  <DownloadIcon />
-                </span>
-                {link.text}
-              </a>
+                <a href={link.url} target="_blank" rel="noopener noreferrer">
+                  <span className="inline-flex h-6 w-6 items-center justify-center">
+                    <DownloadIcon />
+                  </span>
+                  {link.text}
+                </a>
+              </Button>
             );
           })
         ) : (

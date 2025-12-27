@@ -43,7 +43,7 @@ pnpm check-stories     # ストーリーの存在チェック
 ### 技術スタック
 
 - **Vite + React 19 + TypeScript**: 高速な開発環境と型安全性
-- **styled-components**: テーマベースのCSS-in-JS
+- **Tailwind CSS v4 + shadcn/ui**: ユーティリティファーストCSS + Radixベースのアクセシブルコンポーネント
 - **React Router v7 (HashRouter)**: GitHub Pages対応ルーティング
 - **Biome**: 統一されたリンター/フォーマッター
 - **Storybook**: コンポーネントカタログとビジュアルテスト
@@ -95,16 +95,24 @@ GitHub Actionsによる自動デプロイ：
 
 ## 再利用可能コンポーネント
 
-よく使うコンポーネント（`src/components/`）：
+### shadcn/ui コンポーネント（`src/components/ui/`）
+
+| コンポーネント | 説明 |
+|---------------|------|
+| `Button` | CVAベースのボタン（styledバリアントあり） |
+| `Dialog` | Radix Dialogベースのモーダル |
+| `Tabs` | Radix Tabsベースのタブ UI |
+
+### カスタムコンポーネント（`src/components/`）
 
 | コンポーネント | 説明 |
 |---------------|------|
 | `LazyImage` / `LazyVideo` | IntersectionObserver による遅延読み込み |
-| `Modal` | フォーカス管理付きのアクセシブルなモーダル |
+| `Modal` | Dialog のラッパー（後方互換性用） |
 | `SectionTitle` / `TitleWithLine` | セクション見出しスタイル |
 | `BackgroundSection` | 固定背景付きセクション |
-| `StyledButton` | 統一されたボタンスタイル |
-| `FilterTabs` / `TabComponents` | タブ UI |
+| `StyledButton` | Button のラッパー（後方互換性用） |
+| `FilterTabs` | Tabs のラッパー（後方互換性用） |
 | `Grid` | レスポンシブグリッドレイアウト |
 
 ## Biome設定

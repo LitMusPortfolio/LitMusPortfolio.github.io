@@ -1,11 +1,37 @@
-import { lazy, useEffect } from "react";
+import { lazy, useEffect, useState } from "react";
 import { createHashRouter, RouterProvider } from "react-router-dom";
 import ErrorBoundary from "./components/ErrorBoundary";
+import MainLayout from "./components/MainLayout";
 import { MobileNotice } from "./components/MobileNotice";
-import { useIsMobile } from "./hooks/useIsMobile";
-import MainLayout from "./layouts/MainLayout";
 import { setupGlobalErrorHandlers } from "./utils/errorReporting";
 import { preloadCriticalAssets } from "./utils/preloadAssets";
+
+// モバイル判定フック（このコンポーネントでのみ使用）
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      const userAgent =
+        navigator.userAgent ||
+        navigator.vendor ||
+        (window as Window & { opera?: string }).opera ||
+        "";
+      const mobileRegex =
+        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
+      const isMobileUA = mobileRegex.test(userAgent);
+      const isMobileWidth = window.innerWidth <= 768;
+
+      setIsMobile(isMobileUA || isMobileWidth);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  return isMobile;
+}
 
 // Lazy load page components
 const HomePage = lazy(() => import("./pages/HomePage"));

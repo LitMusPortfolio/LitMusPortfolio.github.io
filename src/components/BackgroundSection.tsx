@@ -1,5 +1,5 @@
 import { Section } from "@/components/Layout";
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/cn";
 
 type BackgroundSectionProps = React.HTMLAttributes<HTMLElement> & {
   backgroundImage?: string;

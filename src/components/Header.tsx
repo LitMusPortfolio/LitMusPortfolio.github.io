@@ -1,3 +1,4 @@
+import { ExternalLink } from "lucide-react";
 import { Link } from "react-router-dom";
 import LazyImage from "./LazyImage";
 
@@ -43,7 +44,7 @@ export default function Header() {
               rel="noopener noreferrer"
             >
               Shop
-              <ExternalLinkIcon />
+              <ExternalLink className="ml-1 inline-block h-[0.8em] w-[0.8em]" />
             </Link>
           </MenuItem>
           <MenuItem>
@@ -62,11 +63,5 @@ function MenuItem({ children }: { children: React.ReactNode }) {
     <li className="font-[Montserrat,sans-serif] before:content-[''] [&_a]:uppercase [&_a]:tracking-[0.1em] [&_a]:transition-colors [&_a]:duration-300 [&_a:hover]:text-primary-light">
       {children}
     </li>
-  );
-}
-
-function ExternalLinkIcon() {
-  return (
-    <span className="relative ml-1 inline-block h-[0.8em] w-[0.8em] before:absolute before:right-0 before:top-0 before:h-[60%] before:w-[60%] before:border-r-2 before:border-t-2 before:border-current after:absolute after:right-[30%] after:top-[30%] after:h-0.5 after:w-[70%] after:origin-right after:-rotate-45 after:bg-current" />
   );
 }

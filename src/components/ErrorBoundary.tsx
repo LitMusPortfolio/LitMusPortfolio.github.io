@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { Component } from "react";
+import { Button } from "@/components/ui/button";
 import { formatErrorInfo, getErrorMessage } from "@/utils/errorReporting";
 
 type Props = {
@@ -57,20 +58,20 @@ export default class ErrorBoundary extends Component<Props, State> {
             {this.state.errorMessage || "予期しないエラーが発生しました。"}
           </p>
           <div className="flex gap-6">
-            <button
-              type="button"
+            <Button
+              variant="gradient"
+              className="px-8 py-4"
               onClick={this.handleReset}
-              className="cursor-pointer rounded-lg border-none bg-gradient-primary px-8 py-4 text-base text-[var(--color-text-primary)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-button active:translate-y-0"
             >
               もう一度試す
-            </button>
-            <button
-              type="button"
+            </Button>
+            <Button
+              variant="gradient"
+              className="px-8 py-4"
               onClick={this.handleReload}
-              className="cursor-pointer rounded-lg border-none bg-gradient-primary px-8 py-4 text-base text-[var(--color-text-primary)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-button active:translate-y-0"
             >
               ページを再読み込み
-            </button>
+            </Button>
           </div>
         </div>
       );

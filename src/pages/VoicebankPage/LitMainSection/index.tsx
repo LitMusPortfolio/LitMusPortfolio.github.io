@@ -1,5 +1,6 @@
 import { Section } from "@/components/Layout";
 import LazyImage from "@/components/LazyImage";
+import { Button } from "@/components/ui/button";
 import { VideoBackground } from "@/components/VideoBackground";
 
 export default function LitMainSection() {
@@ -73,16 +74,16 @@ export default function LitMainSection() {
       </div>
 
       {/* Download Button */}
-      <button
-        type="button"
+      <Button
+        variant="gradient"
         onClick={() => {
           const element = document.getElementById("downloads");
           element?.scrollIntoView({ behavior: "smooth" });
         }}
-        className="absolute bottom-16 right-16 z-10 animate-float cursor-pointer rounded-full border-none bg-gradient-primary px-8 py-32 text-5xl font-bold uppercase tracking-[0.1em] text-white shadow-[var(--shadow-button),inset_0_1px_0_rgba(255,255,255,0.2)] transition-all duration-300 hover:scale-105 hover:-translate-y-0.5 hover:animate-none hover:bg-[linear-gradient(135deg,#9d5ff6_0%,#8035F6_100%)] hover:shadow-[var(--shadow-button-hover),inset_0_1px_0_rgba(255,255,255,0.3)] max-sm:bottom-8 max-sm:right-1/2 max-sm:translate-x-1/2"
+        className="absolute bottom-16 right-16 z-10 animate-float rounded-full px-8 py-32 text-5xl font-bold uppercase tracking-[0.1em] text-white shadow-[var(--shadow-button),inset_0_1px_0_rgba(255,255,255,0.2)] transition-all duration-300 hover:scale-105 hover:-translate-y-0.5 hover:animate-none hover:bg-[linear-gradient(135deg,#9d5ff6_0%,#8035F6_100%)] hover:shadow-[var(--shadow-button-hover),inset_0_1px_0_rgba(255,255,255,0.3)] max-sm:bottom-8 max-sm:right-1/2 max-sm:translate-x-1/2"
       >
         FREE DL
-      </button>
+      </Button>
     </Section>
   );
 }

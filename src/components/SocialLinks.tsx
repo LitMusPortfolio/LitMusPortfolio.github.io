@@ -1,6 +1,12 @@
-import { cn } from "@/lib/utils";
-import type { SocialLink } from "@/types";
+import { cn } from "@/utils/cn";
 import LazyImage from "./LazyImage";
+
+// 型定義（このコンポーネントでのみ使用）
+type SocialLink = {
+  platform: string;
+  url: string;
+  icon: string;
+};
 
 type SocialLinksProps = {
   links?: SocialLink[];

@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils/cn";
 
 // 基本セクションコンポーネント
 type SectionProps = React.HTMLAttributes<HTMLElement> & {

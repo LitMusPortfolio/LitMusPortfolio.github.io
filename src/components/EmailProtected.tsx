@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Button } from "@/components/ui/button";
 
 type EmailProtectedProps = {
   email: string;
@@ -31,14 +32,14 @@ export default function EmailProtected({
     return (
       <span className="inline-flex items-center gap-1 text-[var(--color-text-primary)]">
         【{" "}
-        <button
-          type="button"
+        <Button
+          variant="link"
           onClick={() => setIsRevealed(true)}
           aria-label={`メールアドレス ${showButtonText}`}
-          className="cursor-pointer border-none bg-transparent p-0 font-inherit text-inherit text-primary underline decoration-dotted underline-offset-2 transition-all duration-200 hover:text-primary-light hover:decoration-solid focus:outline-2 focus:outline-offset-2 focus:outline-primary"
+          className="h-auto p-0 text-inherit decoration-dotted underline-offset-2 hover:decoration-solid"
         >
           {showButtonText}
-        </button>{" "}
+        </Button>{" "}
         】
       </span>
     );

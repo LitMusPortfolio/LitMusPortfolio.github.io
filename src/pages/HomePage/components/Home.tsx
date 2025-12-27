@@ -3,6 +3,7 @@ import { Section } from "@/components/Layout";
 import LazyImage from "@/components/LazyImage";
 import { SocialLinks as SocialLinksComponent } from "@/components/SocialLinks";
 import TextWithBackground from "@/components/TextWithBackground";
+import { Button } from "@/components/ui/button";
 import { VideoBackground } from "@/components/VideoBackground";
 
 export default function Home() {
@@ -39,14 +40,14 @@ export default function Home() {
       </div>
 
       {/* VOICEVOXバナー */}
-      <button
-        type="button"
-        className="absolute right-12 top-24 cursor-pointer border-none bg-transparent p-0 backdrop-blur-[10px] max-sm:right-8 max-sm:top-24"
+      <Button
+        variant="ghost"
+        className="absolute right-12 top-24 h-auto p-0 backdrop-blur-[10px] max-sm:right-8 max-sm:top-24"
         onClick={() => navigate("/voicebank")}
         aria-label="VOICEVOX 離途のページへ移動"
       >
         <LazyImage src="/001_top/離途バナー.webp" alt="" aria-hidden="true" />
-      </button>
+      </Button>
 
       {/* ソーシャルリンク */}
       <div className="absolute bottom-32 right-12 z-10 max-sm:bottom-32 max-sm:right-8">
