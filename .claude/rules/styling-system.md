@@ -1,48 +1,61 @@
 ---
 paths:
   - "src/**/*.tsx"
+  - "src/**/*.css"
 ---
 
 # スタイリングシステム
 
-## テーマオブジェクトの使用
+## Tailwind CSS v4 テーマ設定
 
-全てのスタイリングは `src/styles/theme.ts` のテーマ値を使用すること。直接的なカラーコードやピクセル値の使用は禁止。
+テーマは `src/globals.css` の `@theme` ディレクティブで定義。CSS変数として利用可能。
 
-使用可能なテーマ値:
-- `colors` - カラーパレット
-- `typography` - フォント設定
-- `space` - スペーシング
-- `breakpoints` - ブレークポイント
-- `effects` - エフェクト
+### 主要なCSS変数
 
-## styled-components でのテーマ使用
+**カラー:**
+- `--color-primary` - メインカラー
+- `--color-text-primary` - テキストカラー
+- `--color-bg-dark` - 背景カラー
 
-```typescript
-const StyledComponent = styled.div`
-  color: ${({ theme }) => theme.colors.text.primary};
-  padding: ${({ theme }) => theme.space.md};
+**シャドウ:**
+- `--shadow-glow-sm/md/lg` - グローエフェクト
+- `--shadow-button` - ボタン用シャドウ
 
-  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-    padding: ${({ theme }) => theme.space.sm};
-  }
-`;
+**Glassmorphism:**
+- `--glass-bg` - ガラス背景
+- `--glass-border` - ガラスボーダー
+- `--glass-blur` - ブラー効果
+
+**ブレークポイント:**
+- `--breakpoint-xs` - 600px
+- `--breakpoint-sm` - 768px
+- `--breakpoint-md` - 968px
+
+**Z-Index:**
+- `--z-content`, `--z-dropdown`, `--z-modal`
+
+## 使用例
+
+```css
+.element {
+  color: var(--color-text-primary);
+  background: var(--color-bg-dark);
+  box-shadow: var(--shadow-glow-sm);
+}
 ```
 
-## Transient Props
+## カスタムユーティリティクラス
 
-DOM に渡さない props には `$` プレフィックスを使用:
+```tsx
+// Glassmorphism
+<div className="glass p-4 rounded-lg">
 
-```typescript
-type Props = {
-  $isActive?: boolean;
-};
-
-const Button = styled.button<Props>`
-  opacity: ${({ $isActive }) => ($isActive ? 1 : 0.5)};
-`;
+// ホバーエフェクト
+<div className="card-hover">
 ```
 
-## GlobalStyle.ts
+## 禁止事項
 
-独自のスタイル定義は必要最低限とし、基本的には `GlobalStyle.ts` にまとめる。
+- 直接的なカラーコード（`#ffffff`）の使用禁止
+- 直接的なピクセル値の使用は最小限に
+- インラインスタイルの使用は避ける

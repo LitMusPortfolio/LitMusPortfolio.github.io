@@ -8,22 +8,11 @@
     "build": "tsc -b && vite build",
     "lint": "biome check",
     "typecheck": "tsc --noEmit",
-    "typecheck:stories": "tsc --project tsconfig.stories.json",
     "preview": "vite preview",
     "knip": "knip",
-    "check-all": "pnpm knip && pnpm lint && pnpm typecheck && pnpm typecheck:stories",
     "prepare": "lefthook install",
-    "launch-playwright-sse": "pnpm dlx @playwright/mcp@latest --port 8931 --headless",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "generate-stories": "tsx scripts/generate-stories.ts",
-    "check-stories": "tsx scripts/check-stories.ts",
-    "screenshot": "storycap http://localhost:6006 -o .reg/actual -V 320x568 -V 375x667 -V 414x896 -V 768x1024 -V 1024x768 -V 1280x720 -V 1440x900 -V 1920x1080",
-    "screenshot:server": "storycap --serverCmd \"pnpm storybook\" --serverTimeout 60000",
-    "screenshot:ci": "storycap --serverCmd \"pnpm storybook -- --ci\" --serverTimeout 60000",
-    "visual-test": "reg-suit run",
-    "visual-test:update": "reg-suit run --update",
-    "visual-compare": "reg-cli .reg/actual .reg/expected .reg/diff -R .reg/report.html",
     "chromatic": "npx chromatic --project-token=chpt_86b2af203940de1"
   },
   "knip": {
@@ -36,12 +25,9 @@
     ],
     "ignore": [
       ".storybook/**",
-      "src/components/ui/**",
-      "src/components/StyledButton.tsx"
+      "src/components/ui/**"
     ],
     "ignoreDependencies": [
-      "@playwright/test",
-      "@types/puppeteer",
       "tailwindcss"
     ]
   },
@@ -60,7 +46,6 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^2.0.0-beta.5",
-    "@playwright/test": "^1.52.0",
     "@storybook/addon-essentials": "^8.6.14",
     "@storybook/addon-interactions": "^8.6.14",
     "@storybook/addon-viewport": "^8.6.14",
@@ -69,7 +54,6 @@
     "@storybook/test": "^8.6.14",
     "@tailwindcss/vite": "^4.1.18",
     "@types/node": "^22.15.29",
-    "@types/puppeteer": "^5.4.7",
     "@types/react": "^19.1.2",
     "@types/react-dom": "^19.1.2",
     "@vitejs/plugin-react": "^4.5.0",

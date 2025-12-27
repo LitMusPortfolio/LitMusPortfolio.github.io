@@ -2,11 +2,9 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-## 重要
+デプロイ先 URL: https://litmus9.com/#/
 
-- サーバーは常に起動しています。自分で起動する必要はありません。
-- StorybookでUIコンポーネントの動作を確認できます: `pnpm storybook`
-- インポートには `@/` エイリアスを使用（例: `import { theme } from "@/styles/theme"`）
+必ず chrome-devtools mcp を使用してデバッグしながら作業を進めること。
 
 ## 開発コマンド
 
@@ -20,22 +18,13 @@ pnpm dev
 # ビルド
 pnpm build
 
+# プレビュー（ビルド後の確認）
+pnpm preview
+
 # コード品質チェック（コミット前に実行推奨）
 pnpm lint          # Biomeによるリント
 pnpm typecheck     # TypeScriptの型チェック
-pnpm check-all     # 全チェック（knip + lint + typecheck + typecheck:stories）
-
-# Storybook
-pnpm storybook     # Storybook起動
-pnpm build-storybook  # Storybookビルド
-
-# ビジュアルテスト
-pnpm screenshot    # スクリーンショット生成
-pnpm visual-test   # ビジュアル回帰テスト実行
-
-# ストーリー管理
-pnpm generate-stories  # ストーリーファイルの自動生成
-pnpm check-stories     # ストーリーの存在チェック
+pnpm knip          # 未使用コード/依存関係の検出
 ```
 
 ## アーキテクチャ概要
@@ -48,6 +37,18 @@ pnpm check-stories     # ストーリーの存在チェック
 - **Biome**: 統一されたリンター/フォーマッター
 - **Storybook**: コンポーネントカタログとビジュアルテスト
 
+### ルーティング構成
+
+HashRouterを使用（GitHub Pages対応）。全ページはReact.lazy()で遅延読み込み。
+
+| パス | ページ |
+|------|--------|
+| `/` | HomePage |
+| `/about` | AboutPage |
+| `/works` | WorksPage |
+| `/voicebank` | VoicebankPage（離途キャラクターページ） |
+| `/contact` | ContactPage |
+
 ### ページ構成パターン
 
 ```
@@ -58,50 +59,28 @@ pages/
     ├── components/         # ページ固有コンポーネント
     ├── sections/           # セクション分割（大規模ページ用）
     ├── data/               # 静的データ定義
-    ├── hooks/              # カスタムフック
-    ├── types/              # 型定義
-    ├── config/             # 設定値
-    └── utils/              # ユーティリティ関数
+    └── ...
 ```
 
-## ルーティング構成
+VoicebankPageはセクション分割パターンを採用（`LitMainSection/`, `LitCharacterSection/`等）。
 
-HashRouterを使用（GitHub Pages対応）：
+## スタイリング
 
-| パス | ページ |
-|------|--------|
-| `/` | HomePage |
-| `/about` | AboutPage |
-| `/works` | WorksPage |
-| `/voicebank` | VoicebankPage（離途キャラクターページ） |
-| `/contact` | ContactPage |
+Tailwind CSS v4 を使用。テーマは `src/globals.css` の `@theme` ディレクティブで定義。
 
-全ページはReact.lazy()で遅延読み込み。
+詳細は `.claude/rules/styling-system.md` を参照。
 
-## パフォーマンス最適化
-
-- **コード分割**: 各ページを個別バンドルに
-- **メディア最適化**: WebP画像、WebM動画を使用
-- **遅延読み込み**: LazyImage/LazyVideoコンポーネント
-- **固定背景**: パララックス効果で`background-attachment: fixed`
-
-## デプロイメント
-
-GitHub Actionsによる自動デプロイ：
-
-- mainブランチへのpushで自動デプロイ
-- PRでビジュアル回帰テスト実行
-- GitHub Pages（https://litmusportfolio.github.io/）で公開
-
-## 再利用可能コンポーネント
+## コンポーネント
 
 ### shadcn/ui コンポーネント（`src/components/ui/`）
 
 | コンポーネント | 説明 |
 |---------------|------|
-| `Button` | CVAベースのボタン（styledバリアントあり） |
+| `Button` | CVAベースのボタン（`styled`, `gradient`バリアントあり） |
 | `Dialog` | Radix Dialogベースのモーダル |
 | `Tabs` | Radix Tabsベースのタブ UI |
+| `Card` | Radix Cardベース（CardHeader, CardTitle, CardContent等を含む） |
+| `Separator` | Radix Separatorベースの区切り線 |
 
 ### カスタムコンポーネント（`src/components/`）
 
@@ -110,14 +89,28 @@ GitHub Actionsによる自動デプロイ：
 | `LazyImage` / `LazyVideo` | IntersectionObserver による遅延読み込み |
 | `Modal` | Dialog のラッパー（後方互換性用） |
 | `SectionTitle` / `TitleWithLine` | セクション見出しスタイル |
+| `TextWithBackground` | 背景画像付きテキスト（SectionTitleで使用） |
 | `BackgroundSection` | 固定背景付きセクション |
+| `VideoBackground` | LazyVideoをラップした背景動画レイアウト |
 | `StyledButton` | Button のラッパー（後方互換性用） |
 | `FilterTabs` | Tabs のラッパー（後方互換性用） |
 | `Grid` | レスポンシブグリッドレイアウト |
 
-## Biome設定
+## コーディング規約
+
+### Biome設定
 
 - インデント: スペース2つ
 - クォート: ダブルクォート
 - 未使用のインポート/変数はエラー
 - import文は自動整理される
+
+詳細なコーディング規約は `.claude/rules/` を参照。
+
+## デプロイメント
+
+GitHub Actionsによる自動デプロイ：
+
+- mainブランチへのpushで自動デプロイ
+- PRでビジュアル回帰テスト実行
+- GitHub Pages + カスタムドメイン（https://litmus9.com）で公開
