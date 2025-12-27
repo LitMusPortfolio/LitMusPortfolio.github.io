@@ -10,6 +10,13 @@ type Work = {
 
 export const worksData: Work[] = [
   {
+    title: "Kura Kura",
+    category: ["music"],
+    description: "作曲・編曲",
+    link: "https://youtu.be/1KUrM-WVx7M?si=-wk2BSRnu8HN90Cq",
+    requester: "Lezel",
+  },
+  {
     title: "NANASHI Sing up Vol.2-Reflection-",
     category: ["movie"],
     description: "リリックモーション",
@@ -45,7 +52,7 @@ export const worksData: Work[] = [
     requester: "LitMus",
   },
   {
-    title: "リアライズ",
+    title: "Suzumi Nemo 2nd One-man live『 ONESELF 』",
     category: ["movie"],
     description: "リリックモーション",
     link: "https://www.youtube.com/live/DuqUxwAGTjo",
