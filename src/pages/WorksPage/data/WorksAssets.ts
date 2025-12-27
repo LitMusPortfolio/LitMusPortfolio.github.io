@@ -1,4 +1,4 @@
-export type Category = "music" | "illustration" | "movie" | "other";
+export type Category = "music" | "illustration" | "movie" | "direction" | "other";
 
 type Work = {
   title: string;
@@ -9,6 +9,55 @@ type Work = {
 };
 
 export const worksData: Work[] = [
+  {
+    title: "雁字搦×",
+    category: ["direction"],
+    description: "プロダクションコーディネート",
+    link: "https://www.youtube.com/watch?v=K3sD87WZvqI",
+    requester: "ねりきり",
+  },
+  {
+    title: "離花しい",
+    category: ["movie"],
+    description: "動画",
+    link: "https://www.youtube.com/watch?v=hK58SyAlMsQ",
+    requester: "んべべ商会",
+  },
+  {
+    title: "かげふみ",
+    category: ["music", "direction"],
+    description: "作曲、ディレクション",
+    link: "https://www.youtube.com/watch?v=qENnaJzSnl0",
+    requester: "LitMus",
+  },
+  {
+    title: "シークエル",
+    category: ["movie", "direction"],
+    description: "ムービーディレクション",
+    link: "https://www.youtube.com/watch?v=waddjPqTqEc",
+    requester: "szri",
+  },
+  {
+    title: "Regret",
+    category: ["movie"],
+    description: "動画",
+    link: "https://www.youtube.com/watch?v=uRHIwfZdEms",
+    requester: "LoA",
+  },
+  {
+    title: "β世界線に於ける私という虚像について",
+    category: ["movie", "other"],
+    description: "XFD動画、CDデザイン",
+    link: "https://www.youtube.com/watch?v=78oLluJk3Mc",
+    requester: "LitMus",
+  },
+  {
+    title: "追憶の欠片にて",
+    category: ["music", "illustration"],
+    description: "作曲、イラスト",
+    link: "https://www.youtube.com/watch?v=BCEp6UPo2TQ",
+    requester: "LitMus",
+  },
   {
     title: "Kura Kura",
     category: ["music"],
@@ -47,7 +96,7 @@ export const worksData: Work[] = [
   {
     title: "この声に気づいて欲しいのに",
     category: ["music", "illustration", "movie"],
-    description: "自主制作　作曲、イラスト、動画",
+    description: "作曲、イラスト、動画",
     link: "https://youtu.be/eAjyQVUoBGY",
     requester: "LitMus",
   },
@@ -68,7 +117,7 @@ export const worksData: Work[] = [
   {
     title: "僕の人生は僕だけのものだった",
     category: ["music", "other"],
-    description: "自主制作　作曲、3Dモデリング",
+    description: "作曲、3Dモデリング",
     link: "https://youtu.be/szoC6fCe4dU",
     requester: "LitMus",
   },
@@ -82,7 +131,7 @@ export const worksData: Work[] = [
   {
     title: "白昼夢は壊れる前に",
     category: ["music", "illustration", "movie"],
-    description: "自主制作　作曲、イラスト、動画",
+    description: "作曲、イラスト、動画",
     link: "https://youtu.be/DVZcSV24uKg",
     requester: "LitMus",
   },
@@ -96,7 +145,7 @@ export const worksData: Work[] = [
   {
     title: "海底に揺蕩う",
     category: ["music"],
-    description: "自主制作　作曲（FEAT CONTEST épeler賞 受賞）",
+    description: "作曲（FEAT CONTEST épeler賞 受賞）",
     link: "https://youtu.be/n6RzHvfRtRw",
     requester: "LitMus",
   },
@@ -110,7 +159,7 @@ export const worksData: Work[] = [
   {
     title: "消えたいと願うだけで",
     category: ["music", "illustration", "movie"],
-    description: "自主制作　作曲、イラスト、動画",
+    description: "作曲、イラスト、動画",
     link: "https://youtu.be/MThsERSoUZc",
     requester: "LitMus",
   },
@@ -131,42 +180,42 @@ export const worksData: Work[] = [
   {
     title: "行間をなぞるように",
     category: ["music", "illustration", "movie"],
-    description: "自主制作　作曲、イラスト、動画",
+    description: "作曲、イラスト、動画",
     link: "https://youtu.be/ptWdarOnnyU",
     requester: "LitMus",
   },
   {
     title: "こころは此処にひとり",
     category: ["music", "illustration", "movie"],
-    description: "自主制作　作曲、イラスト、動画",
+    description: "作曲、イラスト、動画",
     link: "https://youtu.be/a9jYRwfepVU",
     requester: "LitMus",
   },
   {
     title: "サイエンス・フィクション",
     category: ["music", "illustration", "movie", "other"],
-    description: "自主制作　作曲、イラスト、アニメーション、動画",
+    description: "作曲、イラスト、アニメーション、動画",
     link: "https://youtu.be/BattHMkwcDA",
     requester: "LitMus",
   },
   {
     title: "ほんとをたべさせて",
     category: ["music", "illustration", "movie"],
-    description: "自主制作　作曲、イラスト、動画",
+    description: "作曲、イラスト、動画",
     link: "https://youtu.be/S-pToxFYRIw",
     requester: "LitMus",
   },
   {
     title: "エスの残滓",
     category: ["music", "illustration", "movie"],
-    description: "自主制作　作曲、イラスト、動画",
+    description: "作曲、イラスト、動画",
     link: "https://youtu.be/XONCzrrnNFs",
     requester: "LitMus",
   },
   {
     title: "U+0370",
     category: ["music", "illustration", "movie"],
-    description: "自主制作　作曲、イラスト、動画",
+    description: "作曲、イラスト、動画",
     link: "https://youtu.be/oaHL4aZMQqE",
     requester: "LitMus",
   },
@@ -225,13 +274,6 @@ export const worksData: Work[] = [
     description: "イラスト・コンテ・ロゴデザイン",
     link: "https://www.youtube.com/watch?v=QjDGmJZjIYo",
     requester: "Kyiku",
-  },
-  {
-    title: "寡黙なアリスのユーフォリア",
-    category: ["illustration"],
-    description: "イラスト",
-    link: "https://www.nicovideo.jp/watch/sm41950316",
-    requester: "smile dog",
   },
   {
     title: "痛いの痛いの飛んでいけ",

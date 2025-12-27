@@ -60,7 +60,7 @@ export default function About() {
             <SubHeading>
               音楽 / イラスト / デザイン
               <br />
-              動画 / 合成音声用ライブラリ提供
+              動画 / ディレクション / 合成音声用ライブラリ提供
             </SubHeading>
 
             <Profile>
