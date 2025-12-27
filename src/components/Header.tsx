@@ -1,114 +1,26 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
-import styled from "styled-components";
-import { theme } from "@/styles/theme";
 import LazyImage from "./LazyImage";
 
-const HeaderContainer = styled.header`
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: ${theme.zIndex.max};
-  background: ${theme.effects.glassmorphism.background};
-  backdrop-filter: ${theme.effects.glassmorphism.backdropFilter};
-  padding: ${theme.space.xs} 0;
-`;
-
-const Nav = styled.nav`
-  max-width: 95%;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 ${theme.space.lg};
-  
-  @media (max-width: ${theme.breakpoints.mobile}) {
-    padding: 0 ${theme.space.sm};
-  }
-`;
-
-const Logo = styled(Link)`
-  display: inline-block;
-  height: ${theme.sizes.button.md};
-`;
-
-const MenuList = styled.ul<{ $isOpen: boolean }>`
-  display: flex;
-  flex-direction: row;
-  gap: ${theme.space.lg};
-`;
-
-const MenuItem = styled.li`
-  font-family: 'Montserrat', sans-serif;
-
-  a {
-    color: ${theme.colors.text.primary};
-    text-decoration: none;
-    text-transform: uppercase;
-    letter-spacing: ${theme.typography.heading.letterSpacingEn};
-    
-    &:hover {
-      color: ${theme.colors.primary.light};
-    }
-  }
-
-  &::before {
-    content: '';
-  }
-`;
-
-const ExternalLinkIcon = styled.span`
-  display: inline-block;
-  width: 0.8em;
-  height: 0.8em;
-  position: relative;
-  
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 60%;
-    height: 60%;
-    border: ${theme.borders.width.base} solid currentColor;
-    border-bottom: none;
-    border-left: none;
-  }
-  
-  &::after {
-    content: '';
-    position: absolute;
-    top: 30%;
-    right: 30%;
-    width: 70%;
-    height: ${theme.borders.width.base};
-    background: currentColor;
-    transform: rotate(-45deg);
-    transform-origin: right center;
-  }
-`;
-
 export default function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
   const handleNavClick = () => {
-    setIsMenuOpen(false);
-    // Force scroll to top
     window.scrollTo(0, 0);
   };
 
   return (
-    <HeaderContainer>
-      <Nav aria-label="Main navigation">
-        <Logo
+    <header className="fixed left-0 right-0 top-0 z-[9999] bg-[rgba(0,0,0,0.3)] py-2 backdrop-blur-[10px]">
+      <nav
+        className="mx-auto flex max-w-[95%] items-center justify-between px-8 max-sm:px-4"
+        aria-label="Main navigation"
+      >
+        <Link
           to="/"
           onClick={() => window.scrollTo(0, 0)}
           aria-label="LitMus9 home"
+          className="inline-block h-10"
         >
           <LazyImage src="/001_top/LitMus9_logo.webp" alt="LitMus9" eager />
-        </Logo>
-        <MenuList $isOpen={isMenuOpen}>
+        </Link>
+        <ul className="my-[17.6px] flex gap-8">
           <MenuItem>
             <Link to="/about" onClick={handleNavClick}>
               About
@@ -139,8 +51,22 @@ export default function Header() {
               Contact
             </Link>
           </MenuItem>
-        </MenuList>
-      </Nav>
-    </HeaderContainer>
+        </ul>
+      </nav>
+    </header>
+  );
+}
+
+function MenuItem({ children }: { children: React.ReactNode }) {
+  return (
+    <li className="font-[Montserrat,sans-serif] before:content-[''] [&_a]:uppercase [&_a]:tracking-[0.1em] [&_a]:transition-colors [&_a]:duration-300 [&_a:hover]:text-primary-light">
+      {children}
+    </li>
+  );
+}
+
+function ExternalLinkIcon() {
+  return (
+    <span className="relative ml-1 inline-block h-[0.8em] w-[0.8em] before:absolute before:right-0 before:top-0 before:h-[60%] before:w-[60%] before:border-r-2 before:border-t-2 before:border-current after:absolute after:right-[30%] after:top-[30%] after:h-0.5 after:w-[70%] after:origin-right after:-rotate-45 after:bg-current" />
   );
 }

@@ -1,18 +1,4 @@
-import styled from "styled-components";
-import { theme } from "@/styles/theme";
 import TextWithBackground from "./TextWithBackground";
-
-// セクションタイトルのラッパー
-const SectionTitleWrapper = styled.h1`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin-bottom: ${theme.space.lg};
-  
-  @media (max-width: ${theme.breakpoints.mobile}) {
-   margin-bottom: ${theme.space.lg};
-  }
-`;
 
 type SectionTitleProps = {
   children: string;
@@ -24,10 +10,8 @@ export default function SectionTitle({
   isPurple = false,
 }: SectionTitleProps) {
   return (
-    <SectionTitleWrapper>
-      <TextWithBackground isPurple={isPurple || false}>
-        {children}
-      </TextWithBackground>
-    </SectionTitleWrapper>
+    <h1 className="mb-8 flex flex-col items-start">
+      <TextWithBackground isPurple={isPurple}>{children}</TextWithBackground>
+    </h1>
   );
 }

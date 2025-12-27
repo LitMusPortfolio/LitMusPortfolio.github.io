@@ -1,47 +1,4 @@
 import { useState } from "react";
-import styled from "styled-components";
-
-const EmailContainer = styled.span`
-  display: inline-flex;
-  align-items: center;
-  gap: ${({ theme }) => theme.space.xs};
-  color: ${({ theme }) => theme.colors.text.primary};
-`;
-
-const EmailButton = styled.button`
-  background: transparent;
-  border: none;
-  color: ${({ theme }) => theme.colors.primary};
-  padding: 0;
-  cursor: pointer;
-  font-size: inherit;
-  font-family: inherit;
-  transition: all 0.2s ease;
-  text-decoration: underline;
-  text-decoration-style: dotted;
-  text-underline-offset: 2px;
-  
-  &:hover {
-    color: ${({ theme }) => theme.colors.primary.light};
-    text-decoration-style: solid;
-  }
-
-  &:focus {
-    outline: 2px solid ${({ theme }) => theme.colors.primary};
-    outline-offset: 2px;
-  }
-`;
-
-const EmailText = styled.span`
-  color: ${({ theme }) => theme.colors.primary.main};
-  font-family: inherit;
-  letter-spacing: inherit;
-  transition: color 0.2s ease;
-  
-  &:hover {
-    color: ${({ theme }) => theme.colors.primary.light};
-  }
-`;
 
 type EmailProtectedProps = {
   email: string;
@@ -55,8 +12,8 @@ export default function EmailProtected({
   const [isRevealed, setIsRevealed] = useState(false);
 
   // メールアドレスを難読化（文字コードを使用）
-  const obfuscateEmail = (email: string) => {
-    const [local, domain] = email.split("@");
+  const obfuscateEmail = (emailStr: string) => {
+    const [local, domain] = emailStr.split("@");
     const domainParts = domain.split(".");
 
     return {
@@ -72,31 +29,33 @@ export default function EmailProtected({
 
   if (!isRevealed) {
     return (
-      <EmailContainer>
+      <span className="inline-flex items-center gap-1 text-[var(--color-text-primary)]">
         【{" "}
-        <EmailButton
+        <button
+          type="button"
           onClick={() => setIsRevealed(true)}
           aria-label={`メールアドレス ${showButtonText}`}
+          className="cursor-pointer border-none bg-transparent p-0 font-inherit text-inherit text-primary underline decoration-dotted underline-offset-2 transition-all duration-200 hover:text-primary-light hover:decoration-solid focus:outline-2 focus:outline-offset-2 focus:outline-primary"
         >
           {showButtonText}
-        </EmailButton>{" "}
+        </button>{" "}
         】
-      </EmailContainer>
+      </span>
     );
   }
 
   // JavaScriptが有効な場合のみ表示される
   return (
-    <EmailContainer>
+    <span className="inline-flex items-center gap-1 text-[var(--color-text-primary)]">
       【
-      <EmailText>
+      <span className="font-inherit tracking-inherit text-primary transition-colors duration-200 hover:text-primary-light">
         <span>{parts.local}</span>
         <span>{parts.at}</span>
         <span>{parts.domain}</span>
         <span>{parts.dot}</span>
         <span>{parts.tld}</span>
-      </EmailText>
+      </span>
       】
-    </EmailContainer>
+    </span>
   );
 }

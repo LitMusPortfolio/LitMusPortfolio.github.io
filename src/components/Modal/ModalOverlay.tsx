@@ -1,13 +1,25 @@
-import styled from "styled-components";
+import { cn } from "@/lib/utils";
 
-// モーダルオーバーレイ（背景）
-export const ModalOverlay = styled.div<{ $isOpen: boolean }>`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.8);
-  z-index: 9999;
-  backdrop-filter: blur(10px);
-`;
+type ModalOverlayProps = {
+  isOpen: boolean;
+  onClick: (e: React.MouseEvent) => void;
+  children: React.ReactNode;
+};
+
+export function ModalOverlay({ isOpen, onClick, children }: ModalOverlayProps) {
+  if (!isOpen) return null;
+
+  return (
+    <div
+      className={cn("fixed inset-0 z-[9999] bg-black/80 backdrop-blur-[10px]")}
+    >
+      <button
+        type="button"
+        onClick={onClick}
+        className="absolute inset-0 h-full w-full cursor-default border-none bg-transparent"
+        aria-label="モーダルを閉じる"
+      />
+      {children}
+    </div>
+  );
+}

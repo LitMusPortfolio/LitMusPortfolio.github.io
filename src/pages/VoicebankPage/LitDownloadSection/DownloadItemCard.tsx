@@ -1,87 +1,5 @@
-import styled from "styled-components";
 import LazyImage from "@/components/LazyImage";
-import { cardHoverEffect, glassmorphism } from "@/styles/utils";
 import type { DownloadItem } from "./data";
-
-// スタイルコンポーネント
-const DownloadCard = styled.article`
-  ${glassmorphism}
-  border-radius: 12px;
-  overflow: hidden;
-  ${cardHoverEffect}
-  cursor: pointer;
-  min-width: 80%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-`;
-
-const ThumbnailWrapper = styled.div`
-  position: relative;
-  width: 100%;
-  padding-bottom: 56.25%; /* 16:9 アスペクト比 */
-  background: #000;
-  overflow: hidden;
-`;
-
-const ThumbnailImage = styled(LazyImage)`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-`;
-
-const DefaultThumbnail = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, #1a0a3e 0%, #2d1b69 50%, #3e2980 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  
-  &::before {
-    content: '';
-    width: 80px;
-    height: 80px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-`;
-
-const CardInfo = styled.div`
-  padding: 1.5rem;
-  background: rgba(0, 0, 0, 0.5);
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-`;
-
-const CardTitle = styled.h3`
-  color: #fff;
-  margin: 0.5rem 0;
-  line-height: 1.4;
-`;
-
-const CardDescription = styled.p`
-  font-size: 0.85rem;
-  color: rgba(255, 255, 255, 0.7);
-  line-height: 1.5;
-  margin: 0.5rem 0;
-`;
 
 // コンポーネントのProps
 type DownloadItemCardProps = {
@@ -95,18 +13,36 @@ export default function DownloadItemCard({
   onClick,
 }: DownloadItemCardProps) {
   return (
-    <DownloadCard onClick={onClick} tabIndex={0}>
-      <ThumbnailWrapper>
+    <button
+      type="button"
+      onClick={onClick}
+      className="glass flex h-full min-w-[80%] cursor-pointer flex-col overflow-hidden rounded-xl border-none text-left transition-all duration-300 hover:-translate-y-2.5 hover:border-[rgba(138,97,255,0.5)] hover:shadow-[0_20px_40px_rgba(138,97,255,0.4)]"
+      aria-label={`${item.name}のダウンロード詳細を開く`}
+    >
+      {/* Thumbnail */}
+      <div className="relative w-full overflow-hidden bg-black pb-[56.25%]">
         {item.image ? (
-          <ThumbnailImage src={item.image} alt={item.name} />
+          <LazyImage
+            src={item.image}
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 h-full w-full [&_img]:h-full [&_img]:w-full [&_img]:object-cover"
+          />
         ) : (
-          <DefaultThumbnail aria-label="Default thumbnail" />
+          <div
+            className="absolute inset-0 flex h-full w-full items-center justify-center bg-gradient-to-br from-[#1a0a3e] via-[#2d1b69] to-[#3e2980] before:flex before:h-20 before:w-20 before:items-center before:justify-center before:rounded-[20px] before:bg-white/10 before:content-['']"
+            aria-hidden="true"
+          />
         )}
-      </ThumbnailWrapper>
-      <CardInfo>
-        <CardTitle>{item.name}</CardTitle>
-        <CardDescription>{item.description}</CardDescription>
-      </CardInfo>
-    </DownloadCard>
+      </div>
+
+      {/* Card Info */}
+      <div className="flex flex-1 flex-col justify-between bg-black/50 px-6 pb-6 pt-4">
+        <h3 className="my-2 leading-[1.4] text-white">{item.name}</h3>
+        <p className="my-2 text-[0.85rem] leading-[1.5] text-white/70">
+          {item.description}
+        </p>
+      </div>
+    </button>
   );
 }

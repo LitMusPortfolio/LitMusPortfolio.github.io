@@ -1,48 +1,42 @@
-import styled from "styled-components";
-import { theme } from "@/styles/theme";
+import { cn } from "@/lib/utils";
 
 // 基本セクションコンポーネント
-export const Section = styled.section`
-  min-height: 100vh;
-  padding: ${theme.space["2xl"]} 0;
-  position: relative;
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-`;
+type SectionProps = React.HTMLAttributes<HTMLElement> & {
+  children: React.ReactNode;
+};
+
+export function Section({ children, className, ...props }: SectionProps) {
+  return (
+    <section
+      className={cn(
+        "relative min-h-screen bg-cover bg-center bg-fixed py-16",
+        className,
+      )}
+      {...props}
+    >
+      {children}
+    </section>
+  );
+}
 
 // コンテナコンポーネント
-export const Container = styled.div`
-  margin: 0 auto;
-  padding: 2% 4%;
-  width: 85%;
-  position: relative;
-  z-index: ${theme.zIndex.content};
-`;
+type ContainerProps = {
+  children: React.ReactNode;
+  className?: string;
+};
 
-// サイドデコレーション用スタイルコンポーネント
-const DecorationContainer = styled.div<{ $side: "left" | "right" }>`
-  position: fixed;
-  ${({ $side }) => ($side === "right" ? "right: -20vw" : "left: -20vw")};
-  top: 50%;
-  transform: translateY(-50%) rotate(-90deg);
-  width: 40vw;
-  height: 15vh;
-  z-index: ${({ $side }) => ($side === "right" ? -200 : -50)};
-  pointer-events: none;
-`;
-
-const DecorationImage = styled.img<{ $clipTop: boolean }>`
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  height: 100%;
-  width: auto;
-  opacity: ${theme.opacity[80]};
-  clip-path: ${({ $clipTop }) =>
-    $clipTop ? "inset(0 0 50% 0)" : "inset(50% 0 0 0)"};
-`;
+export function Container({ children, className }: ContainerProps) {
+  return (
+    <div
+      className={cn(
+        "relative z-[var(--z-content)] mx-auto w-[85%] px-[4%] py-[2%]",
+        className,
+      )}
+    >
+      {children}
+    </div>
+  );
+}
 
 // サイドデコレーションコンポーネント
 type SideDecorationProps = {
@@ -55,31 +49,54 @@ export function SideDecoration({ svgPath }: SideDecorationProps) {
   return (
     <>
       {/* 右側に配置 - 下半分を表示 */}
-      <DecorationContainer $side="right">
-        <DecorationImage src={svgPath} alt="" $clipTop />
-      </DecorationContainer>
+      <div className="pointer-events-none fixed -right-[20vw] top-1/2 z-[-200] h-[15vh] w-[40vw] -translate-y-1/2 -rotate-90">
+        <img
+          src={svgPath}
+          alt=""
+          className="absolute left-1/2 top-1/2 h-full w-auto -translate-x-1/2 -translate-y-1/2 opacity-80 [clip-path:inset(0_0_50%_0)]"
+        />
+      </div>
 
       {/* 左側に配置 - 上半分を表示 */}
-      <DecorationContainer $side="left">
-        <DecorationImage src={svgPath} alt="" $clipTop={false} />
-      </DecorationContainer>
+      <div className="pointer-events-none fixed -left-[20vw] top-1/2 z-[-50] h-[15vh] w-[40vw] -translate-y-1/2 -rotate-90">
+        <img
+          src={svgPath}
+          alt=""
+          className="absolute left-1/2 top-1/2 h-full w-auto -translate-x-1/2 -translate-y-1/2 opacity-80 [clip-path:inset(50%_0_0_0)]"
+        />
+      </div>
     </>
   );
 }
 
 // グリッドコンテナ
 type GridContainerProps = {
-  $columns?: string;
-  $gap?: string;
-  $mobileColumns?: string;
+  children: React.ReactNode;
+  columns?: string;
+  gap?: string;
+  mobileColumns?: string;
+  className?: string;
 };
 
-export const GridContainer = styled.div<GridContainerProps>`
-  display: grid;
-  grid-template-columns: ${(props) => props.$columns || "1fr"};
-  gap: ${(props) => props.$gap || `${theme.space.lg}`};
-  
-  @media (max-width: ${theme.breakpoints.tablet}) {
-    grid-template-columns: ${(props) => props.$mobileColumns || "1fr"};
-  }
-`;
+export function GridContainer({
+  children,
+  columns = "1fr",
+  gap = "2rem",
+  mobileColumns = "1fr",
+  className,
+}: GridContainerProps) {
+  return (
+    <div
+      className={cn("grid", className)}
+      style={
+        {
+          gridTemplateColumns: columns,
+          gap,
+          "--mobile-columns": mobileColumns,
+        } as React.CSSProperties
+      }
+    >
+      {children}
+    </div>
+  );
+}

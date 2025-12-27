@@ -1,49 +1,36 @@
-import styled from "styled-components";
-import { theme } from "@/styles/theme";
+import { cn } from "@/lib/utils";
 
 type StyledButtonProps = {
-  $active?: boolean;
-  $underlineOnActive?: boolean;
-  $variant?: "default" | "primary" | "secondary" | "ghost";
-  $size?: "sm" | "md" | "lg";
-};
+  active?: boolean;
+  underlineOnActive?: boolean;
+  variant?: "default" | "primary" | "secondary" | "ghost";
+  size?: "sm" | "md" | "lg";
+  className?: string;
+  children: React.ReactNode;
+} & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
-export const StyledButton = styled.button<StyledButtonProps>`
-  background: transparent;
-  border: none;
-  padding: ${theme.space.sm} ${theme.space.md};
-  cursor: pointer;
-  position: relative;
-  white-space: nowrap;
-  transition: color ${theme.animation.duration.base} ease;
-  
-  ${(props) =>
-    props.$underlineOnActive !== false &&
-    `
-    &::after {
-      content: '';
-      position: absolute;
-      bottom: -${theme.borders.width.base};
-      left: 0;
-      right: 0;
-      height: ${theme.borders.width.base};
-      background: ${theme.colors.primary.main};
-      transform: scaleX(${props.$active ? 1 : 0});
-      transition: transform ${theme.animation.duration.base} ease;
-    }
-  `}
-  
-  &:hover {
-    color: ${theme.colors.primary.main};
-  }
-  
-  &:focus-visible {
-    outline: ${theme.borders.width.base} solid ${theme.colors.primary.main};
-    outline-offset: ${theme.borders.width.base};
-  }
-  
-  &:disabled {
-    opacity: ${theme.opacity[60]};
-    cursor: not-allowed;
-  }
-`;
+export function StyledButton({
+  active = false,
+  underlineOnActive = true,
+  className,
+  children,
+  ...props
+}: StyledButtonProps) {
+  return (
+    <button
+      className={cn(
+        "relative cursor-pointer whitespace-nowrap border-none bg-transparent px-6 py-4 transition-colors duration-300",
+        "hover:text-primary",
+        "focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary",
+        "disabled:cursor-not-allowed disabled:opacity-60",
+        underlineOnActive &&
+          "after:absolute after:bottom-[-2px] after:left-0 after:right-0 after:h-0.5 after:bg-primary after:transition-transform after:duration-300",
+        underlineOnActive && (active ? "after:scale-x-100" : "after:scale-x-0"),
+        className,
+      )}
+      {...props}
+    >
+      {children}
+    </button>
+  );
+}

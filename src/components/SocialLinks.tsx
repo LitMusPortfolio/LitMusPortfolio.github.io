@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import { cn } from "@/lib/utils";
 import type { SocialLink } from "@/types";
 import LazyImage from "./LazyImage";
 
@@ -6,33 +6,6 @@ type SocialLinksProps = {
   links?: SocialLink[];
   size?: "small" | "medium" | "large";
 };
-
-const SocialLinksContainer = styled.div`
-  display: flex;
-  gap: ${({ theme }) => theme.space.md};
-  align-items: center;
-`;
-
-const SocialLinkItem = styled.a<{ $size: string }>`
-  display: inline-block;
-  width: ${({ $size, theme }) =>
-    $size === "small"
-      ? theme.sizes.icon.md
-      : $size === "large"
-        ? theme.sizes.icon.xl
-        : theme.sizes.icon.lg};
-  height: ${({ $size, theme }) =>
-    $size === "small"
-      ? theme.sizes.icon.md
-      : $size === "large"
-        ? theme.sizes.icon.xl
-        : theme.sizes.icon.lg};
-  transition: transform ${({ theme }) => theme.animation.duration.fast} ${({ theme }) => theme.animation.easing.ease};
-  
-  &:hover {
-    transform: scale(1.1);
-  }
-`;
 
 const SOCIAL_LINKS = [
   {
@@ -52,24 +25,33 @@ const SOCIAL_LINKS = [
   },
 ];
 
+const sizeClasses = {
+  small: "h-6 w-6",
+  medium: "h-8 w-8",
+  large: "h-10 w-10",
+};
+
 export const SocialLinks = ({
   links = SOCIAL_LINKS,
   size = "medium",
 }: SocialLinksProps) => {
   return (
-    <SocialLinksContainer>
+    <div className="flex items-center gap-6">
       {links.map((link) => (
-        <SocialLinkItem
+        <a
           key={link.platform}
           href={link.url}
           target="_blank"
           rel="noopener noreferrer"
-          $size={size}
+          className={cn(
+            "inline-block transition-transform duration-300 hover:scale-110",
+            sizeClasses[size],
+          )}
           aria-label={link.platform}
         >
           <LazyImage src={link.icon} alt={link.platform} eager />
-        </SocialLinkItem>
+        </a>
       ))}
-    </SocialLinksContainer>
+    </div>
   );
 };

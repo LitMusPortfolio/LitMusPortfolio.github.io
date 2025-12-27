@@ -1,7 +1,5 @@
 import type { ReactNode } from "react";
 import { Component } from "react";
-import styled from "styled-components";
-import { theme } from "@/styles/theme";
 import { formatErrorInfo, getErrorMessage } from "@/utils/errorReporting";
 
 type Props = {
@@ -16,54 +14,6 @@ type State = {
   errorMessage?: string;
 };
 
-const ErrorContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 50vh;
-  padding: 2rem;
-  text-align: center;
-`;
-
-const ErrorTitle = styled.h2`
-  color: ${theme.colors.text.primary};
-  font-size: 2rem;
-  margin-bottom: 1rem;
-`;
-
-const ErrorMessage = styled.p`
-  color: ${theme.colors.text.secondary};
-  font-size: 1rem;
-  margin-bottom: 2rem;
-  max-width: 600px;
-`;
-
-const ButtonContainer = styled.div`
-  display: flex;
-  gap: ${theme.space.md};
-`;
-
-const RetryButton = styled.button`
-  background: ${theme.colors.primary.gradient};
-  color: ${theme.colors.text.primary};
-  border: none;
-  padding: 1rem 2rem;
-  border-radius: 8px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: transform 0.2s, box-shadow 0.2s;
-
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: ${theme.shadows.button};
-  }
-
-  &:active {
-    transform: translateY(0);
-  }
-`;
-
 export default class ErrorBoundary extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
@@ -71,16 +21,12 @@ export default class ErrorBoundary extends Component<Props, State> {
   }
 
   static getDerivedStateFromError(error: Error) {
-    // エラーメッセージを生成
     const errorMessage = getErrorMessage(error);
     return { hasError: true, error, errorMessage };
   }
 
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
-    // エラー情報を整形
     formatErrorInfo(error, errorInfo);
-
-    // 親コンポーネントにエラーを通知
     this.props.onError?.(error, errorInfo);
   }
 
@@ -103,18 +49,30 @@ export default class ErrorBoundary extends Component<Props, State> {
       }
 
       return (
-        <ErrorContainer>
-          <ErrorTitle>エラーが発生しました</ErrorTitle>
-          <ErrorMessage>
+        <div className="flex min-h-[50vh] flex-col items-center justify-center p-8 text-center">
+          <h2 className="mb-4 text-[2rem] text-[var(--color-text-primary)]">
+            エラーが発生しました
+          </h2>
+          <p className="mb-8 max-w-[600px] text-base text-[var(--color-text-secondary)]">
             {this.state.errorMessage || "予期しないエラーが発生しました。"}
-          </ErrorMessage>
-          <ButtonContainer>
-            <RetryButton onClick={this.handleReset}>もう一度試す</RetryButton>
-            <RetryButton onClick={this.handleReload}>
+          </p>
+          <div className="flex gap-6">
+            <button
+              type="button"
+              onClick={this.handleReset}
+              className="cursor-pointer rounded-lg border-none bg-gradient-primary px-8 py-4 text-base text-[var(--color-text-primary)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-button active:translate-y-0"
+            >
+              もう一度試す
+            </button>
+            <button
+              type="button"
+              onClick={this.handleReload}
+              className="cursor-pointer rounded-lg border-none bg-gradient-primary px-8 py-4 text-base text-[var(--color-text-primary)] transition-all duration-200 hover:-translate-y-0.5 hover:shadow-button active:translate-y-0"
+            >
               ページを再読み込み
-            </RetryButton>
-          </ButtonContainer>
-        </ErrorContainer>
+            </button>
+          </div>
+        </div>
       );
     }
 

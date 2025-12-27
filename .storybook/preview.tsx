@@ -1,8 +1,6 @@
 import type { Preview } from "@storybook/react";
 import { MemoryRouter } from "react-router-dom";
-import { ThemeProvider } from "styled-components";
-import { GlobalStyles } from "../src/styles/GlobalStyles";
-import { theme } from "../src/styles/theme";
+import "../src/globals.css";
 
 const CUSTOM_VIEWPORTS = {
   mobile320: {
@@ -77,12 +75,9 @@ const preview: Preview = {
   },
   decorators: [
     (Story) => (
-      <ThemeProvider theme={theme}>
-        <GlobalStyles />
-        <MemoryRouter>
-          <Story />
-        </MemoryRouter>
-      </ThemeProvider>
+      <MemoryRouter>
+        <Story />
+      </MemoryRouter>
     ),
   ],
 };

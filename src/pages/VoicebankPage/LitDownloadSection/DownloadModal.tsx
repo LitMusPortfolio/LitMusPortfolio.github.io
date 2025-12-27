@@ -1,6 +1,5 @@
-import styled, { css, keyframes } from "styled-components";
 import Modal from "@/components/Modal";
-import { theme } from "@/styles/theme";
+import { cn } from "@/lib/utils";
 
 // 型定義（DownloadModal固有の拡張型）
 type DownloadModalLink = {
@@ -25,190 +24,82 @@ type DownloadModalProps = {
   children?: React.ReactNode;
 };
 
-// アニメーション
-const slideInUp = keyframes`
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-`;
-
-const shimmer = keyframes`
-  0% {
-    background-position: -200% center;
-  }
-  100% {
-    background-position: 200% center;
-  }
-`;
-
-const ContentWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-`;
-
-const ModalButtons = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-top: auto;
-  align-self: flex-end;
-  animation: ${slideInUp} 0.8s ease-out;
-  margin-bottom: 3rem;
-`;
-
-const ModalButton = styled.a<{ $primary?: boolean }>`
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-  padding: 1.2rem 2.5rem;
-  background: ${({ $primary }) =>
-    $primary
-      ? `linear-gradient(135deg, ${theme.colors.primary.main}, ${theme.colors.primary.dark})`
-      : "rgba(255, 255, 255, 0.08)"};
-  color: ${theme.colors.text.primary};
-  border: 2px solid ${({ $primary }) =>
-    $primary ? "transparent" : "rgba(255, 255, 255, 0.15)"};
-  border-radius: 50px;
-  text-align: center;
-  text-decoration: none;
-  transition: all 0.3s ease;
-  overflow: hidden;
-  
-  ${({ $primary }) =>
-    $primary &&
-    css`
-    background-size: 200% 100%;
-    background-image: linear-gradient(
-      135deg,
-      ${theme.colors.primary.main} 0%,
-      ${theme.colors.primary.dark} 50%,
-      ${theme.colors.primary.main} 100%
-    );
-    animation: ${shimmer} 3s ease-in-out infinite;
-  `}
-  
-  &::before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    transition: width 0.6s ease, height 0.6s ease;
-  }
-  
-  &:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4);
-    border-color: ${({ $primary }) =>
-      $primary ? "transparent" : theme.colors.primary.main};
-    
-    &::before {
-      width: 300px;
-      height: 300px;
-    }
-  }
-  
-  &:active {
-    transform: translateY(-1px);
-    box-shadow: 0 5px 15px rgba(139, 92, 246, 0.3);
-  }
-  
-  svg {
-    width: 1.2rem;
-    height: 1.2rem;
-  }
-`;
-
-// 追加のスタイルコンポーネント
-
-const IconWrapper = styled.span`
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 1.5rem;
-  height: 1.5rem;
-  
-  svg {
-    width: 100%;
-    height: 100%;
-  }
-`;
-
-const DownloadIcon = () => (
-  <svg
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    aria-hidden="true"
-  >
-    <title>Download</title>
-    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-    <polyline points="7 10 12 15 17 10" />
-    <line x1="12" y1="15" x2="12" y2="3" />
-  </svg>
-);
-
-// スタイルコンポーネント
-const DescriptionSection = styled.div``;
-
-const DescriptionParagraph = styled.p`
-  color: ${theme.colors.text.secondary};
-  margin-bottom: 1.2rem;
-`;
+// Download Icon Component
+function DownloadIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      aria-hidden="true"
+      className="h-full w-full"
+    >
+      <title>Download</title>
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+      <polyline points="7 10 12 15 17 10" />
+      <line x1="12" y1="15" x2="12" y2="3" />
+    </svg>
+  );
+}
 
 // 構造化コンテンツコンポーネント
-const StructuredContent = ({ content }: { content: DownloadContent }) => {
+function StructuredContent({ content }: { content: DownloadContent }) {
   if (!content) {
     return <div>コンテンツが見つかりません</div>;
   }
 
   return (
-    <ContentWrapper>
+    <div className="flex h-full flex-col">
+      {/* Description */}
       {content.description && content.description.length > 0 && (
-        <DescriptionSection>
+        <div>
           {content.description.map((paragraph) => (
-            <DescriptionParagraph key={`paragraph-${paragraph}`}>
+            <p
+              key={`paragraph-${paragraph}`}
+              className="mb-[1.2rem] text-[var(--color-text-secondary)]"
+            >
               {paragraph}
-            </DescriptionParagraph>
+            </p>
           ))}
-        </DescriptionSection>
+        </div>
       )}
 
-      <ModalButtons>
+      {/* Buttons */}
+      <div className="mb-12 mt-auto flex animate-slide-in-up flex-col self-end">
         {content.links && content.links.length > 0 ? (
-          content.links.map((link, index) => (
-            <ModalButton
-              key={`link-${link.url}-${index}`}
-              href={link.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              $primary={link.primary || index === 0}
-            >
-              <IconWrapper>
-                <DownloadIcon />
-              </IconWrapper>
-              {link.text}
-            </ModalButton>
-          ))
+          content.links.map((link, index) => {
+            const isPrimary = link.primary || index === 0;
+            return (
+              <a
+                key={`link-${link.url}-${index}`}
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={cn(
+                  "relative flex items-center justify-center gap-4 overflow-hidden rounded-full px-10 py-[1.2rem] text-center text-[var(--color-text-primary)] no-underline transition-all duration-300",
+                  "before:absolute before:left-1/2 before:top-1/2 before:h-0 before:w-0 before:-translate-x-1/2 before:-translate-y-1/2 before:rounded-full before:bg-white/20 before:transition-[width,height] before:duration-[0.6s] before:ease-out before:content-['']",
+                  "hover:-translate-y-[3px] hover:shadow-[0_10px_30px_rgba(139,92,246,0.4)] hover:before:h-[300px] hover:before:w-[300px]",
+                  "active:-translate-y-px active:shadow-[0_5px_15px_rgba(139,92,246,0.3)]",
+                  isPrimary
+                    ? "animate-shimmer border-2 border-transparent bg-[linear-gradient(135deg,var(--color-primary)_0%,var(--color-primary-dark)_50%,var(--color-primary)_100%)] bg-[length:200%_100%]"
+                    : "border-2 border-white/15 bg-white/[0.08] hover:border-primary",
+                )}
+              >
+                <span className="inline-flex h-6 w-6 items-center justify-center">
+                  <DownloadIcon />
+                </span>
+                {link.text}
+              </a>
+            );
+          })
         ) : (
           <div>ダウンロードリンクがありません</div>
         )}
-      </ModalButtons>
-    </ContentWrapper>
+      </div>
+    </div>
   );
-};
+}
 
 export default function DownloadModal({
   isOpen,

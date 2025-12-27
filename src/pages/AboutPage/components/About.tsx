@@ -1,69 +1,35 @@
-import styled from "styled-components";
 import { BackgroundSection } from "@/components/BackgroundSection";
 import { Container, SideDecoration } from "@/components/Layout";
 import LazyImage from "@/components/LazyImage";
 import SectionTitle from "@/components/SectionTitle";
 import TitleWithLine from "@/components/TitleWithLine";
 
-const ContentWrapper = styled.div`
-  display: grid;
-  grid-template-columns: 6fr 7fr;
-  gap: 4rem;
-  align-items: center;
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-    grid-template-columns: 1fr;
-    gap: 3rem;
-  }
-`;
-
-const CharacterImage = styled(LazyImage)`
-  img {
-    width: 80%;
-    height: auto;
-    display: block;
-  }
-`;
-
-const Profile = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-`;
-
-const SubHeading = styled.h3`
-  margin-bottom: 1rem;
-`;
-
-const AboutSection = styled(BackgroundSection)`
-  min-height: 0;
-`;
-
 export default function About() {
   return (
-    <AboutSection id="about" backgroundImage="/LitMusBG.webp">
+    <BackgroundSection backgroundImage="/LitMusBG.webp" className="min-h-0">
       <SideDecoration svgPath="/010_PageSideTitleSvg/ABOUT.svg" />
       <Container>
         <SectionTitle>ABOUT</SectionTitle>
 
-        <ContentWrapper>
+        <div className="grid grid-cols-[6fr_7fr] items-center gap-16 max-sm:grid-cols-1 max-sm:gap-12">
           <div>
-            <CharacterImage
+            <LazyImage
               src="/002_about/LitMusIcon.webp"
               alt="LitMus"
               fallback="/002_about/LitMusIcon.webp"
+              className="[&_img]:block [&_img]:h-auto [&_img]:w-4/5"
             />
           </div>
 
           <div>
             <TitleWithLine title="LitMus" />
-            <SubHeading>
+            <h3 className="mb-4">
               音楽 / イラスト / デザイン
               <br />
               動画 / ディレクション / 合成音声用ライブラリ提供
-            </SubHeading>
+            </h3>
 
-            <Profile>
+            <div className="flex flex-col gap-2">
               <p>2000年9月9日生まれ。</p>
               <p>
                 2022年よりボーカロイドのMVイラストを担当。
@@ -81,10 +47,10 @@ export default function About() {
                 合成音声に深く興味を持ち、オープンソースであるOpenUtauの開発に携わったり、合成音声ライブラリ「離途」では自分が音声提供からイラスト、楽曲制作までマルチに制作を行う。
               </p>
               <p>好きな食べ物は回鍋肉。</p>
-            </Profile>
+            </div>
           </div>
-        </ContentWrapper>
+        </div>
       </Container>
-    </AboutSection>
+    </BackgroundSection>
   );
 }

@@ -1,23 +1,27 @@
-import styled from "styled-components";
 import { Section } from "@/components/Layout";
+import { cn } from "@/lib/utils";
 
-type BackgroundSectionProps = {
+type BackgroundSectionProps = React.HTMLAttributes<HTMLElement> & {
   backgroundImage?: string;
   overlay?: boolean;
+  children: React.ReactNode;
 };
 
-export const BackgroundSection = styled(Section)<BackgroundSectionProps>`
-  position: relative;
-  
-  &::before {
-      content: '';
-      position: absolute;
-      background-image: ${({ backgroundImage }) =>
-        backgroundImage ? `url(${backgroundImage})` : "none"};
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-      inset: 0;
-        z-index: -1000;
-    }
-`;
+export function BackgroundSection({
+  backgroundImage,
+  children,
+  className,
+  ...props
+}: BackgroundSectionProps) {
+  return (
+    <Section className={cn("relative", className)} {...props}>
+      {backgroundImage && (
+        <div
+          className="absolute inset-0 z-[-1000] bg-cover bg-center bg-fixed"
+          style={{ backgroundImage: `url(${backgroundImage})` }}
+        />
+      )}
+      {children}
+    </Section>
+  );
+}

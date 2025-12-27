@@ -1,29 +1,28 @@
-import styled from "styled-components";
-import { theme } from "@/styles/theme";
+import { forwardRef } from "react";
+import { cn } from "@/lib/utils";
 
-// タブコンポーネント
-export const TabContainer = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 2rem;
-  margin-bottom: 2rem;
-  position: relative;
-  
-  /* 右端まで伸びる罫線 */
-  &::after {
-    content: '';
-    flex: 1;
-    height: 2px;
-    background: rgba(255, 255, 255, 0.2);
-    margin-left: 2rem;
-  }
-  
-  @media (max-width: ${theme.breakpoints.mobile}) {
-    flex-wrap: wrap;
-    
-    &::after {
-      display: none;
-    }
-  }
-`;
+type TabContainerProps = {
+  children: React.ReactNode;
+  className?: string;
+} & React.HTMLAttributes<HTMLDivElement>;
+
+export const TabContainer = forwardRef<HTMLDivElement, TabContainerProps>(
+  ({ children, className, ...props }, ref) => {
+    return (
+      <div
+        ref={ref}
+        className={cn(
+          "relative mb-8 flex flex-wrap items-center justify-start gap-8",
+          "after:ml-8 after:h-0.5 after:flex-1 after:bg-white/20",
+          "max-sm:after:hidden",
+          className,
+        )}
+        {...props}
+      >
+        {children}
+      </div>
+    );
+  },
+);
+
+TabContainer.displayName = "TabContainer";

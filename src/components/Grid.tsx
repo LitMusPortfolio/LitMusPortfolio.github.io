@@ -1,8 +1,6 @@
 import type { ReactNode } from "react";
-import styled from "styled-components";
-import { theme } from "@/styles/theme";
+import { cn } from "@/lib/utils";
 
-// グリッドコンポーネントのProps
 type GridProps<T> = {
   items: T[];
   renderItem: (item: T, index: number) => ReactNode;
@@ -21,7 +19,6 @@ type GridProps<T> = {
   "aria-label"?: string;
 };
 
-// デフォルトのグリッド設定
 const DEFAULT_COLUMNS = {
   default: "repeat(auto-fill, minmax(22%, 1fr))",
   tablet: "repeat(auto-fill, minmax(30%, 1fr))",
@@ -33,27 +30,6 @@ const DEFAULT_GAP = {
   mobile: "0.5rem",
 };
 
-// スタイル付きグリッドコンテナ
-const StyledGrid = styled.div<{
-  $columns: { default?: string; mobile?: string };
-  $gap: { default?: string; mobile?: string };
-}>`
-  display: grid;
-  grid-template-columns: ${({ $columns }) => $columns.default || DEFAULT_COLUMNS.default};
-  gap: ${({ $gap }) => $gap.default || DEFAULT_GAP.default};
-  grid-auto-rows: 1fr; /* すべての行の高さを揃える */
-  
-  @media (max-width: ${theme.breakpoints.tablet}) {
-    grid-template-columns: ${DEFAULT_COLUMNS.tablet};
-  }
-  
-  @media (max-width: ${theme.breakpoints.mobile}) {
-    grid-template-columns: ${DEFAULT_COLUMNS.mobile};
-    gap: ${DEFAULT_GAP.mobile};
-  }
-`;
-
-// 汎用Gridコンポーネント
 export default function Grid<T>({
   items,
   renderItem,
@@ -66,18 +42,21 @@ export default function Grid<T>({
   "aria-label": ariaLabel,
 }: GridProps<T>) {
   return (
-    <StyledGrid
-      $columns={columns}
-      $gap={gap}
-      className={className}
+    <div
+      className={cn("grid auto-rows-fr", className)}
+      style={
+        {
+          gridTemplateColumns: columns.default || DEFAULT_COLUMNS.default,
+          gap: gap.default || DEFAULT_GAP.default,
+        } as React.CSSProperties
+      }
       id={id}
-      role={role}
-      aria-label={ariaLabel}
+      {...(role ? { role, "aria-label": ariaLabel } : {})}
     >
       {items.map((item, index) => {
         const key = keyExtractor ? keyExtractor(item, index) : index;
         return <div key={key}>{renderItem(item, index)}</div>;
       })}
-    </StyledGrid>
+    </div>
   );
 }

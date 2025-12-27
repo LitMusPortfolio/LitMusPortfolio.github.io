@@ -1,37 +1,18 @@
-import styled from "styled-components";
-import { theme } from "@/styles/theme";
+import { cn } from "@/lib/utils";
 
-// 共通タイトル付き罫線コンポーネント
 type TitleWithLineProps = {
   title: string;
   className?: string;
 };
-
-// タイトルと罫線のコンテナ
-const Container = styled.div`
-  display: flex;
-  align-items: center;
-  width: 100%;
-  margin-bottom: ${theme.space.md};
-`;
-
-// 罫線
-const Line = styled.div`
-  flex: 1;
-  height: ${theme.borders.width.base};
-  background: ${theme.colors.text.primary};
-  opacity: ${theme.opacity[80]};
-  margin-left: ${theme.space.sm};
-`;
 
 export default function TitleWithLine({
   title,
   className,
 }: TitleWithLineProps) {
   return (
-    <Container className={className}>
+    <div className={cn("mb-6 flex w-full items-center", className)}>
       <h2>{title}</h2>
-      <Line />
-    </Container>
+      <div className="ml-4 h-0.5 flex-1 bg-[var(--color-text-primary)] opacity-80" />
+    </div>
   );
 }

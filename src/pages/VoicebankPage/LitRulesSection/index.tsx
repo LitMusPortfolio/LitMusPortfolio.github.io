@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import { Container, Section } from "@/components/Layout";
 import SectionTitle from "@/components/SectionTitle";
 import TitleWithLine from "@/components/TitleWithLine";
@@ -61,10 +60,6 @@ const RULES = [
   },
 ];
 
-const RulesTitle = styled(TitleWithLine)`
-  margin-top: 3rem;
-`;
-
 export default function LitRulesSection() {
   return (
     <Section id="rules">
@@ -72,10 +67,15 @@ export default function LitRulesSection() {
         <SectionTitle isPurple>RULES</SectionTitle>
         {RULES.map((rule) => (
           <div key={rule.title}>
-            <RulesTitle title={rule.title} />
-            <ul>
+            <TitleWithLine title={rule.title} className="mt-12" />
+            <ul className="flex list-none flex-col gap-4">
               {rule.items.map((item) => (
-                <li key={item}>{item}</li>
+                <li
+                  key={item}
+                  className="flex before:relative before:top-[0.7em] before:mr-2 before:text-[0.7rem] before:content-['▶']"
+                >
+                  {item}
+                </li>
               ))}
             </ul>
           </div>

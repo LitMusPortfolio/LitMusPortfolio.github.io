@@ -8,7 +8,6 @@ import {
 import { useModalFocusManager, useScrollLock } from "./ModalFocusManager";
 import { ModalOverlay } from "./ModalOverlay";
 
-// モーダルのプロップス型定義
 type ModalProps = {
   isOpen: boolean;
   onClose: () => void;
@@ -21,7 +20,6 @@ type ModalProps = {
   ariaLabel?: string;
 };
 
-// メインモーダルコンポーネント
 export default function Modal({
   isOpen,
   onClose,
@@ -35,14 +33,12 @@ export default function Modal({
 }: ModalProps): React.JSX.Element | null {
   const modalRef = useRef<HTMLDivElement>(null);
 
-  // フォーカス管理とESCキー処理
   useModalFocusManager({
     isOpen,
     modalRef: modalRef as React.RefObject<HTMLDivElement>,
     onClose,
   });
 
-  // スクロールロック
   useScrollLock(isOpen);
 
   const handleOverlayClick = (e: React.MouseEvent) => {
@@ -51,19 +47,18 @@ export default function Modal({
     }
   };
 
-  // isOpenがfalseの場合は何もレンダリングしない
   if (!isOpen) {
     return null;
   }
 
   return (
-    <ModalOverlay $isOpen={isOpen} onClick={handleOverlayClick}>
+    <ModalOverlay isOpen={isOpen} onClick={handleOverlayClick}>
       <ModalContainer
         ref={modalRef}
         onClick={(e) => e.stopPropagation()}
-        $maxWidth={maxWidth}
-        $hasImage={hasImage || !!imageUrl}
-        $variant={variant}
+        maxWidth={maxWidth}
+        hasImage={hasImage || !!imageUrl}
+        variant={variant}
         role="dialog"
         aria-modal="true"
         aria-label={ariaLabel || title || "Modal dialog"}
@@ -76,7 +71,7 @@ export default function Modal({
             )}
           </ModalImageSection>
         )}
-        <ModalContent $variant={variant} title={title}>
+        <ModalContent variant={variant} title={title}>
           {children}
         </ModalContent>
       </ModalContainer>

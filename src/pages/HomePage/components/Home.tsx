@@ -1,114 +1,9 @@
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
 import { Section } from "@/components/Layout";
 import LazyImage from "@/components/LazyImage";
 import { SocialLinks as SocialLinksComponent } from "@/components/SocialLinks";
 import TextWithBackground from "@/components/TextWithBackground";
 import { VideoBackground } from "@/components/VideoBackground";
-
-const HomeSection = styled(Section)`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
-  padding: 0;
-  min-height: 100vh;
-`;
-
-const HomeContent = styled.div`
-  position: absolute;
-  left: ${({ theme }) => theme.space.xl};
-  bottom: ${({ theme }) => theme.space["4xl"]};
-  z-index: 1;
-  text-align: left;
-  color: ${({ theme }) => theme.colors.text.primary};
-  
-  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-    left: ${({ theme }) => theme.space.lg};
-    bottom: ${({ theme }) => theme.space["4xl"]};
-  }
-`;
-
-const MainTitle = styled.h1`
-  margin: 0;
-  line-height: 1;
-  color: ${({ theme }) => theme.colors.text.primary};
-`;
-
-const TagsWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: ${({ theme }) => theme.space.sm};
-  margin-top: ${({ theme }) => theme.space["2xl"]};
-`;
-
-const TagLine = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  gap: ${({ theme }) => theme.space.sm};
-  flex-wrap: wrap;
-  font-family: 'Montserrat', sans-serif;
-`;
-
-const SocialLinksWrapper = styled.div`
-  position: absolute;
-  right: ${({ theme }) => theme.space.xl};
-  bottom: ${({ theme }) => theme.space["4xl"]};
-  z-index: 10;
-  
-  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-    right: ${({ theme }) => theme.space.lg};
-    bottom: ${({ theme }) => theme.space["4xl"]};
-  }
-`;
-
-const VoicevoxBanner = styled.div`
-  position: absolute;
-  right: ${({ theme }) => theme.space.xl};
-  top: ${({ theme }) => theme.space["3xl"]};
-  backdrop-filter: ${({ theme }) => theme.effects.glassmorphism.backdropFilter};
-  -webkit-backdrop-filter: ${({ theme }) => theme.effects.glassmorphism.backdropFilter};
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-    right: ${({ theme }) => theme.space.lg};
-    top: ${({ theme }) => theme.space["3xl"]};
-  }
-`;
-
-const NewsBar = styled.div`
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  width: 100%;
-  background: ${({ theme }) => theme.effects.glassmorphism.background};
-  backdrop-filter: ${({ theme }) => theme.effects.glassmorphism.backdropFilter};
-  -webkit-backdrop-filter: ${({ theme }) => theme.effects.glassmorphism.backdropFilter};
-  padding: ${({ theme }) => theme.space.sm} ${({ theme }) => theme.space.xl};
-  display: flex;
-  gap: ${({ theme }) => theme.space.lg};
-  overflow: hidden;
-  
-  @media (max-width: ${({ theme }) => theme.breakpoints.mobile}) {
-    padding: ${({ theme }) => theme.space.sm} ${({ theme }) => theme.space.lg};
-    gap: ${({ theme }) => theme.space.sm};
-  }
-`;
-
-const NewsText = styled.span`
-  animation: scroll ${({ theme }) => theme.animation.duration.scrolling} linear infinite;
-  
-  @keyframes scroll {
-    0% {
-      transform: translateX(100%);
-    }
-    100% {
-      transform: translateX(-100%);
-    }
-  }
-`;
 
 export default function Home() {
   const videoSources = [
@@ -118,44 +13,52 @@ export default function Home() {
   const navigate = useNavigate();
 
   return (
-    <HomeSection>
+    <Section className="fixed inset-0 h-screen w-full overflow-hidden p-0">
       <VideoBackground sources={videoSources} autoPlay loop muted playsInline />
-      <HomeContent>
-        <MainTitle>
+
+      {/* メインコンテンツ */}
+      <div className="absolute bottom-32 left-12 z-[1] text-left text-[var(--color-text-primary)] max-sm:bottom-32 max-sm:left-8">
+        <h1 className="m-0 leading-none text-[var(--color-text-primary)]">
           <TextWithBackground>LITMUS</TextWithBackground>
-        </MainTitle>
-        <TagsWrapper>
-          <TagLine>
+        </h1>
+        <div className="mt-16 flex flex-col gap-4">
+          <div className="flex flex-wrap justify-start gap-4 font-[Montserrat]">
             <TextWithBackground>#MUSIC</TextWithBackground>
             <TextWithBackground>#VOCALOIDPRODUCE</TextWithBackground>
-          </TagLine>
-          <TagLine>
+          </div>
+          <div className="flex flex-wrap justify-start gap-4 font-[Montserrat]">
             <TextWithBackground>#ILLUSTRATION</TextWithBackground>
             <TextWithBackground>#DESIGN</TextWithBackground>
-          </TagLine>
-          <TagLine>
+          </div>
+          <div className="flex flex-wrap justify-start gap-4 font-[Montserrat]">
             <TextWithBackground>#3D</TextWithBackground>
             <TextWithBackground>#MOVIE</TextWithBackground>
             <TextWithBackground>#SYNTHETIC VOICE</TextWithBackground>
-          </TagLine>
-        </TagsWrapper>
-      </HomeContent>
+          </div>
+        </div>
+      </div>
 
-      <VoicevoxBanner
-        onClick={() => {
-          navigate("/voicebank");
-        }}
+      {/* VOICEVOXバナー */}
+      <button
+        type="button"
+        className="absolute right-12 top-24 cursor-pointer border-none bg-transparent p-0 backdrop-blur-[10px] max-sm:right-8 max-sm:top-24"
+        onClick={() => navigate("/voicebank")}
+        aria-label="VOICEVOX 離途のページへ移動"
       >
-        <LazyImage src="/001_top/離途バナー.webp" alt="VOICEVOX" />
-      </VoicevoxBanner>
+        <LazyImage src="/001_top/離途バナー.webp" alt="" aria-hidden="true" />
+      </button>
 
-      <SocialLinksWrapper>
+      {/* ソーシャルリンク */}
+      <div className="absolute bottom-32 right-12 z-10 max-sm:bottom-32 max-sm:right-8">
         <SocialLinksComponent size="large" />
-      </SocialLinksWrapper>
+      </div>
 
-      <NewsBar>
-        <NewsText>××× 2025/06/06 VOICEVOX離途 がリリース！ ×××</NewsText>
-      </NewsBar>
-    </HomeSection>
+      {/* ニュースバー */}
+      <div className="absolute bottom-0 left-0 right-0 flex w-full gap-8 overflow-hidden bg-[var(--glass-bg)] px-12 py-4 backdrop-blur-[10px] max-sm:gap-4 max-sm:px-8">
+        <span className="animate-scroll">
+          ××× 2025/06/06 VOICEVOX離途 がリリース！ ×××
+        </span>
+      </div>
+    </Section>
   );
 }

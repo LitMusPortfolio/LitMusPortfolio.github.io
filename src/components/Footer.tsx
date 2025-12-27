@@ -1,89 +1,36 @@
 import { Link } from "react-router-dom";
-import styled from "styled-components";
 import LazyImage from "./LazyImage";
 import { SocialLinks } from "./SocialLinks";
 
-const FooterContainer = styled.footer`
-  background: ${({ theme }) => theme.colors.background.darker};
-  padding: ${({ theme }) => theme.space.xl} ${({ theme }) => theme.space["3xl"]};
-  border-top: ${({ theme }) => theme.borders.width.thin} solid ${({ theme }) => `rgba(255, 255, 255, ${theme.opacity[10]})`};
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: ${({ theme }) => theme.space.lg};
-  position: relative;
-  z-index: ${({ theme }) => theme.zIndex.content};
-`;
-
-const LeftSection = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-`;
-
-const RightSection = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  justify-content: center;
-`;
-
-const Copyright = styled.div`
-  padding-top: ${({ theme }) => theme.space.md};
-`;
-
-const PageTop = styled.div`
-  cursor: pointer;
-  width: 12vw;
-`;
-
-const Contact = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  justify-content: center;
-  border: ${({ theme }) => theme.borders.width.thin} solid;
-  padding: ${({ theme }) => theme.space.xs} ${({ theme }) => theme.space["2xl"]};
-  border-radius: ${({ theme }) => theme.borders.radius["2xl"]};
-  font-size: ${({ theme }) => theme.typography.fontSize.sm};
-`;
-
-const SNSLinksWrapper = styled.div`
-  display: flex;
-  gap: ${({ theme }) => theme.space.sm};
-  margin-bottom: ${({ theme }) => theme.space.md};
-  
-  span {
-    margin-right: ${({ theme }) => theme.space.xs};
-  }
-`;
-
 export default function Footer() {
   return (
-    <FooterContainer>
-      <LeftSection>
-        <PageTop
+    <footer className="grid grid-cols-2 gap-8 border-t border-white/10 bg-[var(--color-bg-darker)] px-24 py-12 relative z-[var(--z-content)]">
+      <div className="flex flex-col items-start justify-center">
+        <button
+          type="button"
+          className="w-[12vw] cursor-pointer border-none bg-transparent p-0"
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          aria-label="ページの一番上に移動"
         >
           <LazyImage
             src="/001_top/FooterPageTop.svg"
-            alt="Pageの一番上に移動するボタン。Page Topと書かれている。"
+            alt=""
             aria-hidden="true"
           />
-        </PageTop>
-      </LeftSection>
-      <RightSection>
-        <SNSLinksWrapper>
-          <span>SNS</span>
+        </button>
+      </div>
+      <div className="flex flex-col items-end justify-center">
+        <div className="mb-6 flex items-center gap-4">
+          <span className="mr-2">SNS</span>
           <SocialLinks size="small" />
-        </SNSLinksWrapper>
-        <Contact>
+        </div>
+        <div className="flex flex-col items-end justify-center rounded-[30px] border border-current px-16 py-2 text-[0.85rem]">
           <Link to="/contact">CONTACT</Link>
-        </Contact>
-        <Copyright>
+        </div>
+        <div className="pt-6">
           <p>&copy; 2022 - 2025 LitMus9_. All rights reserved.</p>
-        </Copyright>
-      </RightSection>
-    </FooterContainer>
+        </div>
+      </div>
+    </footer>
   );
 }

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import styled from "styled-components";
+import { cn } from "@/lib/utils";
 import { videoCache } from "@/utils/videoCache";
 
 type VideoSource = {
@@ -16,24 +16,10 @@ type LazyVideoProps = {
   muted?: boolean;
   playsInline?: boolean;
   className?: string;
+  style?: React.CSSProperties;
   onLoadedData?: () => void;
   onError?: () => void;
 };
-
-const VideoWrapper = styled.div`
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-  height: 100%;
-`;
-
-const StyledVideo = styled.video<{ $isLoaded: boolean }>`
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: ${(props) => (props.$isLoaded ? 1 : 0)};
-  transition: opacity 0.3s ease-in-out;
-`;
 
 export default function LazyVideo({
   src,
@@ -44,10 +30,10 @@ export default function LazyVideo({
   muted = false,
   playsInline = false,
   className,
+  style,
   onLoadedData,
   onError,
 }: LazyVideoProps) {
-  // キャッシュされている場合は初期状態でロード済みにする
   const [isLoaded, setIsLoaded] = useState(() =>
     videoCache.isLoaded(src, sources),
   );
@@ -57,7 +43,6 @@ export default function LazyVideo({
   const videoElementRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
-    // キャッシュされている場合は即座に表示
     if (videoCache.isLoaded(src, sources)) {
       setIsInView(true);
       return;
@@ -104,9 +89,13 @@ export default function LazyVideo({
   };
 
   return (
-    <VideoWrapper ref={videoRef} className={className}>
+    <div
+      ref={videoRef}
+      className={cn("relative h-full w-full overflow-hidden", className)}
+      style={style}
+    >
       {isInView && !hasError && (
-        <StyledVideo
+        <video
           ref={videoElementRef}
           src={src}
           poster={poster}
@@ -116,14 +105,17 @@ export default function LazyVideo({
           playsInline={playsInline}
           onLoadedData={handleLoadedData}
           onError={handleError}
-          $isLoaded={isLoaded}
           preload="metadata"
+          className={cn(
+            "h-full w-full object-cover transition-opacity duration-300 ease-in-out",
+            isLoaded ? "opacity-100" : "opacity-0",
+          )}
         >
           {sources?.map((source) => (
             <source key={source.src} src={source.src} type={source.type} />
           ))}
-        </StyledVideo>
+        </video>
       )}
-    </VideoWrapper>
+    </div>
   );
 }

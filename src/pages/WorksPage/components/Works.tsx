@@ -1,107 +1,10 @@
 import { useMemo, useRef, useState } from "react";
-import styled from "styled-components";
 import { BackgroundSection } from "@/components/BackgroundSection";
 import FilterTabs, { type TabItem } from "@/components/FilterTabs";
 import Grid from "@/components/Grid";
 import { Container, SideDecoration } from "@/components/Layout";
 import SectionTitle from "@/components/SectionTitle";
-import { theme } from "@/styles/theme";
 import { CATEGORIES, type Category, worksData } from "../data/WorksAssets";
-
-const ContentWrapper = styled(Container)`
-  position: relative;
-  z-index: ${theme.zIndex.content};
-`;
-
-const StickyHeader = styled.div`
-  position: sticky;
-  z-index: ${theme.zIndex.dropdown};
-  
-  @media (max-width: ${theme.breakpoints.mobile}) {
-    top: ${theme.spacing.headerHeightMobile};
-    padding: ${theme.space.md};
-  }
-`;
-
-const WorkCard = styled.article`
-  background: ${theme.effects.glassmorphism.background};
-  backdrop-filter: ${theme.effects.glassmorphism.backdropFilter};
-  -webkit-backdrop-filter: ${theme.effects.glassmorphism.backdropFilter};
-  border: ${theme.effects.glassmorphism.border};
-  border-radius: ${theme.effects.glassmorphism.borderRadius};
-  overflow: hidden;
-  cursor: pointer;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  transition: all 0.3s ease;
-  
-  &:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
-  }
-`;
-
-const ThumbnailWrapper = styled.div`
-  position: relative;
-  width: 100%;
-  padding-bottom: 56.25%; /* 16:9 アスペクト比 */
-  background: #000;
-  overflow: hidden;
-  
-  img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  
-  iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: none;
-    pointer-events: none;
-  }
-`;
-
-const WorkInfo = styled.div`
-  padding: ${theme.space.sm};
-  padding-bottom: ${theme.space.md};
-  background: rgba(0, 0, 0, ${theme.opacity[50]});
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.2rem;
-`;
-
-const WorkRequester = styled.p`
-  font-size: ${theme.typography.fontSize.xs};
-`;
-
-const PlayButtonOverlay = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 3rem;
-  color: white;
-  text-shadow: 0 0 0.5em black;
-  opacity: ${theme.opacity[80]};
-  pointer-events: none;
-`;
-
-const EmptyPreview = styled.div`
-  width: 100%;
-  height: 100%;
-  background: #000;
-`;
 
 type TabId = Category | "all";
 
@@ -109,7 +12,6 @@ type TabId = Category | "all";
 const getVideoInfo = (
   url: string,
 ): { type: "youtube" | "nicovideo" | "unknown"; id: string | null } => {
-  // YouTube URLパターン
   const youtubeMatch = url.match(
     /(?:youtube\.com\/(?:watch\?v=|live\/)|youtu\.be\/)([a-zA-Z0-9_-]+)/,
   );
@@ -117,7 +19,6 @@ const getVideoInfo = (
     return { type: "youtube", id: youtubeMatch[1] };
   }
 
-  // ニコニコ動画 URLパターン
   const nicovideoMatch = url.match(/nicovideo\.jp\/watch\/(sm\d+)/);
   if (nicovideoMatch) {
     return { type: "nicovideo", id: nicovideoMatch[1] };
@@ -135,7 +36,6 @@ function VideoPreview({ link }: VideoPreviewProps) {
   const { type, id } = getVideoInfo(link);
 
   if (type === "youtube" && id) {
-    // YouTubeはサムネイル表示
     return (
       <>
         <img
@@ -143,20 +43,20 @@ function VideoPreview({ link }: VideoPreviewProps) {
           alt="YouTube thumbnail"
           loading="lazy"
           onError={(e) => {
-            // hqdefaultが存在しない場合はmqdefaultにフォールバック
             const target = e.target as HTMLImageElement;
             if (target.src.includes("hqdefault")) {
               target.src = `https://img.youtube.com/vi/${id}/mqdefault.jpg`;
             }
           }}
         />
-        <PlayButtonOverlay>▶</PlayButtonOverlay>
+        <div className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-5xl text-white opacity-80 [text-shadow:0_0_0.5em_black]">
+          ▶
+        </div>
       </>
     );
   }
 
   if (type === "nicovideo" && id) {
-    // ニコニコ動画は埋め込み表示
     return (
       <iframe
         key={`nicovideo-${id}`}
@@ -168,8 +68,7 @@ function VideoPreview({ link }: VideoPreviewProps) {
     );
   }
 
-  // その他は黒背景を表示
-  return <EmptyPreview />;
+  return <div className="h-full w-full bg-black" />;
 }
 
 const CATEGORY_LABELS: Record<Category, string> = {
@@ -198,8 +97,8 @@ export default function Works() {
   return (
     <BackgroundSection backgroundImage="/LitMusBG.webp">
       <SideDecoration svgPath="/010_PageSideTitleSvg/WORKS.svg" />
-      <ContentWrapper>
-        <StickyHeader>
+      <Container className="relative z-[var(--z-content)]">
+        <div className="sticky z-[var(--z-dropdown)] max-sm:top-[50px] max-sm:p-6">
           <SectionTitle>WORKS</SectionTitle>
           <FilterTabs
             ref={tabsRef}
@@ -209,32 +108,33 @@ export default function Works() {
             ariaLabel="Filter works by category"
             ariaControls="works-grid"
           />
-        </StickyHeader>
+        </div>
 
         <Grid
           items={filteredWorks}
           renderItem={(work) => (
-            <WorkCard
-              onClick={() =>
-                window.open(work.link, "_blank", "noopener,noreferrer")
-              }
+            <a
+              href={work.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="glass flex h-full cursor-pointer flex-col overflow-hidden text-inherit no-underline transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_30px_rgba(139,92,246,0.3)]"
             >
-              <ThumbnailWrapper>
+              <div className="relative w-full overflow-hidden bg-black pb-[56.25%] [&_iframe]:pointer-events-none [&_iframe]:absolute [&_iframe]:inset-0 [&_iframe]:h-full [&_iframe]:w-full [&_iframe]:border-none [&_img]:absolute [&_img]:inset-0 [&_img]:h-full [&_img]:w-full [&_img]:object-cover">
                 <VideoPreview link={work.link} />
-              </ThumbnailWrapper>
-              <WorkInfo>
-                <WorkRequester>{work.requester}</WorkRequester>
+              </div>
+              <div className="flex h-full flex-col items-center justify-between gap-1 bg-black/50 px-4 pb-6 pt-4">
+                <p className="text-[0.7rem]">{work.requester}</p>
                 <h3>{work.title}</h3>
                 <p>{work.description}</p>
-              </WorkInfo>
-            </WorkCard>
+              </div>
+            </a>
           )}
           keyExtractor={(work) => `${work.title}-${work.link}`}
           id="works-grid"
           role="tabpanel"
           aria-label="Works grid"
         />
-      </ContentWrapper>
+      </Container>
     </BackgroundSection>
   );
 }

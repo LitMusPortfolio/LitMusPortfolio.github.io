@@ -1,12 +1,9 @@
 import { lazy, useEffect } from "react";
 import { createHashRouter, RouterProvider } from "react-router-dom";
-import { ThemeProvider } from "styled-components";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { MobileNotice } from "./components/MobileNotice";
 import { useIsMobile } from "./hooks/useIsMobile";
 import MainLayout from "./layouts/MainLayout";
-import { GlobalStyles } from "./styles/GlobalStyles";
-import { theme } from "./styles/theme";
 import { setupGlobalErrorHandlers } from "./utils/errorReporting";
 import { preloadCriticalAssets } from "./utils/preloadAssets";
 
@@ -57,12 +54,9 @@ function App() {
   }, []);
 
   return (
-    <ThemeProvider theme={theme}>
-      <GlobalStyles />
-      <ErrorBoundary>
-        {isMobile ? <MobileNotice /> : <RouterProvider router={router} />}
-      </ErrorBoundary>
-    </ThemeProvider>
+    <ErrorBoundary>
+      {isMobile ? <MobileNotice /> : <RouterProvider router={router} />}
+    </ErrorBoundary>
   );
 }
 

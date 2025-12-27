@@ -1,6 +1,3 @@
-import styled from "styled-components";
-import { theme } from "@/styles/theme";
-
 // 型定義
 type ProfileData = {
   label: string;
@@ -11,41 +8,17 @@ type ProfileSectionProps = {
   data: ProfileData[];
 };
 
-// スタイルコンポーネント
-const ProfileContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-`;
-
-const ProfileItem = styled.div`
-  display: flex;
-  align-items: center;
-  width: 100%;
-`;
-
-const ProfileLine = styled.div`
-  flex: 1;
-  height: ${theme.borders.width.thin};
-  background: ${theme.colors.text.primary};
-  margin: 0 ${theme.space.sm};
-`;
-
-const ProfileValue = styled.span`
-  white-space: nowrap;
-`;
-
 // プロフィールセクションコンポーネント
 export default function ProfileSection({ data }: ProfileSectionProps) {
   return (
-    <ProfileContainer>
+    <div className="flex flex-col gap-4">
       {data.map((item) => (
-        <ProfileItem key={item.label}>
+        <div key={item.label} className="flex w-full items-center">
           <span>{item.label}</span>
-          <ProfileLine />
-          <ProfileValue>{item.value}</ProfileValue>
-        </ProfileItem>
+          <div className="mx-2 h-px flex-1 bg-[var(--color-text-primary)]" />
+          <span className="whitespace-nowrap">{item.value}</span>
+        </div>
       ))}
-    </ProfileContainer>
+    </div>
   );
 }

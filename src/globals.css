@@ -1,0 +1,282 @@
+@import "tailwindcss";
+
+/* ============================================
+   Custom Theme Configuration (Tailwind v4)
+   ============================================ */
+
+@theme {
+  /* Colors - Primary */
+  --color-primary: #8b5cf6;
+  --color-primary-light: #a78bfa;
+  --color-primary-dark: #7c3aed;
+
+  /* Colors - Purple Scale */
+  --color-purple-100: #ede9fe;
+  --color-purple-200: #ddd6fe;
+  --color-purple-300: #c4b5fd;
+  --color-purple-400: #a78bfa;
+  --color-purple-500: #8b5cf6;
+  --color-purple-600: #7c3aed;
+  --color-purple-700: #6d28d9;
+  --color-purple-800: #5b21b6;
+  --color-purple-900: #4c1d95;
+
+  /* Colors - Background */
+  --color-bg-dark: #1a0a3e;
+  --color-bg-darker: #0a1628;
+
+  /* Colors - Text */
+  --color-text-primary: #eeeeee;
+  --color-text-secondary: rgba(255, 255, 255, 0.9);
+  --color-text-muted: rgba(255, 255, 255, 0.7);
+
+  /* Shadows - Glow */
+  --shadow-glow-sm: 0 0 20px rgba(139, 92, 246, 0.5);
+  --shadow-glow-md: 0 0 40px rgba(139, 92, 246, 0.6);
+  --shadow-glow-lg: 0 0 60px rgba(139, 92, 246, 0.7);
+  --shadow-text: 0 2px 8px rgba(0, 0, 0, 0.5);
+  --shadow-button: 0 10px 30px rgba(128, 53, 246, 0.5);
+  --shadow-button-hover: 0 15px 40px rgba(128, 53, 246, 0.7);
+
+  /* Glassmorphism */
+  --glass-bg: rgba(0, 0, 0, 0.3);
+  --glass-border: 1px solid rgba(139, 92, 246, 0.3);
+  --glass-radius: 15px;
+  --glass-blur: blur(10px);
+
+  /* Breakpoints */
+  --breakpoint-xs: 600px;
+  --breakpoint-sm: 768px;
+  --breakpoint-md: 968px;
+  --breakpoint-lg: 1200px;
+
+  /* Spacing */
+  --spacing-header: 95px;
+  --spacing-header-mobile: 50px;
+
+  /* Typography - Font Sizes */
+  --font-size-xs: 0.7rem;
+  --font-size-sm: 0.85rem;
+  --font-size-base: 1.1rem;
+  --font-size-lg: 1.5rem;
+  --font-size-xl: 2rem;
+  --font-size-h1: 4rem;
+  --font-size-h2: 2.2rem;
+  --font-size-h3: 1.5rem;
+
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 20px;
+  --radius-2xl: 30px;
+
+  /* Animation */
+  --duration-fast: 0.3s;
+  --duration-normal: 0.6s;
+  --duration-slow: 1s;
+  --duration-scroll: 20s;
+
+  /* Z-Index */
+  --z-behind: -1;
+  --z-base: 0;
+  --z-decoration: 1;
+  --z-content: 2;
+  --z-front: 3;
+  --z-dropdown: 10;
+  --z-sticky: 50;
+  --z-fixed: 100;
+  --z-modal-backdrop: 1000;
+  --z-modal: 1050;
+  --z-popover: 1100;
+  --z-tooltip: 1200;
+  --z-max: 9999;
+
+  /* Container Sizes */
+  --container-sm: 640px;
+  --container-md: 768px;
+  --container-lg: 1024px;
+  --container-xl: 1200px;
+  --container-2xl: 1400px;
+
+  /* Font Families */
+  --font-heading-ja: "Source Han Sans JP", "Noto Sans JP", sans-serif;
+  --font-heading-en: "Montserrat", sans-serif;
+  --font-body: "ZenKaku Gothic New", "Noto Sans JP", sans-serif;
+}
+
+/* ============================================
+   Global Styles
+   ============================================ */
+
+* {
+  box-sizing: border-box;
+  color: var(--color-text-primary);
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-body);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  background: #000;
+  overflow-x: hidden;
+  font-size: var(--font-size-base);
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+  margin-top: 0;
+}
+
+/* Headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  letter-spacing: 0.07em;
+  line-height: 1.4;
+}
+
+h1 {
+  font-size: var(--font-size-h1);
+}
+
+h2 {
+  font-size: var(--font-size-h2);
+}
+
+h3 {
+  font-size: var(--font-size-lg);
+}
+
+/* English text in headings */
+h1 span[lang="en"],
+h2 span[lang="en"],
+h3 span[lang="en"],
+h4 span[lang="en"],
+h5 span[lang="en"],
+h6 span[lang="en"],
+h1 .en,
+h2 .en,
+h3 .en,
+h4 .en,
+h5 .en,
+h6 .en {
+  font-family: var(--font-heading-en);
+}
+
+/* Body text */
+p,
+div,
+td,
+th {
+  font-family: var(--font-body);
+  letter-spacing: 0.06em;
+  line-height: 1.8;
+}
+
+p {
+  margin: 0.5rem 0;
+}
+
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #111;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* ============================================
+   Utility Classes
+   ============================================ */
+
+/* Glassmorphism */
+.glass {
+  background: var(--glass-bg);
+  border: var(--glass-border);
+  border-radius: var(--glass-radius);
+  backdrop-filter: var(--glass-blur);
+}
+
+/* Background Gradient */
+.bg-gradient-main {
+  background: linear-gradient(135deg, #1a0a3e 0%, #2d1b69 50%, #3e2980 100%);
+}
+
+.bg-gradient-blue {
+  background: linear-gradient(
+    135deg,
+    #0a1628 0%,
+    #1a2c4e 30%,
+    #2a4a7c 60%,
+    #3a5f95 100%
+  );
+}
+
+.bg-gradient-primary {
+  background: linear-gradient(135deg, #8035f6 0%, #9d5ff6 100%);
+}
+
+/* Scroll Animation */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll {
+  animation: scroll var(--duration-scroll) linear infinite;
+}
+
+/* Card Hover Effect */
+.card-hover {
+  transition:
+    transform var(--duration-fast) ease,
+    box-shadow var(--duration-fast) ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-glow-sm);
+}
+

@@ -15,7 +15,6 @@ type FilterTabsProps = {
   ariaControls?: string;
 };
 
-// FilterTabsコンポーネント（タブのキーボードナビゲーション機能付き）
 const FilterTabs = forwardRef<HTMLDivElement, FilterTabsProps>(
   (
     {
@@ -76,7 +75,7 @@ const FilterTabs = forwardRef<HTMLDivElement, FilterTabsProps>(
         {tabs.map((tab) => (
           <StyledButton
             key={tab.id}
-            $active={activeTab === tab.id}
+            active={activeTab === tab.id}
             onClick={() => onTabChange(tab.id)}
             role="tab"
             aria-selected={activeTab === tab.id}

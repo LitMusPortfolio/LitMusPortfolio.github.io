@@ -6,7 +6,8 @@
     "useIgnoreFile": true
   },
   "files": {
-    "ignoreUnknown": true
+    "ignoreUnknown": true,
+    "includes": ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.json"]
   },
   "formatter": {
     "enabled": true,
@@ -30,6 +31,14 @@
     "formatter": {
       "quoteStyle": "double",
       "enabled": true
+    }
+  },
+  "css": {
+    "parser": {
+      "cssModules": true
+    },
+    "linter": {
+      "enabled": false
     }
   },
   "assist": {

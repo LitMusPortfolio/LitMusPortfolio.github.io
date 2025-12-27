@@ -1,18 +1,8 @@
-import styled from "styled-components";
 import { BackgroundSection } from "@/components/BackgroundSection";
 import EmailProtected from "@/components/EmailProtected";
 import { Container, GridContainer, SideDecoration } from "@/components/Layout";
 import SectionTitle from "@/components/SectionTitle";
 import TitleWithLine from "@/components/TitleWithLine";
-
-const LeftSection = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const RightSection = styled.div`
-  display: flex;
-`;
 
 const NOTICES = [
   {
@@ -39,14 +29,17 @@ export default function Contact() {
       <Container>
         <SectionTitle>CONTACT</SectionTitle>
 
-        <GridContainer $columns="0.6fr 0.4fr">
-          <LeftSection>
+        <GridContainer columns="0.6fr 0.4fr">
+          <div className="flex flex-col">
             {NOTICES.map((notice) => (
               <div key={notice.title}>
                 <TitleWithLine title={notice.title} />
-                <ul>
+                <ul className="flex list-none flex-col gap-4">
                   {notice.items.map((item) => (
-                    <li key={item}>
+                    <li
+                      key={item}
+                      className="flex before:relative before:top-[0.7em] before:mr-2 before:text-[0.7rem] before:content-['▶']"
+                    >
                       {item === "【 6litmus9@gmail.com 】" ? (
                         <EmailProtected email="6litmus9@gmail.com" />
                       ) : (
@@ -57,8 +50,8 @@ export default function Contact() {
                 </ul>
               </div>
             ))}
-          </LeftSection>
-          <RightSection></RightSection>
+          </div>
+          <div className="flex" />
         </GridContainer>
       </Container>
     </BackgroundSection>
