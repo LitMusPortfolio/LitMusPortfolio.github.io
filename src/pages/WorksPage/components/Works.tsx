@@ -177,6 +177,7 @@ const WORK_TABS: TabItem<TabId>[] = [
   { id: "music", label: "MUSIC" },
   { id: "illustration", label: "ILLUST" },
   { id: "movie", label: "MOVIE" },
+  { id: "direction", label: "DIRECTION" },
   { id: "other", label: "OTHER" },
 ];
 

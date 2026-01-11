@@ -10,6 +10,13 @@ type Work = {
 
 export const worksData: Work[] = [
   {
+    title: "愛して愛して愛して",
+    category: ["direction", "movie"],
+    description: "全体ディレクション、VJ、コンポジット",
+    link: "https://youtu.be/pL28oe-e-vg?si=augZZwEnLMkJ829g",
+    requester: "ボカロ紅白歌合戦",
+  },
+  {
     title: "雁字搦×",
     category: ["direction"],
     description: "プロダクションコーディネート",
