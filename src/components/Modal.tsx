@@ -1,6 +1,8 @@
+"use client";
+
+import Image from "next/image";
 import type React from "react";
 import type { ReactNode } from "react";
-import LazyImage from "@/components/LazyImage";
 import {
   Dialog,
   DialogContent,
@@ -45,7 +47,12 @@ export default function Modal({
         {showImage && (
           <DialogImageSection>
             {imageUrl && (
-              <LazyImage src={imageUrl} alt={title || "Modal image"} />
+              <Image
+                src={imageUrl}
+                alt={title || "Modal image"}
+                width={800}
+                height={600}
+              />
             )}
           </DialogImageSection>
         )}

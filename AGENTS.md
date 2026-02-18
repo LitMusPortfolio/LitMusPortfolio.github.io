@@ -2,7 +2,7 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-デプロイ先 URL: https://litmus9.com/#/
+デプロイ先 URL: https://litmus9.com/
 
 必ず chrome-devtools mcp を使用してデバッグしながら作業を進めること。
 
@@ -12,14 +12,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 # 依存関係のインストール
 pnpm install
 
-# 開発サーバー起動 (http://localhost:5173)
+# 開発サーバー起動 (http://localhost:3000)
 pnpm dev
 
 # ビルド
 pnpm build
 
 # プレビュー（ビルド後の確認）
-pnpm preview
+pnpm start
 
 # コード品質チェック（コミット前に実行推奨）
 pnpm lint          # Biomeによるリント
@@ -27,19 +27,24 @@ pnpm typecheck     # TypeScriptの型チェック
 pnpm knip          # 未使用コード/依存関係の検出
 ```
 
+### Git Hooks (lefthook)
+
+pre-commitで `knip --fix`, `lint --write`, `typecheck` が自動実行される。pre-pushではさらに `build` も実行される。
+
 ## アーキテクチャ概要
 
 ### 技術スタック
 
-- **Vite + React 19 + TypeScript**: 高速な開発環境と型安全性
-- **Tailwind CSS v4 + shadcn/ui**: ユーティリティファーストCSS + Radixベースのアクセシブルコンポーネント
-- **React Router v7 (HashRouter)**: GitHub Pages対応ルーティング
-- **Biome**: 統一されたリンター/フォーマッター
-- **Storybook**: コンポーネントカタログとビジュアルテスト
+- **Next.js 15 (App Router) + React 19 + TypeScript**: `output: "export"` で静的HTML出力。パスエイリアス `@/` → `src/`
+- **Tailwind CSS v4 + shadcn/ui**: テーマは `src/globals.css` の `@theme` で定義
+- **App Router (static export)**: ファイルベースルーティング。`app/` にはルーティングファイルのみ配置し、`src/pages/` のコンポーネントを import する薄いラッパー構成
+- **Biome**: リンター/フォーマッター（スペース2、ダブルクォート、未使用import/変数はエラー）
+
+### モバイル対応
+
+モバイルデバイスでは通常のルーティングではなく `MobileNotice` コンポーネントが表示される（`ClientLayout.tsx`）。デスクトップ専用サイト。
 
 ### ルーティング構成
-
-HashRouterを使用（GitHub Pages対応）。全ページはReact.lazy()で遅延読み込み。
 
 | パス | ページ |
 |------|--------|
@@ -52,14 +57,13 @@ HashRouterを使用（GitHub Pages対応）。全ページはReact.lazy()で遅�
 ### ページ構成パターン
 
 ```
-pages/
-└── [PageName]/
-    ├── index.tsx           # ページエントリーポイント
-    ├── index.stories.tsx   # Storybookストーリー
-    ├── components/         # ページ固有コンポーネント
-    ├── sections/           # セクション分割（大規模ページ用）
-    ├── data/               # 静的データ定義
-    └── ...
+src/app/[route]/page.tsx    # "use client" 薄いラッパー → src/views/ を import
+
+src/views/[PageName]/
+├── index.tsx           # ページエントリーポイント
+├── components/         # ページ固有コンポーネント
+├── sections/           # セクション分割（大規模ページ用）
+└── data/               # 静的データ定義
 ```
 
 VoicebankPageはセクション分割パターンを採用（`LitMainSection/`, `LitCharacterSection/`等）。
@@ -86,13 +90,13 @@ Tailwind CSS v4 を使用。テーマは `src/globals.css` の `@theme` ディ�
 
 | コンポーネント | 説明 |
 |---------------|------|
+| `ClientLayout` | Header + main + Footer を統合したクライアントレイアウト |
 | `LazyImage` / `LazyVideo` | IntersectionObserver による遅延読み込み |
 | `Modal` | Dialog のラッパー（後方互換性用） |
 | `SectionTitle` / `TitleWithLine` | セクション見出しスタイル |
 | `TextWithBackground` | 背景画像付きテキスト（SectionTitleで使用） |
 | `BackgroundSection` | 固定背景付きセクション |
 | `VideoBackground` | LazyVideoをラップした背景動画レイアウト |
-| `StyledButton` | Button のラッパー（後方互換性用） |
 | `FilterTabs` | Tabs のラッパー（後方互換性用） |
 | `Grid` | レスポンシブグリッドレイアウト |
 
@@ -112,5 +116,5 @@ Tailwind CSS v4 を使用。テーマは `src/globals.css` の `@theme` ディ�
 GitHub Actionsによる自動デプロイ：
 
 - mainブランチへのpushで自動デプロイ
-- PRでビジュアル回帰テスト実行
 - GitHub Pages + カスタムドメイン（https://litmus9.com）で公開
+- `next build` で `out/` ディレクトリに静的HTML出力

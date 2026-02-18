@@ -12,7 +12,7 @@ export function formatErrorInfo(error: Error, errorInfo?: React.ErrorInfo) {
   };
 
   // 開発環境ではコンソールに詳細を出力
-  if (import.meta.env.DEV) {
+  if (process.env.NODE_ENV === "development") {
     console.error("Error Details:", errorDetails);
   }
 

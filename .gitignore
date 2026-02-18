@@ -10,6 +10,9 @@ lerna-debug.log*
 node_modules
 dist
 dist-ssr
+.next
+out
+next-env.d.ts
 *.local
 
 worktrees/
@@ -31,15 +34,11 @@ worktrees/
 .specstory/
 .serena/
 
-storybook-static/
-
-# reg-suit
-.reg/
-.reg-storage/
-__screenshots__/
-
 # Test coverage
 coverage/
 
 *.Identifier
 .envrc
+# next-agents-md
+.next-docs/
+.next/

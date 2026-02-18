@@ -8,31 +8,41 @@ paths:
 
 ## Tailwind CSS v4 テーマ設定
 
-テーマは `src/globals.css` の `@theme` ディレクティブで定義。CSS変数として利用可能。
+デザイントークンは `src/theme.css` に定義。`@theme` ブロック内のトークンはユーティリティクラスを自動生成し、`:root` ブロック内のトークンはCSS変数としてのみ利用可能。
+
+グローバルスタイル（リセット・ユーティリティクラス）は `src/globals.css` に定義。
 
 ### 主要なCSS変数
 
 **カラー:**
 - `--color-primary` - メインカラー
 - `--color-text-primary` - テキストカラー
-- `--color-bg-dark` - 背景カラー
+- `--color-bg-dark` / `--color-bg-body` - 背景カラー
+- `--color-surface-*` - サーフェス（ダイアログ、ヘッダー等）
+- `--color-gradient-*` - グラデーション停止色
+- `--color-scrollbar-*` - スクロールバー
 
 **シャドウ:**
 - `--shadow-glow-sm/md/lg` - グローエフェクト
-- `--shadow-button` - ボタン用シャドウ
+- `--shadow-button` / `--shadow-button-hover` - ボタン用シャドウ
+- `--shadow-card-*` - カードホバーシャドウ
+- `--shadow-dialog` / `--shadow-dialog-download` - ダイアログシャドウ
+
+**タイポグラフィ:**
+- `font-medium/semibold/bold` - フォントウェイト（Tailwind デフォルト）
+- `--tracking-body/heading/nav` - レタースペーシング（カスタム）
+- `--leading-heading/body/snug/relaxed` - 行間（カスタム）
 
 **Glassmorphism:**
 - `--glass-bg` - ガラス背景
 - `--glass-border` - ガラスボーダー
 - `--glass-blur` - ブラー効果
 
-**ブレークポイント:**
-- `--breakpoint-xs` - 600px
-- `--breakpoint-sm` - 768px
-- `--breakpoint-md` - 968px
-
-**Z-Index:**
-- `--z-content`, `--z-dropdown`, `--z-modal`
+**その他:**
+- `--blur-sm/md` - ブラー値
+- `ease-in-out/ease-out` - イージング（Tailwind デフォルト）
+- `--breakpoint-xs/sm/md/lg` - ブレークポイント
+- `--z-*` - Z-Index（13段階）
 
 ## 使用例
 

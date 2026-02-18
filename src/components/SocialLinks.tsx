@@ -1,5 +1,7 @@
+"use client";
+
+import Image from "next/image";
 import { cn } from "@/utils/cn";
-import LazyImage from "./LazyImage";
 
 // 型定義（このコンポーネントでのみ使用）
 type SocialLink = {
@@ -55,7 +57,13 @@ export const SocialLinks = ({
           )}
           aria-label={link.platform}
         >
-          <LazyImage src={link.icon} alt={link.platform} eager />
+          <Image
+            src={link.icon}
+            alt={link.platform}
+            width={40}
+            height={40}
+            className="h-full w-full"
+          />
         </a>
       ))}
     </div>

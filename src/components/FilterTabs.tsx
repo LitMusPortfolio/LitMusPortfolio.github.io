@@ -1,3 +1,5 @@
+"use client";
+
 import { forwardRef } from "react";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 

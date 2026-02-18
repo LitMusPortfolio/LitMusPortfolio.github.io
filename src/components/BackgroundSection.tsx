@@ -1,3 +1,5 @@
+"use client";
+
 import { Section } from "@/components/Layout";
 import { cn } from "@/utils/cn";
 

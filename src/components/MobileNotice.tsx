@@ -1,3 +1,5 @@
+"use client";
+
 export function MobileNotice() {
   return (
     <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[var(--color-bg-dark)] p-8 text-center">

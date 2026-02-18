@@ -1,6 +1,8 @@
-import { Link } from "react-router-dom";
+"use client";
+
+import Image from "next/image";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import LazyImage from "./LazyImage";
 import { SocialLinks } from "./SocialLinks";
 
 export default function Footer() {
@@ -13,10 +15,12 @@ export default function Footer() {
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           aria-label="ページの一番上に移動"
         >
-          <LazyImage
+          <Image
             src="/001_top/FooterPageTop.svg"
             alt=""
-            aria-hidden="true"
+            width={200}
+            height={40}
+            className="w-full h-auto"
           />
         </Button>
       </div>
@@ -30,7 +34,7 @@ export default function Footer() {
           asChild
           className="rounded-[30px] px-16 py-2 text-[0.85rem]"
         >
-          <Link to="/contact">CONTACT</Link>
+          <Link href="/contact">CONTACT</Link>
         </Button>
         <div className="pt-6">
           <p>&copy; 2022 - 2025 LitMus9_. All rights reserved.</p>
